@@ -1,0 +1,6 @@
+- [ ] Shared design system, navigation, footer, and motion
+- [ ] Home, Services, Work, case study, Process, About, Careers, Contact
+- [ ] Blog listing and article pages
+- [ ] Authentication and protected admin CMS
+- [ ] Database-backed public content and contact form
+- [ ] Responsive and security verification
