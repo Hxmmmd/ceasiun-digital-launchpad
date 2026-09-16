@@ -4,3 +4,4 @@
 - [ ] Authentication and protected admin CMS
 - [ ] Database-backed public content and contact form
 - [ ] Responsive and security verification
+- [ ] Apply supplied Ceasiun logo across site and favicon
