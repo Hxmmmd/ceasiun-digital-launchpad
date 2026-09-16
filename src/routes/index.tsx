@@ -1,24 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+import { createFileRoute, Link } from "@tanstack/react-router";import { ArrowRight, Check, MoveRight } from "lucide-react";import { Layout,SectionHead,CTA,meta } from "@/components/site";import { CountUp } from "@/components/count-up";import { useTestimonials } from "@/components/public-content";import { services,faq } from "@/lib/site-data";import { Button } from "@/components/ui/button";import hero from "@/assets/ceasiun-hero.jpg";
+export const Route=createFileRoute("/")({head:()=>meta("Digital growth partner","Ceasiun builds digital products, growth systems, automation, security, and managed operations for ambitious businesses."),component:Home});
+function Home(){const testimonials=useTestimonials();return <Layout><section className="hero"><img src={hero} width={1600} height={1008} alt="Abstract precision architecture representing connected digital systems" fetchPriority="high"/><div className="hero-shade"/><div className="shell hero-content"><p className="eyebrow">Digital solutions · Built for growth</p><h1>Digital systems that move business forward.</h1><p>Ceasiun brings engineering, growth, automation, design, security, and managed operations into one accountable partnership.</p><Button asChild size="lg"><Link to="/contact">Start a project <ArrowRight/></Link></Button></div></section><section className="section shell"><SectionHead eyebrow="One partner. Nine capabilities." title="Built to solve the whole digital problem." copy="Strategy is stronger when execution is connected. Our specialists work as one team across every critical touchpoint."/><div className="service-grid">{services.map((s,i)=><Link to="/services" hash={s.slug} className="service-card" key={s.slug}><span>0{i+1}</span><s.icon/><h3>{s.title}</h3><p>{s.short}</p><MoveRight/></Link>)}</div></section><section className="contrast section"><div className="shell split"><div><p className="eyebrow">Why Ceasiun</p><h2>Senior thinking. Practical delivery. One clear line of accountability.</h2></div><div className="reasons">{["End-to-end digital capability","Milestone-led delivery","Post-launch partnership","A 21-person specialist team"].map(x=><p key={x}><Check/>{x}</p>)}</div></div></section><section className="stats"><div className="shell stats-grid"><div><strong><CountUp value={2024}/></strong><span>Established</span></div><div><strong><CountUp value={21}/></strong><span>Team members</span></div><div><strong><CountUp value={9}/></strong><span>Core capabilities</span></div><div><strong><CountUp value={8}/></strong><span>Delivery stages</span></div></div></section><section className="section shell"><SectionHead eyebrow="Client perspective" title="Proof belongs in the open." copy="Only approved client feedback is published. Sample entries are always clearly identified."/>{testimonials.length?<div className="quote-grid">{testimonials.map(t=><blockquote key={t.id}><p>“{t.quote}”</p><footer>{t.attribution} · {t.company}{t.is_sample&&<em>Sample</em>}</footer></blockquote>)}</div>:<div className="empty-proof"><h3>Verified client stories are being prepared.</h3><p>We would rather show no claim than an unverified one.</p></div>}</section><section className="section shell faq"><SectionHead eyebrow="Questions, answered" title="A clear start to every engagement."/>{faq.map(([q,a],i)=><details key={q} open={i===0}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</section><CTA/></Layout>}
