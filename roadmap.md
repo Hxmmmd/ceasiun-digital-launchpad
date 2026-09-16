@@ -1,7 +1,7 @@
-- [ ] Shared design system, navigation, footer, and motion
-- [ ] Home, Services, Work, case study, Process, About, Careers, Contact
-- [ ] Blog listing and article pages
-- [ ] Authentication and protected admin CMS
-- [ ] Database-backed public content and contact form
-- [ ] Responsive and security verification
-- [ ] Apply supplied Ceasiun logo across site and favicon
+- [x] Shared design system, navigation, footer, and motion
+- [x] Home, Services, Work, case study, Process, About, Careers, Contact
+- [x] Blog listing and article pages
+- [x] Authentication and protected admin CMS
+- [x] Database-backed public content and contact form
+- [x] Responsive and security verification
+- [x] Apply supplied Ceasiun logo across site and favicon
