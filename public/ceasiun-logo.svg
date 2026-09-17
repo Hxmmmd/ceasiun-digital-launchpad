@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#ffffff" stroke-width="7.5" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10">
+  <!-- Outer Corner Brackets -->
+  <path d="M 10,44 V 10 H 43" />
+  <path d="M 57,10 H 90 V 44" />
+  <path d="M 10,56 V 90 H 43" />
+  <path d="M 57,90 H 90 V 56" />
+  
+  <!-- Inner Interlocking Geometry -->
+  <path d="M 57,10 L 28,39 V 61 L 43,76" />
+  <path d="M 43,90 L 75,58" />
+  <path d="M 38,50 H 90" />
+  <path d="M 55,30 L 70,45" />
+</svg>
