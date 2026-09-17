@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
+import { reportError } from "../lib/error-reporting";
 
 function NotFoundComponent() {
   return (
@@ -38,7 +38,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportError(error, { boundary: "root_error_component" });
   }, [error]);
 
   return (
@@ -78,7 +78,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Ceasiun — Digital Growth Partner" },
-      { name: "description", content: "Ceasiun builds digital products and growth systems for ambitious businesses." },
+      {
+        name: "description",
+        content: "Ceasiun builds digital products and growth systems for ambitious businesses.",
+      },
       { name: "author", content: "Ceasiun" },
       { property: "og:title", content: "Ceasiun — Digital Growth Partner" },
       { property: "og:description", content: "Digital solutions and support for business growth." },
@@ -89,7 +92,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,

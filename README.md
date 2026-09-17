@@ -308,19 +308,9 @@ premium dark neutral palette (near-black background, off-white text, one
 
 restrained accent color) rather than inventing a full palette.
 
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/f7f0648b-29e1-4df6-ac3a-5ca44437333e).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+To run this project locally, make sure you have Node.js installed.
 
 ```sh
 git clone <this-repository-url>

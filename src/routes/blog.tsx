@@ -1,1 +1,100 @@
-import { createFileRoute,Link } from "@tanstack/react-router";import { useMemo,useState } from "react";import { Search } from "lucide-react";import { usePublishedPosts } from "@/components/public-content";import { Layout,PageIntro,meta } from "@/components/site";import { Input } from "@/components/ui/input";export const Route=createFileRoute("/blog")({head:()=>meta("Insights","Ideas and practical guidance from Ceasiun across engineering, growth, AI, security, and digital operations."),component:Page});function Page(){const posts=usePublishedPosts();const [q,setQ]=useState("");const [cat,setCat]=useState("All");const cats=["All",...new Set(posts.map(p=>p.category))];const shown=useMemo(()=>posts.filter(p=>(cat==="All"||p.category===cat)&&(p.title+p.excerpt).toLowerCase().includes(q.toLowerCase())),[posts,q,cat]);return <Layout><PageIntro eyebrow="Insights" title="Useful thinking for digital operators." copy="Practical perspectives across the disciplines that shape digital growth."/><section className="section shell"><div className="blog-tools"><label><Search/><Input aria-label="Search articles" value={q} onChange={e=>setQ(e.target.value)} placeholder="Search insights"/></label><div className="filters">{cats.map(c=><button key={c} className={cat===c?"selected":""} onClick={()=>setCat(c)}>{c}</button>)}</div></div>{shown.length?<div className="post-grid">{shown.map(p=><Link to="/blog/$slug" params={{slug:p.slug}} key={p.id}><span>{p.category}</span><h2>{p.title}</h2><p>{p.excerpt}</p><small>{p.author}{p.published_at?` · ${new Date(p.published_at).toLocaleDateString()}`:""}</small></Link>)}</div>:<div className="empty-proof"><h3>No published insights yet.</h3><p>The Ceasiun team is preparing the first articles.</p></div>}</section></Layout>}
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
+import { Search } from "lucide-react";
+import { usePublishedPosts } from "@/components/public-content";
+import { Layout, PageIntro, meta } from "@/components/site";
+import { Input } from "@/components/ui/input";
+
+export const Route = createFileRoute("/blog")({
+  head: () =>
+    meta(
+      "Insights & Articles",
+      "Practical guidance from Ceasiun across website engineering, growth, AI automation, cybersecurity, and digital operations.",
+    ),
+  component: BlogListingPage,
+});
+
+function BlogListingPage() {
+  const posts = usePublishedPosts();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const categories = ["All", ...new Set(posts.map((post) => post.category).filter(Boolean))];
+
+  const filteredPosts = useMemo(() => {
+    return posts.filter((post) => {
+      const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
+      const matchesSearch = (post.title + " " + post.excerpt)
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [posts, searchQuery, selectedCategory]);
+
+  return (
+    <Layout>
+      <PageIntro
+        eyebrow="Insights & Articles"
+        title="Useful thinking for digital operators."
+        copy="Practical perspectives across the disciplines that shape modern digital growth."
+      />
+
+      <section className="section shell">
+        {/* Search & Category Filter Tools */}
+        <div className="blog-tools">
+          <label>
+            <Search />
+            <Input
+              aria-label="Search articles"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search insights by topic or keyword..."
+            />
+          </label>
+
+          {categories.length > 1 && (
+            <div className="filters">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  className={selectedCategory === category ? "selected" : ""}
+                  onClick={() => setSelectedCategory(category)}
+                  type="button"
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Post Grid or Empty State */}
+        {filteredPosts.length > 0 ? (
+          <div className="post-grid">
+            {filteredPosts.map((post) => (
+              <Link
+                to="/blog/$slug"
+                params={{ slug: post.slug }}
+                key={post.id}
+                className="post-card"
+              >
+                <span>{post.category}</span>
+                <h2>{post.title}</h2>
+                <p>{post.excerpt}</p>
+                <small>
+                  By {post.author}
+                  {post.published_at && ` · ${new Date(post.published_at).toLocaleDateString()}`}
+                </small>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="empty-proof">
+            <h3>No published insights yet.</h3>
+            <p>The Ceasiun team is currently preparing initial articles and guides.</p>
+          </div>
+        )}
+      </section>
+    </Layout>
+  );
+}

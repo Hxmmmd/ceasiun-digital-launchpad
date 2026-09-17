@@ -1,1 +1,71 @@
-import { createFileRoute } from "@tanstack/react-router";import { Layout,PageIntro,CTA,meta } from "@/components/site";import { processSteps } from "@/lib/site-data";export const Route=createFileRoute("/process")({head:()=>meta("Our process","See Ceasiun’s eight-stage delivery process and project-based and monthly retainer workflows."),component:Page});function Page(){return <Layout><PageIntro eyebrow="Process" title="Clarity at every stage." copy="A disciplined eight-step method keeps strategy, craft, and delivery moving in the same direction."/><section className="section shell timeline">{processSteps.map((s,i)=><article key={s}><span>{String(i+1).padStart(2,"0")}</span><h2>{s}</h2><p>{["Understand the business, users, constraints, and opportunity.","Set priorities, outcomes, milestones, and responsibilities.","Shape the experience and visual system before building.","Engineer the solution in controlled, reviewable stages.","Test quality, resilience, usability, and requirements.","Move to production with a deliberate launch plan.","Stabilize, support, and resolve what real use reveals.","Measure, learn, and improve what matters next."][i]}</p></article>)}</section><section className="contrast section"><div className="shell"><h2>Two ways to engage.</h2><div className="engagement-grid"><article><span>Project-based</span><p>Discover → Propose → Contract → Execute → Review → Complete → Deliver</p></article><article><span>Monthly retainer</span><p>Discover → Propose → Contract → Onboard → Execute → Report → Renew</p></article></div><p className="payment">30% advance, followed by milestone-based payments.</p></div></section><CTA/></Layout>}
+import { createFileRoute } from "@tanstack/react-router";
+import { Layout, PageIntro, CTA, meta } from "@/components/site";
+import { processSteps } from "@/lib/site-data";
+
+export const Route = createFileRoute("/process")({
+  head: () =>
+    meta(
+      "Our Process",
+      "Explore Ceasiun’s eight-stage delivery process, project-based model, and monthly retainer engagement workflows.",
+    ),
+  component: ProcessPage,
+});
+
+const stepDescriptions = [
+  "Understand the business, user needs, technical constraints, and strategic opportunities.",
+  "Define clear priorities, target outcomes, project milestones, and team responsibilities.",
+  "Shape user experiences, UI components, and brand guidelines before writing production code.",
+  "Engineer resilient frontends, backends, and integrations in controlled, reviewable stages.",
+  "Rigorous testing for performance, security, responsiveness, accessibility, and functional requirements.",
+  "Execute a smooth production deployment with monitoring, DNS setup, and launch readiness checks.",
+  "Stabilize infrastructure, resolve initial user feedback, and provide continuous technical support.",
+  "Measure analytics, review growth data, and iteratively improve what drives business performance.",
+];
+
+function ProcessPage() {
+  return (
+    <Layout>
+      <PageIntro
+        eyebrow="Delivery Process"
+        title="Clarity at every stage."
+        copy="A disciplined eight-step method keeps strategy, craft, and execution moving seamlessly in the same direction."
+      />
+
+      {/* Eight-Step Delivery Process */}
+      <section className="section shell timeline">
+        {processSteps.map((step, index) => (
+          <article key={step}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h2>{step}</h2>
+            <p>{stepDescriptions[index]}</p>
+          </article>
+        ))}
+      </section>
+
+      {/* Engagement Models & Payment Terms */}
+      <section className="contrast section">
+        <div className="shell">
+          <h2>Two engagement models built for flexibility.</h2>
+          <div className="engagement-grid">
+            <article>
+              <span>Project-Based</span>
+              <p>Discover → Propose → Contract → Execute → Review → Complete → Deliver</p>
+            </article>
+
+            <article>
+              <span>Monthly Retainer</span>
+              <p>Discover → Propose → Contract → Onboard → Execute → Report → Renew</p>
+            </article>
+          </div>
+
+          <p className="payment">
+            Payment structure: 30% advance required to initiate work, followed by milestone-based
+            payments.
+          </p>
+        </div>
+      </section>
+
+      <CTA />
+    </Layout>
+  );
+}
