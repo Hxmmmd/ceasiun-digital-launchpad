@@ -73,8 +73,8 @@ export function Header() {
     <header className={`${menuVisible ? "site-header is-open" : "site-header"} ${!open && menuVisible ? "is-closing" : ""}`}>
       <div className="shell nav-row">
         <Link href="/" className="wordmark" aria-label={`${settings.siteName} Home`} onClick={closeMenu}>
-          <img src="/ceasiun-logo.svg" alt={settings.siteName} />
-          {settings.siteName.toUpperCase()}
+          <img src="/ceasiun-logo.svg" alt="" />
+          <span className="wordmark-name">{settings.siteName}</span>
         </Link>
 
         <nav className="desktop-nav" aria-label="Main navigation">
@@ -152,10 +152,10 @@ export function Footer() {
     <footer className="footer">
       <div className="shell footer-grid">
         <div>
-          <Link href="/" className="wordmark" aria-label={`${settings.siteName} Home`}>
-            <img src="/ceasiun-logo.svg" alt={settings.siteName} />
-            {settings.siteName.toUpperCase()}
+          <Link href="/" className="wordmark footer-wordmark" aria-label={`${settings.siteName} Home`}>
+            <img src="/ceasiun-logo.svg" alt="" />
           </Link>
+          <h2 className="footer-brand-heading">{settings.siteName}</h2>
           <p>{settings.footerBlurb}</p>
           <p className="footer-tagline">{settings.footerTagline}</p>
         </div>

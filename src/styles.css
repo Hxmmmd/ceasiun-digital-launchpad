@@ -275,10 +275,22 @@ html {
   gap: 1rem;
 }
 .wordmark {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.65rem;
+  color: var(--foreground);
+  font-family: var(--font-display);
   font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+.wordmark-name {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
 }
 .wordmark img {
   width: 34px;
@@ -963,6 +975,16 @@ blockquote em {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+}
+.footer-brand-heading {
+  margin: 0.8rem 0 0;
+  color: var(--foreground);
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.65rem);
+  font-weight: 700;
+  letter-spacing: -0.065em;
+  line-height: 0.95;
+  text-transform: uppercase;
 }
 .footer-grid p,
 .footer-grid a {
