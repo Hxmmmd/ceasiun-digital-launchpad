@@ -2363,7 +2363,7 @@ blockquote em {
   flex-shrink: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ═════════════════════════════════════════���═════════════════════════
    ADMIN STATUS PILLS
 ═══════════════════════════════════════════════════════════════════ */
 .status-pill {
@@ -2769,8 +2769,6 @@ blockquote em {
     transform 0.22s ease,
     padding 0.22s ease;
 }
-.admin-mobile-brand { display: none; align-items: center; gap: 0.5rem; font-family: var(--font-display); letter-spacing: 0.08em; }
-.admin-mobile-brand img { width: 28px; height: 28px; object-fit: contain; }
 .admin-topbar {
   display: flex;
   align-items: center;
@@ -2789,7 +2787,6 @@ blockquote em {
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
-  .admin-mobile-brand { display: inline-flex; margin-right: auto; }
   .admin-menu-toggle {
     display: flex;
   }

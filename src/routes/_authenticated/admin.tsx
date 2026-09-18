@@ -422,7 +422,7 @@ export default function AdminDashboard() {
     return `local-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
   }
 
-  // ─── Admin Users ──���──────────────────���────────────────────────────────
+  // ─── Admin Users ──���──────────────────���──────────────��─────────────────
   function handleCreateUser(e: React.FormEvent) {
     e.preventDefault();
     if (!newUser.email || !newUser.password) return;
@@ -733,10 +733,6 @@ export default function AdminDashboard() {
       {/* Main Content */}
       <section className="admin-main-section">
         <div className="admin-topbar">
-          <div className="admin-mobile-brand">
-            <img src="/ceasiun-logo.svg" alt="" width={28} height={28} />
-            <strong>CEASIUN</strong>
-          </div>
           <button
             type="button"
             className="admin-menu-toggle"
