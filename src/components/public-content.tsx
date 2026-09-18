@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { hasSupabaseConfig, supabase } from "@/integrations/supabase/client";
 import { CMS_EVENT } from "@/lib/cms";
 
 export type Post = {
@@ -48,6 +48,10 @@ export type CareerOpening = {
   is_visible: boolean;
 };
 
+// Supabase types may be intentionally empty in preview environments while CMS data is optional.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const cmsSupabase = supabase as any;
+
 function loadLocal<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
   try {
@@ -84,12 +88,13 @@ export function usePublishedPosts() {
       );
       return;
     }
-    supabase
+    if (!hasSupabaseConfig) return;
+    cmsSupabase
       .from("blog_posts")
       .select("id,slug,title,excerpt,category,body,author,cover_url,published_at,tags,status")
       .eq("status", "published")
       .order("published_at", { ascending: false })
-      .then(({ data }) => setPosts(data ?? []));
+      .then(({ data }: { data: any }) => setPosts(data ?? []));
   });
 
   return posts;
@@ -104,13 +109,14 @@ export function usePost(slug: string) {
       setPost(localPosts.find((p) => p.slug === slug && p.status === "published") ?? null);
       return;
     }
-    supabase
+    if (!hasSupabaseConfig) return;
+    cmsSupabase
       .from("blog_posts")
       .select("id,slug,title,excerpt,category,body,author,cover_url,published_at,tags")
       .eq("slug", slug)
       .eq("status", "published")
       .maybeSingle()
-      .then(({ data }) => setPost(data));
+      .then(({ data }: { data: any }) => setPost(data));
   }, [slug]);
 
   return post;
@@ -127,12 +133,13 @@ export function useTestimonials() {
       );
       return;
     }
-    supabase
+    if (!hasSupabaseConfig) return;
+    cmsSupabase
       .from("testimonials")
       .select("id,quote,attribution,company,is_sample,is_visible,sort_order")
       .eq("is_visible", true)
       .order("sort_order")
-      .then(({ data }) => setTestimonials(data ?? []));
+      .then(({ data }: { data: any }) => setTestimonials(data ?? []));
   });
 
   return testimonials;
@@ -147,11 +154,12 @@ export function useCaseStudies() {
       setCases(local.filter((c) => c.is_visible));
       return;
     }
-    supabase
+    if (!hasSupabaseConfig) return;
+    cmsSupabase
       .from("case_studies")
       .select("*")
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .then(({ data }) =>
+      .then(({ data }: { data: any }) =>
         setCases(((data as any[] | null) ?? []).filter((c: any) => c.is_visible !== false) as CaseStudy[]),
       );
   });
@@ -168,7 +176,8 @@ export function useCareerOpenings() {
       setJobs(local.filter((c) => c.is_visible));
       return;
     }
-    supabase.from("career_openings").select("*").eq("is_visible", true).then(({ data }) => setJobs(data ?? []));
+    if (!hasSupabaseConfig) return;
+    cmsSupabase.from("career_openings").select("*").eq("is_visible", true).then(({ data }: { data: any }) => setJobs(data ?? []));
   });
 
   return jobs;

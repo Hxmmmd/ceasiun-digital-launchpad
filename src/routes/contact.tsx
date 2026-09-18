@@ -42,7 +42,7 @@ export default function ContactPage() {
     };
 
     try {
-      const { error } = await supabase.from("contact_submissions").insert(payload);
+      const { error } = await (supabase as any).from("contact_submissions").insert(payload);
       if (error) {
         setErrorMessage("Unable to send your message right now. Please try again or reach out via WhatsApp.");
       } else {
