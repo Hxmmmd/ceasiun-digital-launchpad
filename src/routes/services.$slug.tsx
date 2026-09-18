@@ -65,7 +65,12 @@ const serviceNarratives: Record<string, { intro: string; outcomes: string[]; fit
 
 export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
   const services = useCmsServices();
-  const service = services.find((item) => item.slug === slug) ?? services[0];
+  const service = services.find((item) => item.slug === slug);
+
+  if (!service) {
+    return null;
+  }
+
   const Icon = service.icon;
   const narrative = serviceNarratives[service.slug] ?? serviceNarratives["web-development"];
 
