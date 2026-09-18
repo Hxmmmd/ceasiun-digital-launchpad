@@ -1,16 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useCaseStudies } from "@/components/public-content";
 import { CTA, Layout, meta } from "@/components/site";
 import { samples } from "@/lib/site-data";
 
-export const Route = createFileRoute("/work/$slug")({
-  head: () => meta("Case Study", "A Ceasiun case-study example demonstrating our Problem to Approach to Result framework."),
-  component: CaseStudyPage,
-});
-
-function CaseStudyPage() {
-  const { slug } = Route.useParams();
+export default function CaseStudyPage({ slug }: { slug: string }) {
   const cmsCases = useCaseStudies();
   const fallback = samples.find((sample) => sample.slug === slug);
   const item =
@@ -38,7 +33,7 @@ function CaseStudyPage() {
         <div className="section shell" style={{ paddingTop: "10rem" }}>
           <h1>Case Study Not Found</h1>
           <p style={{ margin: "1.5rem 0" }}>The case study you are looking for does not exist or is hidden.</p>
-          <Link to="/work">Return to Work</Link>
+          <Link  href="/work">Return to Work</Link>
         </div>
       </Layout>
     );
@@ -47,7 +42,7 @@ function CaseStudyPage() {
   return (
     <Layout>
       <article className="case-page shell">
-        <Link to="/work">
+        <Link  href="/work">
           <ArrowLeft /> All Work
         </Link>
         <p className="eyebrow">{item.category} - Case Study</p>

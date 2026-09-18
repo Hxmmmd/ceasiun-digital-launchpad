@@ -1,4 +1,5 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+"use client";
+import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
@@ -10,27 +11,11 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Layout, CTA, meta } from "@/components/site";
-import { services, samples } from "@/lib/site-data";
+import { samples } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
 import { useCmsServices } from "@/hooks/use-cms";
 
-export const Route = createFileRoute("/services/$slug")({
-  loader: ({ params }) => {
-    const item = services.find((x) => x.slug === params.slug);
-    if (!item) throw notFound();
-    return { slug: item.slug };
-  },
-  head: ({ loaderData }) =>
-    meta(
-      services.find((item) => item.slug === loaderData?.slug)?.title ?? "Service Category",
-      services.find((item) => item.slug === loaderData?.slug)?.short ??
-        "Explore specialized digital services from Ceasiun across web engineering, marketing, branding, AI automation, and managed operations.",
-    ),
-  component: ServiceCategoryDetailPage,
-});
-
-function ServiceCategoryDetailPage() {
-  const { slug } = Route.useLoaderData();
+export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
   const services = useCmsServices();
   const service = services.find((item) => item.slug === slug) ?? services[0];
   const Icon = service.icon;
@@ -51,7 +36,7 @@ function ServiceCategoryDetailPage() {
       {/* Service Detail Intro Hero */}
       <section className="service-detail-hero grid-bg shell">
         <div className="service-detail-nav">
-          <Link to="/services" className="back-link">
+          <Link  href="/services" className="back-link">
             <ArrowLeft /> All Services
           </Link>
           <span className="service-badge">Practice 0{currentIndex + 1} of 0{services.length}</span>
@@ -69,7 +54,7 @@ function ServiceCategoryDetailPage() {
 
           <div className="service-hero-actions">
             <Button asChild size="lg">
-              <Link to="/contact" search={{ service: service.title }}>
+              <Link  href="/contact">
                 Discuss {service.title} <ArrowUpRight />
               </Link>
             </Button>
@@ -212,8 +197,7 @@ function ServiceCategoryDetailPage() {
             return (
               <Link
                 key={other.slug}
-                to="/services/$slug"
-                params={{ slug: other.slug }}
+                 href={`/services/${other.slug}`}
                 className="switcher-card"
               >
                 <div className="switcher-card-head">
@@ -236,7 +220,7 @@ function ServiceCategoryDetailPage() {
         </div>
         <div className="mini-grid">
           {displaySamples.map((sample) => (
-            <Link key={sample.slug} to="/work/$slug" params={{ slug: sample.slug }}>
+            <Link key={sample.slug}  href={`/work/${sample.slug}`}>
               <span>{sample.category}</span>
               <h3>{sample.title}</h3>
             </Link>

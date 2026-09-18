@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+"use client";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { CheckCircle2, Facebook, Instagram, Linkedin, MessageCircle, Phone, Twitter, Youtube } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Layout, PageIntro, SectionHead, meta } from "@/components/site";
@@ -7,18 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useCms, useCmsServices } from "@/hooks/use-cms";
-
-export const Route = createFileRoute("/contact")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    service: typeof search["service"] === "string" ? search["service"] : "",
-  }),
-  head: () =>
-    meta(
-      "Contact Us",
-      "Talk to Ceasiun about your next website engineering, digital marketing, AI automation, cybersecurity, or managed services contract.",
-    ),
-  component: ContactPage,
-});
 
 function whatsappHref(value: string) {
   if (value.startsWith("http")) return value;
@@ -29,8 +18,9 @@ function phoneHref(value: string) {
   return `tel:${value.replace(/[^\d+]/g, "")}`;
 }
 
-function ContactPage() {
-  const search = Route.useSearch();
+export default function ContactPage() {
+  const searchParams = useSearchParams();
+  const search = { service: searchParams.get("service") ?? "" };
   const cms = useCms();
   const services = useCmsServices();
   const [submitted, setSubmitted] = useState(false);

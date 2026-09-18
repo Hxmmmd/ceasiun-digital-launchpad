@@ -1,4 +1,5 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+"use client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   ArrowLeft,
@@ -39,17 +40,6 @@ import { AdminPagesEditor } from "@/components/admin-pages-editor";
 import { notifyCmsListeners } from "@/lib/cms";
 import { services } from "@/lib/site-data";
 import logoUrl from "@/assets/ceasiun-logo.svg";
-
-export const Route = createFileRoute("/_authenticated/admin")({
-  head: () => ({
-    meta: [
-      { title: "Advanced Admin Command Center — Ceasiun" },
-      { name: "description", content: "Complete Ceasiun website control panel & user management." },
-      { property: "og:title", content: "Admin Command Center — Ceasiun" },
-    ],
-  }),
-  component: AdminDashboard,
-});
 
 type MainTab =
   | "overview"
@@ -337,8 +327,8 @@ const blankCareer = (): CareerOpening => ({
 });
 
 // ─── Main Component ───────────────────────────────────────────────────────────
-export function AdminDashboard() {
-  const navigate = useNavigate();
+export default function AdminDashboard() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<MainTab>("overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -434,7 +424,7 @@ export function AdminDashboard() {
     return `local-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
   }
 
-  // ─── Admin Users ──────────────────────────────────────────────────────
+  // ─── Admin Users ──��───────────────────────────────────────────────────
   function handleCreateUser(e: React.FormEvent) {
     e.preventDefault();
     if (!newUser.email || !newUser.password) return;
@@ -610,7 +600,7 @@ export function AdminDashboard() {
       localStorage.removeItem("ceasiun_active_user");
     }
     await supabase.auth.signOut();
-    navigate({ to: "/auth", replace: true });
+    router.replace("/auth");
   }
 
   // ─── Tab label helper ─────────────────────────────────────────────────
@@ -1424,7 +1414,7 @@ export function AdminDashboard() {
           </div>
         )}
 
-        {/* ══════════════════════════════════════════════════════════════════
+        {/* ═══════════════���══════════════════════════════════════════════════
             TAB 9: SITE SETTINGS
         ══════════════════════════════════════════════════════════════════ */}
         {activeTab === "settings" && (

@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { usePublishedPosts } from "@/components/public-content";
@@ -6,16 +7,7 @@ import { Layout, PageIntro, meta } from "@/components/site";
 import { Input } from "@/components/ui/input";
 import { useCms } from "@/hooks/use-cms";
 
-export const Route = createFileRoute("/blog")({
-  head: () =>
-    meta(
-      "Insights & Articles",
-      "Practical guidance from Ceasiun across website engineering, growth, AI automation, cybersecurity, and digital operations.",
-    ),
-  component: BlogListingPage,
-});
-
-function BlogListingPage() {
+export default function BlogListingPage() {
   const { blog } = useCms();
   const posts = usePublishedPosts();
   const [searchQuery, setSearchQuery] = useState("");
@@ -75,8 +67,7 @@ function BlogListingPage() {
           <div className="post-grid">
             {filteredPosts.map((post) => (
               <Link
-                to="/blog/$slug"
-                params={{ slug: post.slug }}
+                 href={`/blog/${post.slug}`}
                 key={post.id}
                 className="post-card"
               >

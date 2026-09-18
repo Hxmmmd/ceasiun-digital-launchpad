@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+import Link from "next/link";
 import { ArrowRight, Check, MoveRight } from "lucide-react";
 import { CountUp } from "@/components/count-up";
 import { useTestimonials } from "@/components/public-content";
@@ -7,16 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useCms, useCmsServices } from "@/hooks/use-cms";
 import hero from "@/assets/ceasiun-hero.jpg";
 
-export const Route = createFileRoute("/")({
-  head: () =>
-    meta(
-      "Digital Growth Partner",
-      "Ceasiun builds digital products, growth systems, automation, security, and managed operations for ambitious businesses.",
-    ),
-  component: HomePage,
-});
-
-function HomePage() {
+export default function HomePage() {
   const cms = useCms();
   const services = useCmsServices();
   const testimonials = useTestimonials();
@@ -24,14 +16,14 @@ function HomePage() {
   return (
     <Layout>
       <section className="hero">
-        <img src={hero} width={1600} height={1008} alt={cms.home.heroAlt} fetchPriority="high" />
+        <img src={hero.src} width={1600} height={1008} alt={cms.home.heroAlt} fetchPriority="high" />
         <div className="hero-shade" />
         <div className="shell hero-content">
           <p className="eyebrow">{cms.home.heroEyebrow}</p>
           <h1>{cms.home.heroTitle}</h1>
           <p>{cms.home.heroCopy}</p>
           <Button asChild size="lg">
-            <Link to="/contact" search={{ service: "" }}>
+            <Link  href="/contact">
               {cms.home.heroCta} <ArrowRight />
             </Link>
           </Button>
@@ -48,7 +40,7 @@ function HomePage() {
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <Link to="/services" hash={service.slug} className="service-card" key={service.slug}>
+              <Link  href="/services" className="service-card" key={service.slug}>
                 <span>0{index + 1}</span>
                 <Icon />
                 <h3>{service.title}</h3>
