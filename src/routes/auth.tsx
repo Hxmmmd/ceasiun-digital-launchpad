@@ -1,4 +1,6 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+"use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -7,14 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import logoUrl from "@/assets/ceasiun-logo.svg";
 
-export const Route = createFileRoute("/auth")({
-  head: () =>
-    meta("Admin Sign In", "Secure Ceasiun content administration interface for team members."),
-  component: AuthPage,
-});
-
-function AuthPage() {
-  const navigate = useNavigate();
+export default function AuthPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("admin@example.com");
   const [password, setPassword] = useState("admin");
   const [mode, setMode] = useState<"in" | "up">("in");
@@ -48,7 +44,7 @@ function AuthPage() {
           if (found) {
             localStorage.setItem("ceasiun_demo_admin", "true");
             localStorage.setItem("ceasiun_active_user", JSON.stringify(found));
-            navigate({ to: "/admin" });
+            router.push("/admin");
             setLoading(false);
             return;
           }
@@ -78,7 +74,7 @@ function AuthPage() {
         } catch {
           // ignore Supabase background fallback errors for demo account
         }
-        navigate({ to: "/admin" });
+        router.push("/admin");
         setLoading(false);
         return;
       }
@@ -107,7 +103,7 @@ function AuthPage() {
           if (typeof window !== "undefined") {
             localStorage.setItem("ceasiun_demo_admin", "true");
           }
-          navigate({ to: "/admin" });
+          router.push("/admin");
           return;
         }
         setMessage(res.error.message);
@@ -115,14 +111,14 @@ function AuthPage() {
         setMessage("Check your email to confirm the account, then sign in.");
       } else {
         await supabase.rpc("claim_ceasiun_admin");
-        navigate({ to: "/admin" });
+        router.push("/admin");
       }
     } catch (err: unknown) {
       if (cleanEmail === "admin@example.com") {
         if (typeof window !== "undefined") {
           localStorage.setItem("ceasiun_demo_admin", "true");
         }
-        navigate({ to: "/admin" });
+        router.push("/admin");
         return;
       }
       setMessage(err instanceof Error ? err.message : "Authentication failed.");
@@ -147,7 +143,7 @@ function AuthPage() {
   return (
     <main className="auth-page">
       <section>
-        <Link to="/" className="back-link auth-back">
+        <Link  href="/" className="back-link auth-back">
           <ArrowLeft /> Back to Website
         </Link>
         <img src={logoUrl} alt="Ceasiun Logo" />

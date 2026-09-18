@@ -1,12 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Layout, meta } from "@/components/site";
 import { usePost } from "@/components/public-content";
-
-export const Route = createFileRoute("/blog/$slug")({
-  head: () => meta("Insight Article", "Read the latest practical insight from Ceasiun."),
-  component: BlogPostPage,
-});
 
 function RenderProseContent({ body }: { body: string }) {
   if (!body) return null;
@@ -80,8 +76,7 @@ function RenderProseContent({ body }: { body: string }) {
   return <div className="prose">{elements}</div>;
 }
 
-function BlogPostPage() {
-  const { slug } = Route.useParams();
+export default function BlogPostPage({ slug }: { slug: string }) {
   const post = usePost(slug);
 
 
@@ -97,7 +92,7 @@ function BlogPostPage() {
           <p style={{ margin: "1.5rem 0" }}>
             The article you are looking for does not exist or has been removed.
           </p>
-          <Link to="/blog">Return to Insights</Link>
+          <Link  href="/blog">Return to Insights</Link>
         </div>
       </Layout>
     );
@@ -106,7 +101,7 @@ function BlogPostPage() {
   return (
     <Layout>
       <article className="article shell">
-        <Link to="/blog">
+        <Link  href="/blog">
           <ArrowLeft /> All Insights
         </Link>
         <p className="eyebrow">{post.category}</p>

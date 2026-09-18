@@ -1,19 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useCareerOpenings } from "@/components/public-content";
 import { Layout, PageIntro, meta } from "@/components/site";
 import { useCms } from "@/hooks/use-cms";
 
-export const Route = createFileRoute("/careers")({
-  head: () =>
-    meta(
-      "Careers at Ceasiun",
-      "Explore open roles and culture at Ceasiun. We value ownership, practical judgment, and technical excellence.",
-    ),
-  component: CareersPage,
-});
-
-function CareersPage() {
+export default function CareersPage() {
   const { careers } = useCms();
   const jobs = useCareerOpenings();
   const loading = jobs === undefined;
@@ -48,7 +40,7 @@ function CareersPage() {
                   </span>
                 </div>
                 <p>{job.description}</p>
-                <Link to="/contact" search={{ service: "" }}>
+                <Link  href="/contact">
                   Apply Now <ArrowUpRight />
                 </Link>
               </article>

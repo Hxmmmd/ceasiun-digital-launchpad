@@ -1,17 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+"use client";
 import { CTA, Layout, PageIntro, meta } from "@/components/site";
 import { useCms } from "@/hooks/use-cms";
 
-export const Route = createFileRoute("/process")({
-  head: () =>
-    meta(
-      "Our Process",
-      "Explore Ceasiun's eight-stage delivery process, project-based model, and monthly retainer engagement workflows.",
-    ),
-  component: ProcessPage,
-});
-
-function ProcessPage() {
+export default function ProcessPage() {
   const { process } = useCms();
 
   return (

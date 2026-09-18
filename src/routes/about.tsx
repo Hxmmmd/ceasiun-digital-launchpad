@@ -1,17 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+"use client";
 import { CTA, Layout, PageIntro, meta } from "@/components/site";
 import { useCms } from "@/hooks/use-cms";
 
-export const Route = createFileRoute("/about")({
-  head: () =>
-    meta(
-      "About Ceasiun",
-      "Founded in 2024 by Hammad Hanif, Ceasiun is a digital growth partner agency with a team of 21 specialists.",
-    ),
-  component: AboutPage,
-});
-
-function AboutPage() {
+export default function AboutPage() {
   const { about } = useCms();
 
   return (

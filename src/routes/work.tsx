@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCaseStudies } from "@/components/public-content";
 import { CTA, Layout, PageIntro, meta } from "@/components/site";
@@ -10,16 +11,7 @@ import commerce from "@/assets/work-commerce.jpg";
 
 const images = [commerce, automation, brand];
 
-export const Route = createFileRoute("/work")({
-  head: () =>
-    meta(
-      "Selected Work",
-      "Explore Ceasiun's case-study approach across website engineering, automation, and branding.",
-    ),
-  component: WorkPage,
-});
-
-function WorkPage() {
+export default function WorkPage() {
   const { work } = useCms();
   const cmsCases = useCaseStudies();
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -63,9 +55,9 @@ function WorkPage() {
 
         <div className="work-grid">
           {filteredCases.map((item, index) => (
-            <Link to="/work/$slug" params={{ slug: item.slug }} key={item.id} className="work-card">
+            <Link  href={`/work/${item.slug}`} key={item.id} className="work-card">
               <img
-                src={images[index % images.length]}
+                src={images[index % images.length].src}
                 alt={item.title}
                 width={1200}
                 height={800}

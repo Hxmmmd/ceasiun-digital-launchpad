@@ -1,4 +1,5 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+import Link from "next/link";
 import {
   ArrowUpRight,
   Briefcase,
@@ -59,14 +60,14 @@ export function Header() {
   return (
     <header className={open ? "site-header is-open" : "site-header"}>
       <div className="shell nav-row">
-        <Link to="/" className="wordmark" aria-label={`${settings.siteName} Home`} onClick={() => setOpen(false)}>
+        <Link href="/" className="wordmark" aria-label={`${settings.siteName} Home`} onClick={() => setOpen(false)}>
           <img src={logoUrl} alt={settings.siteName} />
           {settings.siteName.toUpperCase()}
         </Link>
 
         <nav className="desktop-nav" aria-label="Main navigation">
           {nav.map(([n, to]) => (
-            <Link key={to} to={to} activeProps={{ className: "active" }} activeOptions={{ exact: to === "/" }}>
+            <Link key={to} href={to}>
               {n}
             </Link>
           ))}
@@ -74,7 +75,7 @@ export function Header() {
 
         <div className="nav-actions">
           <Button asChild size="lg">
-            <Link to="/contact" search={{ service: "" }}>
+            <Link href="/contact">
               {settings.headerCta} <ArrowUpRight />
             </Link>
           </Button>
@@ -98,9 +99,7 @@ export function Header() {
               return (
                 <Link
                   key={to}
-                  to={to}
-                  activeProps={{ className: "active" }}
-                  activeOptions={{ exact: to === "/" }}
+                  href={to}
                   onClick={() => setOpen(false)}
                 >
                   <Icon className="mobile-nav-icon" />
@@ -108,14 +107,12 @@ export function Header() {
                 </Link>
               );
             })}
-            <Link to="/careers" activeProps={{ className: "active" }} onClick={() => setOpen(false)}>
+            <Link href="/careers" onClick={() => setOpen(false)}>
               <GraduationCap className="mobile-nav-icon" />
               <span>Careers</span>
             </Link>
             <Link
-              to="/contact"
-              search={{ service: "" }}
-              activeProps={{ className: "active" }}
+              href="/contact"
               onClick={() => setOpen(false)}
             >
               <Mail className="mobile-nav-icon" />
@@ -125,7 +122,7 @@ export function Header() {
 
           <div className="mobile-nav-footer">
             <Button asChild size="lg" className="w-full text-black font-bold">
-              <Link to="/contact" search={{ service: "" }} onClick={() => setOpen(false)}>
+              <Link href="/contact" onClick={() => setOpen(false)}>
                 {settings.headerCta} <ArrowUpRight className="text-black" />
               </Link>
             </Button>
@@ -143,7 +140,7 @@ export function Footer() {
     <footer className="footer">
       <div className="shell footer-grid">
         <div>
-          <Link to="/" className="wordmark" aria-label={`${settings.siteName} Home`}>
+          <Link href="/" className="wordmark" aria-label={`${settings.siteName} Home`}>
             <img src={logoUrl} alt={settings.siteName} />
             {settings.siteName.toUpperCase()}
           </Link>
@@ -154,12 +151,12 @@ export function Footer() {
         <div>
           <b>Navigate</b>
           {nav.map(([n, to]) => (
-            <Link key={to} to={to}>
+            <Link key={to} href={to}>
               {n}
             </Link>
           ))}
-          <Link to="/careers">Careers</Link>
-          <Link to="/contact" search={{ service: "" }}>
+          <Link href="/careers">Careers</Link>
+          <Link href="/contact">
             Contact
           </Link>
         </div>
@@ -198,7 +195,7 @@ export function Footer() {
 
       <div className="shell footer-bottom">
         <span>(c) {new Date().getFullYear()} {settings.siteName}. All rights reserved.</span>
-        <Link to="/admin">Admin Desk</Link>
+        <Link href="/admin">Admin Desk</Link>
       </div>
     </footer>
   );
@@ -245,7 +242,7 @@ export function CTA() {
         <p className="eyebrow">{cta.eyebrow}</p>
         <h2>{cta.title}</h2>
         <Button asChild size="lg">
-          <Link to="/contact" search={{ service: "" }}>
+          <Link href="/contact">
             {cta.button} <ArrowUpRight />
           </Link>
         </Button>
