@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import { usePublishedPosts } from "@/components/public-content";
 import { Layout, PageIntro, meta } from "@/components/site";
 import { Input } from "@/components/ui/input";
+import { useCms } from "@/hooks/use-cms";
 
 export const Route = createFileRoute("/blog")({
   head: () =>
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/blog")({
 });
 
 function BlogListingPage() {
+  const { blog } = useCms();
   const posts = usePublishedPosts();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -34,9 +36,9 @@ function BlogListingPage() {
   return (
     <Layout>
       <PageIntro
-        eyebrow="Insights & Articles"
-        title="Useful thinking for digital operators."
-        copy="Practical perspectives across the disciplines that shape modern digital growth."
+        eyebrow={blog.eyebrow}
+        title={blog.title}
+        copy={blog.copy}
       />
 
       <section className="section shell">
@@ -83,7 +85,7 @@ function BlogListingPage() {
                 <p>{post.excerpt}</p>
                 <small>
                   By {post.author}
-                  {post.published_at && ` · ${new Date(post.published_at).toLocaleDateString()}`}
+                  {post.published_at && ` - ${new Date(post.published_at).toLocaleDateString()}`}
                 </small>
               </Link>
             ))}

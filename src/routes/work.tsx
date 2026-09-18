@@ -1,46 +1,53 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { Layout, PageIntro, CTA, meta } from "@/components/site";
+import { useMemo, useState } from "react";
+import { useCaseStudies } from "@/components/public-content";
+import { CTA, Layout, PageIntro, meta } from "@/components/site";
+import { useCms } from "@/hooks/use-cms";
 import { samples } from "@/lib/site-data";
-import commerce from "@/assets/work-commerce.jpg";
 import automation from "@/assets/work-automation.jpg";
 import brand from "@/assets/work-brand.jpg";
+import commerce from "@/assets/work-commerce.jpg";
 
-const images = {
-  commerce,
-  automation,
-  brand,
-};
+const images = [commerce, automation, brand];
 
 export const Route = createFileRoute("/work")({
   head: () =>
     meta(
       "Selected Work",
-      "Explore Ceasiun’s case-study approach across website engineering, automation, and branding.",
+      "Explore Ceasiun's case-study approach across website engineering, automation, and branding.",
     ),
   component: WorkPage,
 });
 
 function WorkPage() {
+  const { work } = useCms();
+  const cmsCases = useCaseStudies();
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = ["All", ...new Set(samples.map((sample) => sample.category))];
+  const cases = useMemo(() => {
+    if (cmsCases.length > 0) return cmsCases;
+    return samples.map((sample) => ({
+      id: sample.slug,
+      slug: sample.slug,
+      title: sample.title,
+      category: sample.category,
+      summary: sample.summary,
+      problem: "",
+      approach: "",
+      result: "",
+      is_visible: true,
+    }));
+  }, [cmsCases]);
 
-  const filteredSamples =
-    selectedCategory === "All"
-      ? samples
-      : samples.filter((sample) => sample.category === selectedCategory);
+  const categories = ["All", ...new Set(cases.map((item) => item.category))];
+  const filteredCases =
+    selectedCategory === "All" ? cases : cases.filter((item) => item.category === selectedCategory);
 
   return (
     <Layout>
-      <PageIntro
-        eyebrow="Work & Portfolio"
-        title="A record of deliberate problem solving."
-        copy="Until verified client case studies are released with client consent, these sample structures demonstrate our Problem → Approach → Result framework."
-      />
+      <PageIntro eyebrow={work.eyebrow} title={work.title} copy={work.copy} />
 
       <section className="section shell">
-        {/* Category Filter */}
         <div className="filters">
           {categories.map((category) => (
             <button
@@ -54,24 +61,18 @@ function WorkPage() {
           ))}
         </div>
 
-        {/* Case Study Grid */}
         <div className="work-grid">
-          {filteredSamples.map((item) => (
-            <Link
-              to="/work/$slug"
-              params={{ slug: item.slug }}
-              key={item.slug}
-              className="work-card"
-            >
+          {filteredCases.map((item, index) => (
+            <Link to="/work/$slug" params={{ slug: item.slug }} key={item.id} className="work-card">
               <img
-                src={images[item.image as keyof typeof images]}
+                src={images[index % images.length]}
                 alt={item.title}
                 width={1200}
                 height={800}
                 loading="lazy"
               />
               <div>
-                <span>{item.category} · Sample Case Study</span>
+                <span>{item.category} - Case Study</span>
                 <h2>{item.title}</h2>
                 <p>{item.summary}</p>
               </div>

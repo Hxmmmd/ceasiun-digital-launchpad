@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { CMS_EVENT } from "@/lib/cms";
 
 export type Post = {
   id: string;
@@ -56,45 +57,52 @@ function loadLocal<T>(key: string, fallback: T): T {
   }
 }
 
-/** Returns published blog posts — reads from localStorage (admin-managed) with Supabase fallback */
+function useLocalRefresh(onRefresh: () => void, deps: unknown[] = []) {
+  useEffect(() => {
+    onRefresh();
+    window.addEventListener(CMS_EVENT, onRefresh);
+    window.addEventListener("storage", onRefresh);
+    return () => {
+      window.removeEventListener(CMS_EVENT, onRefresh);
+      window.removeEventListener("storage", onRefresh);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+}
+
 export function usePublishedPosts() {
   const [posts, setPosts] = useState<Post[]>([]);
 
-  useEffect(() => {
-    // Check if admin has managed posts locally
+  useLocalRefresh(() => {
     const localPosts = loadLocal<Post[]>("ceasiun_blog_posts", []);
     if (localPosts.length > 0) {
-      const published = localPosts
-        .filter((p) => p.status === "published")
-        .sort((a, b) => new Date(b.published_at ?? 0).getTime() - new Date(a.published_at ?? 0).getTime());
-      setPosts(published);
+      setPosts(
+        localPosts
+          .filter((p) => p.status === "published")
+          .sort((a, b) => new Date(b.published_at ?? 0).getTime() - new Date(a.published_at ?? 0).getTime()),
+      );
       return;
     }
-
-    // Fallback to Supabase
     supabase
       .from("blog_posts")
       .select("id,slug,title,excerpt,category,body,author,cover_url,published_at,tags,status")
       .eq("status", "published")
       .order("published_at", { ascending: false })
       .then(({ data }) => setPosts(data ?? []));
-  }, []);
+  });
 
   return posts;
 }
 
-/** Returns a single post by slug */
 export function usePost(slug: string) {
   const [post, setPost] = useState<Post | null | undefined>(undefined);
 
-  useEffect(() => {
+  useLocalRefresh(() => {
     const localPosts = loadLocal<Post[]>("ceasiun_blog_posts", []);
     if (localPosts.length > 0) {
-      const found = localPosts.find((p) => p.slug === slug && p.status === "published");
-      setPost(found ?? null);
+      setPost(localPosts.find((p) => p.slug === slug && p.status === "published") ?? null);
       return;
     }
-
     supabase
       .from("blog_posts")
       .select("id,slug,title,excerpt,category,body,author,cover_url,published_at,tags")
@@ -107,70 +115,60 @@ export function usePost(slug: string) {
   return post;
 }
 
-/** Returns visible testimonials */
 export function useTestimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
-  useEffect(() => {
+  useLocalRefresh(() => {
     const local = loadLocal<Testimonial[]>("ceasiun_testimonials", []);
     if (local.length > 0) {
-      const visible = local
-        .filter((t) => t.is_visible !== false)
-        .sort((a, b) => (a.sort_order ?? 99) - (b.sort_order ?? 99));
-      setTestimonials(visible);
+      setTestimonials(
+        local.filter((t) => t.is_visible !== false).sort((a, b) => (a.sort_order ?? 99) - (b.sort_order ?? 99)),
+      );
       return;
     }
-
     supabase
       .from("testimonials")
       .select("id,quote,attribution,company,is_sample,is_visible,sort_order")
       .eq("is_visible", true)
       .order("sort_order")
       .then(({ data }) => setTestimonials(data ?? []));
-  }, []);
+  });
 
   return testimonials;
 }
 
-/** Returns visible case studies */
 export function useCaseStudies() {
   const [cases, setCases] = useState<CaseStudy[]>([]);
 
-  useEffect(() => {
+  useLocalRefresh(() => {
     const local = loadLocal<CaseStudy[]>("ceasiun_case_studies", []);
     if (local.length > 0) {
       setCases(local.filter((c) => c.is_visible));
       return;
     }
-
-    // Supabase fallback — cast as any since table schema may differ
     supabase
       .from("case_studies")
       .select("*")
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .then(({ data }) => setCases((data as any[] ?? []).filter((c: any) => c.is_visible !== false) as CaseStudy[]));
-  }, []);
+      .then(({ data }) =>
+        setCases(((data as any[] | null) ?? []).filter((c: any) => c.is_visible !== false) as CaseStudy[]),
+      );
+  });
 
   return cases;
 }
 
-/** Returns visible career openings */
 export function useCareerOpenings() {
   const [jobs, setJobs] = useState<CareerOpening[]>([]);
 
-  useEffect(() => {
+  useLocalRefresh(() => {
     const local = loadLocal<CareerOpening[]>("ceasiun_careers", []);
     if (local.length > 0) {
       setJobs(local.filter((c) => c.is_visible));
       return;
     }
-
-    supabase
-      .from("career_openings")
-      .select("*")
-      .eq("is_visible", true)
-      .then(({ data }) => setJobs(data ?? []));
-  }, []);
+    supabase.from("career_openings").select("*").eq("is_visible", true).then(({ data }) => setJobs(data ?? []));
+  });
 
   return jobs;
 }

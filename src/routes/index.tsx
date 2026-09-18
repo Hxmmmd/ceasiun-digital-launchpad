@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, MoveRight } from "lucide-react";
-import { Layout, SectionHead, CTA, meta } from "@/components/site";
 import { CountUp } from "@/components/count-up";
 import { useTestimonials } from "@/components/public-content";
-import { services, faq } from "@/lib/site-data";
+import { CTA, Layout, SectionHead, meta } from "@/components/site";
 import { Button } from "@/components/ui/button";
+import { useCms, useCmsServices } from "@/hooks/use-cms";
 import hero from "@/assets/ceasiun-hero.jpg";
 
 export const Route = createFileRoute("/")({
@@ -17,48 +17,32 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const cms = useCms();
+  const services = useCmsServices();
   const testimonials = useTestimonials();
-
-  const keyReasons = [
-    "End-to-end digital capability",
-    "Milestone-led delivery",
-    "Post-launch partnership",
-    "A 21-person specialist team",
-  ];
 
   return (
     <Layout>
-      {/* Hero Section */}
       <section className="hero">
-        <img
-          src={hero}
-          width={1600}
-          height={1008}
-          alt="Abstract precision architecture representing connected digital systems"
-          fetchPriority="high"
-        />
+        <img src={hero} width={1600} height={1008} alt={cms.home.heroAlt} fetchPriority="high" />
         <div className="hero-shade" />
         <div className="shell hero-content">
-          <p className="eyebrow">Digital solutions · Built for growth</p>
-          <h1>Digital systems that move business forward.</h1>
-          <p>
-            Ceasiun brings engineering, growth, automation, design, security, and managed operations
-            into one accountable partnership.
-          </p>
+          <p className="eyebrow">{cms.home.heroEyebrow}</p>
+          <h1>{cms.home.heroTitle}</h1>
+          <p>{cms.home.heroCopy}</p>
           <Button asChild size="lg">
             <Link to="/contact" search={{ service: "" }}>
-              Start a project <ArrowRight />
+              {cms.home.heroCta} <ArrowRight />
             </Link>
           </Button>
         </div>
       </section>
 
-      {/* Services Overview */}
       <section className="section shell">
         <SectionHead
-          eyebrow="One partner. Nine capabilities."
-          title="Built to solve the whole digital problem."
-          copy="Strategy is stronger when execution is connected. Our specialists work as one team across every critical touchpoint."
+          eyebrow={cms.home.servicesEyebrow}
+          title={cms.home.servicesTitle}
+          copy={cms.home.servicesCopy}
         />
         <div className="service-grid">
           {services.map((service, index) => {
@@ -76,15 +60,14 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
       <section className="contrast section">
         <div className="shell split">
           <div>
-            <p className="eyebrow">Why Ceasiun</p>
-            <h2>Senior thinking. Practical delivery. One clear line of accountability.</h2>
+            <p className="eyebrow">{cms.home.whyEyebrow}</p>
+            <h2>{cms.home.whyTitle}</h2>
           </div>
           <div className="reasons">
-            {keyReasons.map((reason) => (
+            {cms.home.whyReasons.map((reason) => (
               <p key={reason}>
                 <Check />
                 {reason}
@@ -94,50 +77,32 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Animated Statistics */}
       <section className="stats">
         <div className="shell stats-grid">
-          <div>
-            <strong>
-              <CountUp value={2024} />
-            </strong>
-            <span>Established</span>
-          </div>
-          <div>
-            <strong>
-              <CountUp value={21} />
-            </strong>
-            <span>Team members</span>
-          </div>
-          <div>
-            <strong>
-              <CountUp value={9} />
-            </strong>
-            <span>Core capabilities</span>
-          </div>
-          <div>
-            <strong>
-              <CountUp value={8} />
-            </strong>
-            <span>Delivery stages</span>
-          </div>
+          {cms.home.stats.map((stat) => (
+            <div key={stat.label}>
+              <strong>
+                <CountUp value={stat.value} />
+              </strong>
+              <span>{stat.label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Testimonials */}
       <section className="section shell">
         <SectionHead
-          eyebrow="Client perspective"
-          title="Proof belongs in the open."
-          copy="Only approved client feedback is published. Sample entries are always clearly identified."
+          eyebrow={cms.home.testimonialsEyebrow}
+          title={cms.home.testimonialsTitle}
+          copy={cms.home.testimonialsCopy}
         />
         {testimonials.length > 0 ? (
           <div className="quote-grid">
             {testimonials.map((item) => (
               <blockquote key={item.id}>
-                <p>“{item.quote}”</p>
+                <p>"{item.quote}"</p>
                 <footer>
-                  {item.attribution} · {item.company}
+                  {item.attribution} - {item.company}
                   {item.is_sample && <em>Sample</em>}
                 </footer>
               </blockquote>
@@ -151,10 +116,9 @@ function HomePage() {
         )}
       </section>
 
-      {/* FAQ Section */}
       <section className="section shell faq">
-        <SectionHead eyebrow="Questions, answered" title="A clear start to every engagement." />
-        {faq.map(([question, answer], index) => (
+        <SectionHead eyebrow={cms.home.faqEyebrow} title={cms.home.faqTitle} />
+        {cms.faq.map(([question, answer], index) => (
           <details key={question} open={index === 0}>
             <summary>
               {question}
@@ -165,7 +129,6 @@ function HomePage() {
         ))}
       </section>
 
-      {/* Primary CTA */}
       <CTA />
     </Layout>
   );

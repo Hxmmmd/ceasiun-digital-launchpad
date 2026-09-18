@@ -116,7 +116,7 @@ function BlogPostPage() {
         <div className="byline">
           By {post.author}
           {post.published_at &&
-            ` · ${new Date(post.published_at).toLocaleDateString("en-US", {
+            ` - ${new Date(post.published_at).toLocaleDateString("en-US", {
               month: "long",
               day: "numeric",
               year: "numeric",

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useCareerOpenings } from "@/components/public-content";
 import { Layout, PageIntro, meta } from "@/components/site";
+import { useCms } from "@/hooks/use-cms";
 
 export const Route = createFileRoute("/careers")({
   head: () =>
@@ -12,41 +13,25 @@ export const Route = createFileRoute("/careers")({
   component: CareersPage,
 });
 
-const coreValues = [
-  "Own the outcome",
-  "Stay curious",
-  "Communicate clearly",
-  "Make it maintainable",
-];
-
 function CareersPage() {
+  const { careers } = useCms();
   const jobs = useCareerOpenings();
   const loading = jobs === undefined;
 
-
   return (
     <Layout>
-      <PageIntro
-        eyebrow="Careers"
-        title="Do serious work with people who care about details."
-        copy="We value clear thinking, ownership, honest communication, and the discipline to keep improving."
-      />
+      <PageIntro eyebrow={careers.eyebrow} title={careers.title} copy={careers.copy} />
 
       <section className="section shell">
-        {/* Culture / Values */}
         <div className="values-grid">
-          {coreValues.map((value) => (
+          {careers.values.map((value) => (
             <article key={value}>
               <h2>{value}</h2>
-              <p>
-                Our culture rewards practical judgment, continuous learning, and software built to
-                last.
-              </p>
+              <p>Our culture rewards practical judgment, continuous learning, and software built to last.</p>
             </article>
           ))}
         </div>
 
-        {/* Open Roles */}
         <div className="jobs">
           <p className="eyebrow">Open Positions</p>
           {loading ? (
@@ -59,7 +44,7 @@ function CareersPage() {
                 <div>
                   <h2>{job.title}</h2>
                   <span>
-                    {job.location} · {job.type}
+                    {job.location} - {job.type}
                   </span>
                 </div>
                 <p>{job.description}</p>
@@ -71,10 +56,7 @@ function CareersPage() {
           ) : (
             <div className="empty-proof">
               <h3>No open roles right now.</h3>
-              <p>
-                Follow Ceasiun on LinkedIn and social channels to stay updated on future hiring
-                announcements.
-              </p>
+              <p>Follow Ceasiun on LinkedIn and social channels to stay updated on future hiring announcements.</p>
             </div>
           )}
         </div>

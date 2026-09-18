@@ -12,24 +12,27 @@ import {
 import { Layout, CTA, meta } from "@/components/site";
 import { services, samples } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
+import { useCmsServices } from "@/hooks/use-cms";
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
     const item = services.find((x) => x.slug === params.slug);
     if (!item) throw notFound();
-    return item;
+    return { slug: item.slug };
   },
   head: ({ loaderData }) =>
     meta(
-      loaderData?.title ? `${loaderData.title} Services` : "Service Category",
-      loaderData?.short ??
+      services.find((item) => item.slug === loaderData?.slug)?.title ?? "Service Category",
+      services.find((item) => item.slug === loaderData?.slug)?.short ??
         "Explore specialized digital services from Ceasiun across web engineering, marketing, branding, AI automation, and managed operations.",
     ),
   component: ServiceCategoryDetailPage,
 });
 
 function ServiceCategoryDetailPage() {
-  const service = Route.useLoaderData();
+  const { slug } = Route.useLoaderData();
+  const services = useCmsServices();
+  const service = services.find((item) => item.slug === slug) ?? services[0];
   const Icon = service.icon;
 
   // Filter related samples or case studies

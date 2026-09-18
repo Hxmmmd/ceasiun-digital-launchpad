@@ -20,9 +20,19 @@ import {
   Youtube,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
-import { nav } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
+import { useCms } from "@/hooks/use-cms";
 import logoUrl from "@/assets/ceasiun-logo.svg";
+import { nav } from "@/lib/site-data";
+
+function whatsappHref(value: string) {
+  if (value.startsWith("http")) return value;
+  return `https://wa.me/${value.replace(/[^\d]/g, "")}`;
+}
+
+function phoneHref(value: string) {
+  return `tel:${value.replace(/[^\d+]/g, "")}`;
+}
 
 const mobileNavIcons = {
   "/": Home,
@@ -37,13 +47,10 @@ const mobileNavIcons = {
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { settings } = useCms();
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -52,19 +59,14 @@ export function Header() {
   return (
     <header className={open ? "site-header is-open" : "site-header"}>
       <div className="shell nav-row">
-        <Link to="/" className="wordmark" aria-label="Ceasiun Home" onClick={() => setOpen(false)}>
-          <img src={logoUrl} alt="Ceasiun" />
-          CEASIUN
+        <Link to="/" className="wordmark" aria-label={`${settings.siteName} Home`} onClick={() => setOpen(false)}>
+          <img src={logoUrl} alt={settings.siteName} />
+          {settings.siteName.toUpperCase()}
         </Link>
 
         <nav className="desktop-nav" aria-label="Main navigation">
           {nav.map(([n, to]) => (
-            <Link
-              key={to}
-              to={to}
-              activeProps={{ className: "active" }}
-              activeOptions={{ exact: to === "/" }}
-            >
+            <Link key={to} to={to} activeProps={{ className: "active" }} activeOptions={{ exact: to === "/" }}>
               {n}
             </Link>
           ))}
@@ -73,7 +75,7 @@ export function Header() {
         <div className="nav-actions">
           <Button asChild size="lg">
             <Link to="/contact" search={{ service: "" }}>
-              Start a project <ArrowUpRight />
+              {settings.headerCta} <ArrowUpRight />
             </Link>
           </Button>
           <Button
@@ -106,11 +108,7 @@ export function Header() {
                 </Link>
               );
             })}
-            <Link
-              to="/careers"
-              activeProps={{ className: "active" }}
-              onClick={() => setOpen(false)}
-            >
+            <Link to="/careers" activeProps={{ className: "active" }} onClick={() => setOpen(false)}>
               <GraduationCap className="mobile-nav-icon" />
               <span>Careers</span>
             </Link>
@@ -128,7 +126,7 @@ export function Header() {
           <div className="mobile-nav-footer">
             <Button asChild size="lg" className="w-full text-black font-bold">
               <Link to="/contact" search={{ service: "" }} onClick={() => setOpen(false)}>
-                Start a project <ArrowUpRight className="text-black" />
+                {settings.headerCta} <ArrowUpRight className="text-black" />
               </Link>
             </Button>
           </div>
@@ -139,19 +137,18 @@ export function Header() {
 }
 
 export function Footer() {
+  const { settings } = useCms();
+
   return (
     <footer className="footer">
       <div className="shell footer-grid">
         <div>
-          <Link to="/" className="wordmark" aria-label="Ceasiun Home">
-            <img src={logoUrl} alt="Ceasiun" />
-            CEASIUN
+          <Link to="/" className="wordmark" aria-label={`${settings.siteName} Home`}>
+            <img src={logoUrl} alt={settings.siteName} />
+            {settings.siteName.toUpperCase()}
           </Link>
-          <p>Ceasiun, your digital growth partner.</p>
-          <p className="footer-tagline">
-            Website Development · Digital Marketing · SMM · Design · Branding · AI & Automation ·
-            Cyber Security · Managed Operations
-          </p>
+          <p>{settings.footerBlurb}</p>
+          <p className="footer-tagline">{settings.footerTagline}</p>
         </div>
 
         <div>
@@ -169,38 +166,38 @@ export function Footer() {
 
         <div>
           <b>Connect</b>
-          <a href="tel:+923140262087">
-            <Phone /> 0314 0262087
+          <a href={phoneHref(settings.phone)}>
+            <Phone /> {settings.phone}
           </a>
-          <a href="https://wa.me/923140262087" target="_blank" rel="noreferrer">
+          <a href={whatsappHref(settings.whatsapp)} target="_blank" rel="noreferrer">
             <MessageCircle /> WhatsApp
           </a>
-          <a href="https://linkedin.com/in/ceasiun" target="_blank" rel="noreferrer">
+          <a href={settings.linkedin} target="_blank" rel="noreferrer">
             <Linkedin /> LinkedIn
           </a>
-          <a href="https://instagram.com/ceasiun" target="_blank" rel="noreferrer">
+          <a href={settings.instagram} target="_blank" rel="noreferrer">
             <Instagram /> Instagram
           </a>
-          <a href="https://facebook.com/ceasiun" target="_blank" rel="noreferrer">
+          <a href={settings.facebook} target="_blank" rel="noreferrer">
             <Facebook /> Facebook
           </a>
-          <a href="https://x.com/ceasiun" target="_blank" rel="noreferrer">
+          <a href={settings.x} target="_blank" rel="noreferrer">
             <Twitter /> X (Twitter)
           </a>
-          <a href="https://youtube.com/@ceasiun" target="_blank" rel="noreferrer">
+          <a href={settings.youtube} target="_blank" rel="noreferrer">
             <Youtube /> YouTube
           </a>
-          <a href="https://tiktok.com/@ceasiun" target="_blank" rel="noreferrer">
+          <a href={settings.tiktok} target="_blank" rel="noreferrer">
             <span className="social-text-icon">TikTok</span> @ceasiun
           </a>
-          <a href="https://discord.com/invite/AkBQH7EQM4" target="_blank" rel="noreferrer">
+          <a href={settings.discord} target="_blank" rel="noreferrer">
             <span className="social-text-icon">Discord</span> Join Community
           </a>
         </div>
       </div>
 
       <div className="shell footer-bottom">
-        <span>© {new Date().getFullYear()} Ceasiun. All rights reserved.</span>
+        <span>(c) {new Date().getFullYear()} {settings.siteName}. All rights reserved.</span>
         <Link to="/admin">Admin Desk</Link>
       </div>
     </footer>
@@ -217,15 +214,7 @@ export function Layout({ children }: { children: ReactNode }) {
   );
 }
 
-export function PageIntro({
-  eyebrow,
-  title,
-  copy,
-}: {
-  eyebrow: string;
-  title: string;
-  copy: string;
-}) {
+export function PageIntro({ eyebrow, title, copy }: { eyebrow: string; title: string; copy: string }) {
   return (
     <section className="page-intro grid-bg">
       <div className="shell">
@@ -237,15 +226,7 @@ export function PageIntro({
   );
 }
 
-export function SectionHead({
-  eyebrow,
-  title,
-  copy,
-}: {
-  eyebrow: string;
-  title: string;
-  copy?: string;
-}) {
+export function SectionHead({ eyebrow, title, copy }: { eyebrow: string; title: string; copy?: string }) {
   return (
     <div className="section-head">
       <p className="eyebrow">{eyebrow}</p>
@@ -256,14 +237,16 @@ export function SectionHead({
 }
 
 export function CTA() {
+  const { cta } = useCms();
+
   return (
     <section className="cta-band">
       <div className="shell">
-        <p className="eyebrow">Your Next Move</p>
-        <h2>Build what growth needs next.</h2>
+        <p className="eyebrow">{cta.eyebrow}</p>
+        <h2>{cta.title}</h2>
         <Button asChild size="lg">
           <Link to="/contact" search={{ service: "" }}>
-            Talk to Ceasiun <ArrowUpRight />
+            {cta.button} <ArrowUpRight />
           </Link>
         </Button>
       </div>
@@ -273,9 +256,9 @@ export function CTA() {
 
 export const meta = (title: string, description: string) => ({
   meta: [
-    { title: `${title} — Ceasiun` },
+    { title: `${title} - Ceasiun` },
     { name: "description", content: description },
-    { property: "og:title", content: `${title} — Ceasiun` },
+    { property: "og:title", content: `${title} - Ceasiun` },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Layout, PageIntro, CTA, meta } from "@/components/site";
+import { CTA, Layout, PageIntro, meta } from "@/components/site";
+import { useCms } from "@/hooks/use-cms";
 
 export const Route = createFileRoute("/about")({
   head: () =>
@@ -11,58 +12,36 @@ export const Route = createFileRoute("/about")({
 });
 
 function AboutPage() {
+  const { about } = useCms();
+
   return (
     <Layout>
-      <PageIntro
-        eyebrow="About Ceasiun"
-        title="A digital partner built for long-term accountability."
-        copy="Ceasiun helps businesses go digital and grow through connected engineering, marketing, automation, and managed operations."
-      />
+      <PageIntro eyebrow={about.eyebrow} title={about.title} copy={about.copy} />
 
-      {/* Company Story */}
       <section className="section shell split story">
         <div>
-          <p className="eyebrow">Our Story</p>
-          <h2>Started focused. Growing deliberately.</h2>
+          <p className="eyebrow">{about.storyEyebrow}</p>
+          <h2>{about.storyTitle}</h2>
         </div>
         <div>
-          <p>
-            Founded in 2024 by Hammad Hanif, Ceasiun began with a core team of 10 digital
-            specialists. Today, our team has grown to 21 people working across software engineering,
-            growth marketing, visual design, AI automation, cybersecurity, and managed
-            infrastructure.
-          </p>
-          <p>
-            Our growth is driven by a simple model: understand the client's real business challenge,
-            assemble the right specialist capabilities, and maintain clear accountability through
-            execution and post-launch support.
-          </p>
+          <p>{about.storyP1}</p>
+          <p>{about.storyP2}</p>
         </div>
       </section>
 
-      {/* Team & Culture */}
       <section className="team-band">
         <div className="shell">
-          <p className="eyebrow">Team & Culture</p>
-          <h2>Different disciplines. Shared standards.</h2>
+          <p className="eyebrow">{about.cultureEyebrow}</p>
+          <h2>{about.cultureTitle}</h2>
           <div className="culture-grid">
-            <div>
-              <strong>21</strong>
-              <span>Team members</span>
-            </div>
-            <div>
-              <strong>9</strong>
-              <span>Connected practices</span>
-            </div>
-            <div>
-              <strong>1</strong>
-              <span>Delivery culture</span>
-            </div>
+            {about.cultureStats.map((stat) => (
+              <div key={stat.label}>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))}
           </div>
-          <p className="muted-note">
-            Detailed team profiles and photography will be published upon verification. Ceasiun does
-            not display placeholder staff or unverified client claims.
-          </p>
+          <p className="muted-note">{about.cultureNote}</p>
         </div>
       </section>
 

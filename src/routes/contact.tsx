@@ -1,21 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import {
-  CheckCircle2,
-  Facebook,
-  Instagram,
-  Linkedin,
-  MessageCircle,
-  Phone,
-  Twitter,
-  Youtube,
-} from "lucide-react";
+import { CheckCircle2, Facebook, Instagram, Linkedin, MessageCircle, Phone, Twitter, Youtube } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Layout, PageIntro, SectionHead, meta } from "@/components/site";
-import { services, faq } from "@/lib/site-data";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { useCms, useCmsServices } from "@/hooks/use-cms";
 
 export const Route = createFileRoute("/contact")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -29,8 +20,19 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
+function whatsappHref(value: string) {
+  if (value.startsWith("http")) return value;
+  return `https://wa.me/${value.replace(/[^\d]/g, "")}`;
+}
+
+function phoneHref(value: string) {
+  return `tel:${value.replace(/[^\d+]/g, "")}`;
+}
+
 function ContactPage() {
   const search = Route.useSearch();
+  const cms = useCms();
+  const services = useCmsServices();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -51,15 +53,12 @@ function ContactPage() {
 
     try {
       const { error } = await supabase.from("contact_submissions").insert(payload);
-
       if (error) {
-        setErrorMessage(
-          "Unable to send your message right now. Please try again or reach out via WhatsApp.",
-        );
+        setErrorMessage("Unable to send your message right now. Please try again or reach out via WhatsApp.");
       } else {
         setSubmitted(true);
       }
-    } catch (err: unknown) {
+    } catch {
       setErrorMessage("An unexpected error occurred. Please reach out directly.");
     } finally {
       setLoading(false);
@@ -68,21 +67,14 @@ function ContactPage() {
 
   return (
     <Layout>
-      <PageIntro
-        eyebrow="Contact Us"
-        title="Let’s define the next move."
-        copy="Tell us where your business is now, what needs to change, and what a successful outcome looks like."
-      />
+      <PageIntro eyebrow={cms.contact.eyebrow} title={cms.contact.title} copy={cms.contact.copy} />
 
       <section className="section shell contact-grid">
         {submitted ? (
           <div className="form-success">
             <CheckCircle2 />
-            <h2>Message received.</h2>
-            <p>
-              Thank you for reaching out. The Ceasiun team will review your enquiry and respond
-              shortly.
-            </p>
+            <h2>{cms.contact.successTitle}</h2>
+            <p>{cms.contact.successCopy}</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
@@ -98,7 +90,7 @@ function ContactPage() {
 
             <label>
               Phone / WhatsApp
-              <Input name="phone" type="tel" placeholder="+92 314 0262087" />
+              <Input name="phone" type="tel" placeholder={cms.settings.phone} />
             </label>
 
             <label>
@@ -132,63 +124,54 @@ function ContactPage() {
           </form>
         )}
 
-        {/* Direct Contact & Social Links */}
         <aside>
-          <p className="eyebrow">Direct Contact</p>
-          <h2>Prefer a conversation?</h2>
+          <p className="eyebrow">{cms.contact.asideEyebrow}</p>
+          <h2>{cms.contact.asideTitle}</h2>
 
-          <a href="https://wa.me/923140262087" target="_blank" rel="noreferrer">
-            <MessageCircle /> WhatsApp: 0314 0262087
+          <a href={whatsappHref(cms.settings.whatsapp)} target="_blank" rel="noreferrer">
+            <MessageCircle /> WhatsApp: {cms.settings.phone}
           </a>
-          <a href="tel:+923140262087">
-            <Phone /> Phone: 0314 0262087
+          <a href={phoneHref(cms.settings.phone)}>
+            <Phone /> Phone: {cms.settings.phone}
           </a>
 
-          <div
-            className="contact-socials"
-            style={{ margin: "1.5rem 0", display: "grid", gap: "0.5rem" }}
-          >
+          <div className="contact-socials" style={{ margin: "1.5rem 0", display: "grid", gap: "0.5rem" }}>
             <p className="eyebrow" style={{ marginTop: "1rem" }}>
               Social Channels
             </p>
-            <a href="https://linkedin.com/in/ceasiun" target="_blank" rel="noreferrer">
-              <Linkedin /> LinkedIn: in/ceasiun
+            <a href={cms.settings.linkedin} target="_blank" rel="noreferrer">
+              <Linkedin /> LinkedIn
             </a>
-            <a href="https://instagram.com/ceasiun" target="_blank" rel="noreferrer">
-              <Instagram /> Instagram: ceasiun
+            <a href={cms.settings.instagram} target="_blank" rel="noreferrer">
+              <Instagram /> Instagram
             </a>
-            <a href="https://facebook.com/ceasiun" target="_blank" rel="noreferrer">
-              <Facebook /> Facebook: ceasiun
+            <a href={cms.settings.facebook} target="_blank" rel="noreferrer">
+              <Facebook /> Facebook
             </a>
-            <a href="https://x.com/ceasiun" target="_blank" rel="noreferrer">
-              <Twitter /> X (Twitter): ceasiun
+            <a href={cms.settings.x} target="_blank" rel="noreferrer">
+              <Twitter /> X (Twitter)
             </a>
-            <a href="https://youtube.com/@ceasiun" target="_blank" rel="noreferrer">
-              <Youtube /> YouTube: ceasiun
+            <a href={cms.settings.youtube} target="_blank" rel="noreferrer">
+              <Youtube /> YouTube
             </a>
-            <a href="https://tiktok.com/@ceasiun" target="_blank" rel="noreferrer">
+            <a href={cms.settings.tiktok} target="_blank" rel="noreferrer">
               <span className="social-text-icon">TikTok:</span> ceasiun
             </a>
-            <a href="https://discord.com/invite/AkBQH7EQM4" target="_blank" rel="noreferrer">
+            <a href={cms.settings.discord} target="_blank" rel="noreferrer">
               <span className="social-text-icon">Discord:</span> Join Community
             </a>
           </div>
 
           <div className="payment-info" style={{ marginTop: "1.5rem" }}>
-            <p className="eyebrow">Payment Options</p>
-            <p>
-              <strong>Pakistan:</strong> Easypaisa, JazzCash, Credit Card, Bank Transfer.
-              <br />
-              <strong>International:</strong> Payoneer, Mastercard, Visa.
-            </p>
+            <p className="eyebrow">{cms.contact.paymentEyebrow}</p>
+            <p>{cms.contact.paymentCopy}</p>
           </div>
         </aside>
       </section>
 
-      {/* FAQ Section */}
       <section className="section shell faq">
-        <SectionHead eyebrow="Before We Begin" title="Common questions answered." />
-        {faq.map(([question, answer]) => (
+        <SectionHead eyebrow={cms.contact.faqEyebrow} title={cms.contact.faqTitle} />
+        {cms.faq.map(([question, answer]) => (
           <details key={question}>
             <summary>
               {question}

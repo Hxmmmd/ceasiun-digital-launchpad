@@ -15,6 +15,7 @@ import {
   Inbox,
   LayoutDashboard,
   LogOut,
+  Menu,
   MessageSquareQuote,
   Pencil,
   Plus,
@@ -34,6 +35,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { AdminPagesEditor } from "@/components/admin-pages-editor";
+import { notifyCmsListeners } from "@/lib/cms";
 import { services } from "@/lib/site-data";
 import logoUrl from "@/assets/ceasiun-logo.svg";
 
@@ -57,6 +60,7 @@ type MainTab =
   | "case_studies"
   | "testimonials"
   | "career_openings"
+  | "pages"
   | "settings";
 
 interface AdminUser {
@@ -280,6 +284,7 @@ function loadLocal<T>(key: string, fallback: T): T {
 function saveLocal<T>(key: string, value: T) {
   if (typeof window !== "undefined") {
     localStorage.setItem(key, JSON.stringify(value));
+    notifyCmsListeners();
   }
 }
 
@@ -335,6 +340,8 @@ const blankCareer = (): CareerOpening => ({
 export function AdminDashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<MainTab>("overview");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [feedbackType, setFeedbackType] = useState<"success" | "error">("success");
   const [isSaving, setIsSaving] = useState(false);
@@ -408,6 +415,19 @@ export function AdminDashboard() {
     setFeedbackMessage(msg);
     setFeedbackType(type);
     setTimeout(() => setFeedbackMessage(""), 4000);
+  }
+
+  function toggleSidebar() {
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 899px)").matches) {
+      setSidebarOpen((open) => !open);
+      return;
+    }
+    setSidebarCollapsed((collapsed) => !collapsed);
+  }
+
+  function selectTab(tab: MainTab) {
+    setActiveTab(tab);
+    setSidebarOpen(false);
   }
 
   function newId() {
@@ -603,6 +623,7 @@ export function AdminDashboard() {
     case_studies: "Case Studies",
     testimonials: "Testimonials",
     career_openings: "Careers",
+    pages: "Pages & Preview",
     settings: "Site Settings",
   };
 
@@ -626,7 +647,11 @@ export function AdminDashboard() {
 
   // ─── Render ────────────────────────────────────────────────────────────
   return (
-    <main className="admin">
+    <main
+      className={`admin ${sidebarOpen ? "sidebar-open" : ""} ${
+        sidebarCollapsed ? "sidebar-collapsed" : ""
+      }`}
+    >
       {/* Sidebar */}
       <aside className="admin-sidebar">
         <div className="admin-brand">
@@ -643,7 +668,7 @@ export function AdminDashboard() {
             <button
               key={tab}
               className={activeTab === tab ? "selected" : ""}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => selectTab(tab)}
               type="button"
             >
               {tab === "overview" && <LayoutDashboard />}
@@ -661,7 +686,7 @@ export function AdminDashboard() {
               key={tab}
               className={activeTab === tab ? "selected" : ""}
               onClick={() => {
-                setActiveTab(tab);
+                selectTab(tab);
                 setBlogMode("list");
                 setCaseMode("list");
                 setTestMode("list");
@@ -683,15 +708,22 @@ export function AdminDashboard() {
 
           <p className="admin-nav-group">Configuration</p>
           <button
+            className={activeTab === "pages" ? "selected" : ""}
+            onClick={() => selectTab("pages")}
+            type="button"
+          >
+            <Globe /> Pages & Preview
+          </button>
+          <button
             className={activeTab === "services" ? "selected" : ""}
-            onClick={() => setActiveTab("services")}
+            onClick={() => selectTab("services")}
             type="button"
           >
             <Briefcase /> Services Practices
           </button>
           <button
             className={activeTab === "settings" ? "selected" : ""}
-            onClick={() => setActiveTab("settings")}
+            onClick={() => selectTab("settings")}
             type="button"
           >
             <Settings /> Site Settings
@@ -704,9 +736,26 @@ export function AdminDashboard() {
           </button>
         </div>
       </aside>
+      <button
+        type="button"
+        className="admin-sidebar-backdrop"
+        aria-label="Close admin navigation"
+        onClick={() => setSidebarOpen(false)}
+      />
 
       {/* Main Content */}
       <section className="admin-main-section">
+        <div className="admin-topbar">
+          <button
+            type="button"
+            className="admin-menu-toggle"
+            aria-label={sidebarOpen ? "Close admin navigation" : "Toggle admin navigation"}
+            onClick={toggleSidebar}
+          >
+            {sidebarOpen ? <X /> : <Menu />}
+          </button>
+          <span>{tabLabel[activeTab]}</span>
+        </div>
         {feedbackMessage && (
           <div className={`admin-alert-banner ${feedbackType}`}>
             <Sparkles className="alert-icon" />
@@ -1336,6 +1385,18 @@ export function AdminDashboard() {
         {/* ══════════════════════════════════════════════════════════════════
             TAB 8: SERVICES (read-only directory)
         ══════════════════════════════════════════════════════════════════ */}
+        {activeTab === "pages" && (
+          <div className="admin-tab-view">
+            <header className="admin-view-header">
+              <div>
+                <p className="eyebrow">Visual CMS</p>
+                <h1>Pages & Live Preview</h1>
+              </div>
+            </header>
+            <AdminPagesEditor onSaved={(msg) => notify(msg)} />
+          </div>
+        )}
+
         {activeTab === "services" && (
           <div className="admin-tab-view">
             <header className="admin-view-header">

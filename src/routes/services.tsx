@@ -1,27 +1,30 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Check } from "lucide-react";
-import { Layout, PageIntro, CTA, meta } from "@/components/site";
-import { services, samples } from "@/lib/site-data";
+import { CTA, Layout, PageIntro, meta } from "@/components/site";
+import { useCms, useCmsServices } from "@/hooks/use-cms";
+import { samples } from "@/lib/site-data";
 
 export const Route = createFileRoute("/services")({
   head: () =>
     meta(
       "Digital Services",
-      "Explore Ceasiun’s nine connected service areas: Website Engineering, Digital Marketing, Social Media, Design, Branding, AI & Automation, Cyber Security, Website Management, and Managed Services.",
+      "Explore Ceasiun's connected service areas across web engineering, marketing, social media, design, branding, AI automation, security, and managed operations.",
     ),
   component: ServicesPage,
 });
 
 function ServicesPage() {
+  const cms = useCms();
+  const services = useCmsServices();
+
   return (
     <Layout>
       <PageIntro
-        eyebrow="Services"
-        title="Capability without fragmentation."
-        copy="Nine specialist practices, connected around the outcomes your business needs."
+        eyebrow={cms.servicesPage.eyebrow}
+        title={cms.servicesPage.title}
+        copy={cms.servicesPage.copy}
       />
 
-      {/* Nine Core Service Categories */}
       <section className="section shell service-list">
         {services.map((service, index) => {
           const Icon = service.icon;
@@ -48,18 +51,10 @@ function ServicesPage() {
               </ul>
 
               <div className="service-card-actions">
-                <Link
-                  to="/services/$slug"
-                  params={{ slug: service.slug }}
-                  className="service-detail-btn"
-                >
+                <Link to="/services/$slug" params={{ slug: service.slug }} className="service-detail-btn">
                   View Service Details <ArrowUpRight />
                 </Link>
-                <Link
-                  to="/contact"
-                  search={{ service: service.title }}
-                  className="service-contact-btn"
-                >
+                <Link to="/contact" search={{ service: service.title }} className="service-contact-btn">
                   Discuss this service <ArrowUpRight />
                 </Link>
               </div>
@@ -68,7 +63,6 @@ function ServicesPage() {
         })}
       </section>
 
-      {/* Case Study Concepts */}
       <section className="section shell">
         <h2>Related work structures</h2>
         <div className="mini-grid">
