@@ -1358,6 +1358,34 @@ blockquote em {
   flex-wrap: wrap;
 }
 
+/* Service pages reveal in a calm sequence while keeping content usable immediately. */
+.service-detail-hero .service-detail-nav { animation: service-slide-up 650ms 80ms both cubic-bezier(0.22, 1, 0.36, 1); }
+.service-detail-hero .service-hero-main { animation: service-slide-up 700ms 180ms both cubic-bezier(0.22, 1, 0.36, 1); }
+.service-detail-hero .service-icon-wrapper { animation: service-icon-pop 700ms 280ms both cubic-bezier(0.22, 1, 0.36, 1); }
+.service-story-grid,
+#capabilities,
+.contrast-card-section,
+.deliverables-grid,
+.case-flow,
+.service-switcher-section,
+.mini-grid { animation: service-slide-up 700ms both cubic-bezier(0.22, 1, 0.36, 1); }
+.capability-card,
+.highlight-item,
+.deliverable-card,
+.switcher-card { transition: transform 280ms ease, border-color 280ms ease, background-color 280ms ease, box-shadow 280ms ease; }
+.capability-card:hover,
+.deliverable-card:hover { transform: translateY(-5px); border-color: color-mix(in oklab, var(--primary) 45%, transparent); box-shadow: 0 16px 40px color-mix(in oklab, var(--primary) 10%, transparent); }
+
+@keyframes service-slide-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes service-icon-pop {
+  from { opacity: 0; transform: translateY(12px) scale(0.82) rotate(-6deg); }
+  to { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+}
+
+
   .service-story-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
@@ -1669,6 +1697,43 @@ blockquote em {
     border-top: 1px solid var(--border);
     padding-left: 0;
     padding-top: 2rem;
+  }
+  .service-detail-nav {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+  .service-detail-hero {
+    min-height: auto;
+  }
+  .service-hero-main {
+    max-width: none;
+  }
+  .service-hero-main h1 {
+    font-size: clamp(2.35rem, 12vw, 4rem);
+    line-height: 0.98;
+    overflow-wrap: anywhere;
+  }
+  .service-hero-main .lede {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .service-story-grid,
+  .contrast-card-section,
+  .section.shell {
+    min-width: 0;
+  }
+  .section-head h2 {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+    overflow-wrap: anywhere;
+  }
+  .service-story-panel,
+  .contrast-card {
+    padding: 1.25rem;
+  }
+  .capability-card,
+  .switcher-card {
+    padding: 1.25rem;
   }
   .service-hero-actions {
     flex-direction: column;
