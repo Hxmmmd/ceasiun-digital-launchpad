@@ -23,7 +23,6 @@ import {
 import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { useCms } from "@/hooks/use-cms";
-import logoUrl from "@/assets/ceasiun-logo.svg";
 import { nav } from "@/lib/site-data";
 
 function whatsappHref(value: string) {
@@ -61,7 +60,7 @@ export function Header() {
     <header className={open ? "site-header is-open" : "site-header"}>
       <div className="shell nav-row">
         <Link href="/" className="wordmark" aria-label={`${settings.siteName} Home`} onClick={() => setOpen(false)}>
-          <img src={logoUrl} alt={settings.siteName} />
+          <img src="/ceasiun-logo.svg" alt={settings.siteName} />
           {settings.siteName.toUpperCase()}
         </Link>
 
@@ -141,7 +140,7 @@ export function Footer() {
       <div className="shell footer-grid">
         <div>
           <Link href="/" className="wordmark" aria-label={`${settings.siteName} Home`}>
-            <img src={logoUrl} alt={settings.siteName} />
+            <img src="/ceasiun-logo.svg" alt={settings.siteName} />
             {settings.siteName.toUpperCase()}
           </Link>
           <p>{settings.footerBlurb}</p>

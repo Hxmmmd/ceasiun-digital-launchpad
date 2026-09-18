@@ -6,7 +6,6 @@ import { ArrowLeft } from "lucide-react";
 import { meta } from "@/components/site";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import logoUrl from "@/assets/ceasiun-logo.svg";
 
 export default function AuthPage() {
   const router = useRouter();
@@ -86,7 +85,7 @@ export default function AuthPage() {
         <Link  href="/" className="back-link auth-back">
           <ArrowLeft /> Back to Website
         </Link>
-        <img src={logoUrl} alt="Ceasiun Logo" />
+        <img src="/ceasiun-logo.svg" alt="Ceasiun Logo" />
         <p className="eyebrow">Secure Administration</p>
         <h1>{mode === "in" ? "Welcome Back" : "Create Administrator"}</h1>
 
