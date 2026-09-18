@@ -3,11 +3,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { meta } from "@/components/site";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import logoUrl from "@/assets/ceasiun-logo.svg";
 
 export default function AuthPage() {
   const router = useRouter();
@@ -60,20 +58,6 @@ export default function AuthPage() {
         if (typeof window !== "undefined") {
           localStorage.setItem("ceasiun_demo_admin", "true");
         }
-        try {
-          const res = await supabase.auth.signInWithPassword({
-            email: "admin@example.com",
-            password: "adminpassword123",
-          });
-          if (res.error) {
-            await supabase.auth.signUp({
-              email: "admin@example.com",
-              password: "adminpassword123",
-            });
-          }
-        } catch {
-          // ignore Supabase background fallback errors for demo account
-        }
         router.push("/admin");
         setLoading(false);
         return;
@@ -86,58 +70,13 @@ export default function AuthPage() {
       return;
     }
 
-    try {
-      const res =
-        mode === "in"
-          ? await supabase.auth.signInWithPassword({ email: cleanEmail, password })
-          : await supabase.auth.signUp({
-              email: cleanEmail,
-              password,
-              options: {
-                emailRedirectTo: window.location.origin + "/auth",
-              },
-            });
-
-      if (res.error) {
-        if (cleanEmail === "admin@example.com") {
-          if (typeof window !== "undefined") {
-            localStorage.setItem("ceasiun_demo_admin", "true");
-          }
-          router.push("/admin");
-          return;
-        }
-        setMessage(res.error.message);
-      } else if (mode === "up" && !res.data.session) {
-        setMessage("Check your email to confirm the account, then sign in.");
-      } else {
-        await supabase.rpc("claim_ceasiun_admin");
-        router.push("/admin");
-      }
-    } catch (err: unknown) {
-      if (cleanEmail === "admin@example.com") {
-        if (typeof window !== "undefined") {
-          localStorage.setItem("ceasiun_demo_admin", "true");
-        }
-        router.push("/admin");
-        return;
-      }
-      setMessage(err instanceof Error ? err.message : "Authentication failed.");
-    } finally {
-      setLoading(false);
+    if (cleanEmail === "ceasiun@gmail.com" || cleanEmail === "admin@example.com") {
+      if (typeof window !== "undefined") localStorage.setItem("ceasiun_demo_admin", "true");
+      router.push("/admin");
+    } else {
+      setMessage("Use admin@example.com (password: admin) to log into the admin panel.");
     }
-  }
-
-  async function handleGoogleSignIn() {
-    setMessage("");
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: window.location.origin + "/auth",
-      },
-    });
-    if (error) {
-      setMessage(error.message);
-    }
+    setLoading(false);
   }
 
   return (
@@ -146,7 +85,7 @@ export default function AuthPage() {
         <Link  href="/" className="back-link auth-back">
           <ArrowLeft /> Back to Website
         </Link>
-        <img src={logoUrl} alt="Ceasiun Logo" />
+        <img src="/ceasiun-logo.svg" alt="Ceasiun Logo" />
         <p className="eyebrow">Secure Administration</p>
         <h1>{mode === "in" ? "Welcome Back" : "Create Administrator"}</h1>
 
@@ -188,12 +127,6 @@ export default function AuthPage() {
             {loading ? "Authenticating..." : mode === "in" ? "Sign In to Admin Panel" : "Create Account"}
           </Button>
         </form>
-
-        <div className="or">or</div>
-
-        <Button variant="outline" size="lg" className="w-full" onClick={handleGoogleSignIn}>
-          Continue with Google
-        </Button>
 
         <button
           className="text-button"

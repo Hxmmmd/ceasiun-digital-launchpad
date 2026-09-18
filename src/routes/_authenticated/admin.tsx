@@ -32,7 +32,6 @@ import {
   Users,
   X,
 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -424,7 +423,7 @@ export default function AdminDashboard() {
     return `local-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
   }
 
-  // ─── Admin Users ──��───────────────────────────────────────────────────
+  // ─── Admin Users ──���───────────────────────────────────────────────────
   function handleCreateUser(e: React.FormEvent) {
     e.preventDefault();
     if (!newUser.email || !newUser.password) return;
@@ -460,7 +459,7 @@ export default function AdminDashboard() {
     }
   }
 
-  // ─── Inquiries ─────────────────────────────────────────────────────────
+  // ─── Inquiries ─────────��───────────────────────────────────────────────
   function handleInquiryStatus(id: string, status: "New" | "In Progress" | "Resolved") {
     setInquiries((prev) => prev.map((inq) => (inq.id === id ? { ...inq, status } : inq)));
     notify("Inquiry status updated.");
@@ -599,7 +598,6 @@ export default function AdminDashboard() {
       localStorage.removeItem("ceasiun_demo_admin");
       localStorage.removeItem("ceasiun_active_user");
     }
-    await supabase.auth.signOut();
     router.replace("/auth");
   }
 
@@ -1414,7 +1412,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* ═══════════════���══════════════════════════════════════════════════
+        {/* ═══════════════�����═════════════════════════════════════════════════
             TAB 9: SITE SETTINGS
         ══════════════════════════════════════════════════════════════════ */}
         {activeTab === "settings" && (
