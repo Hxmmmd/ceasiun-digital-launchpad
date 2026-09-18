@@ -47,7 +47,20 @@ const mobileNavIcons = {
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
   const { settings } = useCms();
+
+  useEffect(() => {
+    if (open) {
+      setMenuVisible(true);
+      return;
+    }
+
+    const timeout = window.setTimeout(() => setMenuVisible(false), 420);
+    return () => window.clearTimeout(timeout);
+  }, [open]);
+
+  const closeMenu = () => setOpen(false);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -57,9 +70,9 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className={open ? "site-header is-open" : "site-header"}>
+    <header className={`${menuVisible ? "site-header is-open" : "site-header"} ${!open && menuVisible ? "is-closing" : ""}`}>
       <div className="shell nav-row">
-        <Link href="/" className="wordmark" aria-label={`${settings.siteName} Home`} onClick={() => setOpen(false)}>
+        <Link href="/" className="wordmark" aria-label={`${settings.siteName} Home`} onClick={closeMenu}>
           <img src="/ceasiun-logo.svg" alt={settings.siteName} />
           {settings.siteName.toUpperCase()}
         </Link>
@@ -90,8 +103,8 @@ export function Header() {
         </div>
       </div>
 
-      {open && (
-        <nav className="mobile-nav" aria-label="Mobile navigation">
+      {menuVisible && (
+        <nav className={`mobile-nav ${!open ? "is-closing" : ""}`} aria-label="Mobile navigation">
           <div className="mobile-nav-links">
             {nav.map(([n, to]) => {
               const Icon = mobileNavIcons[to as keyof typeof mobileNavIcons] || Home;
@@ -99,20 +112,20 @@ export function Header() {
                 <Link
                   key={to}
                   href={to}
-                  onClick={() => setOpen(false)}
+                  onClick={closeMenu}
                 >
                   <Icon className="mobile-nav-icon" />
                   <span>{n}</span>
                 </Link>
               );
             })}
-            <Link href="/careers" onClick={() => setOpen(false)}>
+            <Link href="/careers" onClick={closeMenu}>
               <GraduationCap className="mobile-nav-icon" />
               <span>Careers</span>
             </Link>
             <Link
               href="/contact"
-              onClick={() => setOpen(false)}
+              onClick={closeMenu}
             >
               <Mail className="mobile-nav-icon" />
               <span>Contact</span>
@@ -121,7 +134,7 @@ export function Header() {
 
           <div className="mobile-nav-footer">
             <Button asChild size="lg" className="w-full text-black font-bold">
-              <Link href="/contact" onClick={() => setOpen(false)}>
+              <Link href="/contact" onClick={closeMenu}>
                 {settings.headerCta} <ArrowUpRight className="text-black" />
               </Link>
             </Button>
