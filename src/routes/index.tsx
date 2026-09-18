@@ -40,7 +40,7 @@ export default function HomePage() {
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <Link  href="/services" className="service-card" key={service.slug}>
+              <Link  href={`/services/${service.slug}`} className="service-card" key={service.slug}>
                 <span>0{index + 1}</span>
                 <Icon />
                 <h3>{service.title}</h3>

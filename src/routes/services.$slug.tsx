@@ -15,10 +15,59 @@ import { samples } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
 import { useCmsServices } from "@/hooks/use-cms";
 
+const serviceNarratives: Record<string, { intro: string; outcomes: string[]; fit: string }> = {
+  "web-development": {
+    intro: "Your website should be more than a brochure. We design and engineer fast, conversion-focused digital products that make complex offers easy to understand and simple to act on.",
+    outcomes: ["A clearer path from first visit to enquiry or checkout.", "A flexible foundation that your team can update without slowing down.", "Technical performance, accessibility, SEO, and security built into the delivery."],
+    fit: "Best for teams launching a new digital product, rebuilding an outdated site, or turning a marketing site into a reliable growth channel.",
+  },
+  marketing: {
+    intro: "We connect strategy, creative, search, and measurement into one practical growth system. Every campaign is designed around the audience, offer, and business metric that matters.",
+    outcomes: ["A prioritized acquisition plan instead of disconnected tactics.", "Landing pages and campaigns aligned around one conversion journey.", "Reporting that explains what changed, why it changed, and what to do next."],
+    fit: "Best for businesses that have a strong offer but need more qualified traffic, better conversion, or a repeatable acquisition engine.",
+  },
+  social: {
+    intro: "Social media becomes valuable when it is consistent, intentional, and human. We run the day-to-day brand presence while building content systems that create trust and conversation.",
+    outcomes: ["A recognizable publishing rhythm across the right channels.", "Content designed for reach, engagement, and meaningful enquiries.", "Faster community responses with clear escalation and support workflows."],
+    fit: "Best for founders and teams that want an active, well-managed presence without adding a full internal content department.",
+  },
+  design: {
+    intro: "Good design makes the right message feel obvious. We create visual systems that balance clarity, distinction, and usability across screens, campaigns, and everyday brand touchpoints.",
+    outcomes: ["A visual language that stays coherent as your content grows.", "Production-ready assets sized and prepared for every channel.", "Interfaces and marketing materials that guide attention toward action."],
+    fit: "Best for teams refining a product experience, launching a campaign, or replacing inconsistent visual assets with a confident system.",
+  },
+  branding: {
+    intro: "A strong brand gives every future decision a point of view. We define the positioning, voice, visual rules, and practical toolkit your team needs to show up consistently.",
+    outcomes: ["A sharper position that makes comparison easier for customers.", "Messaging and visual rules your whole team can use.", "A scalable identity system ready for new products, channels, and markets."],
+    fit: "Best for new businesses, repositioning companies, and established teams whose public presence no longer matches their ambition.",
+  },
+  automation: {
+    intro: "We turn repetitive work into dependable systems. From AI assistants to connected workflows, the goal is not novelty; it is giving your team more time for decisions, relationships, and creative work.",
+    outcomes: ["Fewer manual handoffs and less duplicated data entry.", "Faster responses for prospects, customers, and internal teams.", "Documented workflows that can be monitored, improved, and safely handed over."],
+    fit: "Best for businesses with repeatable processes, growing enquiry volume, or teams spending too much time moving information between tools.",
+  },
+  security: {
+    intro: "Security work should be practical and understandable. We identify real exposure, reduce the attack surface, and give your team a prioritized path from risk discovery to resilience.",
+    outcomes: ["A clearer picture of vulnerabilities and their business impact.", "Hardened access, infrastructure, and application configurations.", "Actionable remediation guidance instead of an intimidating report with no next step."],
+    fit: "Best for organizations handling customer data, running revenue-critical websites, or preparing for a security review or compliance requirement.",
+  },
+  management: {
+    intro: "A website is an operating asset, not a one-time launch. We keep it maintained, monitored, backed up, and improving so your team can focus on the business it supports.",
+    outcomes: ["Fewer avoidable outages, broken updates, and performance regressions.", "A safe process for content changes, releases, and recovery.", "Ongoing technical insight through regular health and speed reviews."],
+    fit: "Best for teams that need dependable technical ownership without hiring a full-time website operations team.",
+  },
+  managed: {
+    intro: "Add senior technical capability without the weight of a full-time hiring cycle. We operate as an extension of your team across engineering, QA, cloud infrastructure, and technical decision-making.",
+    outcomes: ["A dependable technical partner with clear ownership and communication.", "Stronger release quality through repeatable QA and deployment practices.", "Flexible capacity that can grow or contract with your roadmap."],
+    fit: "Best for growing companies that need experienced technical execution but want to keep their team lean and focused.",
+  },
+};
+
 export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
   const services = useCmsServices();
   const service = services.find((item) => item.slug === slug) ?? services[0];
   const Icon = service.icon;
+  const narrative = serviceNarratives[service.slug] ?? serviceNarratives["web-development"];
 
   // Filter related samples or case studies
   const relatedSamples = samples.filter((sample) =>
@@ -64,6 +113,21 @@ export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
               </a>
             </Button>
           </div>
+        </div>
+      </section>
+
+      <section className="section shell service-story-grid">
+        <div className="section-head">
+          <p className="eyebrow">The Approach</p>
+          <h2>Built around the way your business actually works.</h2>
+          <p>{narrative.intro}</p>
+        </div>
+        <div className="service-story-panel">
+          <p className="eyebrow">What changes after delivery</p>
+          <ul>
+            {narrative.outcomes.map((outcome) => <li key={outcome}><CheckCircle2 />{outcome}</li>)}
+          </ul>
+          <p className="service-fit"><strong>Good fit:</strong> {narrative.fit}</p>
         </div>
       </section>
 
