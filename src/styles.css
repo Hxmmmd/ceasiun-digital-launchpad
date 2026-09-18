@@ -168,6 +168,54 @@
   }
 }
 
+/* Ceasiun scrollbar system: shared by page, drawer, admin panels, forms, and tables. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--primary) 68%, var(--card)) color-mix(in oklab, var(--background) 92%, black);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--primary) 68%, var(--card)) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: color-mix(in oklab, var(--background) 92%, black);
+}
+
+*::-webkit-scrollbar-thumb {
+  min-height: 40px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--primary) 82%, white), color-mix(in oklab, var(--primary) 48%, var(--card)));
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--primary) 96%, white), color-mix(in oklab, var(--primary) 66%, var(--card)));
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@media (max-width: 640px) {
+  *::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    border-width: 1px;
+  }
+}
+
 @utility shell {
   width: min(100% - 2.5rem, 1240px);
   margin-inline: auto;
@@ -2145,7 +2193,7 @@ blockquote em {
 
 /* ═══════════════════════════════════════════════════════════════════
    ADMIN ALERT BANNER
-═══════════════════════════════════════════════════════════════════ */
+═══════════════��═══════════════════════════════════════════════════ */
 .admin-alert-banner {
   display: flex;
   align-items: center;
