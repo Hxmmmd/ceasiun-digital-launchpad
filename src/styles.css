@@ -147,14 +147,16 @@
     scroll-behavior: smooth;
   }
   body {
-    font-family: var(--font-sans);
-    margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  margin: 0;
   }
   h1,
   h2,
   h3,
   .wordmark {
     font-family: var(--font-display);
+    font-weight: 700;
     letter-spacing: 0;
   }
   button,
@@ -2150,7 +2152,7 @@ blockquote em {
 
 /* ═══════════════════════════════════════════════════════════════════
    CMS LIST VIEW — shared between Blog, Cases, Testimonials, Careers
-══════════════════════��════════════════════════════════════════════ */
+══════��═══════════════��════════════════════════════════════════════ */
 .cms-list-view {
   display: flex;
   flex-direction: column;
