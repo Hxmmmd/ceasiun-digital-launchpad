@@ -143,7 +143,7 @@ export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
 
         <div className="capabilities-grid">
           {service.items.map((item, idx) => (
-            <div key={item} className="capability-card">
+            <Link key={item} href={`/services/${service.slug}/${item.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`} className="capability-card">
               <div className="capability-num">0{idx + 1}</div>
               <h3>{item}</h3>
               <p>
@@ -152,7 +152,7 @@ export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
               <div className="capability-check">
                 <CheckCircle2 /> Included in Practice Scope
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
