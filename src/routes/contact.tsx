@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle2, Facebook, Instagram, Linkedin, MessageCircle, Phone, Twitter, Youtube } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { Layout, PageIntro, SectionHead, meta } from "@/components/site";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -42,14 +41,11 @@ export default function ContactPage() {
     };
 
     try {
-      const { error } = await (supabase as any).from("contact_submissions").insert(payload);
-      if (error) {
-        setErrorMessage("Unable to send your message right now. Please try again or reach out via WhatsApp.");
-      } else {
-        setSubmitted(true);
-      }
+      const submissions = JSON.parse(localStorage.getItem("ceasiun_contact_submissions") ?? "[]");
+      localStorage.setItem("ceasiun_contact_submissions", JSON.stringify([...submissions, { ...payload, created_at: new Date().toISOString() }]));
+      setSubmitted(true);
     } catch {
-      setErrorMessage("An unexpected error occurred. Please reach out directly.");
+      setErrorMessage("Unable to save your message right now. Please reach out directly.");
     } finally {
       setLoading(false);
     }
