@@ -757,6 +757,38 @@ html {
 @media (max-width: 820px) { .reviews-panel .review-controls { max-width: 15rem; } }
 @media (max-width: 820px) { .reviews-panel { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.25rem; } .reviews-panel .review-stage { margin-right: -1.25rem; } }
 @media (max-width: 600px) { .reviews-panel .review-stage .review-card { min-width: calc(100% - 0.25rem); flex-basis: calc(100% - 0.25rem); } }
+
+/* Responsive review slider: preserve the peek on desktop, then stack cleanly on smaller screens. */
+@media (min-width: 1200px) {
+  .reviews-panel { grid-template-columns: minmax(17rem, 0.68fr) minmax(0, 1.9fr); }
+  .reviews-panel .review-stage .review-card { min-height: 29rem; }
+}
+@media (max-width: 820px) {
+  .reviews-panel { grid-template-columns: 1fr; gap: 1.75rem; padding: clamp(1.5rem, 5vw, 2.5rem); }
+  .reviews-intro { gap: 0.9rem; }
+  .reviews-intro h3 { max-width: none; font-size: clamp(2.25rem, 8vw, 3.5rem); }
+  .reviews-intro .reviews-score { display: flex; align-items: center; flex-wrap: wrap; }
+  .reviews-intro .reviews-score > span { width: auto; }
+  .reviews-carousel-area { width: 100%; min-width: 0; }
+  .reviews-panel .review-stage { margin-right: -1.5rem; padding-right: 1.5rem; }
+  .reviews-panel .review-stage .review-card { min-height: 23rem; }
+  .reviews-panel .review-track { --slide-width: 84%; }
+}
+@media (max-width: 540px) {
+  .reviews-panel { gap: 1.25rem; padding: 1.35rem 1rem 1.5rem; }
+  .reviews-intro h3 { font-size: clamp(2rem, 11vw, 3rem); }
+  .reviews-intro .reviews-score strong { font-size: 1.65rem; }
+  .reviews-panel .review-controls { max-width: none; }
+  .reviews-panel .review-stage { margin-right: -1rem; padding-right: 1rem; }
+  .reviews-panel .review-stage .review-card { min-width: calc(100% - 0.25rem); flex-basis: calc(100% - 0.25rem); min-height: 22rem; padding: 1.25rem !important; }
+  .reviews-panel .review-track { --slide-width: 100%; gap: 0.75rem; }
+  .reviews-panel .review-card-top > div { flex-basis: calc(100% - 3rem); }
+  .reviews-panel .review-card p { font-size: 0.95rem !important; }
+  .review-dots { overflow: hidden; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .review-track { transition: none !important; }
+}
 .google-mark, .review-card-top, .reviews-score, .star-row { display: flex; align-items: center; }
 .google-logo { width: 1.45rem; height: 1.45rem; }
 .review-google-logo { width: 1.2rem; height: 1.2rem; margin-left: auto; }
