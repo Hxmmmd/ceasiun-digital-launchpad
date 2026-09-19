@@ -20,6 +20,7 @@ import {
   X,
   Youtube,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { useCms } from "@/hooks/use-cms";
@@ -45,7 +46,8 @@ const mobileNavIcons = {
   "/contact": Mail,
 };
 
-export function Header() {
+  export function Header() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const { settings } = useCms();
@@ -79,7 +81,12 @@ export function Header() {
 
         <nav className="desktop-nav" aria-label="Main navigation">
           {nav.map(([n, to]) => (
-            <Link key={to} href={to}>
+            <Link
+              key={to}
+              href={to}
+              className={pathname === to ? "active" : undefined}
+              aria-current={pathname === to ? "page" : undefined}
+            >
               {n}
             </Link>
           ))}
