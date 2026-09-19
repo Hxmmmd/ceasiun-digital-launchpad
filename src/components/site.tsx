@@ -204,7 +204,7 @@ export function Footer() {
             <Music2 aria-hidden="true" /> TikTok
           </a>
           <a href={settings.discord} target="_blank" rel="noreferrer">
-            <Gamepad2 aria-hidden="true" /> Discord
+            <Gamepad2 aria-hidden="true" /> Discord Join Community
           </a>
         </div>
       </div>
