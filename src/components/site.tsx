@@ -179,6 +179,10 @@ export function Footer() {
   <span>Terms &amp; Conditions</span>
   <span aria-hidden="true">Read our terms</span>
   </Link>
+  <Link href="/disclaimer" className="footer-privacy-link">
+  <span>Disclaimer</span>
+  <span aria-hidden="true">Read our disclaimer</span>
+  </Link>
         </div>
 
         <div className="footer-connect-section">
