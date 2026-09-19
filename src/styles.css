@@ -1308,6 +1308,32 @@ blockquote em {
   padding: 0.8rem;
   color: var(--foreground);
 }
+.contact-grid select {
+  appearance: none;
+  padding-right: 3rem;
+  border-radius: 0.5rem !important;
+  border-color: color-mix(in oklab, var(--primary) 28%, var(--input));
+  background-color: var(--card);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2372d8b2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.1rem;
+  cursor: pointer;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+.contact-grid select:hover {
+  border-color: var(--primary);
+  background-color: color-mix(in oklab, var(--card) 88%, var(--primary));
+}
+.contact-grid select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 18%, transparent);
+}
+.contact-grid select option {
+  background: var(--card);
+  color: var(--foreground);
+}
 .contact-grid aside {
   border-left: 1px solid var(--border);
   padding-left: 2rem;
@@ -3040,7 +3066,7 @@ blockquote em {
   }
 }
 
-/* ══════════════��════════════════════════════════════════════════════
+/* ══════════════��═════════════════════════════════════════��══════════
    CMS EDITOR — 2-column layout for blog/cases, single col for others
 ════════════════════════════���══════════════════════════════════════ */
 .cms-editor {
