@@ -21,8 +21,8 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
   }, [visible.length]);
 
   if (!visible.length) return null;
-  const current = visible[active];
   const go = (direction: number) => setActive((index) => (index + direction + visible.length) % visible.length);
+  const slides = Array.from({ length: visible.length + 2 }, (_, index) => visible[index % visible.length]);
 
   return (
     <div className="reviews-panel" aria-roledescription="carousel" aria-label="Google client reviews">
@@ -38,16 +38,20 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
         </div>
       </div>
       <div className="review-stage" aria-live="polite">
-        <blockquote className="review-card" key={current.id}>
-          <div className="review-card-top">
-            <span className="review-avatar">{current.attribution.charAt(0).toUpperCase()}</span>
-            <div><strong>{current.attribution}</strong><span>{current.company}</span></div>
-            <img src={googleLogo} alt="Google review" className="review-google-logo" />
-          </div>
-          <div className="star-row" aria-label="5 out of 5 stars">{Array.from({ length: 5 }, (_, index) => <Star key={index} fill="currentColor" />)}</div>
-          <p>“{current.quote}”</p>
-          <footer>{current.is_sample ? "Sample review" : "Client review"}</footer>
-        </blockquote>
+        <div className="review-track" style={{ transform: `translateX(calc(-${active} * (66.666% + 1rem))` }}>
+          {slides.map((review, index) => (
+            <blockquote className="review-card" key={`${review.id}-${active}-${index}`}>
+              <div className="review-card-top">
+                <span className="review-avatar">{review.attribution.charAt(0).toUpperCase()}</span>
+                <div><strong>{review.attribution}</strong><span>{review.company}</span></div>
+                <img src={googleLogo} alt="Google review" className="review-google-logo" />
+              </div>
+              <div className="star-row" aria-label="5 out of 5 stars">{Array.from({ length: 5 }, (_, starIndex) => <Star key={starIndex} fill="currentColor" />)}</div>
+              <p>“{review.quote}”</p>
+              <footer>{review.is_sample ? "Sample review" : "Client review"}</footer>
+            </blockquote>
+          ))}
+        </div>
       </div>
       <div className="review-controls">
         <span>{String(active + 1).padStart(2, "0")} <i>/</i> {String(visible.length).padStart(2, "0")}</span>

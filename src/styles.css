@@ -737,8 +737,17 @@ html {
   overflow: hidden;
   padding: 0.15rem;
 }
+.review-track {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
 .review-stage .review-card {
   min-height: 15.5rem;
+  min-width: calc(66.666% - 0.666rem);
+  flex: 0 0 calc(66.666% - 0.666rem);
   align-content: start;
   border: 1px solid color-mix(in oklab, var(--border) 90%, var(--primary));
   background: linear-gradient(145deg, color-mix(in oklab, var(--card) 96%, var(--primary)), var(--card));
@@ -756,7 +765,10 @@ html {
   55% { opacity: 1; }
   to { opacity: 1; transform: translateX(0) scale(1); }
 }
-@media (prefers-reduced-motion: reduce) { .review-stage .review-card { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .review-stage .review-card { animation: none; }
+  .review-track { transition: none; }
+}
 .google-mark { gap: 0.65rem; font-weight: 700; }
 .google-g, .review-google { color: #4285f4; font-weight: 800; }
 .google-g { font-size: 1.35rem; }
@@ -1695,6 +1707,8 @@ blockquote em {
 }
 @media (max-width: 700px) {
   .reviews-summary { align-items: flex-start; flex-direction: column; }
+  .review-stage .review-card { min-width: calc(88% - 0.5rem); flex-basis: calc(88% - 0.5rem); }
+  .review-track { gap: 0.75rem; transition-duration: 950ms; }
   .reviews-score { width: 100%; justify-content: space-between; }
   .legal-content { grid-template-columns: 1fr; gap: 2rem; }
   .legal-toc { position: static; display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 0.5rem; }
