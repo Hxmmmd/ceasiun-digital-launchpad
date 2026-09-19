@@ -1386,9 +1386,34 @@ blockquote em {
   color: var(--muted-foreground);
 }
 .article {
-  padding-top: 11rem;
-  padding-bottom: 8rem;
-  max-width: 900px;
+  width: min(100% - 2rem, 900px);
+  padding-top: clamp(7rem, 14vw, 11rem);
+  padding-bottom: clamp(4rem, 10vw, 8rem);
+  overflow-wrap: anywhere;
+}
+.article > a {
+  width: fit-content;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: color-mix(in oklab, var(--card) 72%, transparent);
+  text-decoration: none;
+}
+.article > a:hover {
+  border-color: var(--primary);
+  background: var(--accent);
+  color: var(--primary);
+}
+.article h1 {
+  max-width: 100%;
+  font-size: clamp(2.6rem, 8vw, 6.5rem);
+  overflow-wrap: anywhere;
+}
+.article .lede {
+  max-width: 48rem;
+  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+  line-height: 1.55;
 }
 .article .byline {
   border-block: 1px solid var(--border);
@@ -1404,13 +1429,26 @@ blockquote em {
   max-width: 720px;
 }
 .prose h2 {
-  font-size: 2rem;
-  margin: 3rem 0 1rem;
+  font-size: clamp(1.55rem, 4vw, 2rem);
+  line-height: 1.15;
+  margin: clamp(2rem, 7vw, 3rem) 0 1rem;
 }
-.prose p {
-  font-size: 1.1rem;
-  line-height: 1.85;
+.prose h3 {
+  font-size: clamp(1.2rem, 3vw, 1.4rem);
+  line-height: 1.25;
+}
+.prose p,
+.prose li {
+  font-size: clamp(1rem, 2.2vw, 1.1rem);
+  line-height: 1.8;
   color: var(--muted-foreground);
+}
+@media (max-width: 600px) {
+  .article { width: min(100% - 1.25rem, 900px); }
+  .article > a { margin-bottom: 2.25rem; }
+  .article .byline { margin: 1.5rem 0; line-height: 1.6; }
+  .article > img { margin: 1.5rem 0; }
+  .prose ul { padding-left: 1.25rem !important; }
 }
 .loading {
   min-height: 100vh;

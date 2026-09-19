@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   ChevronRight,
   Edit3,
+  ExternalLink,
   Eye,
   EyeOff,
   FileText,
@@ -1010,6 +1011,15 @@ export default function AdminDashboard() {
                       <span className="cms-date">{new Date(post.published_at).toLocaleDateString()}</span>
                     </div>
                     <div className="cms-row-actions">
+                      <a
+                        href={`/blog/${post.slug}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        title="Preview article"
+                        className="action-btn toggle"
+                      >
+                        <ExternalLink /> Preview
+                      </a>
                       <button
                         type="button"
                         title={post.status === "hidden" ? "Make Visible" : "Hide Post"}
@@ -1068,6 +1078,8 @@ export default function AdminDashboard() {
                         <option>Branding</option>
                         <option>Social Media</option>
                         <option>Graphic Design</option>
+                        <option>Website Management</option>
+                        <option>Managed Services</option>
                         <option>Business Strategy</option>
                       </select>
                     </label>
