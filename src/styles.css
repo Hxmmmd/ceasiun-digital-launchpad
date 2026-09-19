@@ -169,6 +169,76 @@
 }
 
 /* Ceasiun scrollbar system: shared by page, drawer, admin panels, forms, and tables. */
+.route-progress {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  background: color-mix(in oklab, var(--primary) 18%, transparent);
+  transition: opacity 120ms ease;
+}
+.route-progress.is-active { opacity: 1; }
+.route-progress span {
+  display: block;
+  width: 32%;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--primary);
+  box-shadow: 0 0 14px color-mix(in oklab, var(--primary) 80%, transparent);
+  animation: route-progress-sweep 900ms ease-in-out infinite;
+}
+@keyframes route-progress-sweep { from { transform: translateX(-120%); } to { transform: translateX(340%); } }
+
+.route-loading {
+  display: grid;
+  min-height: 100svh;
+  place-content: center;
+  justify-items: center;
+  gap: 0.7rem;
+  padding: 2rem;
+  background: var(--background);
+  color: var(--foreground);
+  text-align: center;
+}
+.route-loading-mark {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  margin-bottom: 0.35rem;
+  border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border));
+  border-radius: 1.35rem;
+  background: color-mix(in oklab, var(--primary) 10%, var(--card));
+  box-shadow: 0 0 0 10px color-mix(in oklab, var(--primary) 4%, transparent);
+  animation: loading-pulse 1.8s ease-in-out infinite;
+}
+.route-loading-mark img { width: 52px; height: 52px; object-fit: contain; }
+.route-loading .eyebrow { margin: 0; color: var(--primary); }
+.route-loading-label { margin: 0; color: var(--muted-foreground); font-size: 0.9rem; }
+.route-loading-bar {
+  width: min(180px, 62vw);
+  height: 3px;
+  margin-top: 0.55rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--foreground) 12%, transparent);
+}
+.route-loading-bar span {
+  display: block;
+  width: 42%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--primary);
+  animation: loading-sweep 1.15s ease-in-out infinite;
+}
+@keyframes loading-pulse { 50% { transform: scale(1.04); opacity: 0.78; } }
+@keyframes loading-sweep { from { transform: translateX(-115%); } to { transform: translateX(255%); } }
+
 html {
   scrollbar-width: thin;
   scrollbar-color: color-mix(in oklab, var(--primary) 68%, var(--card)) color-mix(in oklab, var(--background) 92%, black);
@@ -971,11 +1041,54 @@ blockquote em {
   display: grid;
   gap: 3rem;
 }
-.footer-grid > div {
+  .footer-grid > div {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-}
+  }
+  .footer-privacy-section,
+  .footer-connect-section {
+  align-self: start;
+  }
+  .footer-privacy-section {
+  gap: 0.95rem !important;
+  }
+  .footer-privacy-link {
+  display: grid !important;
+  gap: 0.35rem !important;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: color-mix(in oklab, var(--card) 72%, transparent);
+  transition: border-color 220ms ease, background-color 220ms ease, transform 220ms ease;
+  }
+  .footer-privacy-link span:first-child {
+  color: var(--foreground);
+  font-family: var(--font-display);
+  font-weight: 700;
+  }
+  .footer-privacy-link span:last-child {
+  color: var(--muted-foreground);
+  font-size: 0.78rem;
+  }
+  .footer-privacy-link:hover {
+  border-color: color-mix(in oklab, var(--primary) 55%, var(--border));
+  background: color-mix(in oklab, var(--primary) 8%, var(--card));
+  transform: translateY(-2px);
+  }
+
+.legal-page { padding-top: 1rem; padding-bottom: clamp(4rem, 10vw, 8rem); }
+.legal-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 2rem; padding: 1rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); color: var(--muted-foreground); font-size: 0.85rem; }
+.legal-content { display: grid; grid-template-columns: 210px minmax(0, 760px); gap: clamp(2rem, 7vw, 7rem); justify-content: center; padding-top: clamp(2.5rem, 6vw, 5rem); }
+.legal-toc { position: sticky; top: 6rem; align-self: start; display: grid; gap: 0.55rem; }
+.legal-toc a { color: var(--muted-foreground); font-size: 0.82rem; line-height: 1.3; text-decoration: none; }
+.legal-toc a:hover { color: var(--primary); }
+.legal-content article { min-width: 0; }
+.legal-content section { scroll-margin-top: 7rem; padding-bottom: 2.2rem; }
+.legal-content h2 { margin: 0 0 0.7rem; font-family: var(--font-display); font-size: clamp(1.35rem, 2.4vw, 2rem); letter-spacing: -0.025em; }
+.legal-content p { max-width: 70ch; margin: 0; color: var(--muted-foreground); line-height: 1.75; }
+.legal-content p + p { margin-top: 0.8rem; }
+
 .footer-brand-heading {
   margin: 0.8rem 0 0;
   color: var(--foreground);
@@ -1255,8 +1368,10 @@ blockquote em {
     grid-column: 1/-1;
   }
   .footer-grid {
-    grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: minmax(0, 1.7fr) minmax(150px, 0.8fr) minmax(190px, 1fr);
+  align-items: start;
   }
+
   .admin {
     grid-template-columns: 230px 1fr;
   }
@@ -1427,6 +1542,10 @@ blockquote em {
   grid-template-columns: 1fr;
 }
 @media (max-width: 700px) {
+  .legal-content { grid-template-columns: 1fr; gap: 2rem; }
+  .legal-toc { position: static; display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 0.5rem; }
+  .legal-toc .eyebrow { flex: 0 0 auto; }
+  .legal-toc a { flex: 0 0 auto; white-space: nowrap; }
   .service-story-grid { grid-template-columns: 1fr; gap: 1.5rem; }
 }
 
@@ -1789,8 +1908,12 @@ blockquote em {
   border-bottom: 1px solid var(--border);
 }
 .admin-brand img {
+  display: block;
   width: 38px;
   height: 38px;
+  flex: 0 0 38px;
+  object-fit: contain;
+  object-position: center;
 }
 .admin-brand strong {
   display: block;
@@ -2314,6 +2437,9 @@ blockquote em {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .route-progress span,
+  .route-loading-mark,
+  .route-loading-bar span { animation: none !important; }
   html {
     scroll-behavior: auto;
   }
@@ -2359,7 +2485,7 @@ blockquote em {
   flex-shrink: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════��══���═════════════════════════
    ADMIN STATUS PILLS
 ═══════════════════════════════════════════════════════════════════ */
 .status-pill {
@@ -2509,9 +2635,9 @@ blockquote em {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ══════════════��════════════════════════════════════════════════════
    CMS EDITOR — 2-column layout for blog/cases, single col for others
-═══════════════════════════════════════════════════════════════════ */
+════════════════════════════���══════════════════════════════════════ */
 .cms-editor {
   background: var(--card);
   border: 1px solid var(--border);
@@ -2766,9 +2892,6 @@ blockquote em {
     padding 0.22s ease;
 }
 .admin-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 30;
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -2786,17 +2909,9 @@ blockquote em {
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
-.admin-menu-toggle {
-  display: inline-flex;
-  width: 40px;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--card);
-  color: var(--foreground);
-}
+  .admin-menu-toggle {
+    display: flex;
+  }
 .admin-menu-toggle svg {
   width: 20px;
   height: 20px;

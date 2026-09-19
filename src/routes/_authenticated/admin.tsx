@@ -38,7 +38,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { AdminPagesEditor } from "@/components/admin-pages-editor";
 import { notifyCmsListeners } from "@/lib/cms";
 import { services } from "@/lib/site-data";
-import logoUrl from "@/assets/ceasiun-logo.svg";
 
 type MainTab =
   | "overview"
@@ -423,7 +422,7 @@ export default function AdminDashboard() {
     return `local-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
   }
 
-  // ─── Admin Users ──���───────────────────────────────────────────────────
+  // ─── Admin Users ──���──────────────────���──────────────��─────────────────
   function handleCreateUser(e: React.FormEvent) {
     e.preventDefault();
     if (!newUser.email || !newUser.password) return;
@@ -643,7 +642,7 @@ export default function AdminDashboard() {
       {/* Sidebar */}
       <aside className="admin-sidebar">
         <div className="admin-brand">
-          <img src={logoUrl} alt="Ceasiun Logo" />
+          <img src="/ceasiun-logo.svg" alt="Ceasiun Logo" width={38} height={38} />
           <div>
             <strong>CEASIUN</strong>
             <span>Admin Command Center</span>

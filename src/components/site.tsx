@@ -160,20 +160,15 @@ export function Footer() {
           <p className="footer-tagline">{settings.footerTagline}</p>
         </div>
 
-        <div>
-          <b>Navigate</b>
-          {nav.map(([n, to]) => (
-            <Link key={to} href={to}>
-              {n}
-            </Link>
-          ))}
-          <Link href="/careers">Careers</Link>
-          <Link href="/contact">
-            Contact
+        <div className="footer-privacy-section">
+          <b>Legal</b>
+          <Link href="/privacy-policy" className="footer-privacy-link">
+            <span>Privacy Policy</span>
+            <span aria-hidden="true">Read our policy</span>
           </Link>
         </div>
 
-        <div>
+        <div className="footer-connect-section">
           <b>Connect</b>
           <a href={phoneHref(settings.phone)}>
             <Phone /> {settings.phone}
