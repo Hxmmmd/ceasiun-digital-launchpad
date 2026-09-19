@@ -57,7 +57,13 @@ export function usePost(slug: string) {
 
 export function useTestimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  useLocalRefresh(() => setTestimonials(loadLocal<Testimonial[]>("ceasiun_testimonials", defaultTestimonials).filter((t) => t.is_visible !== false).sort((a, b) => (a.sort_order ?? 99) - (b.sort_order ?? 99))));
+  useLocalRefresh(() => {
+    const saved = loadLocal<Testimonial[]>("ceasiun_testimonials", []);
+    const combined = saved.length >= 10
+      ? saved
+      : [...saved, ...defaultTestimonials.filter((item) => !saved.some((entry) => entry.id === item.id)).slice(0, 10 - saved.length)];
+    setTestimonials(combined.filter((t) => t.is_visible !== false).sort((a, b) => (a.sort_order ?? 99) - (b.sort_order ?? 99)));
+  });
   return testimonials;
 }
 
