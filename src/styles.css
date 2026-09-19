@@ -739,7 +739,7 @@ html {
 .reviews-carousel-area { min-width: 0; }
 .reviews-brand { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1rem; color: var(--muted-foreground); font-size: 0.82rem; font-weight: 700; }
 .reviews-panel .review-stage { margin: 0; padding: 0.5rem 0 1rem 1rem; overflow: hidden; }
-.reviews-panel .review-track { width: 100%; --slide-width: 84%; --slide-gap: 1.25rem; gap: var(--slide-gap); }
+.reviews-panel .review-track { width: 100%; --slide-width: calc(84% - 0.25rem); --slide-gap: 1.25rem; gap: var(--slide-gap); }
 .reviews-panel .review-stage .review-card { min-width: calc(84% - 0.25rem); flex-basis: calc(84% - 0.25rem); min-height: 27rem; padding: 1.6rem !important; border: 1px solid color-mix(in oklab, var(--primary) 22%, var(--border)); border-radius: var(--radius-xl) !important; background: var(--card); color: var(--card-foreground); box-shadow: 0 20px 38px color-mix(in oklab, var(--foreground) 12%, transparent), inset 0 1px 0 color-mix(in oklab, var(--primary) 10%, transparent); text-align: center; }
 .reviews-panel .review-card-top { justify-content: center; flex-wrap: wrap; }
 .reviews-panel .review-card-top > div { flex-basis: calc(100% - 3.2rem); text-align: left; }
