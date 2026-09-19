@@ -1636,6 +1636,31 @@ blockquote em {
   color: var(--primary);
   font-size: 0.85rem;
 }
+.admin-preload-bar {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 1000;
+  width: 35%;
+  height: 3px;
+  pointer-events: none;
+  background: var(--primary);
+  box-shadow: 0 0 14px var(--primary);
+  animation: admin-preload 1.2s ease-out forwards;
+}
+@keyframes admin-preload {
+  from { width: 0; opacity: 1; }
+  75% { width: 78%; opacity: 1; }
+  to { width: 100%; opacity: 0; }
+}
+.admin-media-preview {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
 .admin {
   min-height: 100vh;
   min-height: 100dvh;
@@ -2920,7 +2945,7 @@ blockquote em {
 
 /* ═══════════════════════════════════════════════════════════════════
    ADMIN ALERT BANNER
-═══════════════��═══════════════════════════════════════════════════ */
+═══════════════��═════════════��═════════════════════════════════════ */
 .admin-alert-banner {
   display: flex;
   align-items: center;

@@ -84,6 +84,7 @@ interface BlogPost {
   body: string;
   author: string;
   cover_url: string;
+  media_urls?: string;
   tags: string;
   status: "published" | "draft" | "hidden";
   published_at: string;
@@ -107,6 +108,7 @@ interface Testimonial {
   quote: string;
   attribution: string;
   company: string;
+  avatar_url?: string;
   is_sample: boolean;
   is_visible: boolean;
   sort_order: number;
@@ -611,7 +613,7 @@ export default function AdminDashboard() {
     router.replace("/auth");
   }
 
-  // ─── Tab label helper ─────────────────────────────────────────────────
+  // ─── Tab label helper ───────────────────────────────────────────────���─
   const tabLabel: Record<MainTab, string> = {
     overview: "Dashboard",
     users: "Admin & Users",
@@ -650,6 +652,7 @@ export default function AdminDashboard() {
         sidebarCollapsed ? "sidebar-collapsed" : ""
       }`}
     >
+      <div className="admin-preload-bar" aria-hidden="true" />
       {/* Sidebar */}
       <aside className="admin-sidebar">
         <div className="admin-brand">
@@ -1089,9 +1092,13 @@ export default function AdminDashboard() {
                     <label>Tags (comma-separated)
                       <Input value={editingBlog.tags} onChange={(e) => setEditingBlog({ ...editingBlog, tags: e.target.value })} placeholder="seo, web, marketing" />
                     </label>
-                    <label>Cover Image URL
-                      <Input value={editingBlog.cover_url} onChange={(e) => setEditingBlog({ ...editingBlog, cover_url: e.target.value })} placeholder="https://..." />
-                    </label>
+          <label>Cover Image URL
+          <Input value={editingBlog.cover_url} onChange={(e) => setEditingBlog({ ...editingBlog, cover_url: e.target.value })} placeholder="https://..." />
+          <input type="file" accept="image/*" onChange={(e) => { const file = e.target.files?.[0]; if (!file) return; const reader = new FileReader(); reader.onload = () => setEditingBlog({ ...editingBlog, cover_url: String(reader.result) }); reader.readAsDataURL(file); }} />
+          </label>
+          <label>Article Images (optional, one URL per line)
+          <Textarea rows={3} value={editingBlog.media_urls ?? ""} onChange={(e) => setEditingBlog({ ...editingBlog, media_urls: e.target.value })} placeholder="Paste image URLs to use inside the article..." />
+          </label>
                     <label>Publish Status
                       <select value={editingBlog.status} onChange={(e) => setEditingBlog({ ...editingBlog, status: e.target.value as BlogPost["status"] })}>
                         <option value="published">Published (visible on site)</option>
@@ -1281,9 +1288,13 @@ export default function AdminDashboard() {
                   <label>Client Name / Attribution *
                     <Input value={editingTestimonial.attribution} onChange={(e) => setEditingTestimonial({ ...editingTestimonial, attribution: e.target.value })} placeholder="e.g. CEO, Tech Startup" />
                   </label>
-                  <label>Company Name
-                    <Input value={editingTestimonial.company} onChange={(e) => setEditingTestimonial({ ...editingTestimonial, company: e.target.value })} placeholder="e.g. Confidential Client" />
-                  </label>
+          <label>Company Name
+          <Input value={editingTestimonial.company} onChange={(e) => setEditingTestimonial({ ...editingTestimonial, company: e.target.value })} placeholder="e.g. Confidential Client" />
+          </label>
+          <label>Profile Picture (optional)
+          <input type="file" accept="image/*" onChange={(e) => { const file = e.target.files?.[0]; if (!file) return; const reader = new FileReader(); reader.onload = () => setEditingTestimonial({ ...editingTestimonial, avatar_url: String(reader.result) }); reader.readAsDataURL(file); }} />
+          {editingTestimonial.avatar_url && <img className="admin-media-preview" src={editingTestimonial.avatar_url} alt="Selected profile preview" />}
+          </label>
                   <label>Sort Order
                     <Input type="number" value={editingTestimonial.sort_order} onChange={(e) => setEditingTestimonial({ ...editingTestimonial, sort_order: Number(e.target.value) })} />
                   </label>
@@ -1394,7 +1405,7 @@ export default function AdminDashboard() {
 
         {/* ═════════════════════════════════════════════════════════��════════
             TAB 8: SERVICES (read-only directory)
-        ══════════════════════════════════════════════════════════════════ */}
+        ════════════════════════════════════════════════��═════════════════ */}
         {activeTab === "pages" && (
           <div className="admin-tab-view">
             <header className="admin-view-header">
