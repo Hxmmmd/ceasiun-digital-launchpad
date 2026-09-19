@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { ArrowRight, Check, MoveRight } from "lucide-react";
+import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { CountUp } from "@/components/count-up";
 import { useTestimonials } from "@/components/public-content";
 import { CTA, Layout, SectionHead, meta } from "@/components/site";
@@ -89,17 +90,7 @@ export default function HomePage() {
           copy={cms.home.testimonialsCopy}
         />
         {testimonials.length > 0 ? (
-          <div className="quote-grid">
-            {testimonials.map((item) => (
-              <blockquote key={item.id}>
-                <p>"{item.quote}"</p>
-                <footer>
-                  {item.attribution} - {item.company}
-                  {item.is_sample && <em>Sample</em>}
-                </footer>
-              </blockquote>
-            ))}
-          </div>
+          <TestimonialCarousel testimonials={testimonials} />
         ) : (
           <div className="empty-proof">
             <h3>Verified client stories are being prepared.</h3>

@@ -244,6 +244,16 @@ const defaultTestimonials: Testimonial[] = [
     is_visible: true,
     sort_order: 2,
   },
+  ...[
+    ["A polished digital experience that feels exactly right for our brand.", "Founder, Growth Company"],
+    ["Clear communication, sharp execution, and a smooth launch.", "Marketing Lead, SaaS Brand"],
+    ["They turned a complicated brief into a simple, high-performing product.", "Director, Technology Group"],
+    ["The team was thoughtful, responsive, and easy to work with.", "Brand Manager, Retail Company"],
+    ["Their strategic thinking made every design decision count.", "Founder, Consumer Startup"],
+    ["Fast delivery, strong ideas, and excellent attention to detail.", "COO, Services Business"],
+    ["The new platform made our workflow much easier.", "Operations Lead, Logistics Brand"],
+    ["A dependable partner with both creative taste and technical depth.", "CEO, Digital Product"],
+  ].map(([quote, attribution], index) => ({ id: `test-${index + 3}`, quote, attribution, company: "Confidential Client", is_sample: true, is_visible: true, sort_order: index + 3 })),
 ];
 
 const defaultCareers: CareerOpening[] = [
@@ -1205,7 +1215,8 @@ export default function AdminDashboard() {
               <div>
                 <p className="eyebrow">Social Proof</p>
                 <h1>Testimonials</h1>
-              </div>
+                <p className="form-subtext">Manage the rotating Google-style review carousel. Reviews advance automatically every 5 seconds.</p>
+  </div>
               {testMode === "list" ? (
                 <Button onClick={() => { setEditingTestimonial(blankTestimonial()); setTestMode("edit"); }}>
                   <Plus /> Add Testimonial
@@ -1369,7 +1380,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* ══════════════════════════════════════════════════════════════════
+        {/* ═════════════════════════════════════════════════════════��════════
             TAB 8: SERVICES (read-only directory)
         ══════════════════════════════════════════════════════════════════ */}
         {activeTab === "pages" && (
@@ -1411,7 +1422,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* ═══════════════�����═════════════════════════════════════════════════
+        {/* ═══════════════�����══════════════════════════════���══════════════════
             TAB 9: SITE SETTINGS
         ══════════════════════════════════════════════════════════════════ */}
         {activeTab === "settings" && (
