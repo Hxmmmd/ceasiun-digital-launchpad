@@ -199,10 +199,10 @@ export function Footer() {
             <Youtube /> YouTube
           </a>
           <a href={settings.tiktok} target="_blank" rel="noreferrer">
-            <span className="social-text-icon">TikTok</span> @ceasiun
+            <img className="footer-social-logo" src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/tiktok/default.svg" alt="" /> TikTok
           </a>
           <a href={settings.discord} target="_blank" rel="noreferrer">
-            <span className="social-text-icon">Discord</span> Join Community
+            <img className="footer-social-logo" src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/discord/default.svg" alt="" /> Discord
           </a>
         </div>
       </div>

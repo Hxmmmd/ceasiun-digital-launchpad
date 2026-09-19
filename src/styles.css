@@ -1385,11 +1385,18 @@ blockquote em {
 .footer-grid a {
   color: var(--muted-foreground);
 }
-.footer-grid a {
+  .footer-grid a {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
-}
-.footer-grid svg {
+  }
+  .footer-social-logo {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex: 0 0 16px;
+  }
+  .footer-grid svg {
   width: 16px;
 }
 .footer-bottom {
@@ -2772,7 +2779,7 @@ blockquote em {
   flex-shrink: 0;
 }
 
-/* ════════���═══════���═════════════════════��══���═════════════════════════
+/* ════════���═══════���═════════════════════��══���═════════════════════���═══
    ADMIN STATUS PILLS
 ═══════════════════════════════════════════��═══════════════════════ */
 .status-pill {
