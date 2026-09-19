@@ -169,6 +169,51 @@
 }
 
 /* Ceasiun scrollbar system: shared by page, drawer, admin panels, forms, and tables. */
+.route-loading {
+  display: grid;
+  min-height: 100svh;
+  place-content: center;
+  justify-items: center;
+  gap: 0.7rem;
+  padding: 2rem;
+  background: var(--background);
+  color: var(--foreground);
+  text-align: center;
+}
+.route-loading-mark {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  margin-bottom: 0.35rem;
+  border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border));
+  border-radius: 1.35rem;
+  background: color-mix(in oklab, var(--primary) 10%, var(--card));
+  box-shadow: 0 0 0 10px color-mix(in oklab, var(--primary) 4%, transparent);
+  animation: loading-pulse 1.8s ease-in-out infinite;
+}
+.route-loading-mark img { width: 52px; height: 52px; object-fit: contain; }
+.route-loading .eyebrow { margin: 0; color: var(--primary); }
+.route-loading-label { margin: 0; color: var(--muted-foreground); font-size: 0.9rem; }
+.route-loading-bar {
+  width: min(180px, 62vw);
+  height: 3px;
+  margin-top: 0.55rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--foreground) 12%, transparent);
+}
+.route-loading-bar span {
+  display: block;
+  width: 42%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--primary);
+  animation: loading-sweep 1.15s ease-in-out infinite;
+}
+@keyframes loading-pulse { 50% { transform: scale(1.04); opacity: 0.78; } }
+@keyframes loading-sweep { from { transform: translateX(-115%); } to { transform: translateX(255%); } }
+
 html {
   scrollbar-width: thin;
   scrollbar-color: color-mix(in oklab, var(--primary) 68%, var(--card)) color-mix(in oklab, var(--background) 92%, black);
@@ -2367,6 +2412,8 @@ blockquote em {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .route-loading-mark,
+  .route-loading-bar span { animation: none !important; }
   html {
     scroll-behavior: auto;
   }
