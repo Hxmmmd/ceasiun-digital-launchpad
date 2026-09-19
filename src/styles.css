@@ -790,6 +790,29 @@ html {
   .review-track { transition: none !important; }
 }
 
+/* Small screens show one complete review card at a time. */
+@media (max-width: 820px) {
+  .reviews-panel .review-stage {
+    width: 100%;
+    margin: 0;
+    padding: 0.5rem 0 1rem;
+    overflow: hidden;
+  }
+  .reviews-panel .review-track {
+    --slide-width: 100%;
+    width: 100%;
+    gap: 0;
+  }
+  .reviews-panel .review-stage .review-card,
+  .reviews-panel .review-stage .review-card:first-child {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+}
+
+
 /* Keep each review card visually centered like a polished review profile. */
 .reviews-panel .review-card {
   position: relative;
