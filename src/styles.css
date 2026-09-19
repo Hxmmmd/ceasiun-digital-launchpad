@@ -169,6 +169,61 @@
 }
 
 /* Ceasiun scrollbar system: shared by page, drawer, admin panels, forms, and tables. */
+.project-cta { border-radius: 0.7rem !important; }
+
+/* Shared interaction language for buttons and clickable surfaces. */
+:where(button, a, [role="button"]) {
+  -webkit-tap-highlight-color: transparent;
+}
+:where(button, a, [role="button"]):focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--primary) 78%, white);
+  outline-offset: 4px;
+}
+:where(button, a, [role="button"]):active {
+  transform: translateY(1px) scale(0.985);
+  transition-duration: 90ms;
+}
+:where(.button, button:not(.unstyled), .project-cta) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease, background-color 220ms ease, border-color 220ms ease, color 220ms ease;
+}
+:where(.button, button:not(.unstyled), .project-cta)::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background: linear-gradient(115deg, transparent 18%, color-mix(in oklab, white 18%, transparent) 48%, transparent 78%);
+  transform: translateX(-125%);
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+:where(.button, button:not(.unstyled), .project-cta):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px color-mix(in oklab, var(--primary) 18%, transparent);
+}
+:where(.button, button:not(.unstyled), .project-cta):hover::after {
+  transform: translateX(125%);
+}
+:where(.desktop-nav a, .mobile-nav a, .footer a, .legal-toc a, .wordmark) {
+  transition: color 180ms ease, opacity 180ms ease, transform 180ms ease;
+}
+:where(.desktop-nav a, .mobile-nav a, .footer a, .legal-toc a):hover {
+  color: var(--primary);
+}
+:where(.desktop-nav a, .mobile-nav a, .footer a, .legal-toc a):active {
+  transform: translateX(2px);
+}
+:where(.service-card, .work-card, .capability-card, .deliverable-card, .switcher-card, .footer-privacy-link) {
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), border-color 220ms ease, box-shadow 260ms ease, background-color 220ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(button, a, [role="button"], .service-card, .work-card, .capability-card, .deliverable-card, .switcher-card) {
+    transition: none !important;
+  }
+  :where(button, a, [role="button"]):active { transform: none; }
+}
+
 .route-progress {
   position: fixed;
   z-index: 1000;
