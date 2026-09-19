@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import type { Testimonial } from "@/components/public-content";
 
@@ -42,7 +42,7 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
       <div className="reviews-carousel-area">
         <div className="reviews-brand"><img src={googleLogo} alt="Google" className="google-logo" /><span>Google reviews</span></div>
         <div className="review-stage" aria-live="polite">
-        <div className="review-track" style={{ transform: `translate3d(calc(-${active} * (var(--slide-width) + 1rem)), 0, 0)` }}>
+        <div className="review-track" style={{ "--review-count": visible.length, transform: `translate3d(calc(-${active} * (var(--slide-width) + var(--slide-gap))), 0, 0)` } as CSSProperties}>
           {slides.map((review, index) => (
             <blockquote className="review-card" key={`${review.id}-${index}`}>
               <div className="review-card-top">
