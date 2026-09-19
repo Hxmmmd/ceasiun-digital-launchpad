@@ -1810,10 +1810,18 @@ blockquote em {
   border-radius: 99px;
   border: 1px solid color-mix(in oklab, var(--primary) 30%, transparent);
 }
-.service-hero-main {
-  max-width: 900px;
-}
-.service-icon-wrapper {
+  .service-hero-main {
+  max-width: 1100px;
+  }
+  .service-hero-main h1 {
+  max-width: 1100px;
+  margin: 0.75rem 0 1.25rem;
+  font-size: clamp(3.5rem, 8.2vw, 7.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+  font-weight: 600;
+  }
+  .service-icon-wrapper {
   width: 64px;
   height: 64px;
   display: grid;
@@ -2162,8 +2170,12 @@ blockquote em {
     padding-bottom: 3rem;
   }
   .service-detail-hero {
-    padding-top: calc(76px + 2.5rem);
-    padding-bottom: 3rem;
+  padding-top: calc(76px + 2.5rem);
+  padding-bottom: 3rem;
+  }
+  .service-hero-main h1 {
+  font-size: clamp(2.8rem, 11vw, 5rem);
+  line-height: 0.96;
   }
   .case-page,
   .article {
