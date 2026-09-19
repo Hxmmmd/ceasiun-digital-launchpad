@@ -770,7 +770,7 @@ html {
   .reviews-intro .reviews-score { display: flex; align-items: center; flex-wrap: wrap; }
   .reviews-intro .reviews-score > span { width: auto; }
   .reviews-carousel-area { width: 100%; min-width: 0; }
-  .reviews-panel .review-stage { margin-right: -1.5rem; padding-right: 1.5rem; }
+  .reviews-panel .review-stage { margin-right: 0; padding: 0.5rem 0 1rem; }
   .reviews-panel .review-stage .review-card { min-height: 23rem; }
   .reviews-panel .review-track { --slide-width: 84%; }
 }
@@ -779,9 +779,9 @@ html {
   .reviews-intro h3 { font-size: clamp(2rem, 11vw, 3rem); }
   .reviews-intro .reviews-score strong { font-size: 1.65rem; }
   .reviews-panel .review-controls { max-width: none; }
-  .reviews-panel .review-stage { margin-right: -1rem; padding-right: 1rem; }
-  .reviews-panel .review-stage .review-card { min-width: calc(100% - 0.25rem); flex-basis: calc(100% - 0.25rem); min-height: 22rem; padding: 1.25rem !important; }
-  .reviews-panel .review-track { --slide-width: 100%; gap: 0.75rem; }
+  .reviews-panel .review-stage { margin-right: 0; padding: 0.5rem 0 1rem; }
+  .reviews-panel .review-stage .review-card { min-width: 100%; flex-basis: 100%; min-height: 22rem; padding: 1.25rem !important; }
+  .reviews-panel .review-track { --slide-width: 100%; gap: 0; }
   .reviews-panel .review-card-top > div { flex-basis: calc(100% - 3rem); }
   .reviews-panel .review-card p { font-size: 0.95rem !important; }
   .review-dots { overflow: hidden; }
