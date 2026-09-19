@@ -719,6 +719,35 @@ html {
   color: var(--muted-foreground);
   font-size: 0.85rem;
 }
+.reviews-panel {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid var(--border);
+  border-radius: 1.15rem;
+  background: color-mix(in oklab, var(--card) 76%, transparent);
+  box-shadow: 0 20px 60px color-mix(in oklab, var(--foreground) 7%, transparent);
+}
+.reviews-summary { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; padding: 0.25rem 0.35rem 1.35rem; border-bottom: 1px solid var(--border); }
+.google-mark, .review-card-top, .reviews-score, .star-row { display: flex; align-items: center; }
+.google-mark { gap: 0.65rem; font-weight: 700; }
+.google-g, .review-google { color: #4285f4; font-weight: 800; }
+.google-g { font-size: 1.35rem; }
+.reviews-score { gap: 0.8rem; }
+.reviews-score strong { font-family: var(--font-display); font-size: 1.45rem; }
+.reviews-score > span { color: var(--muted-foreground); font-size: 0.78rem; }
+.star-row { gap: 0.18rem; color: #d99a18; }
+.star-row svg { width: 0.92rem; height: 0.92rem; stroke-width: 1.5; }
+.review-card { display: grid; gap: 1rem; border-radius: 0.9rem !important; padding: 1.35rem !important; }
+.review-card-top { gap: 0.75rem; }
+.review-card-top > div { display: grid; gap: 0.15rem; min-width: 0; }
+.review-card-top strong { font-size: 0.92rem; }
+.review-card-top span:not(.review-avatar):not(.review-google) { color: var(--muted-foreground); font-size: 0.78rem; }
+.review-avatar { display: grid; width: 2.3rem; height: 2.3rem; flex: 0 0 auto; place-items: center; border-radius: 50%; background: color-mix(in oklab, var(--primary) 18%, var(--card)); color: var(--primary); font-weight: 800; }
+.review-google { margin-left: auto; font-size: 1.1rem; }
+.review-card p { font-size: 1rem !important; line-height: 1.65 !important; }
+.review-card footer { font-size: 0.76rem; }
+
 .quote-grid,
 .mini-grid,
 .post-grid,
@@ -1638,6 +1667,8 @@ blockquote em {
   grid-template-columns: 1fr;
 }
 @media (max-width: 700px) {
+  .reviews-summary { align-items: flex-start; flex-direction: column; }
+  .reviews-score { width: 100%; justify-content: space-between; }
   .legal-content { grid-template-columns: 1fr; gap: 2rem; }
   .legal-toc { position: static; display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 0.5rem; }
   .legal-toc .eyebrow { flex: 0 0 auto; }
