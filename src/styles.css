@@ -1508,7 +1508,10 @@ blockquote em {
 .legal-content article { min-width: 0; }
 .legal-content section { scroll-margin-top: 7rem; padding-bottom: 2.2rem; }
 .legal-content h2 { margin: 0 0 0.7rem; font-family: var(--font-display); font-size: clamp(1.35rem, 2.4vw, 2rem); letter-spacing: -0.025em; }
-.legal-content p { max-width: 70ch; margin: 0; color: var(--muted-foreground); line-height: 1.75; }
+  .legal-content p { max-width: 70ch; margin: 0; color: var(--muted-foreground); line-height: 1.75; }
+  .legal-lede { margin: 0 0 1rem; padding: 1.25rem; border-left: 2px solid var(--primary); background: color-mix(in oklab, var(--card) 72%, transparent); color: var(--muted-foreground); line-height: 1.8; }
+  .legal-notice { margin-top: 2rem !important; padding: 1.25rem; border: 1px solid var(--border); border-radius: 0.5rem; line-height: 1.8; }
+
 .legal-content p + p { margin-top: 0.8rem; }
 
 .footer-brand-heading {
