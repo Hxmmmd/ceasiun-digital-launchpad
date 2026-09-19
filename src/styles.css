@@ -799,16 +799,16 @@ html {
     overflow: hidden;
   }
   .reviews-panel .review-track {
-    --slide-width: calc(100% / var(--review-count));
-    width: calc(100% * var(--review-count));
+    --slide-width: 100%;
+    width: 100%;
     gap: 0;
   }
   .reviews-panel .review-stage .review-card,
   .reviews-panel .review-stage .review-card:first-child {
-    width: calc(100% / var(--review-count));
-    min-width: calc(100% / var(--review-count));
-    max-width: calc(100% / var(--review-count));
-    flex: 0 0 calc(100% / var(--review-count));
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
   }
 }
 
