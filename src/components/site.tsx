@@ -160,9 +160,16 @@ export function Footer() {
           <p className="footer-tagline">{settings.footerTagline}</p>
         </div>
 
-        <div>
+        <div className="footer-privacy-section">
+          <b>Legal</b>
+          <Link href="/privacy-policy" className="footer-privacy-link">
+            <span>Privacy Policy</span>
+            <span aria-hidden="true">Read our policy</span>
+          </Link>
+        </div>
+
+        <div className="footer-connect-section">
           <b>Connect</b>
-          <Link href="/privacy-policy">Privacy Policy</Link>
           <a href={phoneHref(settings.phone)}>
             <Phone /> {settings.phone}
           </a>
