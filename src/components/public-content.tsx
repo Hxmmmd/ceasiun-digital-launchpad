@@ -10,20 +10,14 @@ export type CareerOpening = { id: string; title: string; location: string; type:
 const defaultTestimonials: Testimonial[] = [
   ["Ceasiun delivered a complete website overhaul in just 3 weeks. The result was beyond what we expected — clean, fast, and exactly on-brand.", "CEO, Pakistani SaaS Startup"],
   ["Their AI automation work saved our team over 20 hours per week. The WhatsApp bot alone handles 80% of our customer queries.", "Operations Director, E-commerce Brand"],
-  ["A polished digital experience that finally feels as ambitious as our company.", "Founder, Growth Company"],
-  ["Clear communication, sharp execution, and a launch that exceeded our goals.", "Marketing Lead, SaaS Brand"],
-  ["The team turned a complicated brief into a simple, high-performing product.", "Director, Technology Group"],
-  ["We saw stronger engagement within the first month after launch.", "Brand Manager, Retail Company"],
-  ["Their strategic thinking made every design and development decision count.", "Founder, Consumer Startup"],
-  ["Fast, thoughtful, and genuinely invested in the outcome of our project.", "COO, Services Business"],
-  ["The new platform made our internal workflow dramatically easier.", "Operations Lead, Logistics Brand"],
-  ["A rare partner that brings both creative taste and technical depth.", "CEO, Digital Product"],
-  ["The attention to detail across mobile and desktop was exceptional.", "Product Manager, Finance Brand"],
-  ["Our website now communicates our value clearly and converts better.", "Founder, Consulting Firm"],
-  ["Every milestone landed on time, with no surprises and excellent support.", "Director, Education Platform"],
-  ["They helped us move from idea to a credible, scalable launch.", "Founder, Startup Studio"],
-  ["The final result is clean, memorable, and much easier for customers to use.", "Head of Growth, Commerce Brand"],
-  ["A dependable team with the confidence to challenge weak ideas.", "Partner, Professional Services"],
+    ["A polished digital experience that feels exactly right for our brand.", "Founder, Growth Company"],
+    ["Clear communication, sharp execution, and a smooth launch.", "Marketing Lead, SaaS Brand"],
+    ["They turned a complicated brief into a simple, high-performing product.", "Director, Technology Group"],
+    ["The team was thoughtful, responsive, and easy to work with.", "Brand Manager, Retail Company"],
+    ["Their strategic thinking made every design decision count.", "Founder, Consumer Startup"],
+    ["Fast delivery, strong ideas, and excellent attention to detail.", "COO, Services Business"],
+    ["The new platform made our workflow much easier.", "Operations Lead, Logistics Brand"],
+    ["A dependable partner with both creative taste and technical depth.", "CEO, Digital Product"],
 ].map(([quote, attribution], index) => ({ id: `default-test-${index + 1}`, quote, attribution, company: "Confidential Client", is_sample: true, is_visible: true, sort_order: index + 1 }));
 
 function loadLocal<T>(key: string, fallback: T): T {
