@@ -10,8 +10,10 @@ import {
   Home,
   Instagram,
   Linkedin,
+  Gamepad2,
   Mail,
   Menu,
+  Music2,
   MessageCircle,
   Newspaper,
   Phone,
@@ -199,10 +201,10 @@ export function Footer() {
             <Youtube /> YouTube
           </a>
           <a href={settings.tiktok} target="_blank" rel="noreferrer">
-            <img className="footer-social-logo" src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/tiktok/default.svg" alt="" /> TikTok
+            <Music2 aria-hidden="true" /> TikTok
           </a>
           <a href={settings.discord} target="_blank" rel="noreferrer">
-            <img className="footer-social-logo" src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/discord/default.svg" alt="" /> Discord
+            <Gamepad2 aria-hidden="true" /> Discord
           </a>
         </div>
       </div>
