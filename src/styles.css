@@ -730,6 +730,18 @@ html {
 }
 .reviews-summary { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; padding: 0.25rem 0.35rem 1.35rem; border-bottom: 1px solid var(--border); }
 .google-mark, .review-card-top, .reviews-score, .star-row { display: flex; align-items: center; }
+.google-logo { width: 1.45rem; height: 1.45rem; }
+.review-google-logo { width: 1.2rem; height: 1.2rem; margin-left: auto; }
+.review-stage { min-height: 14rem; }
+.review-stage .review-card { animation: review-enter 420ms cubic-bezier(0.22, 1, 0.36, 1); }
+.review-controls { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 1rem; color: var(--muted-foreground); font-size: 0.78rem; }
+.review-controls i { padding: 0 0.35rem; font-style: normal; opacity: 0.5; }
+.review-controls > div { display: flex; gap: 0.5rem; }
+.review-controls button { display: grid; width: 2.35rem; height: 2.35rem; place-items: center; border: 1px solid var(--border); border-radius: 50%; background: transparent; color: var(--foreground); cursor: pointer; transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease; }
+.review-controls button:hover { border-color: var(--primary); background: color-mix(in oklab, var(--primary) 12%, transparent); transform: translateY(-2px); }
+.review-controls svg { width: 1rem; height: 1rem; }
+@keyframes review-enter { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .review-stage .review-card { animation: none; } }
 .google-mark { gap: 0.65rem; font-weight: 700; }
 .google-g, .review-google { color: #4285f4; font-weight: 800; }
 .google-g { font-size: 1.35rem; }

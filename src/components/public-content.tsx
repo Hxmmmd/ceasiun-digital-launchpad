@@ -7,6 +7,25 @@ export type Testimonial = { id: string; quote: string; attribution: string; comp
 export type CaseStudy = { id: string; slug: string; title: string; category: string; summary: string; problem: string; approach: string; result: string; is_visible: boolean };
 export type CareerOpening = { id: string; title: string; location: string; type: string; description: string; is_visible: boolean };
 
+const defaultTestimonials: Testimonial[] = [
+  ["Ceasiun delivered a complete website overhaul in just 3 weeks. The result was beyond what we expected — clean, fast, and exactly on-brand.", "CEO, Pakistani SaaS Startup"],
+  ["Their AI automation work saved our team over 20 hours per week. The WhatsApp bot alone handles 80% of our customer queries.", "Operations Director, E-commerce Brand"],
+  ["A polished digital experience that finally feels as ambitious as our company.", "Founder, Growth Company"],
+  ["Clear communication, sharp execution, and a launch that exceeded our goals.", "Marketing Lead, SaaS Brand"],
+  ["The team turned a complicated brief into a simple, high-performing product.", "Director, Technology Group"],
+  ["We saw stronger engagement within the first month after launch.", "Brand Manager, Retail Company"],
+  ["Their strategic thinking made every design and development decision count.", "Founder, Consumer Startup"],
+  ["Fast, thoughtful, and genuinely invested in the outcome of our project.", "COO, Services Business"],
+  ["The new platform made our internal workflow dramatically easier.", "Operations Lead, Logistics Brand"],
+  ["A rare partner that brings both creative taste and technical depth.", "CEO, Digital Product"],
+  ["The attention to detail across mobile and desktop was exceptional.", "Product Manager, Finance Brand"],
+  ["Our website now communicates our value clearly and converts better.", "Founder, Consulting Firm"],
+  ["Every milestone landed on time, with no surprises and excellent support.", "Director, Education Platform"],
+  ["They helped us move from idea to a credible, scalable launch.", "Founder, Startup Studio"],
+  ["The final result is clean, memorable, and much easier for customers to use.", "Head of Growth, Commerce Brand"],
+  ["A dependable team with the confidence to challenge weak ideas.", "Partner, Professional Services"],
+].map(([quote, attribution], index) => ({ id: `default-test-${index + 1}`, quote, attribution, company: "Confidential Client", is_sample: true, is_visible: true, sort_order: index + 1 }));
+
 function loadLocal<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
   try {
@@ -44,7 +63,7 @@ export function usePost(slug: string) {
 
 export function useTestimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  useLocalRefresh(() => setTestimonials(loadLocal<Testimonial[]>("ceasiun_testimonials", []).filter((t) => t.is_visible !== false).sort((a, b) => (a.sort_order ?? 99) - (b.sort_order ?? 99))));
+  useLocalRefresh(() => setTestimonials(loadLocal<Testimonial[]>("ceasiun_testimonials", defaultTestimonials).filter((t) => t.is_visible !== false).sort((a, b) => (a.sort_order ?? 99) - (b.sort_order ?? 99))));
   return testimonials;
 }
 

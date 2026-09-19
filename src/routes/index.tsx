@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, Check, MoveRight, Star } from "lucide-react";
+import { ArrowRight, Check, MoveRight } from "lucide-react";
+import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { CountUp } from "@/components/count-up";
 import { useTestimonials } from "@/components/public-content";
 import { CTA, Layout, SectionHead, meta } from "@/components/site";
@@ -89,40 +90,7 @@ export default function HomePage() {
           copy={cms.home.testimonialsCopy}
         />
         {testimonials.length > 0 ? (
-          <div className="reviews-panel">
-            <div className="reviews-summary">
-              <div className="google-mark" aria-label="Google reviews">
-                <span className="google-g">G</span>
-                <span>Google reviews</span>
-              </div>
-              <div className="reviews-score">
-                <strong>5.0</strong>
-                <div className="star-row" aria-label="5 out of 5 stars">
-                  {Array.from({ length: 5 }, (_, index) => <Star key={index} fill="currentColor" />)}
-                </div>
-                <span>Based on client feedback</span>
-              </div>
-            </div>
-            <div className="quote-grid">
-              {testimonials.map((item) => (
-                <blockquote key={item.id} className="review-card">
-                  <div className="review-card-top">
-                    <span className="review-avatar">{item.attribution.charAt(0).toUpperCase()}</span>
-                    <div>
-                      <strong>{item.attribution}</strong>
-                      <span>{item.company}</span>
-                    </div>
-                    <span className="review-google" aria-label="Google review">G</span>
-                  </div>
-                  <div className="star-row" aria-label="5 out of 5 stars">
-                    {Array.from({ length: 5 }, (_, index) => <Star key={index} fill="currentColor" />)}
-                  </div>
-                  <p>“{item.quote}”</p>
-                  <footer>{item.is_sample ? "Sample review" : "Client review"}</footer>
-                </blockquote>
-              ))}
-            </div>
-          </div>
+          <TestimonialCarousel testimonials={testimonials} />
         ) : (
           <div className="empty-proof">
             <h3>Verified client stories are being prepared.</h3>

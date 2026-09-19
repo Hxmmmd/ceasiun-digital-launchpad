@@ -244,6 +244,22 @@ const defaultTestimonials: Testimonial[] = [
     is_visible: true,
     sort_order: 2,
   },
+  ...[
+    ["A polished digital experience that finally feels as ambitious as our company.", "Founder, Growth Company"],
+    ["Clear communication, sharp execution, and a launch that exceeded our goals.", "Marketing Lead, SaaS Brand"],
+    ["The team turned a complicated brief into a simple, high-performing product.", "Director, Technology Group"],
+    ["We saw stronger engagement within the first month after launch.", "Brand Manager, Retail Company"],
+    ["Their strategic thinking made every design and development decision count.", "Founder, Consumer Startup"],
+    ["Fast, thoughtful, and genuinely invested in the outcome of our project.", "COO, Services Business"],
+    ["The new platform made our internal workflow dramatically easier.", "Operations Lead, Logistics Brand"],
+    ["A rare partner that brings both creative taste and technical depth.", "CEO, Digital Product"],
+    ["The attention to detail across mobile and desktop was exceptional.", "Product Manager, Finance Brand"],
+    ["Our website now communicates our value clearly and converts better.", "Founder, Consulting Firm"],
+    ["Every milestone landed on time, with no surprises and excellent support.", "Director, Education Platform"],
+    ["They helped us move from idea to a credible, scalable launch.", "Founder, Startup Studio"],
+    ["The final result is clean, memorable, and much easier for customers to use.", "Head of Growth, Commerce Brand"],
+    ["A dependable team with the confidence to challenge weak ideas.", "Partner, Professional Services"],
+  ].map(([quote, attribution], index) => ({ id: `test-${index + 3}`, quote, attribution, company: "Confidential Client", is_sample: true, is_visible: true, sort_order: index + 3 })),
 ];
 
 const defaultCareers: CareerOpening[] = [
@@ -1205,7 +1221,8 @@ export default function AdminDashboard() {
               <div>
                 <p className="eyebrow">Social Proof</p>
                 <h1>Testimonials</h1>
-              </div>
+                <p className="form-subtext">Manage the rotating Google-style review carousel. Reviews advance automatically every 5 seconds.</p>
+  </div>
               {testMode === "list" ? (
                 <Button onClick={() => { setEditingTestimonial(blankTestimonial()); setTestMode("edit"); }}>
                   <Plus /> Add Testimonial
@@ -1411,7 +1428,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* ═══════════════�����═════════════════════════════════════════════════
+        {/* ═══════════════�����══════════════════════════════���══════════════════
             TAB 9: SITE SETTINGS
         ══════════════════════════════════════════════════════════════════ */}
         {activeTab === "settings" && (
