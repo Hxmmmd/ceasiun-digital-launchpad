@@ -190,13 +190,20 @@
   transform: translateY(1px) scale(0.985);
   transition-duration: 90ms;
 }
-:where(.button, button:not(.unstyled), .project-cta) {
+  :where(.button, button:not(.unstyled), .project-cta) {
+  border-radius: 0.5rem;
   position: relative;
   overflow: hidden;
   isolation: isolate;
   transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease, background-color 220ms ease, border-color 220ms ease, color 220ms ease;
 }
-:where(.button, button:not(.unstyled), .project-cta)::after {
+  /* Consistent soft corners across public and admin controls. */
+  :where(.button, button:not(.unstyled), .project-cta, [role="button"]) {
+  border-radius: 0.5rem !important;
+  }
+  :where(.review-controls button) { border-radius: 50% !important; }
+  .review-dots button { border-radius: 999px !important; }
+  :where(.button, button:not(.unstyled), .project-cta)::after {
   position: absolute;
   inset: 0;
   z-index: -1;
