@@ -26,18 +26,22 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
 
   return (
     <div className="reviews-panel" aria-roledescription="carousel" aria-label="Google client reviews">
-      <div className="reviews-summary">
-        <div className="google-mark">
-          <img src={googleLogo} alt="Google" className="google-logo" />
-          <span>Google reviews</span>
-        </div>
+      <div className="reviews-intro">
+        <span className="eyebrow">Our clients&apos; testimonials</span>
+        <h3>What our<br />clients say?</h3>
         <div className="reviews-score">
           <strong>5.0</strong>
           <div className="star-row" aria-label="5 out of 5 stars">{Array.from({ length: 5 }, (_, index) => <Star key={index} fill="currentColor" />)}</div>
           <span>{visible.length} client reviews</span>
         </div>
+        <div className="review-controls">
+          <span>{String(active + 1).padStart(2, "0")} <i>/</i> {String(visible.length).padStart(2, "0")}</span>
+          <div><button type="button" onClick={() => go(-1)} aria-label="Previous review"><ChevronLeft /></button><button type="button" onClick={() => go(1)} aria-label="Next review"><ChevronRight /></button></div>
+        </div>
       </div>
-      <div className="review-stage" aria-live="polite">
+      <div className="reviews-carousel-area">
+        <div className="reviews-brand"><img src={googleLogo} alt="Google" className="google-logo" /><span>Google reviews</span></div>
+        <div className="review-stage" aria-live="polite">
         <div className="review-track" style={{ transform: `translateX(calc(-${active} * (66.666% + 1rem))` }}>
           {slides.map((review, index) => (
             <blockquote className="review-card" key={`${review.id}-${active}-${index}`}>
@@ -52,10 +56,12 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
             </blockquote>
           ))}
         </div>
-      </div>
-      <div className="review-controls">
-        <span>{String(active + 1).padStart(2, "0")} <i>/</i> {String(visible.length).padStart(2, "0")}</span>
-        <div><button type="button" onClick={() => go(-1)} aria-label="Previous review"><ChevronLeft /></button><button type="button" onClick={() => go(1)} aria-label="Next review"><ChevronRight /></button></div>
+        </div>
+        <div className="review-dots" aria-label="Review slides">
+          {visible.slice(0, Math.min(6, visible.length)).map((review, index) => (
+            <button key={review.id} type="button" className={index === active % Math.min(6, visible.length) ? "active" : ""} onClick={() => setActive(index)} aria-label={`Show review ${index + 1}`} />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -729,6 +729,34 @@ html {
   box-shadow: 0 20px 60px color-mix(in oklab, var(--foreground) 7%, transparent);
 }
 .reviews-summary { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; padding: 0.25rem 0.35rem 1.35rem; border-bottom: 1px solid var(--border); }
+.reviews-panel { display: grid; grid-template-columns: minmax(15rem, 0.72fr) minmax(0, 1.7fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; padding: clamp(2rem, 5vw, 4rem); overflow: hidden; border-radius: 0; background: #0d1117; color: #f8fafc; border-color: #222b36; }
+.reviews-intro { display: grid; align-content: center; gap: 1.25rem; }
+.reviews-intro .eyebrow { color: #8bb8e8; }
+.reviews-intro h3 { max-width: 20rem; margin: 0; font-family: var(--font-display); font-size: clamp(2.4rem, 4.3vw, 4.4rem); line-height: 0.98; letter-spacing: -0.055em; }
+.reviews-intro .reviews-score { flex-wrap: wrap; gap: 0.65rem; }
+.reviews-intro .reviews-score strong { font-size: 2rem; }
+.reviews-intro .reviews-score > span { width: 100%; color: #8c9bad; }
+.reviews-carousel-area { min-width: 0; }
+.reviews-brand { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1rem; color: #aab6c5; font-size: 0.82rem; font-weight: 700; }
+.reviews-panel .review-stage { margin: 0 -2rem 0 0; padding: 0.5rem 0 1rem; }
+.reviews-panel .review-track { gap: 1.25rem; }
+.reviews-panel .review-stage .review-card { min-width: calc(50% - 0.625rem); flex-basis: calc(50% - 0.625rem); min-height: 27rem; padding: 1.6rem !important; border-color: #303946; border-radius: 1rem !important; background: #1a2028; box-shadow: 0 20px 38px rgba(0,0,0,.22); text-align: center; }
+.reviews-panel .review-card-top { justify-content: center; flex-wrap: wrap; }
+.reviews-panel .review-card-top > div { flex-basis: calc(100% - 3.2rem); text-align: left; }
+.reviews-panel .review-card-top .review-google-logo { position: absolute; top: 1.5rem; right: 1.5rem; }
+.reviews-panel .review-avatar { width: 3.4rem; height: 3.4rem; border: 2px solid #285184; }
+.reviews-panel .review-card .star-row { justify-content: center; margin: 0.8rem 0; }
+.reviews-panel .review-card p { color: #c2cbd6; font-style: italic; text-align: center; }
+.reviews-panel .review-card footer { color: #7d8ca0; text-align: center; }
+.reviews-panel .review-controls { border: 0; padding: 0.5rem 0 0; color: #8c9bad; }
+.reviews-panel .review-controls button { border-color: #3a4553; color: #f8fafc; }
+.reviews-panel .review-controls button:hover { border-color: #4d8fe2; background: #17283c; }
+.review-dots { display: flex; gap: 0.5rem; padding-top: 0.5rem; }
+.review-dots button { width: 1.35rem; height: 0.2rem; padding: 0; border: 0; border-radius: 999px; background: #3a4553; cursor: pointer; transition: width 260ms ease, background-color 260ms ease; }
+.review-dots button.active { width: 2rem; background: #4d8fe2; }
+@media (max-width: 820px) { .reviews-panel .review-controls { max-width: 15rem; } }
+@media (max-width: 820px) { .reviews-panel { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.25rem; } .reviews-panel .review-stage { margin-right: -1.25rem; } }
+@media (max-width: 600px) { .reviews-panel .review-stage .review-card { min-width: calc(100% - 0.25rem); flex-basis: calc(100% - 0.25rem); } }
 .google-mark, .review-card-top, .reviews-score, .star-row { display: flex; align-items: center; }
 .google-logo { width: 1.45rem; height: 1.45rem; }
 .review-google-logo { width: 1.2rem; height: 1.2rem; margin-left: auto; }
