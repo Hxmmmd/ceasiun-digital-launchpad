@@ -162,6 +162,7 @@ export function Footer() {
 
         <div>
           <b>Connect</b>
+          <Link href="/privacy-policy">Privacy Policy</Link>
           <a href={phoneHref(settings.phone)}>
             <Phone /> {settings.phone}
           </a>
