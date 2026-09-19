@@ -161,19 +161,6 @@ export function Footer() {
         </div>
 
         <div>
-          <b>Navigate</b>
-          {nav.map(([n, to]) => (
-            <Link key={to} href={to}>
-              {n}
-            </Link>
-          ))}
-          <Link href="/careers">Careers</Link>
-          <Link href="/contact">
-            Contact
-          </Link>
-        </div>
-
-        <div>
           <b>Connect</b>
           <a href={phoneHref(settings.phone)}>
             <Phone /> {settings.phone}
