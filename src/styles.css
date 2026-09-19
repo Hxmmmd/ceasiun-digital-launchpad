@@ -203,6 +203,15 @@
   }
   :where(.review-controls button) { border-radius: 50% !important; }
   .review-dots button { border-radius: 999px !important; }
+
+/* Apply the same soft corner treatment to every public and admin action control. */
+:where(button, [type="button"], [type="submit"], [type="reset"], a.button, .project-cta, .action-btn, .inq-btn, .text-button, [role="button"]) {
+  border-radius: 0.5rem !important;
+}
+:where(.review-controls button) { border-radius: 50% !important; }
+:where(.review-dots button) { border-radius: 999px !important; }
+:where(.back-link) { border-radius: 0.5rem !important; }
+:where(a[class*="rounded-"], button[class*="rounded-"]) { border-radius: 0.5rem !important; }
   :where(.button, button:not(.unstyled), .project-cta)::after {
   position: absolute;
   inset: 0;
