@@ -16,7 +16,7 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
 
   useEffect(() => {
     if (visible.length < 2) return;
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % visible.length), 5000);
+    const timer = window.setInterval(() => setActive((current) => (current + 1) % visible.length), 6000);
     return () => window.clearInterval(timer);
   }, [visible.length]);
 
@@ -42,9 +42,9 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
       <div className="reviews-carousel-area">
         <div className="reviews-brand"><img src={googleLogo} alt="Google" className="google-logo" /><span>Google reviews</span></div>
         <div className="review-stage" aria-live="polite">
-        <div className="review-track" style={{ transform: `translateX(calc(-${active} * (66.666% + 1rem))` }}>
+        <div className="review-track" style={{ transform: `translate3d(calc(-${active} * (var(--slide-width) + 1rem)), 0, 0)` }}>
           {slides.map((review, index) => (
-            <blockquote className="review-card" key={`${review.id}-${active}-${index}`}>
+            <blockquote className="review-card" key={`${review.id}-${index}`}>
               <div className="review-card-top">
                 <span className="review-avatar">{review.attribution.charAt(0).toUpperCase()}</span>
                 <div><strong>{review.attribution}</strong><span>{review.company}</span></div>

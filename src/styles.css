@@ -740,7 +740,7 @@ html {
 .reviews-brand { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1rem; color: #aab6c5; font-size: 0.82rem; font-weight: 700; }
 .reviews-panel .review-stage { margin: 0 -2rem 0 0; padding: 0.5rem 0 1rem; }
 .reviews-panel .review-track { gap: 1.25rem; }
-.reviews-panel .review-stage .review-card { min-width: calc(50% - 0.625rem); flex-basis: calc(50% - 0.625rem); min-height: 27rem; padding: 1.6rem !important; border-color: #303946; border-radius: 1rem !important; background: #1a2028; box-shadow: 0 20px 38px rgba(0,0,0,.22); text-align: center; }
+.reviews-panel .review-stage .review-card { min-width: calc(84% - 0.25rem); flex-basis: calc(84% - 0.25rem); min-height: 27rem; padding: 1.6rem !important; border-color: #303946; border-radius: 1rem !important; background: #1a2028; box-shadow: 0 20px 38px rgba(0,0,0,.22); text-align: center; }
 .reviews-panel .review-card-top { justify-content: center; flex-wrap: wrap; }
 .reviews-panel .review-card-top > div { flex-basis: calc(100% - 3.2rem); text-align: left; }
 .reviews-panel .review-card-top .review-google-logo { position: absolute; top: 1.5rem; right: 1.5rem; }
@@ -766,10 +766,11 @@ html {
   padding: 0.15rem;
 }
 .review-track {
+  --slide-width: 84%;
   display: flex;
   align-items: stretch;
   gap: 1rem;
-  transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 1400ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 .review-stage .review-card {
@@ -1736,7 +1737,7 @@ blockquote em {
 @media (max-width: 700px) {
   .reviews-summary { align-items: flex-start; flex-direction: column; }
   .review-stage .review-card { min-width: calc(88% - 0.5rem); flex-basis: calc(88% - 0.5rem); }
-  .review-track { gap: 0.75rem; transition-duration: 950ms; }
+  .review-track { --slide-width: 100%; gap: 0.75rem; transition-duration: 1100ms; }
   .reviews-score { width: 100%; justify-content: space-between; }
   .legal-content { grid-template-columns: 1fr; gap: 2rem; }
   .legal-toc { position: static; display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 0.5rem; }
