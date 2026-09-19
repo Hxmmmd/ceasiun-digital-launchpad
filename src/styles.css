@@ -689,10 +689,17 @@ html {
   border-bottom: 1px solid color-mix(in oklab, var(--background) 20%, transparent);
   font-size: 1.1rem;
 }
-.reasons svg {
+  .reasons svg {
+  color: oklch(0.46 0.105 166);
+  }
+  .contrast .eyebrow {
+  color: oklch(0.46 0.105 166);
+  }
+  .dark .contrast .eyebrow,
+  .dark .contrast .reasons svg {
   color: var(--primary);
-}
-.stats {
+  }
+  .stats {
   border-block: 1px solid var(--border);
 }
 .stats-grid {
@@ -2574,7 +2581,7 @@ blockquote em {
   flex-shrink: 0;
 }
 
-/* ════════════════���═════════════════════��══���═════════════════════════
+/* ════════���═══════���═════════════════════��══���═════════════════════════
    ADMIN STATUS PILLS
 ═══════════════════════════════════════════��═══════════════════════ */
 .status-pill {
