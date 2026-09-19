@@ -169,6 +169,31 @@
 }
 
 /* Ceasiun scrollbar system: shared by page, drawer, admin panels, forms, and tables. */
+.route-progress {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  background: color-mix(in oklab, var(--primary) 18%, transparent);
+  transition: opacity 120ms ease;
+}
+.route-progress.is-active { opacity: 1; }
+.route-progress span {
+  display: block;
+  width: 32%;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--primary);
+  box-shadow: 0 0 14px color-mix(in oklab, var(--primary) 80%, transparent);
+  animation: route-progress-sweep 900ms ease-in-out infinite;
+}
+@keyframes route-progress-sweep { from { transform: translateX(-120%); } to { transform: translateX(340%); } }
+
 .route-loading {
   display: grid;
   min-height: 100svh;
@@ -2412,6 +2437,7 @@ blockquote em {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .route-progress span,
   .route-loading-mark,
   .route-loading-bar span { animation: none !important; }
   html {
@@ -2609,9 +2635,9 @@ blockquote em {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ══════════════��════════════════════════════════════════════════════
    CMS EDITOR — 2-column layout for blog/cases, single col for others
-═══════════════════════════════════════════════════════════════════ */
+════════════════════════════���══════════════════════════════════════ */
 .cms-editor {
   background: var(--card);
   border: 1px solid var(--border);
