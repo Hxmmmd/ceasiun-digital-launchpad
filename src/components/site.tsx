@@ -171,10 +171,18 @@ export function Footer() {
 
         <div className="footer-privacy-section">
           <b>Legal</b>
-          <Link href="/privacy-policy" className="footer-privacy-link">
-            <span>Privacy Policy</span>
-            <span aria-hidden="true">Read our policy</span>
-          </Link>
+  <Link href="/privacy-policy" className="footer-privacy-link">
+  <span>Privacy Policy</span>
+  <span aria-hidden="true">Read our policy</span>
+  </Link>
+  <Link href="/terms-and-conditions" className="footer-privacy-link">
+  <span>Terms &amp; Conditions</span>
+  <span aria-hidden="true">Read our terms</span>
+  </Link>
+  <Link href="/disclaimer" className="footer-privacy-link">
+  <span>Disclaimer</span>
+  <span aria-hidden="true">Read our disclaimer</span>
+  </Link>
         </div>
 
         <div className="footer-connect-section">

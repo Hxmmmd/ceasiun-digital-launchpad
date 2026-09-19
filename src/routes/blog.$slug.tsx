@@ -125,6 +125,11 @@ export default function BlogPostPage({ slug }: { slug: string }) {
             style={{ width: "100%", borderRadius: "8px" }}
           />
         )}
+        {(() => {
+          const media = (post as typeof post & { media_urls?: string | string[] }).media_urls;
+          const urls = Array.isArray(media) ? media : media?.split("\\n").map((url) => url.trim()).filter(Boolean) ?? [];
+          return urls.map((url, index) => <img key={`${url}-${index}`} src={url} alt={`${post.title} illustration ${index + 1}`} className="article-media" />);
+        })()}
 
         <RenderProseContent body={post.body} />
       </article>
