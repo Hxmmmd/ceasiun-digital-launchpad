@@ -169,6 +169,8 @@
 }
 
 /* Ceasiun scrollbar system: shared by page, drawer, admin panels, forms, and tables. */
+.project-cta { border-radius: 0.7rem !important; }
+
 .route-progress {
   position: fixed;
   z-index: 1000;

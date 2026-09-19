@@ -22,8 +22,8 @@ export default function HomePage() {
           <p className="eyebrow">{cms.home.heroEyebrow}</p>
           <h1>{cms.home.heroTitle}</h1>
           <p>{cms.home.heroCopy}</p>
-          <Button asChild size="lg">
-            <Link  href="/contact">
+<Button asChild size="lg" className="project-cta">
+          <Link  href="/contact">
               {cms.home.heroCta} <ArrowRight />
             </Link>
           </Button>

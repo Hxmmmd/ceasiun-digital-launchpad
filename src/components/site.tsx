@@ -86,7 +86,7 @@ export function Header() {
         </nav>
 
         <div className="nav-actions">
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="project-cta">
             <Link href="/contact">
               {settings.headerCta} <ArrowUpRight />
             </Link>
@@ -133,8 +133,8 @@ export function Header() {
           </div>
 
           <div className="mobile-nav-footer">
-            <Button asChild size="lg" className="w-full text-black font-bold">
-              <Link href="/contact" onClick={closeMenu}>
+<Button asChild size="lg" className="project-cta w-full text-black font-bold">
+          <Link href="/contact" onClick={closeMenu}>
                 {settings.headerCta} <ArrowUpRight className="text-black" />
               </Link>
             </Button>
