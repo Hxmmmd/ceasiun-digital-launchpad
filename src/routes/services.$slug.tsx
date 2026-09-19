@@ -93,7 +93,6 @@ export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
           <Link  href="/services" className="back-link">
             <ArrowLeft /> All Services
           </Link>
-          <span className="service-badge">Practice 0{currentIndex + 1} of 0{services.length}</span>
         </div>
 
         <div className="service-hero-main">

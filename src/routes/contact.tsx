@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { CheckCircle2, Facebook, Instagram, Linkedin, MessageCircle, Phone, Twitter, Youtube } from "lucide-react";
+import { CheckCircle2, Facebook, Gamepad2, Instagram, Linkedin, MessageCircle, Music2, Phone, Twitter, Youtube } from "lucide-react";
 import { Layout, PageIntro, SectionHead, meta } from "@/components/site";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -141,17 +141,13 @@ export default function ContactPage() {
               <Youtube /> YouTube
             </a>
             <a href={cms.settings.tiktok} target="_blank" rel="noreferrer">
-              <span className="social-text-icon">TikTok:</span> ceasiun
+              <Music2 aria-hidden="true" /> TikTok
             </a>
             <a href={cms.settings.discord} target="_blank" rel="noreferrer">
-              <span className="social-text-icon">Discord:</span> Join Community
+              <Gamepad2 aria-hidden="true" /> Discord Join Community
             </a>
           </div>
 
-          <div className="payment-info" style={{ marginTop: "1.5rem" }}>
-            <p className="eyebrow">{cms.contact.paymentEyebrow}</p>
-            <p>{cms.contact.paymentCopy}</p>
-          </div>
         </aside>
       </section>
 
