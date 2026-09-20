@@ -1421,6 +1421,8 @@ blockquote em {
 .quote-upload label { display: grid; gap: 0.25rem; }
 .quote-upload small { color: var(--muted-foreground); }
 .quote-upload input { font-size: 0.75rem; }
+.quote-errors { display: grid; gap: 0.35rem; padding: 0.75rem 0; color: #ff8f8f; font-size: 0.82rem; }
+.quote-errors p { margin: 0; }
 .quote-actions { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
 .quote-actions button { display: inline-flex; align-items: center; gap: 0.55rem; min-height: 48px; padding: 0.8rem 1rem; border: 1px solid var(--border); border-radius: 0.5rem; background: transparent; color: var(--foreground); cursor: pointer; }
 .quote-actions .quote-next { margin-left: auto; border-color: var(--primary); background: var(--primary); color: var(--background); }
