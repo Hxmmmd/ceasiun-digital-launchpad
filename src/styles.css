@@ -1428,6 +1428,8 @@ blockquote em {
   .quote-chip-grid button:hover, .quote-chip-grid button.selected { border-color: oklch(0.62 0.12 178); background: color-mix(in oklab, oklch(0.62 0.12 178) 12%, var(--card)); box-shadow: 0 8px 20px color-mix(in oklab, oklch(0.62 0.12 178) 20%, transparent); }
 .quote-field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .quote-field-grid label, .quote-step > label { display: grid; gap: 0.45rem; color: var(--muted-foreground); font-size: 0.85rem; }
+.quote-field-grid .phone-field > span { display: inline-flex; align-items: baseline; gap: 0.3rem; }
+.quote-field-grid .phone-field small { color: var(--muted-foreground); font-size: 0.78em; }
 .quote-field-grid input, .quote-field-grid select, .quote-step > label select { min-height: 48px; width: 100%; }
 .quote-upload { display: flex; align-items: center; gap: 0.8rem; padding: 1rem; border: 1px dashed var(--border); color: var(--muted-foreground); }
 .quote-upload > svg { color: var(--primary); }
@@ -3107,7 +3109,7 @@ blockquote em {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════���══════════════════
    ADMIN ALERT BANNER
 ═══════════════��═════════════��════════════════════════════�����════════ */
 .admin-alert-banner {
