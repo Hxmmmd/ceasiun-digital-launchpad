@@ -723,24 +723,68 @@ html {
   color: var(--primary);
   }
   .stats {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.25rem, 3vw, 2rem) 0;
   border-block: 1px solid var(--border);
+  background: linear-gradient(135deg, color-mix(in oklab, var(--card) 72%, transparent), transparent 62%);
+}
+.stats::before {
+  content: "PROOF IN NUMBERS";
+  display: block;
+  width: min(100% - 2rem, 1240px);
+  margin: 0 auto clamp(1rem, 3vw, 2rem);
+  color: var(--primary);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
 }
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
 }
 .stats-grid div {
-  padding: 3rem 1rem;
-  border-right: 1px solid var(--border);
+  position: relative;
+  min-height: 9rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: color-mix(in oklab, var(--background) 78%, transparent);
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+.stats-grid div::after {
+  content: "";
+  position: absolute;
+  right: -1.5rem;
+  bottom: -2rem;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, transparent);
+  border-radius: 50%;
+}
+.stats-grid div:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--primary) 62%, var(--border));
+  background: color-mix(in oklab, var(--primary) 8%, var(--background));
 }
 .stats-grid strong {
   display: block;
-  font: 600 clamp(2.8rem, 6vw, 5rem)/1 var(--font-display);
+  margin-bottom: 0.65rem;
+  font: 600 clamp(2.4rem, 5vw, 4.5rem)/0.95 var(--font-display);
   color: var(--primary);
+  letter-spacing: -0.06em;
 }
 .stats-grid span {
+  display: block;
+  max-width: 10rem;
   color: var(--muted-foreground);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
 }
 .reviews-panel {
   display: grid;
@@ -1836,8 +1880,9 @@ blockquote em {
     grid-template-columns: 1.3fr 0.7fr;
   }
   .stats-grid {
-    grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   }
+  .stats-grid div { min-height: 10rem; }
   .quote-grid,
   .mini-grid,
   .post-grid,
@@ -2074,6 +2119,12 @@ blockquote em {
   grid-template-columns: 1fr;
 }
 @media (max-width: 700px) {
+  .stats { padding-inline: 0; }
+  .stats::before { width: min(100% - 1.25rem, 1240px); }
+  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
+  .stats-grid div { min-height: 8.5rem; padding: 1rem; }
+  .stats-grid strong { font-size: clamp(2rem, 10vw, 3.2rem); }
+  .stats-grid span { font-size: 0.68rem; }
   .reviews-summary { align-items: flex-start; flex-direction: column; }
   .review-stage .review-card { min-width: calc(88% - 0.5rem); flex-basis: calc(88% - 0.5rem); }
   .review-track { --slide-width: 100%; gap: 0.75rem; transition-duration: 1100ms; }
