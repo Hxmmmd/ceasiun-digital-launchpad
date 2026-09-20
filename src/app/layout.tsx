@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   openGraph: { title: "Ceasiun — Digital Growth Partner", description: "Digital solutions and support for business growth.", type: "website" },
   twitter: { card: "summary_large_image", site: "@ceasiun" },
   icons: { icon: "/favicon.png" },
+  verification: {
+    google: "3Be8a7HHWWiGPIsTK8ZHSaGTTzbxnIgEt5KkeBy-H1A",
+  },
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#08090b" };
