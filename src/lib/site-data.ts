@@ -304,7 +304,7 @@ export const nav = [
   ["Home", "/"],
   ["Services", "/services"],
   ["Work", "/work"],
-  ["Process", "/process"],
+  ["Products", "/products"],
   ["About", "/about"],
   ["Blog", "/blog"],
 ] as const;
