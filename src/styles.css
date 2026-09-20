@@ -1405,6 +1405,12 @@ blockquote em {
 .quote-step h2 { max-width: 16ch; margin: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 0.98; }
 .quote-helper { max-width: 45rem; color: var(--muted-foreground); line-height: 1.65; }
 .quote-options { display: grid; gap: 0.75rem; }
+.service-subservice-sections { display: grid; gap: 1.25rem; }
+.service-subservice-section { display: grid; gap: 1rem; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--border); border-radius: 0.75rem; background: color-mix(in oklab, var(--card) 72%, transparent); }
+.service-subservice-heading { display: grid; gap: 0.35rem; padding-bottom: 0.9rem; border-bottom: 1px solid var(--border); }
+.service-subservice-kicker { color: var(--primary); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.service-subservice-heading h3 { margin: 0; font: 600 clamp(1.4rem, 3vw, 2rem)/1 var(--font-display); }
+.service-subservice-heading p { max-width: 48ch; margin: 0; color: var(--muted-foreground); line-height: 1.5; }
 .service-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .quote-options button { position: relative; display: flex; align-items: center; gap: 0.8rem; min-height: 4.2rem; padding: 1rem; border: 1px solid var(--border); border-radius: 0.55rem; background: var(--card); color: var(--foreground); text-align: left; cursor: pointer; transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; }
 .quote-options button:hover, .quote-options button.selected { border-color: var(--primary); background: color-mix(in oklab, var(--primary) 9%, var(--card)); transform: translateY(-2px); }
