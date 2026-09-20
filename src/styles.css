@@ -1418,7 +1418,7 @@ blockquote em {
 .quote-options button span { display: grid; gap: 0.25rem; }
 .quote-options button small { color: var(--muted-foreground); line-height: 1.35; }
 .quote-chip-grid { display: flex; flex-wrap: wrap; gap: 0.65rem; }
-  .quote-chip-grid button { width: auto; min-height: auto; padding: 0.8rem 1rem; border: 1px solid color-mix(in oklab, var(--border) 72%, var(--muted-foreground)); }
+  .quote-chip-grid button { width: auto; min-height: auto; padding: 0.8rem 1rem; border: 1.5px solid color-mix(in oklab, var(--border) 38%, var(--foreground)); }
 .quote-field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .quote-field-grid label, .quote-step > label { display: grid; gap: 0.45rem; color: var(--muted-foreground); font-size: 0.85rem; }
 .quote-field-grid input, .quote-field-grid select, .quote-step > label select { min-height: 48px; width: 100%; }
