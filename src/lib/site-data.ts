@@ -248,10 +248,11 @@ export const services = [
     description:
       "Scale your engineering, QA, and cloud infrastructure operations with Ceasiun's dedicated technical team. Get senior-level expertise on a flexible monthly contract basis.",
     items: [
-      "Managed DevOps Engineering",
+      "DevOps Managed Services",
+      "Marketing Managed Services",
+      "System Administration Managed Services",
+      "Network Administration Managed Services",
       "Managed QA & Automated Testing",
-      "Managed System Administration",
-      "Managed Network & Cloud Infrastructure",
       "Technical Advisory & Architecture",
     ],
     highlights: [

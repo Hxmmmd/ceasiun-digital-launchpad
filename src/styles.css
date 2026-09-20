@@ -723,24 +723,68 @@ html {
   color: var(--primary);
   }
   .stats {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.25rem, 3vw, 2rem) 0;
   border-block: 1px solid var(--border);
+  background: linear-gradient(135deg, color-mix(in oklab, var(--card) 72%, transparent), transparent 62%);
+}
+.stats::before {
+  content: "PROOF IN NUMBERS";
+  display: block;
+  width: min(100% - 2rem, 1240px);
+  margin: 0 auto clamp(1rem, 3vw, 2rem);
+  color: var(--primary);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
 }
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
 }
 .stats-grid div {
-  padding: 3rem 1rem;
-  border-right: 1px solid var(--border);
+  position: relative;
+  min-height: 9rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: color-mix(in oklab, var(--background) 78%, transparent);
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+.stats-grid div::after {
+  content: "";
+  position: absolute;
+  right: -1.5rem;
+  bottom: -2rem;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, transparent);
+  border-radius: 50%;
+}
+.stats-grid div:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--primary) 62%, var(--border));
+  background: color-mix(in oklab, var(--primary) 8%, var(--background));
 }
 .stats-grid strong {
   display: block;
-  font: 600 clamp(2.8rem, 6vw, 5rem)/1 var(--font-display);
+  margin-bottom: 0.65rem;
+  font: 600 clamp(2.4rem, 5vw, 4.5rem)/0.95 var(--font-display);
   color: var(--primary);
+  letter-spacing: -0.06em;
 }
 .stats-grid span {
+  display: block;
+  max-width: 10rem;
   color: var(--muted-foreground);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
 }
 .reviews-panel {
   display: grid;
@@ -1348,6 +1392,62 @@ blockquote em {
   color: var(--muted-foreground);
   line-height: 1.7;
 }
+.quote-intake { display: grid; gap: 2rem; }
+.quote-progress { display: grid; gap: 0.85rem; }
+.quote-progress-track { height: 3px; overflow: hidden; background: var(--border); }
+.quote-progress-track span { display: block; height: 100%; background: var(--primary); transition: width 250ms ease; }
+.quote-progress-steps { display: flex; gap: 0.7rem; overflow-x: auto; scrollbar-width: thin; }
+.quote-progress-steps span { display: grid; gap: 0.2rem; min-width: max-content; color: var(--muted-foreground); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.quote-progress-steps span.active { color: var(--primary); }
+.quote-progress-steps b { font-size: 0.62rem; }
+.quote-step { display: grid; gap: 1rem; animation: quote-step-in 220ms ease both; }
+@keyframes quote-step-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.quote-step h2 { max-width: 16ch; margin: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 0.98; }
+.quote-helper { max-width: 45rem; color: var(--muted-foreground); line-height: 1.65; }
+.quote-options { display: grid; gap: 0.75rem; }
+.service-subservice-sections { display: grid; gap: 1.25rem; }
+.service-subservice-section { display: grid; gap: 1rem; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--border); border-radius: 0.75rem; background: color-mix(in oklab, var(--card) 72%, transparent); }
+.service-subservice-heading { display: grid; gap: 0.35rem; padding-bottom: 0.9rem; border-bottom: 1px solid var(--border); }
+.service-subservice-kicker { color: var(--primary); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.service-subservice-heading h3 { margin: 0; font: 600 clamp(1.4rem, 3vw, 2rem)/1 var(--font-display); }
+.service-subservice-heading p { max-width: 48ch; margin: 0; color: var(--muted-foreground); line-height: 1.5; }
+.service-goal-group { display: grid; gap: 0.65rem; padding-top: 0.25rem; }
+.service-goal-group h4 { margin: 0; font-size: 1.05rem; color: var(--foreground); }
+.service-goal-group p { margin: 0; color: var(--muted-foreground); font-size: 0.88rem; line-height: 1.5; }
+.service-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+ .quote-options button { --quote-cyan: oklch(0.62 0.12 178); position: relative; display: flex; align-items: center; gap: 0.8rem; min-height: 4.2rem; padding: 1rem; border: 1px solid var(--border); border-radius: 0.55rem; background: var(--card); color: var(--foreground); text-align: left; cursor: pointer; transition: border-color 180ms ease, background 180ms ease, transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease; }
+ .quote-options button:not(:hover):not(.selected) { opacity: 1; }
+ .quote-options button:hover, .quote-options button.selected { border-color: var(--quote-cyan); background: color-mix(in oklab, var(--quote-cyan) 12%, var(--card)); box-shadow: 0 10px 24px color-mix(in oklab, var(--quote-cyan) 20%, transparent); transform: translateY(-3px); opacity: 1; }
+ .quote-options button:focus-visible { outline: 2px solid var(--quote-cyan); outline-offset: 3px; opacity: 1; }
+ .quote-options button svg { flex: 0 0 auto; width: 1.25rem; color: var(--quote-cyan); }
+.quote-options button span { display: grid; gap: 0.25rem; }
+.quote-options button small { color: var(--muted-foreground); line-height: 1.35; }
+.quote-chip-grid { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+  .quote-chip-grid button { width: auto; min-height: auto; padding: 0.8rem 1rem; border: 1.5px solid color-mix(in oklab, var(--border) 38%, var(--foreground)); }
+  .quote-chip-grid button:not(:hover):not(.selected) { opacity: 1; }
+  .quote-chip-grid button:hover, .quote-chip-grid button.selected { border-color: oklch(0.62 0.12 178); background: color-mix(in oklab, oklch(0.62 0.12 178) 12%, var(--card)); box-shadow: 0 8px 20px color-mix(in oklab, oklch(0.62 0.12 178) 20%, transparent); }
+.quote-field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.quote-field-grid label, .quote-step > label { display: grid; gap: 0.45rem; color: var(--muted-foreground); font-size: 0.85rem; }
+.quote-field-grid .phone-field > span { display: inline-flex; align-items: baseline; gap: 0.3rem; }
+.quote-field-grid .phone-field small { color: var(--muted-foreground); font-size: 0.78em; }
+.quote-field-grid input, .quote-field-grid select, .quote-step > label select { min-height: 48px; width: 100%; }
+.quote-upload { display: flex; align-items: center; gap: 0.8rem; padding: 1rem; border: 1px dashed var(--border); color: var(--muted-foreground); }
+.quote-upload > svg { color: var(--primary); }
+.quote-upload label { display: grid; gap: 0.25rem; }
+.quote-upload small { color: var(--muted-foreground); }
+.quote-upload input { font-size: 0.75rem; }
+.quote-errors { display: grid; gap: 0.35rem; padding: 0.75rem 0; color: #ff8f8f; font-size: 0.82rem; }
+.quote-errors p { margin: 0; }
+.quote-actions { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.quote-actions button { display: inline-flex; align-items: center; gap: 0.55rem; min-height: 48px; padding: 0.8rem 1rem; border: 1px solid var(--border); border-radius: 0.5rem; background: transparent; color: var(--foreground); cursor: pointer; }
+.quote-actions .quote-next { margin-left: auto; border-color: var(--primary); background: var(--primary); color: var(--background); }
+.quote-actions button:disabled { cursor: not-allowed; opacity: 0.4; }
+.quote-review { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+.quote-review div { display: grid; gap: 0.45rem; padding: 1rem; border: 1px solid var(--border); border-radius: 0.5rem; }
+.quote-review .full { grid-column: 1 / -1; }
+.quote-review span { color: var(--primary); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.quote-review strong { line-height: 1.55; }
+@media (max-width: 700px) { .service-options, .quote-field-grid, .quote-review { grid-template-columns: 1fr; } .quote-review .full { grid-column: auto; } .quote-step h2 { font-size: clamp(2rem, 10vw, 3.2rem); } .quote-actions { position: sticky; bottom: 0; z-index: 2; margin-inline: -0.75rem; padding: 0.75rem; background: color-mix(in oklab, var(--background) 92%, transparent); backdrop-filter: blur(12px); } }
 .form-success {
   padding: 3rem;
   border: 1px solid var(--primary);
@@ -1836,8 +1936,9 @@ blockquote em {
     grid-template-columns: 1.3fr 0.7fr;
   }
   .stats-grid {
-    grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   }
+  .stats-grid div { min-height: 10rem; }
   .quote-grid,
   .mini-grid,
   .post-grid,
@@ -2074,6 +2175,12 @@ blockquote em {
   grid-template-columns: 1fr;
 }
 @media (max-width: 700px) {
+  .stats { padding-inline: 0; }
+  .stats::before { width: min(100% - 1.25rem, 1240px); }
+  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
+  .stats-grid div { min-height: 8.5rem; padding: 1rem; }
+  .stats-grid strong { font-size: clamp(2rem, 10vw, 3.2rem); }
+  .stats-grid span { font-size: 0.68rem; }
   .reviews-summary { align-items: flex-start; flex-direction: column; }
   .review-stage .review-card { min-width: calc(88% - 0.5rem); flex-basis: calc(88% - 0.5rem); }
   .review-track { --slide-width: 100%; gap: 0.75rem; transition-duration: 1100ms; }
@@ -3002,9 +3109,9 @@ blockquote em {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════���══════════════════
    ADMIN ALERT BANNER
-═══════════════��═════════════��═════════════════════════════════════ */
+═══════════════��═════════════��════════════════════════════�����════════ */
 .admin-alert-banner {
   display: flex;
   align-items: center;
@@ -3071,7 +3178,7 @@ blockquote em {
 
 /* ════════════════════════════════════════��══════════════════════════
    CMS LIST VIEW — shared between Blog, Cases, Testimonials, Careers
-══════��═══════════════��════════════════════════════════════════════ */
+══════��═══════════════�����═══════════════════════════════════════════ */
 .cms-list-view {
   display: flex;
   flex-direction: column;
