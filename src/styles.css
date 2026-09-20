@@ -1412,13 +1412,17 @@ blockquote em {
 .service-subservice-heading h3 { margin: 0; font: 600 clamp(1.4rem, 3vw, 2rem)/1 var(--font-display); }
 .service-subservice-heading p { max-width: 48ch; margin: 0; color: var(--muted-foreground); line-height: 1.5; }
 .service-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.quote-options button { position: relative; display: flex; align-items: center; gap: 0.8rem; min-height: 4.2rem; padding: 1rem; border: 1px solid var(--border); border-radius: 0.55rem; background: var(--card); color: var(--foreground); text-align: left; cursor: pointer; transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; }
-.quote-options button:hover, .quote-options button.selected { border-color: var(--primary); background: color-mix(in oklab, var(--primary) 9%, var(--card)); transform: translateY(-2px); }
+ .quote-options button { position: relative; display: flex; align-items: center; gap: 0.8rem; min-height: 4.2rem; padding: 1rem; border: 1px solid var(--border); border-radius: 0.55rem; background: var(--card); color: var(--foreground); text-align: left; cursor: pointer; transition: border-color 180ms ease, background 180ms ease, transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease; }
+ .quote-options button:not(:hover):not(.selected) { opacity: 0.62; }
+ .quote-options button:hover, .quote-options button.selected { border-color: var(--primary); background: color-mix(in oklab, var(--primary) 9%, var(--card)); box-shadow: 0 10px 24px color-mix(in oklab, var(--primary) 16%, transparent); transform: translateY(-3px); opacity: 1; }
+ .quote-options button:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; opacity: 1; }
 .quote-options button svg { flex: 0 0 auto; width: 1.25rem; color: var(--primary); }
 .quote-options button span { display: grid; gap: 0.25rem; }
 .quote-options button small { color: var(--muted-foreground); line-height: 1.35; }
 .quote-chip-grid { display: flex; flex-wrap: wrap; gap: 0.65rem; }
   .quote-chip-grid button { width: auto; min-height: auto; padding: 0.8rem 1rem; border: 1.5px solid color-mix(in oklab, var(--border) 38%, var(--foreground)); }
+  .quote-chip-grid button:not(:hover):not(.selected) { opacity: 0.58; }
+  .quote-chip-grid button:hover, .quote-chip-grid button.selected { box-shadow: 0 8px 20px color-mix(in oklab, var(--primary) 15%, transparent); }
 .quote-field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .quote-field-grid label, .quote-step > label { display: grid; gap: 0.45rem; color: var(--muted-foreground); font-size: 0.85rem; }
 .quote-field-grid input, .quote-field-grid select, .quote-step > label select { min-height: 48px; width: 100%; }
