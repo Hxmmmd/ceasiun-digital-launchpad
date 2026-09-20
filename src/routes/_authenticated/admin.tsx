@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import {
   ArrowLeft,
   Bell,
+  Boxes,
   Briefcase,
   CheckCircle2,
   ChevronRight,
@@ -37,6 +38,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { AdminPagesEditor } from "@/components/admin-pages-editor";
+import { ProductsAdmin } from "@/components/products-admin";
 import { notifyCmsListeners } from "@/lib/cms";
 import { services } from "@/lib/site-data";
 
@@ -47,6 +49,7 @@ type MainTab =
   | "services"
   | "blog_posts"
   | "case_studies"
+  | "products"
   | "testimonials"
   | "career_openings"
   | "pages"
@@ -621,6 +624,7 @@ export default function AdminDashboard() {
     services: "Services",
     blog_posts: "Blog Articles",
     case_studies: "Case Studies",
+    products: "Products",
     testimonials: "Testimonials",
     career_openings: "Careers",
     pages: "Pages & Preview",
@@ -682,7 +686,7 @@ export default function AdminDashboard() {
           ))}
 
           <p className="admin-nav-group">Content Management</p>
-          {(["blog_posts", "case_studies", "testimonials", "career_openings"] as MainTab[]).map((tab) => (
+          {(["blog_posts", "case_studies", "products", "testimonials", "career_openings"] as MainTab[]).map((tab) => (
             <button
               key={tab}
               className={activeTab === tab ? "selected" : ""}
@@ -697,6 +701,7 @@ export default function AdminDashboard() {
             >
               {tab === "blog_posts" && <FileText />}
               {tab === "case_studies" && <FolderKanban />}
+              {tab === "products" && <Boxes />}
               {tab === "testimonials" && <MessageSquareQuote />}
               {tab === "career_openings" && <Users />}
               {tabLabel[tab]}
@@ -1224,6 +1229,8 @@ export default function AdminDashboard() {
             )}
           </div>
         )}
+
+        {activeTab === "products" && <ProductsAdmin />}
 
         {/* ══════════════════════════════════════════════════════════════════
             TAB 6: TESTIMONIALS — Full CRUD

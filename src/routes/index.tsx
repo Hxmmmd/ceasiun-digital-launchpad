@@ -53,6 +53,14 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section shell home-process">
+        <SectionHead eyebrow={cms.process.eyebrow} title={cms.process.title} copy={cms.process.copy} />
+        <div className="timeline home-process-grid">
+          {cms.process.steps.slice(0, 4).map((step, index) => <article key={step.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{step.title}</h3><p>{step.description}</p></article>)}
+        </div>
+        <Link href="/contact" className="text-link">Start with a clear plan <ArrowRight /></Link>
+      </section>
+
       <section className="contrast section">
         <div className="shell split">
           <div>
