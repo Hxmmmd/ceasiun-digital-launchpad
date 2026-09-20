@@ -55,9 +55,23 @@ export default function HomePage() {
 
       <section className="section shell home-process">
         <SectionHead eyebrow={cms.process.eyebrow} title={cms.process.title} copy={cms.process.copy} />
-        <div className="timeline home-process-grid">
-          {cms.process.steps.slice(0, 4).map((step, index) => <article key={step.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{step.title}</h3><p>{step.description}</p></article>)}
+        <div className="home-process-list">
+          {cms.process.steps.map((step, index) => (
+            <article key={step.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </article>
+          ))}
         </div>
+        <section className="engagement-models">
+          <div className="engagement-heading"><h2>{cms.process.engagementTitle}</h2></div>
+          <div className="engagement-grid">
+            <article><h3>{cms.process.projectLabel}</h3><p>{cms.process.projectCopy.replaceAll("->", "→")}</p></article>
+            <article><h3>{cms.process.retainerLabel}</h3><p>{cms.process.retainerCopy.replaceAll("->", "→")}</p></article>
+          </div>
+          <p className="payment-note">{cms.process.payment}</p>
+        </section>
         <Link href="/contact" className="text-link">Start with a clear plan <ArrowRight /></Link>
       </section>
 
