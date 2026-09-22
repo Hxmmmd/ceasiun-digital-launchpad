@@ -55,8 +55,13 @@ export default function HomePage() {
 
       <section className="section shell home-process">
         <SectionHead eyebrow={cms.process.eyebrow} title={cms.process.title} copy={cms.process.copy} />
-        <div className="timeline home-process-grid">
-          {cms.process.steps.slice(0, 4).map((step, index) => <article key={step.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{step.title}</h3><p>{step.description}</p></article>)}
+        <div className="home-process-grid">
+          {cms.process.steps.slice(0, 4).map((step, index) => (
+            <article className="process-card" key={step.title}>
+              <div className="process-card-head"><span>{String(index + 1).padStart(2, "0")}</span><h3>{step.title}</h3></div>
+              <p>{step.description}</p>
+            </article>
+          ))}
         </div>
         <Link href="/contact" className="text-link">Start with a clear plan <ArrowRight /></Link>
       </section>
