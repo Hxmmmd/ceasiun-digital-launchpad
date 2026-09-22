@@ -95,6 +95,7 @@ const mobileNavIcons = {
         </nav>
 
         <div className="nav-actions">
+          <Link href="/auth" className="header-login">Login</Link>
           <Button asChild size="lg" className="project-cta">
             <Link href="/contact">
               {settings.headerCta} <ArrowUpRight />
@@ -187,31 +188,31 @@ export function Footer() {
 
         <div className="footer-connect-section">
           <b>Connect</b>
-          <a href={phoneHref(settings.phone)}>
+          <a className="footer-connect-link" href={phoneHref(settings.phone)}>
             <Phone /> {settings.phone}
           </a>
-          <a href={whatsappHref(settings.whatsapp)} target="_blank" rel="noreferrer">
+          <a className="footer-connect-link" href={whatsappHref(settings.whatsapp)} target="_blank" rel="noreferrer">
             <MessageCircle /> WhatsApp
           </a>
-          <a href={settings.linkedin} target="_blank" rel="noreferrer">
+          <a className="footer-connect-link" href={settings.linkedin} target="_blank" rel="noreferrer">
             <Linkedin /> LinkedIn
           </a>
-          <a href={settings.instagram} target="_blank" rel="noreferrer">
+          <a className="footer-connect-link" href={settings.instagram} target="_blank" rel="noreferrer">
             <Instagram /> Instagram
           </a>
-          <a href={settings.facebook} target="_blank" rel="noreferrer">
+          <a className="footer-connect-link" href={settings.facebook} target="_blank" rel="noreferrer">
             <Facebook /> Facebook
           </a>
-          <a href={settings.x} target="_blank" rel="noreferrer">
+          <a className="footer-connect-link" href={settings.x} target="_blank" rel="noreferrer">
             <Twitter /> X (Twitter)
           </a>
-          <a href={settings.youtube} target="_blank" rel="noreferrer">
+          <a className="footer-connect-link" href={settings.youtube} target="_blank" rel="noreferrer">
             <Youtube /> YouTube
           </a>
-          <a href={settings.tiktok} target="_blank" rel="noreferrer">
+          <a className="footer-connect-link" href={settings.tiktok} target="_blank" rel="noreferrer">
             <Music2 aria-hidden="true" /> TikTok
           </a>
-          <a href={settings.discord} target="_blank" rel="noreferrer">
+          <a className="footer-connect-link" href={settings.discord} target="_blank" rel="noreferrer">
             <Gamepad2 aria-hidden="true" /> Discord Join Community
           </a>
         </div>

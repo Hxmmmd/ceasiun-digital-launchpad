@@ -36,6 +36,11 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="section shell location-section">
+        <div><p className="eyebrow">Find Ceasiun</p><h2>Let&apos;s make the next move practical.</h2><p className="muted-note">Visit our Google Business location or get directions for a conversation.</p><a className="premium-button button" href="https://share.google/naFgKU46P5H4EYIJw" target="_blank" rel="noreferrer">Open in Google Maps</a></div>
+        <iframe className="location-map" title="Ceasiun location on Google Maps" src="https://www.google.com/maps?q=https://share.google/naFgKU46P5H4EYIJw&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+      </section>
+
       <CTA />
     </Layout>
   );
