@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Layout, meta } from "@/components/site";
 import { usePost } from "@/components/public-content";
+import { BlogSidebar } from "@/components/blog-sidebar";
 
 function RenderProseContent({ body }: { body: string }) {
   if (!body) return null;
@@ -131,7 +132,10 @@ export default function BlogPostPage({ slug }: { slug: string }) {
           return urls.map((url, index) => <img key={`${url}-${index}`} src={url} alt={`${post.title} illustration ${index + 1}`} className="article-media" />);
         })()}
 
-        <RenderProseContent body={post.body} />
+        <div className="blog-reading-layout">
+          <BlogSidebar headings={post.body.split("\n").filter((line) => line.trim().startsWith("## ")).map((line) => line.trim().slice(3))} />
+          <div className="blog-reading-content"><RenderProseContent body={post.body} /></div>
+        </div>
       </article>
     </Layout>
   );

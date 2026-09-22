@@ -6,6 +6,7 @@ import { usePublishedPosts } from "@/components/public-content";
 import { Layout, PageIntro, meta } from "@/components/site";
 import { Input } from "@/components/ui/input";
 import { useCms } from "@/hooks/use-cms";
+import { BlogSidebar } from "@/components/blog-sidebar";
 
 export default function BlogListingPage() {
   const { blog } = useCms();
@@ -33,7 +34,9 @@ export default function BlogListingPage() {
         copy={blog.copy}
       />
 
-      <section className="section shell">
+      <section className="section shell blog-page-layout">
+        <BlogSidebar headings={["Search insights", "Browse categories", "Latest articles"]} />
+        <div>
         {/* Search & Category Filter Tools */}
         <div className="blog-tools">
           <label>
@@ -87,6 +90,7 @@ export default function BlogListingPage() {
             <p>The Ceasiun team is currently preparing initial articles and guides.</p>
           </div>
         )}
+        </div>
       </section>
     </Layout>
   );

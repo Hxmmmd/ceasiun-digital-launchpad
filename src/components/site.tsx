@@ -95,6 +95,7 @@ const mobileNavIcons = {
         </nav>
 
         <div className="nav-actions">
+          <Link href="/auth" className="header-login">Login</Link>
           <Button asChild size="lg" className="project-cta">
             <Link href="/contact">
               {settings.headerCta} <ArrowUpRight />

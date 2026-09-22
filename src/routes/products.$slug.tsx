@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { CTA, Layout, PageIntro } from "@/components/site";
+import { Button } from "@/components/ui/button";
 import { defaultProducts, readProducts, type Product } from "@/lib/products";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -19,7 +20,7 @@ export default function ProductDetailPage() {
     <Layout>
       <PageIntro eyebrow={product.industry} title={product.name} copy={product.summary} />
       <section className="section shell product-detail">
-        <Link href="/products" className="text-link"><ArrowLeft /> Back to products</Link>
+        <Button asChild variant="outline" className="premium-button"><Link href="/products"><ArrowLeft /> Back to products</Link></Button>
         <div className="product-detail-copy"><p>{product.description}</p><div className="product-capabilities">{product.capabilities.map((capability) => <span key={capability}>{capability}</span>)}</div></div>
       </section>
       <CTA />

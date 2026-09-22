@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { CTA, Layout, PageIntro } from "@/components/site";
+import { Button } from "@/components/ui/button";
 import { readProducts, type Product } from "@/lib/products";
 import { useEffect, useState } from "react";
 
@@ -23,7 +23,7 @@ export default function ProductsPage() {
             <div className="product-capabilities">
               {product.capabilities.map((capability) => <span key={capability}>{capability}</span>)}
             </div>
-            <Link href={`/products/${product.slug}`} className="text-link">Explore product <ArrowRight /></Link>
+            <Button asChild variant="outline" className="premium-button"><Link href={`/products/${product.slug}`}>Explore product</Link></Button>
           </article>
         ))}
       </section>
