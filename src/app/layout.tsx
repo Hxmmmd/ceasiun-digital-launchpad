@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Manrope, Space_Grotesk } from "next/font/google";
 import "../styles.css";
 import { RouteProgress } from "@/components/route-progress";
+import { ScrollReveal } from "@/components/scroll-reveal";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={`${manrope.variable} ${spaceGrotesk.variable}`}>
       <body>
         <RouteProgress />
+        <ScrollReveal />
         {children}
       </body>
     </html>

@@ -227,10 +227,11 @@ export function Footer() {
 }
 
 export function Layout({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main key={pathname} className="route-view">{children}</main>
       <Footer />
     </>
   );
