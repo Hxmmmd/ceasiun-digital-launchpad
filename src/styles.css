@@ -1690,20 +1690,15 @@ blockquote em {
   gap: 0.5rem;
   }
   .footer-connect-link {
-  width: fit-content;
-  padding: 0.35rem 0.55rem 0.35rem 0.35rem;
-  border-radius: 0.45rem;
-  transition: color 180ms ease, background-color 180ms ease, transform 160ms ease;
+  transition: color 180ms ease;
   }
   .footer-connect-link:hover,
   .footer-connect-link:focus-visible {
-  color: var(--primary-foreground);
-  background: var(--primary);
-  transform: translateY(-1px);
+  color: var(--primary);
   outline: none;
   }
-  .footer-connect-link:active { transform: translateY(0) scale(0.96); }
-  .footer-connect-link svg { transition: transform 180ms ease; }
+  .footer-connect-link:active { color: var(--primary); }
+  .footer-connect-link svg { transition: color 180ms ease, transform 180ms ease; }
   .footer-connect-link:hover svg,
   .footer-connect-link:focus-visible svg { transform: scale(1.08); }
   .footer-social-logo {
