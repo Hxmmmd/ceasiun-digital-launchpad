@@ -1,1 +1,79 @@
-import { createFileRoute,Link } from "@tanstack/react-router";import { useState } from "react";import { Layout,PageIntro,CTA,meta } from "@/components/site";import { samples } from "@/lib/site-data";import commerce from "@/assets/work-commerce.jpg";import automation from "@/assets/work-automation.jpg";import brand from "@/assets/work-brand.jpg";const imgs={commerce,automation,brand};export const Route=createFileRoute("/work")({head:()=>meta("Selected work","Explore Ceasiun’s case-study format across engineering, automation, and branding."),component:Page});function Page(){const [cat,setCat]=useState("All");const cats=["All",...new Set(samples.map(x=>x.category))];return <Layout><PageIntro eyebrow="Work" title="A record of deliberate problem solving." copy="Until verified client work is approved for publication, these clearly marked samples demonstrate our case-study approach."/><section className="section shell"><div className="filters">{cats.map(c=><button className={cat===c?"selected":""} onClick={()=>setCat(c)} key={c}>{c}</button>)}</div><div className="work-grid">{samples.filter(s=>cat==="All"||s.category===cat).map(s=><Link to="/work/$slug" params={{slug:s.slug}} key={s.slug} className="work-card"><img src={imgs[s.image as keyof typeof imgs]} alt="" width={1200} height={800} loading="lazy"/><div><span>{s.category} · Sample</span><h2>{s.title}</h2><p>{s.summary}</p></div></Link>)}</div></section><CTA/></Layout>}
+"use client";
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { useCaseStudies } from "@/components/public-content";
+import { CTA, Layout, PageIntro, meta } from "@/components/site";
+import { useCms } from "@/hooks/use-cms";
+import { samples } from "@/lib/site-data";
+import automation from "@/assets/work-automation.jpg";
+import brand from "@/assets/work-brand.jpg";
+import commerce from "@/assets/work-commerce.jpg";
+
+const images = [commerce, automation, brand];
+
+export default function WorkPage() {
+  const { work } = useCms();
+  const cmsCases = useCaseStudies();
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const cases = useMemo(() => {
+    if (cmsCases.length > 0) return cmsCases;
+    return samples.map((sample) => ({
+      id: sample.slug,
+      slug: sample.slug,
+      title: sample.title,
+      category: sample.category,
+      summary: sample.summary,
+      problem: "",
+      approach: "",
+      result: "",
+      is_visible: true,
+    }));
+  }, [cmsCases]);
+
+  const categories = ["All", ...new Set(cases.map((item) => item.category))];
+  const filteredCases =
+    selectedCategory === "All" ? cases : cases.filter((item) => item.category === selectedCategory);
+
+  return (
+    <Layout>
+      <PageIntro eyebrow={work.eyebrow} title={work.title} copy={work.copy} />
+
+      <section className="section shell">
+        <div className="filters">
+          {categories.map((category) => (
+            <button
+              className={selectedCategory === category ? "selected" : ""}
+              onClick={() => setSelectedCategory(category)}
+              key={category}
+              type="button"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        <div className="work-grid">
+          {filteredCases.map((item, index) => (
+            <Link  href={`/work/${item.slug}`} key={item.id} className="work-card">
+              <img
+                src={images[index % images.length].src}
+                alt={item.title}
+                width={1200}
+                height={800}
+                loading="lazy"
+              />
+              <div>
+                <span>{item.category} - Case Study</span>
+                <h2>{item.title}</h2>
+                <p>{item.summary}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <CTA />
+    </Layout>
+  );
+}

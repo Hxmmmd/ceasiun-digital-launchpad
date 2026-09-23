@@ -1,1 +1,47 @@
-import { createFileRoute } from "@tanstack/react-router";import { Layout,PageIntro,CTA,meta } from "@/components/site";export const Route=createFileRoute("/about")({head:()=>meta("About Ceasiun","Meet Ceasiun, founded by Hammad Hanif in 2024 and grown from 10 to 21 digital specialists."),component:Page});function Page(){return <Layout><PageIntro eyebrow="About" title="A digital partner built for the work after the pitch." copy="Ceasiun helps businesses go digital and grow through connected solutions and dependable support."/><section className="section shell split story"><div><p className="eyebrow">Our story</p><h2>Started focused. Growing deliberately.</h2></div><div><p>Founded in 2024 by Hammad Hanif, Ceasiun began with a team of 10. Today, 21 specialists work across engineering, growth, creative, automation, security, and managed operations.</p><p>That growth reflects a simple model: understand the real business problem, connect the right disciplines, and stay accountable through delivery and beyond.</p></div></section><section className="team-band"><div className="shell"><p className="eyebrow">Team & culture</p><h2>Different disciplines. Shared standards.</h2><div className="culture-grid">{[["21","team members"],["9","connected practices"],["1","delivery culture"]].map(([n,l])=><div key={l}><strong>{n}</strong><span>{l}</span></div>)}</div><p className="muted-note">Team profiles and photography will be added when approved. No placeholder people or invented credentials are shown.</p></div></section><CTA/></Layout>}
+"use client";
+import { CTA, Layout, PageIntro, meta } from "@/components/site";
+import { useCms } from "@/hooks/use-cms";
+
+export default function AboutPage() {
+  const { about } = useCms();
+
+  return (
+    <Layout>
+      <PageIntro eyebrow={about.eyebrow} title={about.title} copy={about.copy} />
+
+      <section className="section shell split story">
+        <div>
+          <p className="eyebrow">{about.storyEyebrow}</p>
+          <h2>{about.storyTitle}</h2>
+        </div>
+        <div>
+          <p>{about.storyP1}</p>
+          <p>{about.storyP2}</p>
+        </div>
+      </section>
+
+      <section className="team-band">
+        <div className="shell">
+          <p className="eyebrow">{about.cultureEyebrow}</p>
+          <h2>{about.cultureTitle}</h2>
+          <div className="culture-grid">
+            {about.cultureStats.map((stat) => (
+              <div key={stat.label}>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))}
+          </div>
+          <p className="muted-note">{about.cultureNote}</p>
+        </div>
+      </section>
+
+      <section className="section shell location-section">
+        <div><p className="eyebrow">Find Ceasiun</p><h2>Let&apos;s make the next move practical.</h2><p className="muted-note">Visit our Google Business location or get directions for a conversation.</p><a className="premium-button button" href="https://share.google/naFgKU46P5H4EYIJw" target="_blank" rel="noreferrer">Open in Google Maps</a></div>
+        <iframe className="location-map" title="Ceasiun location on Google Maps" src="https://www.google.com/maps?q=https://share.google/naFgKU46P5H4EYIJw&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+      </section>
+
+      <CTA />
+    </Layout>
+  );
+}

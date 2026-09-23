@@ -1,11 +1,4 @@
 {
   "version": 1,
-  "asset_id": "77348961-c7d3-4ad3-876c-fb9c0208de7d",
-  "project_id": "f7f0648b-29e1-4df6-ac3a-5ca44437333e",
-  "url": "/__l5e/assets-v1/77348961-c7d3-4ad3-876c-fb9c0208de7d/ceasiun-logo.png",
-  "r2_key": "a/v1/f7f0648b-29e1-4df6-ac3a-5ca44437333e/77348961-c7d3-4ad3-876c-fb9c0208de7d/ceasiun-logo.png",
-  "original_filename": "ceasiun-logo.png",
-  "size": 1358760,
-  "content_type": "image/png",
-  "created_at": "2026-09-16T23:09:13Z"
+  "url": "/ceasiun-logo.svg"
 }

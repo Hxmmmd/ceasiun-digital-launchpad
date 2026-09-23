@@ -1,1 +1,76 @@
-import { createFileRoute,Link,notFound } from "@tanstack/react-router";import { ArrowLeft } from "lucide-react";import { Layout,CTA,meta } from "@/components/site";import { samples } from "@/lib/site-data";export const Route=createFileRoute("/work/$slug")({loader:({params})=>{const item=samples.find(x=>x.slug===params.slug);if(!item)throw notFound();return item},head:({loaderData})=>meta(loaderData?.title??"Case study","A Ceasiun case-study example."),component:Page});function Page(){const s=Route.useLoaderData();return <Layout><article className="case-page shell"><Link to="/work"><ArrowLeft/>All work</Link><p className="eyebrow">{s.category} · Clearly marked sample</p><h1>{s.title}</h1><p className="lede">{s.summary}</p><div className="case-flow"><section><span>01</span><h2>Problem</h2><p>A growing business has fragmented digital tools, inconsistent customer journeys, and limited visibility into what drives results.</p></section><section><span>02</span><h2>Approach</h2><p>Map the system, prioritize high-impact constraints, establish measurable milestones, then design and build in focused stages.</p></section><section><span>03</span><h2>Result</h2><p>A clearer, maintainable digital foundation prepared for faster iteration. This is illustrative—not a claim about a real client engagement.</p></section></div></article><CTA/></Layout>}
+"use client";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { useCaseStudies } from "@/components/public-content";
+import { CTA, Layout, meta } from "@/components/site";
+import { samples } from "@/lib/site-data";
+
+export default function CaseStudyPage({ slug }: { slug: string }) {
+  const cmsCases = useCaseStudies();
+  const fallback = samples.find((sample) => sample.slug === slug);
+  const item =
+    cmsCases.find((study) => study.slug === slug) ??
+    (fallback
+      ? {
+          id: fallback.slug,
+          slug: fallback.slug,
+          title: fallback.title,
+          category: fallback.category,
+          summary: fallback.summary,
+          problem:
+            "Growing businesses often struggle with fragmented digital tools, unclear conversion pathways, and inefficient operational workflows that hinder growth.",
+          approach:
+            "Audit the architecture, map user journeys, eliminate high-friction points, and execute modular engineering and automation in structured milestone sprints.",
+          result:
+            "A cohesive, highly performant digital ecosystem prepared for scaling. This entry illustrates our methodology and is not a claim regarding an unverified client.",
+          is_visible: true,
+        }
+      : null);
+
+  if (!item) {
+    return (
+      <Layout>
+        <div className="section shell" style={{ paddingTop: "10rem" }}>
+          <h1>Case Study Not Found</h1>
+          <p style={{ margin: "1.5rem 0" }}>The case study you are looking for does not exist or is hidden.</p>
+          <Link  href="/work">Return to Work</Link>
+        </div>
+      </Layout>
+    );
+  }
+
+  return (
+    <Layout>
+      <article className="case-page shell">
+        <Link  href="/work">
+          <ArrowLeft /> All Work
+        </Link>
+        <p className="eyebrow">{item.category} - Case Study</p>
+        <h1>{item.title}</h1>
+        <p className="lede">{item.summary}</p>
+
+        <div className="case-flow">
+          <section>
+            <span>01</span>
+            <h2>Problem</h2>
+            <p>{item.problem}</p>
+          </section>
+
+          <section>
+            <span>02</span>
+            <h2>Approach</h2>
+            <p>{item.approach}</p>
+          </section>
+
+          <section>
+            <span>03</span>
+            <h2>Result</h2>
+            <p>{item.result}</p>
+          </section>
+        </div>
+      </article>
+
+      <CTA />
+    </Layout>
+  );
+}

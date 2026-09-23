@@ -1,3 +1,131 @@
-import { createFileRoute, Link } from "@tanstack/react-router";import { ArrowRight, Check, MoveRight } from "lucide-react";import { Layout,SectionHead,CTA,meta } from "@/components/site";import { CountUp } from "@/components/count-up";import { useTestimonials } from "@/components/public-content";import { services,faq } from "@/lib/site-data";import { Button } from "@/components/ui/button";import hero from "@/assets/ceasiun-hero.jpg";
-export const Route=createFileRoute("/")({head:()=>meta("Digital growth partner","Ceasiun builds digital products, growth systems, automation, security, and managed operations for ambitious businesses."),component:Home});
-function Home(){const testimonials=useTestimonials();return <Layout><section className="hero"><img src={hero} width={1600} height={1008} alt="Abstract precision architecture representing connected digital systems" fetchPriority="high"/><div className="hero-shade"/><div className="shell hero-content"><p className="eyebrow">Digital solutions · Built for growth</p><h1>Digital systems that move business forward.</h1><p>Ceasiun brings engineering, growth, automation, design, security, and managed operations into one accountable partnership.</p><Button asChild size="lg"><Link to="/contact" search={{service:""}}>Start a project <ArrowRight/></Link></Button></div></section><section className="section shell"><SectionHead eyebrow="One partner. Nine capabilities." title="Built to solve the whole digital problem." copy="Strategy is stronger when execution is connected. Our specialists work as one team across every critical touchpoint."/><div className="service-grid">{services.map((s,i)=><Link to="/services" hash={s.slug} className="service-card" key={s.slug}><span>0{i+1}</span><s.icon/><h3>{s.title}</h3><p>{s.short}</p><MoveRight/></Link>)}</div></section><section className="contrast section"><div className="shell split"><div><p className="eyebrow">Why Ceasiun</p><h2>Senior thinking. Practical delivery. One clear line of accountability.</h2></div><div className="reasons">{["End-to-end digital capability","Milestone-led delivery","Post-launch partnership","A 21-person specialist team"].map(x=><p key={x}><Check/>{x}</p>)}</div></div></section><section className="stats"><div className="shell stats-grid"><div><strong><CountUp value={2024}/></strong><span>Established</span></div><div><strong><CountUp value={21}/></strong><span>Team members</span></div><div><strong><CountUp value={9}/></strong><span>Core capabilities</span></div><div><strong><CountUp value={8}/></strong><span>Delivery stages</span></div></div></section><section className="section shell"><SectionHead eyebrow="Client perspective" title="Proof belongs in the open." copy="Only approved client feedback is published. Sample entries are always clearly identified."/>{testimonials.length?<div className="quote-grid">{testimonials.map(t=><blockquote key={t.id}><p>“{t.quote}”</p><footer>{t.attribution} · {t.company}{t.is_sample&&<em>Sample</em>}</footer></blockquote>)}</div>:<div className="empty-proof"><h3>Verified client stories are being prepared.</h3><p>We would rather show no claim than an unverified one.</p></div>}</section><section className="section shell faq"><SectionHead eyebrow="Questions, answered" title="A clear start to every engagement."/>{faq.map(([q,a],i)=><details key={q} open={i===0}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</section><CTA/></Layout>}
+"use client";
+import Link from "next/link";
+import { ArrowRight, Check, MoveRight } from "lucide-react";
+import { TestimonialCarousel } from "@/components/testimonial-carousel";
+import { CountUp } from "@/components/count-up";
+import { useTestimonials } from "@/components/public-content";
+import { CTA, Layout, SectionHead, meta } from "@/components/site";
+import { Button } from "@/components/ui/button";
+import { useCms, useCmsServices } from "@/hooks/use-cms";
+import hero from "@/assets/ceasiun-hero.jpg";
+
+export default function HomePage() {
+  const cms = useCms();
+  const services = useCmsServices();
+  const testimonials = useTestimonials();
+
+  return (
+    <Layout>
+      <section className="hero">
+        <img src={hero.src} width={1600} height={1008} alt={cms.home.heroAlt} fetchPriority="high" />
+        <div className="hero-shade" />
+        <div className="shell hero-content">
+          <p className="eyebrow">{cms.home.heroEyebrow}</p>
+          <h1>{cms.home.heroTitle}</h1>
+          <p>{cms.home.heroCopy}</p>
+<Button asChild size="lg" className="project-cta">
+          <Link  href="/contact">
+              {cms.home.heroCta} <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
+      <section className="section shell">
+        <SectionHead
+          eyebrow={cms.home.servicesEyebrow}
+          title={cms.home.servicesTitle}
+          copy={cms.home.servicesCopy}
+        />
+        <div className="service-grid">
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <Link  href={`/services/${service.slug}`} className="service-card" key={service.slug}>
+                <span>0{index + 1}</span>
+                <Icon />
+                <h3>{service.title}</h3>
+                <p>{service.short}</p>
+                <MoveRight />
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="contrast section">
+        <div className="shell split">
+          <div>
+            <p className="eyebrow">{cms.home.whyEyebrow}</p>
+            <h2>{cms.home.whyTitle}</h2>
+          </div>
+          <div className="reasons">
+            {cms.home.whyReasons.map((reason) => (
+              <p key={reason}>
+                <Check />
+                {reason}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="stats">
+        <div className="shell stats-grid">
+          {cms.home.stats.map((stat) => (
+            <div key={stat.label}>
+              <strong>
+                <CountUp value={stat.value} />
+              </strong>
+              <span>{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section shell">
+        <SectionHead
+          eyebrow={cms.home.testimonialsEyebrow}
+          title={cms.home.testimonialsTitle}
+          copy={cms.home.testimonialsCopy}
+        />
+        {testimonials.length > 0 ? (
+          <TestimonialCarousel testimonials={testimonials} />
+        ) : (
+          <div className="empty-proof">
+            <h3>Verified client stories are being prepared.</h3>
+            <p>We would rather show no claim than an unverified one.</p>
+          </div>
+        )}
+      </section>
+
+      <section className="section shell home-process">
+        <SectionHead eyebrow={cms.process.eyebrow} title={cms.process.title} copy={cms.process.copy} />
+        <div className="home-process-grid">
+          {cms.process.steps.map((step, index) => (
+            <article className="process-card" key={step.title}>
+              <div className="process-card-head"><span>{String(index + 1).padStart(2, "0")}</span><h3>{step.title}</h3></div>
+              <p>{step.description}</p>
+            </article>
+          ))}
+        </div>
+        <Button asChild size="lg" className="premium-button"><Link href="/contact">Start with a clear plan</Link></Button>
+      </section>
+
+      <section className="section shell faq">
+        <SectionHead eyebrow={cms.home.faqEyebrow} title={cms.home.faqTitle} />
+        {cms.faq.map(([question, answer], index) => (
+          <details key={question} open={index === 0}>
+            <summary>
+              {question}
+              <span>+</span>
+            </summary>
+            <p>{answer}</p>
+          </details>
+        ))}
+      </section>
+
+      <CTA />
+    </Layout>
+  );
+}
