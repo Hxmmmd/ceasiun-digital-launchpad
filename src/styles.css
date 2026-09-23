@@ -1,4 +1,4 @@
-@import "tailwindcss" source(none);
+@import "tailwindcss";
 @source "../src";
 @import "tw-animate-css";
 
@@ -1236,6 +1236,9 @@ blockquote em {
 .case-flow p {
   color: var(--muted-foreground);
   line-height: 1.8;
+}
+.timeline {
+  padding-block: clamp(1.5rem, 3vw, 3rem);
 }
 .timeline article {
   display: grid;
@@ -3282,6 +3285,7 @@ blockquote em {
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
