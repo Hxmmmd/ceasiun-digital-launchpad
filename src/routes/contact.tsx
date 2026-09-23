@@ -154,44 +154,21 @@ export default function ContactPage() {
           <QuoteIntake services={services} initialService={search.service} onSubmit={handleSubmit} />
         )}
 
-        <aside>
-          <p className="eyebrow">{cms.contact.asideEyebrow}</p>
-          <h2>{cms.contact.asideTitle}</h2>
-
-          <a href={whatsappHref(cms.settings.whatsapp)} target="_blank" rel="noreferrer">
-            <MessageCircle /> WhatsApp: {cms.settings.phone}
+        <aside className="contact-direct">
+          <p className="eyebrow">Direct Conversation</p>
+          <h2 style={{margin: "10px 0 24px 0"}}>Need immediate answers?</h2>
+          <p>
+            Skip the form and start a conversation directly with our team on WhatsApp.
+          </p>
+          <a
+          style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "8px"}}
+            href={whatsappHref(cms.settings.whatsapp)}
+            target="_blank"
+            rel="noreferrer"
+            className="premium-whatsapp-cta"
+          >
+            <MessageCircle color="#2e2e2eff"/> <p style={{color: "#2e2e2eff"}}>Discuss on WhatsApp</p>
           </a>
-          <a href={phoneHref(cms.settings.phone)}>
-            <Phone /> Phone: {cms.settings.phone}
-          </a>
-
-          <div className="contact-socials" style={{ margin: "1.5rem 0", display: "grid", gap: "0.5rem" }}>
-            <p className="eyebrow" style={{ marginTop: "1rem" }}>
-              Social Channels
-            </p>
-            <a href={cms.settings.linkedin} target="_blank" rel="noreferrer">
-              <Linkedin /> LinkedIn
-            </a>
-            <a href={cms.settings.instagram} target="_blank" rel="noreferrer">
-              <Instagram /> Instagram
-            </a>
-            <a href={cms.settings.facebook} target="_blank" rel="noreferrer">
-              <Facebook /> Facebook
-            </a>
-            <a href={cms.settings.x} target="_blank" rel="noreferrer">
-              <Twitter /> X (Twitter)
-            </a>
-            <a href={cms.settings.youtube} target="_blank" rel="noreferrer">
-              <Youtube /> YouTube
-            </a>
-            <a href={cms.settings.tiktok} target="_blank" rel="noreferrer">
-              <Music2 aria-hidden="true" /> TikTok
-            </a>
-            <a href={cms.settings.discord} target="_blank" rel="noreferrer">
-              <Gamepad2 aria-hidden="true" /> Discord Join Community
-            </a>
-          </div>
-
         </aside>
       </section>
 

@@ -3872,3 +3872,76 @@ blockquote em {
     filter: none !important;
   }
 }
+
+/* ---------- Contact Page CTA ---------- */
+.contact-direct {
+  padding: 2rem;
+  background: color-mix(in oklab, var(--card) 95%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px -10px color-mix(in oklab, black 30%, transparent);
+}
+
+.premium-whatsapp-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.5rem;
+  margin-top: 1.5rem;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  box-shadow: 0 4px 12px color-mix(in oklab, var(--primary) 30%, transparent);
+}
+.premium-whatsapp-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px color-mix(in oklab, var(--primary) 40%, transparent);
+}
+
+/* ---------- About Page Location ---------- */
+.location-wrapper {
+  margin-block: 4rem;
+}
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -10px color-mix(in oklab, black 30%, transparent);
+}
+@media (min-width: 768px) {
+  .location-grid {
+    grid-template-columns: 1fr 1.5fr;
+  }
+}
+.location-card {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.location-card address {
+  font-style: normal;
+  margin-block: 1.5rem;
+  line-height: 1.6;
+  color: var(--foreground);
+}
+.location-card .muted-note {
+  margin-bottom: 2rem;
+}
+.location-map-container {
+  min-height: 300px;
+  height: 100%;
+}
+.location-map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}

@@ -108,12 +108,12 @@ export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
           <div className="service-hero-actions">
             <Button asChild size="lg">
               <Link  href="/contact">
-                Discuss {service.title} <ArrowUpRight />
+                Discuss {service.title}
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
               <a href="#capabilities">
-                Explore Capabilities <ChevronRight />
+                Explore Capabilities
               </a>
             </Button>
           </div>
@@ -270,7 +270,6 @@ export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
               >
                 <div className="switcher-card-head">
                   <OtherIcon />
-                  <ArrowRight />
                 </div>
                 <h3>{other.title}</h3>
                 <p>{other.short}</p>

@@ -25,7 +25,7 @@ export default function HomePage() {
           <p>{cms.home.heroCopy}</p>
 <Button asChild size="lg" className="project-cta">
           <Link  href="/contact">
-              {cms.home.heroCta} <ArrowRight />
+              {cms.home.heroCta}
             </Link>
           </Button>
         </div>
@@ -46,7 +46,6 @@ export default function HomePage() {
                 <Icon />
                 <h3>{service.title}</h3>
                 <p>{service.short}</p>
-                <MoveRight />
               </Link>
             );
           })}
