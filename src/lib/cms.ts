@@ -141,10 +141,10 @@ export const defaultCms: CmsContent = {
     button: "Talk to Ceasiun",
   },
   home: {
-    heroEyebrow: "Digital solutions - Built for growth",
-    heroTitle: "Digital systems that move business forward.",
+    heroEyebrow: "CEASIUN — DIGITAL GROWTH PARTNER",
+    heroTitle: "We Build the Digital Side of Your Business.",
     heroCopy:
-      "Ceasiun brings engineering, growth, automation, design, security, and managed operations into one accountable partnership.",
+      "Ceasiun brings your business online with everything it needs to build a professional presence, reach more people, automate operations, and grow with technology.",
     heroCta: "Start a project",
     heroAlt: "Abstract precision architecture representing connected digital systems",
     servicesEyebrow: "One partner. Nine capabilities.",

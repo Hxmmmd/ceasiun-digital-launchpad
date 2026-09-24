@@ -17,7 +17,7 @@ export default function HomePage() {
   return (
     <Layout>
       <section className="hero">
-        <ShapeGrid speed={0.5} squareSize={30} direction="right" borderColor="#c1c1c1ff" hoverFillColor="#22222" hoverTrailAmount={0} shape='hexagon' />
+        <ShapeGrid speed={0.5} squareSize={30} direction="up" borderColor="#c1c1c1ff" hoverFillColor="#22222" hoverTrailAmount={0} shape='hexagon'/>
         <div className="hero-shade" />
         <div className="shell hero-content">
           <p className="eyebrow">{cms.home.heroEyebrow}</p>
