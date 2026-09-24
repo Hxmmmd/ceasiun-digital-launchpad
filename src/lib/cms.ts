@@ -104,14 +104,14 @@ export type CmsContent = {
 };
 
 const defaultStepDescriptions = [
+  "Clarifying business goals, project requirements, expectations, scope, and key challenges.",
   "Understand the business, user needs, technical constraints, and strategic opportunities.",
   "Define clear priorities, target outcomes, project milestones, and team responsibilities.",
-  "Shape user experiences, UI components, and brand guidelines before writing production code.",
-  "Engineer resilient frontends, backends, and integrations in controlled, reviewable stages.",
-  "Rigorous testing for performance, security, responsiveness, accessibility, and functional requirements.",
-  "Execute a smooth production deployment with monitoring, DNS setup, and launch readiness checks.",
-  "Stabilize infrastructure, resolve initial user feedback, and provide continuous technical support.",
-  "Measure analytics, review growth data, and iteratively improve what drives business performance.",
+  "Confirming responsibilities, project terms, milestones, payment structure, and contractual commitments.",
+  "Transforming the approved plan into design, development, implementation, and measurable deliverables.",
+  "Validating the work, addressing feedback, resolving issues, and refining the final outcome.",
+  "Completing final checks, preparing handover, and delivering the approved solution and project assets.",
+  "Maintaining the delivered solution, resolving post-launch issues, and supporting ongoing improvements."
 ];
 
 export const defaultCms: CmsContent = {

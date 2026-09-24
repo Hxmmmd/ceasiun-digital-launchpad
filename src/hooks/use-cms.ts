@@ -41,7 +41,7 @@ export function useCmsServices() {
   return staticServices.map((base) => {
     const override = cms.services.find((s) => s.slug === base.slug);
     if (!override) return base;
-    return {
+    return { 
       ...base,
       title: override.title,
       short: override.short,

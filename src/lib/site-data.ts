@@ -271,14 +271,14 @@ export const services = [
 ];
 
 export const processSteps = [
+  "Discussion",
   "Discovery",
-  "Planning & Strategy",
-  "Design",
-  "Development",
-  "Testing & QA",
-  "Deployment & Launch",
-  "Post-Launch Support",
-  "Continuous Improvement",
+  "Planning",
+  "Contract",
+  "Execute",
+  "Review",
+  "Delivery",
+  "Support",
 ];
 
 export const faq = [

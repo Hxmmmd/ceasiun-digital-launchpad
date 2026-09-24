@@ -10,7 +10,7 @@ import { useCms, useCmsServices } from "@/hooks/use-cms";
 import hero from "@/assets/ceasiun-hero.jpg";
 
 export default function HomePage() {
-  const cms = useCms();
+  const cms = useCms(); 
   const services = useCmsServices();
   const testimonials = useTestimonials();
 
@@ -23,10 +23,8 @@ export default function HomePage() {
           <p className="eyebrow">{cms.home.heroEyebrow}</p>
           <h1>{cms.home.heroTitle}</h1>
           <p>{cms.home.heroCopy}</p>
-<Button asChild size="lg" className="project-cta">
-          <Link  href="/contact">
-              {cms.home.heroCta}
-            </Link>
+          <Button asChild size="lg" className="project-cta">
+            <Link href="/contact">{cms.home.heroCta}</Link>
           </Button>
         </div>
       </section>
