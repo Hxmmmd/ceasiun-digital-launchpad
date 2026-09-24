@@ -8,7 +8,7 @@ import { CTA, Layout, SectionHead, meta } from "@/components/site";
 import { Button } from "@/components/ui/button";
 import { useCms, useCmsServices } from "@/hooks/use-cms";
 import hero from "@/assets/ceasiun-hero.jpg";
-
+import ShapeGrid from "@/components/ShapeGrid";
 export default function HomePage() {
   const cms = useCms(); 
   const services = useCmsServices();
@@ -17,7 +17,7 @@ export default function HomePage() {
   return (
     <Layout>
       <section className="hero">
-        <img src={hero.src} width={1600} height={1008} alt={cms.home.heroAlt} fetchPriority="high" />
+        <ShapeGrid speed={0.5} squareSize={30} direction="right" borderColor="#c1c1c1ff" hoverFillColor="#22222" hoverTrailAmount={0} shape='hexagon' />
         <div className="hero-shade" />
         <div className="shell hero-content">
           <p className="eyebrow">{cms.home.heroEyebrow}</p>
