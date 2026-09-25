@@ -9,16 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useCms, useCmsServices } from "@/hooks/use-cms";
 import hero from "@/assets/ceasiun-hero.jpg";
 import ShapeGrid from "@/components/ShapeGrid";
-import LogoLoop from "@/components/LogoLoop"
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 
-
-const techLogos = [
-  { node: <SiReact />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
-  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
-  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-];
 // Alternative with image sources
 // const imageLogos = [
 //   { src: "/logos/company1.png", alt: "Company 1", href: "https://company1.com" },
@@ -43,21 +34,6 @@ export default function HomePage() {
             <Link href="/contact">{cms.home.heroCta}</Link>
           </Button>
         </div>
-      </section>
-      
-      <section style={{display: 'flex', justifyContent:'center', alignItems: 'center', margin: '10px'}}>
-        <LogoLoop
-          logos={techLogos}
-          speed={100}
-          direction="left"
-          logoHeight={50}
-          gap={60}
-          hoverSpeed={0}
-          scaleOnHover
-          fadeOut
-          fadeOutColor="#040608"
-          ariaLabel="Technology partners"
-        />
       </section>
 
       <section className="section shell">

@@ -15,6 +15,15 @@ import { samples } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
 import { useCmsServices } from "@/hooks/use-cms";
 import ShapeGrid from "@/components/ShapeGrid";
+import LogoLoop from "@/components/LogoLoop"
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
+
+const techLogos = [
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+];
 
 const serviceNarratives: Record<string, { intro: string; outcomes: string[]; fit: string }> = {
   "web-development": {
@@ -123,6 +132,23 @@ export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
           </div>
         </div>
       </section>
+
+      {service.slug === 'web-development' && (
+        <section style={{display: 'flex', justifyContent:'center', alignItems: 'center', margin: '20px 0'}}>
+          <LogoLoop
+            logos={techLogos}
+            speed={100}
+            direction="left"
+            logoHeight={50}
+            gap={60}
+            hoverSpeed={0}
+            scaleOnHover
+            fadeOut
+            fadeOutColor="#040608"
+            ariaLabel="Technology partners"
+          />
+        </section>
+      )}
 
       <section className="section shell service-story-grid">
         <div className="section-head">
