@@ -14,6 +14,7 @@ import { Layout, CTA, meta } from "@/components/site";
 import { samples } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
 import { useCmsServices } from "@/hooks/use-cms";
+import ShapeGrid from "@/components/ShapeGrid";
 
 const serviceNarratives: Record<string, { intro: string; outcomes: string[]; fit: string }> = {
   "web-development": {
@@ -88,34 +89,37 @@ export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
   return (
     <Layout>
       {/* Service Detail Intro Hero */}
-      <section className="service-detail-hero grid-bg shell">
-        <div className="service-detail-nav">
-          <Link  href="/services" className="back-link">
-            <ArrowLeft /> All Services
-          </Link>
-        </div>
-
-        <div className="service-hero-main">
-          <div className="service-icon-wrapper">
-            <Icon className="hero-service-icon" />
+      <section className="service-detail-hero">
+        <ShapeGrid speed={0.5} squareSize={30} direction="up" borderColor="rgba(255, 255, 255, 0.08)" hoverFillColor="#22222" hoverTrailAmount={0} shape='square' disableVignette={true} />
+        <div className="shell" style={{ position: 'relative', zIndex: 1, height: '100%' }}>
+          <div className="service-detail-nav">
+            <Link  href="/services" className="back-link">
+              <ArrowLeft /> All Services
+            </Link>
           </div>
-          <p className="eyebrow">Ceasiun Practice Area</p>
-          <h1>{service.title}</h1>
-          <p className="lede">
-            {service.description || service.short}
-          </p>
 
-          <div className="service-hero-actions">
-            <Button asChild size="lg">
-              <Link  href="/contact">
-                Discuss {service.title}
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <a href="#capabilities">
-                Explore Capabilities
-              </a>
-            </Button>
+          <div className="service-hero-main">
+            <div className="service-icon-wrapper">
+              <Icon className="hero-service-icon" />
+            </div>
+            <p className="eyebrow">Ceasiun Practice Area</p>
+            <h1>{service.title}</h1>
+            <p className="lede">
+              {service.description || service.short}
+            </p>
+
+            <div className="service-hero-actions">
+              <Button asChild size="lg">
+                <Link  href="/contact">
+                  Discuss {service.title}
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <a href="#capabilities">
+                  Explore Capabilities
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

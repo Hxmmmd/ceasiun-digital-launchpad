@@ -2087,6 +2087,8 @@ blockquote em {
    ========================================================================== */
 
 .service-detail-hero {
+  position: relative;
+  overflow: hidden;
   padding-top: clamp(8rem, 14vw, 12rem);
   padding-bottom: clamp(3rem, 6vw, 5rem);
   border-bottom: 1px solid var(--border);
