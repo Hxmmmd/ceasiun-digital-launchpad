@@ -6,6 +6,7 @@ import { CountUp } from "@/components/count-up";
 import { useTestimonials } from "@/components/public-content";
 import { CTA, Layout, SectionHead, meta } from "@/components/site";
 import { Button } from "@/components/ui/button";
+import HowItWorks02 from "@/components/ui/how-it-works-02";
 import { useCms, useCmsServices } from "@/hooks/use-cms";
 import hero from "@/assets/ceasiun-hero.jpg";
 import ShapeGrid from "@/components/ShapeGrid";
@@ -103,27 +104,15 @@ export default function HomePage() {
         )}
       </section>
 
-      <section className="section shell home-process">
-        <SectionHead eyebrow={cms.process.eyebrow} title={cms.process.title} copy={cms.process.copy} />
-        <section className="section shell timeline">
-          {cms.process.steps.map((step, index) => (
-            <article className="timeline-item"key={step.title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h2>{step.title}</h2>
-              <p>{step.description}</p>
-            </article>
-          ))}
-        </section>
-        {/* <section className="section shell timeline">
-          {cms.process.steps.map((step, index) => (
-            <article className="timeline-item" key={step.title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h2>{step.title}</h2>
-              <p>{step.description}</p>
-            </article>
-          ))}
-        </section> */}
-        <Button asChild size="lg" className="premium-button"><Link href="/contact">Start with a clear plan</Link></Button>
+      <section className="section home-process">
+        <HowItWorks02
+          eyebrow={cms.process.eyebrow}
+          heading={cms.process.title}
+          steps={cms.process.steps}
+        />
+        <div className="shell" style={{ display: "flex", justifyContent: "center", marginTop: "-1rem" }}>
+          <Button asChild size="lg" className="premium-button"><Link href="/contact">Start with a clear plan</Link></Button>
+        </div>
       </section>
 
       <section className="section shell faq">

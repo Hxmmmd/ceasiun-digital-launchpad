@@ -19,12 +19,9 @@ export const services = [
     description:
       "Ceasiun delivers end-to-end web engineering—from high-converting WordPress & Shopify solutions to custom full-stack MERN & SaaS web applications built for speed, SEO, and scale.",
     items: [
-      "WordPress Development",
-      "WooCommerce Development",
-      "Shopify Development",
-      "Custom E-commerce Platforms",
-      "MERN Stack Applications",
       "Landing Pages & Portfolios",
+      "E-commerce Development",
+      "MERN Stack Applications",
       "Custom Corporate Websites",
       "SaaS Product Development",
     ],
