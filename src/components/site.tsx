@@ -266,7 +266,7 @@ export function CTA() {
   const { cta } = useCms();
 
   return (
-    <section className="cta-band">
+    <section style={{margin: "30px 0px 0px 0px"}} className="cta-band">
       <div className="shell">
         <p className="eyebrow">{cta.eyebrow}</p>
         <h2>{cta.title}</h2>

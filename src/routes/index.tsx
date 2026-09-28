@@ -8,15 +8,8 @@ import { CTA, Layout, SectionHead, meta } from "@/components/site";
 import { Button } from "@/components/ui/button";
 import HowItWorks02 from "@/components/ui/how-it-works-02";
 import { useCms, useCmsServices } from "@/hooks/use-cms";
-import hero from "@/assets/ceasiun-hero.jpg";
 import ShapeGrid from "@/components/ShapeGrid";
 
-// Alternative with image sources
-// const imageLogos = [
-//   { src: "/logos/company1.png", alt: "Company 1", href: "https://company1.com" },
-//   { src: "/logos/company2.png", alt: "Company 2", href: "https://company2.com" },
-//   { src: "/logos/company3.png", alt: "Company 3", href: "https://company3.com" },
-// ];
 export default function HomePage() {
   const cms = useCms(); 
   const services = useCmsServices();
@@ -104,7 +97,7 @@ export default function HomePage() {
         )}
       </section>
 
-      <section className="section home-process">
+      <section style={{paddingTop:"0px"}} className="section home-process">
         <HowItWorks02
           eyebrow={cms.process.eyebrow}
           heading={cms.process.title}
