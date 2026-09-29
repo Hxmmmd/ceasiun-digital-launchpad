@@ -1,3 +1,5 @@
+"use client";
+import { useState, useEffect } from "react";
 import { Layout, PageIntro } from "@/components/site";
 
 const sections = [
@@ -17,16 +19,31 @@ const sections = [
   ["14. Changes to This Privacy Policy", "We may update this Privacy Policy from time to time. The current version will be posted on this page with its effective and last-updated dates."],
 ];
 
+const idFor = (title: string) => title.slice(3).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
 export default function PrivacyPolicyPage() {
+  const [activeId, setActiveId] = useState("");
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveId(window.location.hash.slice(1));
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    if (window.location.hash) {
+      handleHashChange();
+    }
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   return (
     <Layout>
       <PageIntro eyebrow="Legal" title="Privacy Policy" copy="How Ceasiun handles information shared through our website and services." />
       <main className="shell legal-page">
         <div className="legal-meta"><span>Effective date: 19 September 2026</span><span>Last updated: 19 September 2026</span></div>
         <div className="legal-content">
-          <aside className="legal-toc"><p className="eyebrow">On this page</p>{sections.map(([title]) => <a key={title} href={`#${title.slice(3).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>{title}</a>)}<a href="#contact-us">15. Contact Us</a></aside>
+          <aside className="legal-toc"><p className="eyebrow">On this page</p>{sections.map(([title]) => <a key={title} href={`#${idFor(title)}`} className={activeId === idFor(title) ? "active" : ""} onClick={() => setActiveId(idFor(title))}>{title}</a>)}<a href="#contact-us" className={activeId === "contact-us" ? "active" : ""} onClick={() => setActiveId("contact-us")}>15. Contact Us</a></aside>
           <article>
-            {sections.map(([title, body]) => <section id={title.slice(3).toLowerCase().replace(/[^a-z0-9]+/g, "-")} key={title}><h2>{title}</h2><p>{body}</p></section>)}
+            {sections.map(([title, body]) => <section id={idFor(title)} key={title}><h2>{title}</h2><p>{body}</p></section>)}
             <section id="contact-us"><h2>15. Contact Us</h2><p>If you have questions about this Privacy Policy or how your information is handled, contact us for privacy requests or general inquiries.</p><p><strong>WhatsApp / Phone:</strong> +92 314 0262087</p></section>
           </article>
         </div>

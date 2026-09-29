@@ -1663,7 +1663,7 @@ blockquote em {
   letter-spacing: 0.05em;
  }
  .legal-toc { counter-reset: legal-toc-item; }
- .legal-toc a:hover, .legal-toc a:focus-visible {
+ .legal-toc a:hover, .legal-toc a:focus-visible, .legal-toc a.active {
   background: var(--accent);
   color: var(--foreground);
   outline: none;

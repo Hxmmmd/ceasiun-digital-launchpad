@@ -1,3 +1,5 @@
+"use client";
+import { useState, useEffect } from "react";
 import { Layout, PageIntro } from "@/components/site";
 
 const sections = [
@@ -37,12 +39,25 @@ const sections = [
 const idFor = (title: string) => title.slice(3).toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 export default function TermsAndConditionsPage() {
+  const [activeId, setActiveId] = useState("");
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveId(window.location.hash.slice(1));
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    if (window.location.hash) {
+      handleHashChange();
+    }
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   return <Layout>
     <PageIntro eyebrow="Legal" title="Terms & Conditions" copy="The terms that govern use of the Ceasiun website and engagement of our digital services." />
     <main className="shell legal-page">
       <div className="legal-meta"><span>Last updated: 20 September 2026</span><span>Ceasiun Digital & Technology Solutions</span></div>
       <div className="legal-content">
-        <aside className="legal-toc"><p className="eyebrow">On this page</p>{sections.map(([title]) => <a key={title} href={`#${idFor(title)}`}>{title}</a>)}</aside>
+        <aside className="legal-toc"><p className="eyebrow">On this page</p>{sections.map(([title]) => <a key={title} href={`#${idFor(title)}`} className={activeId === idFor(title) ? "active" : ""} onClick={() => setActiveId(idFor(title))}>{title}</a>)}</aside>
         <article>
           <p className="legal-lede">Welcome to <strong>Ceasiun</strong>. By accessing this website or engaging Ceasiun for any service, you acknowledge that you have read, understood, and agreed to these Terms. If you do not agree, please do not use the website or engage our services.</p>
           {sections.map(([title, body]) => <section id={idFor(title)} key={title}><h2>{title}</h2><p>{body}</p></section>)}

@@ -35,7 +35,7 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${manrope.variable} ${spaceGrotesk.variable}`}>
-      <body>
+      <body suppressHydrationWarning>
         <RouteProgress />
         <ScrollReveal />
         {children}

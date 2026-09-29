@@ -1,3 +1,5 @@
+"use client";
+import { useState, useEffect } from "react";
 import { Layout, PageIntro } from "@/components/site";
 
 const sections = [
@@ -22,12 +24,25 @@ const sections = [
 const idFor = (title: string) => title.slice(3).toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 export default function DisclaimerPage() {
+  const [activeId, setActiveId] = useState("");
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveId(window.location.hash.slice(1));
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    if (window.location.hash) {
+      handleHashChange();
+    }
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   return <Layout>
     <PageIntro eyebrow="Legal" title="Disclaimer" copy="Important limitations and responsibilities relating to the information, services, examples, and third-party resources presented by Ceasiun." />
     <main className="shell legal-page">
       <div className="legal-meta"><span>Last updated: 20 September 2026</span><span>Ceasiun Digital &amp; Technology Solutions</span></div>
       <div className="legal-content">
-        <aside className="legal-toc"><p className="eyebrow">On this page</p>{sections.map(([title]) => <a key={title} href={`#${idFor(title)}`}>{title}</a>)}</aside>
+        <aside className="legal-toc"><p className="eyebrow">On this page</p>{sections.map(([title]) => <a key={title} href={`#${idFor(title)}`} className={activeId === idFor(title) ? "active" : ""} onClick={() => setActiveId(idFor(title))}>{title}</a>)}</aside>
         <article>
           <p className="legal-lede">The information provided on the <strong>Ceasiun</strong> website is intended for general informational and business purposes only. We make reasonable efforts to provide useful information, but do not guarantee that all published information is complete, accurate, current, or suitable for every situation.</p>
           {sections.map(([title, body]) => <section id={idFor(title)} key={title}><h2>{title}</h2><p>{body}</p></section>)}

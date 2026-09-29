@@ -1,9 +1,11 @@
 "use client";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
-import { Layout, meta } from "@/components/site";
+import { Layout} from "@/components/site";
 import { usePost } from "@/components/public-content";
-import { BlogSidebar } from "@/components/blog-sidebar";
+
+const idFor = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 function RenderProseContent({ body }: { body: string }) {
   if (!body) return null;
@@ -38,15 +40,17 @@ function RenderProseContent({ body }: { body: string }) {
     flushList(idx);
 
     if (trimmed.startsWith("### ")) {
+      const title = trimmed.slice(4);
       elements.push(
-        <h3 key={idx} style={{ fontSize: "1.4rem", margin: "2rem 0 1rem" }}>
-          {trimmed.slice(4)}
+        <h3 id={idFor(title)} key={idx} style={{ fontSize: "1.4rem", margin: "2rem 0 1rem", scrollMarginTop: "7rem" }}>
+          {title}
         </h3>,
       );
     } else if (trimmed.startsWith("## ")) {
+      const title = trimmed.slice(3);
       elements.push(
-        <h2 key={idx} style={{ fontSize: "1.8rem", margin: "2.5rem 0 1rem" }}>
-          {trimmed.slice(3)}
+        <h2 id={idFor(title)} key={idx} style={{ fontSize: "1.8rem", margin: "2.5rem 0 1rem", scrollMarginTop: "7rem" }}>
+          {title}
         </h2>,
       );
     } else if (trimmed.startsWith("> ")) {
@@ -79,7 +83,18 @@ function RenderProseContent({ body }: { body: string }) {
 
 export default function BlogPostPage({ slug }: { slug: string }) {
   const post = usePost(slug);
+  const [activeId, setActiveId] = useState("");
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveId(window.location.hash.slice(1));
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    if (window.location.hash) {
+      handleHashChange();
+    }
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   if (post === undefined) {
     return <div className="loading">Loading article...</div>;
@@ -133,8 +148,30 @@ export default function BlogPostPage({ slug }: { slug: string }) {
         })()}
 
         <div className="blog-reading-layout">
-          <BlogSidebar headings={post.body.split("\n").filter((line) => line.trim().startsWith("## ")).map((line) => line.trim().slice(3))} />
-          <div className="blog-reading-content"><RenderProseContent body={post.body} /></div>
+          <aside className="legal-toc">
+            <p className="eyebrow">On this page</p>
+            {post.body
+              .split("\n")
+              .filter((line) => line.trim().startsWith("## "))
+              .map((line) => line.trim().slice(3))
+              .map((title) => {
+                const id = idFor(title);
+                return (
+                  <a 
+                    key={title} 
+                    href={`#${id}`}
+                    className={activeId === id ? "active" : ""}
+                    onClick={() => setActiveId(id)}
+                  >
+                    {title}
+                  </a>
+                );
+              })}
+          </aside>
+          {/* <BlogSidebar headings={post.body.split("\n").filter((line) => line.trim().startsWith("## ")).map((line) => line.trim().slice(3))} /> */}
+          <div className="blog-reading-content">
+            <RenderProseContent body={post.body} />
+          </div>
         </div>
       </article>
     </Layout>
