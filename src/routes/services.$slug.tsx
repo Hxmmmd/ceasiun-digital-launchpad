@@ -2,12 +2,8 @@
 import Link from "next/link";
 import {
   ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
   Check,
   CheckCircle2,
-  ChevronRight,
-  Layers,
   Sparkles,
 } from "lucide-react";
 import { Layout, CTA, meta } from "@/components/site";
@@ -16,14 +12,138 @@ import { Button } from "@/components/ui/button";
 import { useCmsServices } from "@/hooks/use-cms";
 import ShapeGrid from "@/components/ShapeGrid";
 import LogoLoop from "@/components/LogoLoop"
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 
-const techLogos = [
-  { node: <SiReact />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+import {SiReact, SiNextdotjs, SiWordpress, SiShopify, SiTanstack, SiPhp, SiTypescript, SiRedux, SiTailwindcss, SiGithub, SiExpress, SiPostgresql, SiMongodb, SiNodedotjs, SiDjango, SiFastapi, SiInstagram, SiFacebook, SiX, SiYoutube, SiWhatsapp, SiDiscord, SiGmail, SiTelegram, SiReddit,SiFigma,} from 'react-icons/si';
+import {LuCompass, LuTarget, LuType, LuBookOpenText, LuMessageSquareQuote,LuMegaphone,LuLayers3,LuGlobe,LuBrain,LuBot,LuWorkflow,LuZap,LuNetwork,LuSettings2,LuSparkles,LuMessageCircle,LuChartNoAxesCombined,LuShieldCheck,LuKeyRound,LuFingerprint,LuUserRoundCheck,LuRadar,LuEyeOff,LuScanLine,LuBug,LuTriangleAlert,LuFileLock2,LuRefreshCw,LuWrench,LuGauge,LuActivity,LuMonitorCheck,LuCalendarClock,LuArchiveRestore,LuFilePenLine,LuClipboardCheck,LuMonitorSmartphone,LuSlidersHorizontal,LuRotateCcw,LuPanelTop,LuListChecks,LuBriefcaseBusiness,LuHandCoins,LuServerCog,LuCloudCog,LuMonitorCog,LuEthernetPort,LuWaypoints,LuRepeat2,LuUserRoundCog} from "react-icons/lu";
+import { LiaFunnelDollarSolid } from "react-icons/lia";
+import { MdAdsClick, MdOutlineMarkEmailUnread } from "react-icons/md";
+import { TbWorldSearch,TbBrandAdobePremiere} from "react-icons/tb";
+import { FaLinkedin } from "react-icons/fa";
+import { AiOutlinePinterest,AiFillApi } from "react-icons/ai";
+import { PiMicrosoftPowerpointLogo } from "react-icons/pi"
+
+
+
+
+
+
+const webTechLogos = [
   { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
   { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiRedux />, title: "Redux", href: "https://redux-toolkit.js.org/" },
+  { node: <SiExpress />, title: "Express", href: "https://expressjs.com/" },
+  { node: <SiNodedotjs />, title: "Node.js", href: "https://nodejs.org/" },
+  { node: <SiMongodb />, title: "Mongodb", href: "https://www.mongodb.com/" },
+  { node: <SiPostgresql />, title: "Postgresql", href: "https://www.postgresql.org/" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiTanstack />, title: "Tanstack", href: "https://tanstack.com/" },
+  { node: <SiGithub />, title: "Github", href: "https://github.com/" },
+  { node: <SiDjango />, title: "Django", href: "https://www.djangoproject.com/" },
+  { node: <SiFastapi />, title: "Fastapi", href: "https://fastapi.tiangolo.com/" },
+  { node: <SiPhp />, title: "Php", href: "https://www.php.net/" },
+  { node: <SiWordpress />, title: "Wordpress", href: "https://wordpress.org/" },
+  { node: <SiShopify />, title: "Shopify", href: "https://www.shopify.com/" },
 ];
+
+const marketingTechLogos = [
+  {node: <LuChartNoAxesCombined/>, title: "Figma", href: "https://www.figma.com/"},
+  { node: <LiaFunnelDollarSolid />, title: "Lia Funnel Dollar Solid", href: "https://write.com/" },
+  { node: <MdAdsClick />, title: "Md Ads Click", href: "https://write.com/" },
+  { node: <MdOutlineMarkEmailUnread />, title: "Md Outline Mark Email Unread", href: "https://write.com/" },
+  { node: <TbWorldSearch />, title: "Tb World Search", href: "https://write.com/" },
+  {node: <LuMessageCircle/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuMegaphone/>, title: "Figma", href: "https://www.figma.com/"},
+];
+
+const socialTechLogos = [
+  { node: <SiInstagram />, title: "Instagram", href: "https://www.instagram.com/" },
+  { node: <SiFacebook />, title: "Facebook", href: "https://www.facebook.com/" },
+  { node: <FaLinkedin />, title: "Fa Linkedin", href: "https://www.linkedin.com/" },
+  { node: <SiX />, title: "X", href: "https://x.com/" },
+  { node: <SiWhatsapp />, title: "SiWhatsapp", href: "https://www.whatsapp.com/" },
+  { node: <SiYoutube />, title: "SiYoutube", href: "https://www.youtube.com/" },
+  { node: <SiDiscord />, title: "SiDiscord", href: "https://www.discord.com/" },
+  { node: <SiGmail />, title: "SiGmail", href: "https://www.gmail.com/" },
+  { node: <SiTelegram />, title: "SiTelegram", href: "https://www.telegram.com/" },
+  { node: <SiReddit />, title: "SiReddit", href: "https://www.reddit.com/" },
+];
+
+const graphicTechLogos = [
+  {node: <TbBrandAdobePremiere/>, title: "google slide", href: ""},
+  {node: <PiMicrosoftPowerpointLogo/>, title: "google slide", href: ""},
+  { node: <SiFigma/>, title: "Figma", href: "https://www.figma.com/" },
+  { node: <AiOutlinePinterest />, title: "Figma", href: "https://www.figma.com/" },
+  { src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0eWxlPSJvcGFjaXR5OjE7Ij48cGF0aCBkPSJNMjEgN3YxMGE0IDQgMCAwIDEtNCA0SDdhNCA0IDAgMCAxLTQtNFY3YTQgNCAwIDAgMSA0LTRoMTBhNCA0IDAgMCAxIDQgNCIvPjxwYXRoIGQ9Ik03IDE2di00bTAgMFY4aDJhMiAyIDAgMCAxIDIgMnYwYTIgMiAwIDAgMS0yIDJ6bTEwLTFjLS4zMDYtLjYxMy0uOTMzLTEtMS42MTgtMUgxNWExLjUgMS41IDAgMCAwLTEuNSAxLjV2MEExLjUgMS41IDAgMCAwIDE1IDEzaC41YTEuNSAxLjUgMCAwIDEgMS41IDEuNXYwYTEuNSAxLjUgMCAwIDEtMS41IDEuNWgtLjM4MmExLjgxIDEuODEgMCAwIDEtMS42MTgtMXYwIi8+PC9zdmc+", alt: "Company 1", href: "https://company1.com" },
+  { src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0eWxlPSJvcGFjaXR5OjE7Ij48cGF0aCBkPSJNMjEgN3YxMGE0IDQgMCAwIDEtNCA0SDdhNCA0IDAgMCAxLTQtNFY3YTQgNCAwIDAgMSA0LTRoMTBhNCA0IDAgMCAxIDQgNCIvPjxwYXRoIGQ9Ik0xNCAxM3YtMWEyIDIgMCAwIDEgMi0ydjBhMiAyIDAgMCAxIDIgMnYxem0wIDB2MWEyIDIgMCAwIDAgMiAyaDEuNU02IDE2bDEuMTI1LTNNMTIgMTZsLTEuMTI1LTNtLTMuNzUgMEw5IDhsMS44NzUgNW0tMy43NSAwaDMuNzUiLz48L3N2Zz4=", alt: "Company 1", href: "https://company1.com" },
+  { src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0eWxlPSJvcGFjaXR5OjE7Ij48cGF0aCBkPSJNMjEgN3YxMGE0IDQgMCAwIDEtNCA0SDdhNCA0IDAgMCAxLTQtNFY3YTQgNCAwIDAgMSA0LTRoMTBhNCA0IDAgMCAxIDQgNG0tNSA1djRtMC03di4wMSIvPjxwYXRoIGQ9Im03IDE2bDEuMTI1LTNNMTMgMTZsLTEuMTI1LTNtLTMuNzUgMEwxMCA4bDEuODc1IDVtLTMuNzUgMGgzLjc1Ii8+PC9zdmc+", alt: "Company 1", href: "https://company1.com" },
+  { src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0eWxlPSJvcGFjaXR5OjE7Ij48cGF0aCBkPSJNMjEgN3YxMGE0IDQgMCAwIDEtNCA0SDdhNCA0IDAgMCAxLTQtNFY3YTQgNCAwIDAgMSA0LTRoMTBhNCA0IDAgMCAxIDQgNCIvPjxwYXRoIGQ9Ik03IDh2OGg0bTMtNS41VjEzbTAgM3YtM20wIDBzMC0yLjUgMy0yLjUiLz48L3N2Zz4=", alt: "Company 1", href: "https://company1.com" },
+
+];
+
+const brandingTechLogos =[
+  {node: <LuCompass/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuTarget/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuType/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuBookOpenText/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuMessageSquareQuote/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuLayers3/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuGlobe/>, title: "Figma", href: "https://www.figma.com/"},
+]
+
+const aiAutomationTechLogos= [
+  {node: <LuBrain/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuBot/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuWorkflow/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuNetwork/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuSettings2/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <AiFillApi/>, title: "Open AI", href: "https://openai.com/"},
+  {node: <LuSparkles/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuZap/>, title: "Figma", href: "https://www.figma.com/"},
+];
+
+const cyberSecurityTechLogos =[
+  {node: <LuShieldCheck/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuKeyRound/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuFingerprint/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuUserRoundCheck/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuRadar/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuEyeOff/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuScanLine/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuBug/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuTriangleAlert/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuFileLock2/>, title: "Figma", href: "https://www.figma.com/"},
+]
+
+const websiteMantainanceTechLogos =[
+  {node: <LuRefreshCw/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuWrench/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuGauge/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuActivity/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuMonitorCheck/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuCalendarClock/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuArchiveRestore/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuFilePenLine/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuClipboardCheck/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuMonitorSmartphone/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuSlidersHorizontal/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuRotateCcw/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuPanelTop/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuListChecks/>, title: "Figma", href: "https://www.figma.com/"},
+]
+
+const managedServiceTechLogos = [
+  {node: <LuUserRoundCog/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuBriefcaseBusiness/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuHandCoins/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuServerCog/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuCloudCog/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuMonitorCog/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuEthernetPort/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuWaypoints/>, title: "Figma", href: "https://www.figma.com/"},
+  {node: <LuRepeat2/>, title: "Figma", href: "https://www.figma.com/"},
+]
+
 
 const serviceNarratives: Record<string, { intro: string; outcomes: string[]; fit: string }> = {
   "web-development": {
@@ -73,6 +193,18 @@ const serviceNarratives: Record<string, { intro: string; outcomes: string[]; fit
   },
 };
 
+const serviceLogosMap: Record<string, any[]> = {
+  "web-development": webTechLogos,
+  marketing: marketingTechLogos,
+  social: socialTechLogos,
+  design: graphicTechLogos,
+  branding: brandingTechLogos,
+  automation: aiAutomationTechLogos,
+  security: cyberSecurityTechLogos,
+  management: websiteMantainanceTechLogos,
+  managed: managedServiceTechLogos,
+};
+
 export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
   const services = useCmsServices();
   const service = services.find((item) => item.slug === slug);
@@ -83,6 +215,7 @@ export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
 
   const Icon = service.icon;
   const narrative = serviceNarratives[service.slug] ?? serviceNarratives["web-development"];
+  const currentLogos = serviceLogosMap[service.slug] || [];
 
   // Filter related samples or case studies
   const relatedSamples = samples.filter((sample) =>
@@ -133,10 +266,10 @@ export default function ServiceCategoryDetailPage({ slug }: { slug: string }) {
         </div>
       </section>
 
-      {service.slug === 'web-development' && (
+      {currentLogos.length > 0 && (
         <section style={{display: 'flex', justifyContent:'center', alignItems: 'center', margin: '20px 0'}}>
           <LogoLoop
-            logos={techLogos}
+            logos={currentLogos}
             speed={100}
             direction="left"
             logoHeight={50}

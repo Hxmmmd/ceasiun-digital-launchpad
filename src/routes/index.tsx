@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { ArrowRight, Check, MoveRight } from "lucide-react";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
+import TechBackground from "@/components/TechBackground";
 import { CountUp } from "@/components/count-up";
 import { useTestimonials } from "@/components/public-content";
 import { CTA, Layout, SectionHead, meta } from "@/components/site";
@@ -17,7 +18,8 @@ export default function HomePage() {
 
   return (
     <Layout>
-      <section className="hero">
+      <section style={{ width: '100%', height: '600px', position: 'relative' }} className="hero">
+        {/* <TechBackground scale={1.5} gridMul={[2, 1]} digitSize={1.2} timeScale={0.5} pause={false} scanlineIntensity={0.5} glitchAmount={1} flickerAmount={1} noiseAmp={1} chromaticAberration={0} dither={0} curvature={0.1} tint="#00fdceff" mouseReact mouseStrength={0.5} pageLoadAnimation brightness={0.6}/> */}
         <ShapeGrid speed={0.5} squareSize={30} direction="up" borderColor="#c1c1c1ff" hoverFillColor="#22222" hoverTrailAmount={0} shape='hexagon'/>
         <div className="hero-shade" />
         <div className="shell hero-content">

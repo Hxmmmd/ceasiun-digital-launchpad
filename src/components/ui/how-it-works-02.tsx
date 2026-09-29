@@ -105,7 +105,7 @@ export default function HowItWorks02({
                 style={{ "--hiw-delay": `${i * 90}ms` } as React.CSSProperties}
               >
                 {/* Step number bubble */}
-                <span className="hiw-badge absolute -left-[3.65rem] top-1 grid size-9 place-items-center rounded-full border border-border bg-card font-mono text-xs font-semibold text-foreground shadow-sm shadow-black/5 sm:-left-[4.15rem]">
+                <span  className="hiw-badge absolute -left-[3.65rem] top-1 grid size-9 place-items-center rounded-full border border-border bg-card font-mono text-xs font-semibold text-foreground shadow-sm shadow-black/5 sm:-left-[4.15rem]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
