@@ -1479,7 +1479,8 @@ blockquote em {
 .blog-tools > label svg {
   position: absolute;
   left: 1rem;
-  top: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .blog-tools input {
   padding-left: 3rem;
