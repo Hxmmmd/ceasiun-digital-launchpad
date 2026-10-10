@@ -1583,7 +1583,7 @@ blockquote em {
 .approach-steps { position: relative; }
 .approach-step { position: relative; min-height: 270px; padding: 1.25rem; overflow: visible; border: 1px solid color-mix(in oklab, var(--border) 88%, var(--primary)); border-radius: .7rem; background: linear-gradient(145deg, color-mix(in oklab, var(--card) 97%, var(--primary)), var(--card)); transition: transform 260ms cubic-bezier(.22,1,.36,1), border-color 220ms ease, box-shadow 260ms ease; animation: process-card-in 700ms both; }
 .approach-step:nth-child(2) { animation-delay: 70ms; } .approach-step:nth-child(3) { animation-delay: 140ms; } .approach-step:nth-child(4) { animation-delay: 210ms; } .approach-step:nth-child(5) { animation-delay: 280ms; } .approach-step:nth-child(6) { animation-delay: 350ms; } .approach-step:nth-child(7) { animation-delay: 420ms; }
-.approach-step::after { position: absolute; top: 1.75rem; right: -1.15rem; width: 1.15rem; height: 1px; content: ""; background: repeating-linear-gradient(90deg, var(--primary) 0 4px, transparent 4px 9px); opacity: .55; animation: process-dash 2.8s linear infinite; }
+.approach-step::after { position:absolute; top:50%; right:-1.15rem; width:1.15rem; height:2px; content:""; background:repeating-linear-gradient(90deg,var(--primary) 0 4px,transparent 4px 9px); opacity:.55; animation:process-dash 2.8s linear infinite; }
 .approach-step:nth-child(3n)::after, .approach-step:last-child::after { display: none; }
 .approach-step:hover { transform: translateY(-5px); border-color: color-mix(in oklab, var(--primary) 62%, var(--border)); box-shadow: 0 16px 32px color-mix(in oklab, var(--primary) 9%, transparent); }
 .approach-step-top { display: flex; align-items: center; }

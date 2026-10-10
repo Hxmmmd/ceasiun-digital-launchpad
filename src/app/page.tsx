@@ -9,7 +9,7 @@ import type { ComponentType } from "react";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
 
 
-const serviceAreas = services.slice(0, 7).map((service) => ({
+const serviceAreas = services.map((service) => ({
   slug: service.slug,
   title: service.title,
   detail: service.description,
@@ -23,11 +23,9 @@ const faqs = [
   ["How do projects begin?", "Every project starts with a conversation about the objective, current situation and desired outcome. From there, we define scope, milestones and a clear next step."],
   ["How are payments structured?", "Projects require a 30% advance followed by milestone-based payments. Local and international payment methods are available."],
 ];
-
 const processSteps = [
   ["Discussion", "We understand your business, goals, current situation, expectations and the challenge you want to solve.", Search],
-  ["Discovery", "We examine requirements, users, existing systems, technical needs, opportunities and constraints.", ClipboardCheck],
-  ["Planning", "We define priorities, scope, milestones, responsibilities and the right direction for the work.", SlidersHorizontal], 
+  ["Planning", "We examine requirements,define priorities, scope, milestones, responsibilities and the right direction for the work.", SlidersHorizontal], 
   ["Execute", "The agreed work is designed, developed, configured and progressed with clear momentum.", Rocket], 
   ["Review", "We test the work against the requirements, gather feedback and refine what matters.", ClipboardCheck], 
   ["Delivery", "The finished work is finalized, handed over and prepared for launch or everyday use.", Truck], 
@@ -163,8 +161,7 @@ export default function HomePage() {
                 return <article key={step} className="approach-step">
                           <div className="approach-step-top">
                             <span className="approach-index">
-                              <span>STEP</span>
-                              {String(index + 1).padStart(2, "0")}
+                              stage:&nbsp;{String(index + 1).padStart(2, "0")} 
                             </span>
                           </div>
                           <div className="approach-step-heading">
