@@ -1,0 +1,256 @@
+/* ==========================================================================
+    Service Section & Cards Component Styles
+   ========================================================================== */
+
+.services-section {
+    position: relative;
+}
+
+/* Service cards grid */
+.service-list-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(.65rem, 1.4vw, 1rem);
+    min-width: 0;
+}
+
+/* Static service card container */
+.service-list-card-static {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 245px;
+    flex-direction: column;
+    padding: clamp(1rem, 1.8vw, 1.45rem);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 1.15rem;
+    background: linear-gradient(145deg, color-mix(in oklab, var(--card) 95%, var(--primary)), var(--card));
+    color: var(--foreground);
+    text-decoration: none;
+    isolation: isolate;
+    transition: transform 260ms cubic-bezier(.22, 1, .36, 1), border-color 220ms ease, box-shadow 260ms ease;
+}
+
+/* .service-list-card-static::before {
+    position: absolute;
+    z-index: -1;
+    right: -3rem;
+    bottom: -4rem;
+    width: 12rem;
+    height: 12rem;
+    content: "";
+    border: 1px solid color-mix(in oklab, var(--primary) 24%, transparent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 1.5rem color-mix(in oklab, var(--primary) 4%, transparent), 0 0 0 3rem color-mix(in oklab, var(--primary) 3%, transparent);
+    transition: transform .5s cubic-bezier(.22, 1, .36, 1), opacity .35s ease;
+    opacity: .75;
+}
+
+.service-list-card-static::after {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    width: 45%;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, var(--service-accent, var(--primary)));
+    opacity: .75;
+}
+
+.service-list-card-static:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in oklab, var(--primary) 55%, var(--border));
+    box-shadow: 0 18px 34px color-mix(in oklab, var(--primary) 10%, transparent);
+}
+
+.service-list-card-static:hover::before {
+    transform: scale(1.18);
+    opacity: 1;
+} */
+
+/* Card Header */
+.service-list-card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding: 10px 0px; */
+    gap: .75rem;
+    min-width: 0;
+}
+
+.service-list-card-icon {
+    display: grid;
+    width: 2.35rem;
+    height: 2.35rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid color-mix(in oklab, var(--primary) 42%, var(--border));
+    border-radius: .7rem;
+    color: var(--primary);
+    background: color-mix(in oklab, var(--primary) 8%, transparent);
+    transform: none;
+    transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.service-list-card-static:hover .service-list-card-icon,
+.service-list-detail:hover .service-list-card-icon {
+    transform: translateY(-3px);
+    color: var(--foreground);
+    border-color: var(--primary);
+    background: color-mix(in oklab, var(--primary) 16%, transparent);
+    box-shadow: 0 0 0 .28rem color-mix(in oklab, var(--primary) 8%, transparent);
+}
+
+.service-list-card-number {
+    color: var(--muted-foreground);
+    font: 600 .76rem/1 var(--font-mono, monospace);
+    letter-spacing: .16em;
+}
+
+/* Card Title */
+.service-list-card-static h3 {
+    max-width: 9ch;
+    margin: 2.25rem 0 1.25rem;
+    font: 650 clamp(1.35rem, 2.5vw, 2rem)/.98 var(--font-display);
+    letter-spacing: -.065em;
+}
+
+/* Divider Rule */
+.service-card-rule {
+    display: block;
+    width: 3.2rem;
+    height: 2px;
+    margin-bottom: 1.1rem;
+    background: var(--service-accent, var(--primary));
+}
+
+/* Card Details */
+.service-list-card-static > p {
+    max-width: 30ch;
+    margin: 0;
+    color: var(--muted-foreground);
+    font-size: .8rem;
+    line-height: 1.45;
+}
+
+.service-list-card-static ul {
+    display: grid;
+    gap: .5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.service-list-card-static li {
+    display: flex;
+    align-items: flex-start;
+    gap: .45rem;
+    color: var(--muted-foreground);
+    font-size: .8rem;
+    line-height: 1.4;
+}
+
+.service-list-card-static li svg {
+    flex: 0 0 auto;
+    margin-top: .1rem;
+    color: var(--primary);
+}
+
+/* Card Action Link */
+.service-list-card-static .card-link {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    margin-top: auto;
+    padding-top: .9rem;
+    color: var(--primary);
+    font-size: .72rem;
+    font-weight: 700;
+}
+
+.service-list-card-static .card-link svg {
+    transition: transform 220ms ease;
+}
+
+.service-list-card-static:hover .card-link svg {
+    transform: translate(3px, -3px);
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 1080px) {
+    .service-list-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .service-list-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .7rem;
+    }
+    .service-list-card-static {
+        min-height: 220px;
+        padding: .85rem;
+        border-radius: .85rem;
+    }
+    .service-list-card-icon {
+        width: 2rem;
+        height: 2rem;
+    }
+    .service-list-card-number {
+        font-size: .76rem;
+    }
+    .service-list-card-static h3 {
+        margin-top: 1.7rem;
+        font-size: clamp(1.15rem, 5.3vw, 1.65rem);
+    }
+    .service-list-card-static > p {
+        margin-top: .8rem;
+        font-size: .72rem;
+    }
+}
+
+@media (max-width: 540px) {
+    .service-list-cards {
+        grid-template-columns: 1fr;
+    }
+    .service-list-card-static {
+        min-height: 250px;
+    }
+    .service-list-card-static h3 {
+        max-width: 11ch;
+        margin-top: 2.5rem;
+        font-size: clamp(1.8rem, 10vw, 2.5rem);
+    }
+}
+
+@media (max-width: 380px) {
+    .service-list-cards {
+        gap: .5rem;
+    }
+    .service-list-card-static {
+        padding: .72rem;
+    }
+    .service-list-card-static h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .service-list-card-static,
+    .service-list-card-icon,
+    .service-list-card-static .card-link svg {
+        transition: none !important;
+    }
+    .service-list-card-static:hover,
+    .service-list-card-static:hover .service-list-card-icon,
+    .service-list-card-static:hover .card-link svg {
+        transform: none !important;
+    }
+}

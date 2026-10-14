@@ -66,6 +66,34 @@ export const services = [
     ],
   },
   {
+    slug: "design",
+    title: "Graphic Designing",
+    short:
+      "Purposeful visual communication across product, UI, logo, and digital brand touchpoints.",
+    icon: Palette,
+    description:
+      "Elevated visual graphics that capture attention and The communicate your brand's authority across UI design, marketing collateral, social posts, and digital assets.",
+    items: [
+      "UI / UX Design for Web & Mobile",
+      "Logo & Brand Icon Design",
+      "Digital Marketing Collateral",
+      "Social Media Graphics & Banners",
+      "Presentation Decks & Pitch Kits",
+    ],
+    highlights: [
+      "Modern aesthetic grounded in UX research",
+      "Pixel-perfect visual assets exported for web & print",
+      "Figma design tokens & UI design systems",
+      "Fast turnarounds with iterative feedback cycles",
+    ],
+    deliverables: [
+      "High-resolution PNG, SVG, PDF, and source files",
+      "Figma workspace links with complete design specs",
+      "Responsive UI component libraries",
+      "Versatile logo variations for light/dark themes",
+    ],
+  },
+  {
     slug: "social",
     title: "Social Media Management",
     short: "Always-on brand operations, content publishing, outreach and 24/7 support.",
@@ -94,36 +122,8 @@ export const services = [
     ],
   },
   {
-    slug: "design",
-    title: "Graphic Designing",
-    short:
-      "Purposeful visual communication across product, UI, logo, and digital brand touchpoints.",
-    icon: Palette,
-    description:
-      "Elevated visual graphics that capture attention and communicate your brand's authority across UI design, marketing collateral, social posts, and digital assets.",
-    items: [
-      "UI / UX Design for Web & Mobile",
-      "Logo & Brand Icon Design",
-      "Digital Marketing Collateral",
-      "Social Media Graphics & Banners",
-      "Presentation Decks & Pitch Kits",
-    ],
-    highlights: [
-      "Modern aesthetic grounded in UX research",
-      "Pixel-perfect visual assets exported for web & print",
-      "Figma design tokens & UI design systems",
-      "Fast turnarounds with iterative feedback cycles",
-    ],
-    deliverables: [
-      "High-resolution PNG, SVG, PDF, and source files",
-      "Figma workspace links with complete design specs",
-      "Responsive UI component libraries",
-      "Versatile logo variations for light/dark themes",
-    ],
-  },
-  {
     slug: "branding",
-    title: "Branding",
+    title: "Brand Identity",
     short: "Strategy and visual identity systems that make businesses recognizable and coherent.",
     icon: Brush,
     description:
@@ -164,7 +164,6 @@ export const services = [
       "Sales & Lead CRM Automation",
       "Internal Business Process Automations",
       "AI Search Engine Visibility (LLM Optimization)",
-      "AI-Powered SEO Systems",
     ],
     highlights: [
       "Zero-code / low-code and custom API automation pipelines",
@@ -238,7 +237,7 @@ export const services = [
   },
   {
     slug: "managed",
-    title: "Managed Services Contract",
+    title: "Managed Services",
     short:
       "Senior technical capability and engineering operations without the overhead of full-time hiring.",
     icon: CloudCog,

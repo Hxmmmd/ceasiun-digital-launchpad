@@ -2,20 +2,14 @@
 
 import Link from "next/link";
 import { ArrowUpRight, Check, ChevronDown, Minus, Plus, Search, SlidersHorizontal, Rocket, ClipboardCheck, Truck, Headphones } from "lucide-react";
-import { Layout } from "@/components/site";
-import { services } from "@/lib/site-data";
+import { Layout, SectionHead } from "@/components/site";
 import { useEffect, useState } from "react";
 import type { ComponentType } from "react";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
-
-
-const serviceAreas = services.map((service) => ({
-  slug: service.slug,
-  title: service.title,
-  detail: service.description,
-  icon: service.icon,
-  capabilities: service.items,
-}));
+import { useTestimonials } from "@/components/public-content";
+import { useCms } from "@/hooks/use-cms";
+import { ServiceList } from "@/components/page-components/ServiceList";
+import { FAQComponent } from "@/components/page-components/FAQComponent";
 
 const faqs = [
   ["What kind of businesses do you work with?", "Ceasiun supports traditional, growing and international businesses that need a dependable digital partner—from their first launch to ongoing technical operations."],
@@ -24,11 +18,11 @@ const faqs = [
   ["How are payments structured?", "Projects require a 30% advance followed by milestone-based payments. Local and international payment methods are available."],
 ];
 const processSteps = [
-  ["Discussion", "We understand your business, goals, current situation, expectations and the challenge you want to solve.", Search],
-  ["Planning", "We examine requirements,define priorities, scope, milestones, responsibilities and the right direction for the work.", SlidersHorizontal], 
+  ["Discussion", "We understand your business, goals, current situation and expectations and the challenge you want to solve.", Search],
+  ["Planning", "We examine requirements, define priorities, scope, milestones and the right direction for the work.", SlidersHorizontal], 
   ["Execute", "The agreed work is designed, developed, configured and progressed with clear momentum.", Rocket], 
-  ["Review", "We test the work against the requirements, gather feedback and refine what matters.", ClipboardCheck], 
-  ["Delivery", "The finished work is finalized, handed over and prepared for launch or everyday use.", Truck], 
+  ["Review", "We test the work against the requirements, gather your feedback and refine what matters.", ClipboardCheck], 
+  ["Delivery", "The finished work is finalized, handed you over and prepared for launch or everyday use etc.", Truck], 
   ["Support", "Post-delivery guidance, fixes and ongoing technical support continue where they are useful.", Headphones]]
   
 const stats = [["200+", "Campaigns launched"], ["50+", "Happy clients"], ["5+", "Years experience"], ["4.9", "Client rating"]]
@@ -55,28 +49,6 @@ function CountUpMetric({ value, label }: { value: string; label: string }) {
   return <div><strong>{formatted}{suffix}</strong><span>{label}</span></div>;
 }
 
-function ServiceExplorer() {
-  return (
-    <div className="service-cards" aria-label="Service areas">
-      {serviceAreas.map((service) => {
-        const ServiceIcon = service.icon;
-        return (
-          <Link className="service-detail service-card-static" href={`/services/${service.slug}`} key={service.title}>
-            <div className="service-card-heading">
-              <span className="service-card-icon"><ServiceIcon size={21} strokeWidth={1.7} aria-hidden="true" /></span>
-              <h3>{service.title}</h3>
-            </div>
-            <p>{service.detail}</p>
-            <ul aria-label={`${service.title} capabilities`}>
-              {service.capabilities.map((capability) => <li key={capability}><Check size={14} strokeWidth={2.2} aria-hidden="true" /><span>{capability}</span></li>)}
-            </ul>
-            <span className="card-link">Explore capability <ArrowUpRight size={16} aria-hidden="true" /></span>
-          </Link>
-        );
-      })}
-    </div>
-  );
-}
 
 const faqGroups = [
   { label: "General", items: faqs.slice(0, 2) },
@@ -102,6 +74,9 @@ function Faq() {
 }
 
 export default function HomePage() {
+  const cms = useCms(); 
+  const testimonials = useTestimonials();
+
   return <Layout>
     <a className="skip-link" href="#main">Skip to content</a>
     <div id="top" className="new-home">
@@ -117,7 +92,7 @@ export default function HomePage() {
           <div className="system-readout"><span>LIVE SYSTEM</span><b /><small>CONNECTED / 07</small></div>
         </div>
         <div className="shell new-hero-inner">
-          <p className="eyebrow">Digital growth partner / Pakistan + worldwide</p>
+          <p className="eyebrow">Ceasiun - Digital Growth Partner</p>
           <h1 id="hero-title">Take your business online.<br /><em>Build it to grow.</em></h1>
           <p className="hero-lede">Websites, software and automation that fit your business—chosen around what you actually need, not what a service menu says you should buy.</p>
           <div className="hero-actions"><Link className="button button-primary" href="/start-project">Start a project <ArrowUpRight size={18} /></Link><a className="text-link" href="#approach">See how we work <ArrowUpRight size={17} /></a></div>
@@ -147,6 +122,17 @@ export default function HomePage() {
           </div>
         </section>
 
+        <section id="services" className="new-section services-section">
+          <div className="shell">
+            <div className="section-intro compact">
+              <p className="eyebrow">Capabilities</p>
+              <h2>One partner across the digital work.</h2>
+              <p>Explore the areas we can bring together when the requirements call for it.</p>
+            </div>
+            <ServiceList />
+          </div>
+        </section>
+        
         <section id="approach" className="new-section approach-section">
           <div className="shell">
             <div className="section-intro">
@@ -177,16 +163,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="services" className="new-section services-section">
-          <div className="shell">
-            <div className="section-intro compact">
-              <p className="eyebrow">Capabilities</p>
-              <h2>One partner across the digital work.</h2>
-              <p>Explore the areas we can bring together when the requirements call for it.</p>
-            </div>
-            <ServiceExplorer />
-          </div>
-        </section>
+        
 
         <section id="why" className="new-section why-section">
           <div className="shell why-grid">
@@ -224,7 +201,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="testimonials" className="new-section testimonials-section">
+        {/* <section id="testimonials" className="new-section testimonials-section">
           <div className="shell">
             <div className="section-intro compact">
               <p className="eyebrow">Client perspective</p>
@@ -265,17 +242,21 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+        </section> */}
+
+        <section id="testimonials" className="section shell new-section testimonials-section">
+          {testimonials.length > 0 ? (
+            <TestimonialCarousel testimonials={testimonials} />
+          ) : (
+            <div className="empty-proof">
+              <h3>Verified client stories are being prepared.</h3>
+              <p>We would rather show no claim than an unverified one.</p>
+            </div>
+          )}
         </section>
 
-        <section id="faq" className="new-section faq-section">
-          <div className="shell faq-grid">
-            <div className="section-intro compact">
-              <p className="eyebrow">Questions, answered</p>
-              <h2>Before we begin.</h2>
-              <p>A few practical details about working together.</p>
-            </div>
-            <Faq />
-          </div>
+        <section>
+          <FAQComponent />
         </section>
 
         <section id="start" className="new-cta">

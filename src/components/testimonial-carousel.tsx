@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useState, useRef, type CSSProperties } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import type { Testimonial } from "@/components/public-content";
 
@@ -10,18 +10,81 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
   const [active, setActive] = useState(0);
   const visible = useMemo(() => testimonials.filter((item) => item.is_visible !== false), [testimonials]);
 
+  // testing new feature
+  const isHoveredRef = useRef(false);
+  const pendingAdvanceRef = useRef(false);
+  const hoverDelayTimerRef = useRef<number | null>(null);
+
   useEffect(() => {
     setActive((current) => (visible.length ? current % visible.length : 0));
   }, [visible.length]);
 
+  // useEffect(() => {
+  //   if (visible.length < 2) return;
+  //   const timer = window.setInterval(() => setActive((current) => (current + 1) % visible.length), 6000);
+  //   return () => window.clearInterval(timer);
+  // }, [visible.length, active]);
+
   useEffect(() => {
     if (visible.length < 2) return;
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % visible.length), 6000);
-    return () => window.clearInterval(timer);
-  }, [visible.length]);
+
+    const timer = window.setTimeout(() => {
+      if (isHoveredRef.current) {
+        pendingAdvanceRef.current = true;
+      } else {
+        setActive((current) => (current + 1) % visible.length);
+      }
+    }, 6000);
+
+    return () => window.clearTimeout(timer);
+  }, [visible.length, active]);
+
+  // Testing function 
+  const clearPendingAdvance = () => {
+    pendingAdvanceRef.current = false;
+
+    if (hoverDelayTimerRef.current !== null) {
+      window.clearTimeout(hoverDelayTimerRef.current);
+      hoverDelayTimerRef.current = null;
+    }
+  };
+
+  const handleMouseEnter = () => {
+    isHoveredRef.current = true;
+
+    if (hoverDelayTimerRef.current !== null) {
+      window.clearTimeout(hoverDelayTimerRef.current);
+      hoverDelayTimerRef.current = null;
+    }
+  };
+
+  const handleMouseLeave = () => {
+    isHoveredRef.current = false;
+
+    if (!pendingAdvanceRef.current) return;
+
+    hoverDelayTimerRef.current = window.setTimeout(() => {
+      if (isHoveredRef.current) return;
+
+      pendingAdvanceRef.current = false;
+      hoverDelayTimerRef.current = null;
+
+      setActive((current) => (current + 1) % visible.length);
+    }, 2000);
+  };
+
+  const go = (direction: number) => {
+    clearPendingAdvance();
+    setActive((index) => (index + direction + visible.length) % visible.length);
+  };
+
+  const goTo = (index: number) => {
+    clearPendingAdvance();
+    setActive(index);
+  };
 
   if (!visible.length) return null;
-  const go = (direction: number) => setActive((index) => (index + direction + visible.length) % visible.length);
+  // const go = (direction: number) => setActive((index) => (index + direction + visible.length) % visible.length);
   const slides = Array.from({ length: visible.length + 2 }, (_, index) => visible[index % visible.length]);
 
   return (
@@ -39,7 +102,8 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
           <div><button type="button" onClick={() => go(-1)} aria-label="Previous review"><ChevronLeft /></button><button type="button" onClick={() => go(1)} aria-label="Next review"><ChevronRight /></button></div>
         </div>
       </div>
-      <div className="reviews-carousel-area">
+      {/* <div className="reviews-carousel-area"> */}
+      <div className="reviews-carousel-area" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <div className="reviews-brand"><img src={googleLogo} alt="Google" className="google-logo" /><span>Google reviews</span></div>
         <div className="review-stage" aria-live="polite">
         <div className="review-track" style={{ "--review-count": visible.length, transform: `translate3d(calc(-${active} * (var(--slide-width) + var(--slide-gap))), 0, 0)` } as CSSProperties}>
@@ -59,7 +123,8 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
         </div>
         <div className="review-dots" aria-label="Review slides">
           {visible.slice(0, Math.min(6, visible.length)).map((review, index) => (
-            <button key={review.id} type="button" className={index === active % Math.min(6, visible.length) ? "active" : ""} onClick={() => setActive(index)} aria-label={`Show review ${index + 1}`} />
+            // <button key={review.id} type="button" className={index === active % Math.min(6, visible.length) ? "active" : ""} onClick={() => setActive(index)} aria-label={`Show review ${index + 1}`} />
+            <button key={review.id} type="button" className={index === active % Math.min(6, visible.length) ? "active" : ""} onClick={() => goTo(index)} aria-label={`Show review ${index + 1}`} />
           ))}
         </div>
       </div>
