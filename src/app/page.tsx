@@ -46,7 +46,10 @@ function CountUpMetric({ value, label }: { value: string; label: string }) {
   }, [numericValue]);
 
   const formatted = numericValue % 1 === 0 ? Math.round(count).toString() : count.toFixed(1);
-  return <div><strong>{formatted}{suffix}</strong><span>{label}</span></div>;
+  return <div style={{display: 'flex', justifyContent: 'center', flexDirection:'column', alignItems: 'center'}}>
+            <strong>{formatted}{suffix}</strong>
+            <span style={{color:'#75d8b1'}}>{label}</span>
+          </div>;
 }
 
 
@@ -89,16 +92,16 @@ export default function HomePage() {
           <div className="signal-route route-two"><i /><i /><i /></div>
           <div className="signal-route route-three"><i /><i /></div>
           <span className="data-node data-node-one" /><span className="data-node data-node-two" /><span className="data-node data-node-three" />
-          <div className="system-readout"><span>LIVE SYSTEM</span><b /><small>CONNECTED / 07</small></div>
+          {/* <div className="system-readout"><span>LIVE SYSTEM</span><b /><small>CONNECTED / 07</small></div> */}
         </div>
         <div className="shell new-hero-inner">
           <p className="eyebrow">Ceasiun - Digital Growth Partner</p>
-          <h1 id="hero-title">Take your business online.<br /><em>Build it to grow.</em></h1>
+          <h1 id="hero-title">Take your <br /> business online.<br /><em>Build it to grow.</em></h1>
           <p className="hero-lede">Websites, software and automation that fit your business—chosen around what you actually need, not what a service menu says you should buy.</p>
           <div className="hero-actions"><Link className="button button-primary" href="/start-project">Start a project <ArrowUpRight size={18} /></Link><a className="text-link" href="#approach">See how we work <ArrowUpRight size={17} /></a></div>
           <div className="hero-note"><span className="status-dot" /> Clear scope. Milestone delivery. Ongoing support when it helps.</div>
         </div>
-        <div className="hero-index" aria-hidden="true">01 <span /> 07</div>
+        {/* <div className="hero-index" aria-hidden="true">01 <span /> 07</div> */}
       </section>
 
       <section id="trust" className="trust-strip" aria-label="Ceasiun in numbers">
@@ -125,9 +128,9 @@ export default function HomePage() {
         <section id="services" className="new-section services-section">
           <div className="shell">
             <div className="section-intro compact">
-              <p className="eyebrow">Capabilities</p>
+              <p className="eyebrow">Services</p>
               <h2>One partner across the digital work.</h2>
-              <p>Explore the areas we can bring together when the requirements call for it.</p>
+              <p>Explore the areas we can bring together when requirements call for it.</p>
             </div>
             <ServiceList />
           </div>

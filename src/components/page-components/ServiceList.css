@@ -1,5 +1,6 @@
 /* ==========================================================================
     Service Section & Cards Component Styles
+    Ceasiun Minimal High-Tech Aesthetic
    ========================================================================== */
 
 .services-section {
@@ -14,12 +15,12 @@
     min-width: 0;
 }
 
-/* Static service card container */
+/* Service card container */
 .service-list-card-static {
     position: relative;
     display: flex;
     min-width: 0;
-    min-height: 245px;
+    min-height: 250px;
     flex-direction: column;
     padding: clamp(1rem, 1.8vw, 1.45rem);
     overflow: hidden;
@@ -32,50 +33,73 @@
     transition: transform 260ms cubic-bezier(.22, 1, .36, 1), border-color 220ms ease, box-shadow 260ms ease;
 }
 
-/* .service-list-card-static::before {
-    position: absolute;
-    z-index: -1;
-    right: -3rem;
-    bottom: -4rem;
-    width: 12rem;
-    height: 12rem;
-    content: "";
-    border: 1px solid color-mix(in oklab, var(--primary) 24%, transparent);
-    border-radius: 50%;
-    box-shadow: 0 0 0 1.5rem color-mix(in oklab, var(--primary) 4%, transparent), 0 0 0 3rem color-mix(in oklab, var(--primary) 3%, transparent);
-    transition: transform .5s cubic-bezier(.22, 1, .36, 1), opacity .35s ease;
-    opacity: .75;
-}
-
+/* Top accent hairline */
 .service-list-card-static::after {
     position: absolute;
-    z-index: -1;
+    z-index: 1;
     top: 0;
     right: 0;
     width: 45%;
     height: 1px;
     content: "";
-    background: linear-gradient(90deg, transparent, var(--service-accent, var(--primary)));
+    background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--primary) 70%, transparent));
     opacity: .75;
+    pointer-events: none;
 }
 
-.service-list-card-static:hover {
+.service-list-card-static:hover,
+.service-list-card-static:focus-visible {
     transform: translateY(-6px);
     border-color: color-mix(in oklab, var(--primary) 55%, var(--border));
     box-shadow: 0 18px 34px color-mix(in oklab, var(--primary) 10%, transparent);
+    outline: none;
 }
 
-.service-list-card-static:hover::before {
-    transform: scale(1.18);
+/* ==========================================================================
+    Atmospheric Technical Background Artwork Stage
+   ========================================================================== */
+
+.service-card-artwork {
+    position: absolute;
+    right: -2rem;
+    bottom: -2.5rem;
+    width: 14.5rem;
+    height: 14.5rem;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    overflow: visible;
+    opacity: 0.62;
+    transition: transform 500ms cubic-bezier(.22, 1, .36, 1), opacity 350ms ease;
+}
+
+.service-card-artwork svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+}
+
+.service-list-card-static:hover .service-card-artwork,
+.service-list-card-static:focus-visible .service-card-artwork {
+    transform: scale(1.15) translate(-4px, -4px);
     opacity: 1;
-} */
+}
+
+/* Content Layering (Stays crisply above the background artwork) */
+.service-list-card-heading,
+.service-list-card-static h3,
+.service-list-card-static > p,
+.service-list-card-static .card-link {
+    position: relative;
+    z-index: 1;
+}
 
 /* Card Header */
 .service-list-card-heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* padding: 10px 0px; */
     gap: .75rem;
     min-width: 0;
 }
@@ -111,19 +135,16 @@
 
 /* Card Title */
 .service-list-card-static h3 {
-    max-width: 9ch;
-    margin: 2.25rem 0 1.25rem;
+    max-width: 11ch;
+    margin: 2.1rem 0 1.15rem;
     font: 650 clamp(1.35rem, 2.5vw, 2rem)/.98 var(--font-display);
     letter-spacing: -.065em;
+    color: var(--foreground);
+    transition: color 220ms ease;
 }
 
-/* Divider Rule */
-.service-card-rule {
-    display: block;
-    width: 3.2rem;
-    height: 2px;
-    margin-bottom: 1.1rem;
-    background: var(--service-accent, var(--primary));
+.service-list-card-static:hover h3 {
+    color: #ffffff;
 }
 
 /* Card Details */
@@ -135,38 +156,13 @@
     line-height: 1.45;
 }
 
-.service-list-card-static ul {
-    display: grid;
-    gap: .5rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.service-list-card-static li {
-    display: flex;
-    align-items: flex-start;
-    gap: .45rem;
-    color: var(--muted-foreground);
-    font-size: .8rem;
-    line-height: 1.4;
-}
-
-.service-list-card-static li svg {
-    flex: 0 0 auto;
-    margin-top: .1rem;
-    color: var(--primary);
-}
-
 /* Card Action Link */
 .service-list-card-static .card-link {
-    position: relative;
-    z-index: 1;
     display: inline-flex;
     align-items: center;
     gap: .4rem;
     margin-top: auto;
-    padding-top: .9rem;
+    padding-top: 1rem;
     color: var(--primary);
     font-size: .72rem;
     font-weight: 700;
@@ -180,8 +176,733 @@
     transform: translate(3px, -3px);
 }
 
+/* ==========================================================================
+    1. Web Development Hover Animations
+   ========================================================================== */
 
-/* Responsive Adjustments */
+.service-list-card-web-development .web-bracket-left,
+.service-list-card-web-development .web-bracket-right,
+.service-list-card-web-development .web-slash,
+.service-list-card-web-development .web-blueprint {
+    transition: transform 400ms cubic-bezier(.22, 1, .36, 1), stroke 300ms ease, filter 350ms ease;
+}
+
+.service-list-card-web-development .web-cursor {
+    animation: webCursorBlink 1s steps(2, start) infinite;
+}
+
+.service-list-card-web-development:hover .web-bracket-left {
+    transform: translateX(-4px);
+    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--primary) 80%, transparent));
+}
+
+.service-list-card-web-development:hover .web-bracket-right {
+    transform: translateX(4px);
+    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--primary) 80%, transparent));
+}
+
+.service-list-card-web-development:hover .web-bracket-apex {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 6px #ffffff);
+}
+
+.service-list-card-web-development:hover .web-slash {
+    transform: translateY(-2px) scale(1.05);
+    transform-origin: center;
+    filter: drop-shadow(0 0 6px var(--primary));
+}
+
+.service-list-card-web-development:hover .web-slash rect {
+    fill: #ffffff;
+}
+
+.service-list-card-web-development:hover .web-blueprint {
+    stroke: #ffffff;
+    stroke-opacity: 0.4;
+    filter: drop-shadow(0 0 10px color-mix(in oklab, var(--primary) 50%, transparent));
+}
+
+@keyframes webCursorBlink {
+    0%, 100% { opacity: 1; filter: drop-shadow(0 0 4px #ffffff); }
+    50% { opacity: 0; filter: none; }
+}
+
+/* ==========================================================================
+    2. Digital Marketing (Upward Growth Trajectory) Hover Animations
+   ========================================================================== */
+
+.service-list-card-marketing .mkt-growth-line,
+.service-list-card-digital-marketing .mkt-growth-line,
+.service-list-card-marketing .mkt-growth-surge,
+.service-list-card-digital-marketing .mkt-growth-surge,
+.service-list-card-marketing .mkt-area-fill,
+.service-list-card-digital-marketing .mkt-area-fill,
+.service-list-card-marketing .mkt-badge-box,
+.service-list-card-digital-marketing .mkt-badge-box {
+    transition: opacity 350ms ease, stroke 300ms ease, filter 350ms ease, fill-opacity 350ms ease;
+}
+
+.service-list-card-marketing .mkt-growth-surge,
+.service-list-card-digital-marketing .mkt-growth-surge {
+    stroke-dasharray: 40 160;
+    stroke-dashoffset: 200;
+    opacity: 0;
+}
+
+.service-list-card-marketing:hover .mkt-growth-line,
+.service-list-card-digital-marketing:hover .mkt-growth-line {
+    stroke-width: 2.8;
+    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--primary) 80%, transparent));
+}
+
+.service-list-card-marketing:hover .mkt-growth-surge,
+.service-list-card-digital-marketing:hover .mkt-growth-surge {
+    opacity: 1;
+    animation: mktSurgeFlow 1.6s cubic-bezier(.4, 0, .2, 1) infinite;
+    filter: drop-shadow(0 0 6px var(--primary));
+}
+
+.service-list-card-marketing:hover .mkt-area-fill,
+.service-list-card-digital-marketing:hover .mkt-area-fill {
+    opacity: 1;
+    fill-opacity: 0.35;
+}
+
+.service-list-card-marketing .mkt-node,
+.service-list-card-digital-marketing .mkt-node {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 300ms ease, filter 300ms ease;
+}
+
+.service-list-card-marketing:hover .mkt-node-1,
+.service-list-card-digital-marketing:hover .mkt-node-1 {
+    animation: mktNodeFlash 1.4s ease-in-out infinite alternate;
+}
+
+.service-list-card-marketing:hover .mkt-node-2,
+.service-list-card-digital-marketing:hover .mkt-node-2 {
+    animation: mktNodeFlash 1.4s ease-in-out 0.15s infinite alternate;
+}
+
+.service-list-card-marketing:hover .mkt-node-3,
+.service-list-card-digital-marketing:hover .mkt-node-3 {
+    animation: mktNodeFlash 1.4s ease-in-out 0.3s infinite alternate;
+}
+
+.service-list-card-marketing:hover .mkt-node-4,
+.service-list-card-digital-marketing:hover .mkt-node-4 {
+    animation: mktNodeFlash 1.4s ease-in-out 0.45s infinite alternate;
+}
+
+.service-list-card-marketing:hover .mkt-node-apex,
+.service-list-card-digital-marketing:hover .mkt-node-apex {
+    animation: mktApexPulse 1.2s ease-in-out infinite alternate;
+}
+
+.service-list-card-marketing:hover .mkt-badge-box,
+.service-list-card-digital-marketing:hover .mkt-badge-box {
+    stroke: #ffffff;
+    stroke-opacity: 1;
+    filter: drop-shadow(0 0 6px var(--primary));
+}
+
+.service-list-card-marketing:hover .mkt-badge-arrow,
+.service-list-card-digital-marketing:hover .mkt-badge-arrow {
+    animation: mktArrowUp 1s ease-in-out infinite alternate;
+}
+
+@keyframes mktSurgeFlow {
+    0% { stroke-dashoffset: 200; opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0.2; }
+}
+
+@keyframes mktNodeFlash {
+    0% { transform: scale(1); filter: none; }
+    100% { transform: scale(1.25); filter: drop-shadow(0 0 5px var(--primary)); }
+}
+
+@keyframes mktApexPulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 4px var(--primary)); }
+    100% { transform: scale(1.35); filter: drop-shadow(0 0 10px #ffffff); }
+}
+
+@keyframes mktArrowUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-2px); }
+}
+
+/* ==========================================================================
+    3. Graphic Designing Artwork & Hover Interaction
+   ========================================================================== */
+
+.service-list-card-design .dsg-layer-front,
+.service-list-card-graphic-designing .dsg-layer-front,
+.service-list-card-design .dsg-layer-back,
+.service-list-card-graphic-designing .dsg-layer-back {
+    transition: transform 420ms cubic-bezier(.22, 1, .36, 1), opacity 350ms ease, filter 350ms ease;
+}
+
+.service-list-card-design:hover .dsg-layer-front,
+.service-list-card-graphic-designing:hover .dsg-layer-front {
+    transform: translate(-5px, -5px);
+    stroke: #ffffff;
+    stroke-opacity: 0.85;
+    filter: drop-shadow(0 0 14px color-mix(in oklab, var(--primary) 65%, transparent));
+}
+
+.service-list-card-design:hover .dsg-layer-back,
+.service-list-card-graphic-designing:hover .dsg-layer-back {
+    transform: translate(5px, 5px);
+    opacity: 0.85;
+    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--primary) 40%, transparent));
+}
+
+.service-list-card-design:hover .dsg-curve-path,
+.service-list-card-graphic-designing:hover .dsg-curve-path {
+    stroke: #ffffff;
+    stroke-dasharray: 190;
+    animation: dsgDrawPath 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 10px var(--primary));
+}
+
+.service-list-card-design:hover .dsg-anchor-center,
+.service-list-card-graphic-designing:hover .dsg-anchor-center {
+    animation: dsgAnchorPulse 1.4s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 8px var(--primary));
+}
+
+.service-list-card-design:hover .dsg-swatches rect,
+.service-list-card-graphic-designing:hover .dsg-swatches rect {
+    filter: drop-shadow(0 0 5px var(--primary));
+}
+
+@keyframes dsgDrawPath {
+    0% { stroke-dashoffset: 45; opacity: 0.75; }
+    100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@keyframes dsgAnchorPulse {
+    0% { transform: scale(1); transform-origin: 122px 80px; }
+    100% { transform: scale(1.15); transform-origin: 122px 80px; filter: drop-shadow(0 0 8px); }
+}
+
+/* ==========================================================================
+    4. Social Media Management (Glowing Mesh Network) Hover Animations
+   ========================================================================== */
+
+.service-list-card-social .soc-chat,
+.service-list-card-social-media-management .soc-chat,
+.service-list-card-social .soc-media,
+.service-list-card-social-media-management .soc-media,
+.service-list-card-social .soc-spectrum,
+.service-list-card-social-media-management .soc-spectrum,
+.service-list-card-social .soc-hub,
+.service-list-card-social-media-management .soc-hub,
+.service-list-card-social .soc-bus path,
+.service-list-card-social-media-management .soc-bus path {
+    transition: transform 400ms cubic-bezier(.22, 1, .36, 1), filter 350ms ease, stroke 300ms ease, opacity 350ms ease;
+}
+
+.service-list-card-social:hover .soc-chat,
+.service-list-card-social-media-management:hover .soc-chat {
+    transform: translate(-3px, -2px);
+    filter: drop-shadow(0 0 10px color-mix(in oklab, var(--primary) 70%, transparent));
+}
+
+.service-list-card-social:hover .soc-chat rect:first-child,
+.service-list-card-social-media-management:hover .soc-chat rect:first-child {
+    stroke: #ffffff;
+    stroke-opacity: 0.9;
+}
+
+.service-list-card-social:hover .soc-media,
+.service-list-card-social-media-management:hover .soc-media {
+    transform: translate(3px, -2px);
+    filter: drop-shadow(0 0 10px color-mix(in oklab, var(--primary) 70%, transparent));
+}
+
+.service-list-card-social:hover .soc-media rect:nth-child(2),
+.service-list-card-social-media-management:hover .soc-media rect:nth-child(2) {
+    stroke: #ffffff;
+    stroke-opacity: 0.9;
+}
+
+.service-list-card-social:hover .soc-media polygon,
+.service-list-card-social-media-management:hover .soc-media polygon {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 6px var(--primary));
+}
+
+.service-list-card-social:hover .soc-spectrum,
+.service-list-card-social-media-management:hover .soc-spectrum {
+    transform: translate(-2px, 3px);
+    filter: drop-shadow(0 0 10px color-mix(in oklab, var(--primary) 65%, transparent));
+}
+
+.service-list-card-social:hover .soc-hub-frame,
+.service-list-card-social-media-management:hover .soc-hub-frame {
+    stroke: #ffffff;
+    stroke-opacity: 1;
+    filter: drop-shadow(0 0 10px var(--primary));
+}
+
+.service-list-card-social:hover .soc-hub rect:nth-child(2),
+.service-list-card-social-media-management:hover .soc-hub rect:nth-child(2) {
+    animation: socHubPulse 1.2s ease-in-out infinite alternate;
+}
+
+.service-list-card-social:hover .soc-bus path,
+.service-list-card-social-media-management:hover .soc-bus path {
+    stroke: #ffffff;
+    stroke-opacity: 0.85;
+    filter: drop-shadow(0 0 6px var(--primary));
+}
+
+/* Audio waveform animated glowing equalizer bars */
+.service-list-card-social .soc-waveform rect,
+.service-list-card-social-media-management .soc-waveform rect {
+    transform-box: fill-box;
+    transform-origin: bottom;
+    transition: transform 300ms ease, filter 300ms ease;
+}
+
+.service-list-card-social:hover .soc-waveform rect:nth-child(6),
+.service-list-card-social-media-management:hover .soc-waveform rect:nth-child(6) {
+    animation: socWaveDance 1.1s ease-in-out infinite alternate;
+}
+.service-list-card-social:hover .soc-waveform rect:nth-child(2),
+.service-list-card-social-media-management:hover .soc-waveform rect:nth-child(2) {
+    animation: socWaveDance 0.9s ease-in-out 0.15s infinite alternate;
+}
+.service-list-card-social:hover .soc-waveform rect:nth-child(3),
+.service-list-card-social-media-management:hover .soc-waveform rect:nth-child(3) {
+    animation: socWaveDance 1.3s ease-in-out 0.05s infinite alternate;
+}
+.service-list-card-social:hover .soc-waveform rect:nth-child(4),
+.service-list-card-social-media-management:hover .soc-waveform rect:nth-child(4) {
+    animation: socWaveDance 0.8s ease-in-out 0.25s infinite alternate;
+}
+.service-list-card-social:hover .soc-waveform rect:nth-child(5),
+.service-list-card-social-media-management:hover .soc-waveform rect:nth-child(5) {
+    animation: socWaveDance 1.2s ease-in-out 0.1s infinite alternate;
+}
+.service-list-card-social:hover .soc-waveform rect:nth-child(1),
+.service-list-card-social-media-management:hover .soc-waveform rect:nth-child(1) {
+    animation: socWaveDance 1.0s ease-in-out 0.3s infinite alternate;
+}
+.service-list-card-social:hover .soc-waveform rect:nth-child(7),
+.service-list-card-social-media-management:hover .soc-waveform rect:nth-child(7) {
+    animation: socWaveDance 1.15s ease-in-out 0.2s infinite alternate;
+}
+
+/* Glowing Notification Pip */
+.service-list-card-social:hover .soc-pip,
+.service-list-card-social-media-management:hover .soc-pip {
+    animation: socPipGlow 1.2s ease-in-out infinite alternate;
+}
+
+/* Animated Glowing Data Packets */
+.service-list-card-social:hover .soc-packets rect,
+.service-list-card-social-media-management .soc-packets rect {
+    animation: socPacketPulse 1.4s ease-in-out infinite alternate;
+}
+.service-list-card-social:hover .soc-packets rect:nth-child(1) {
+    animation-delay: 0s;
+}
+.service-list-card-social:hover .soc-packets rect:nth-child(2) {
+    animation-delay: 0.25s;
+}
+.service-list-card-social:hover .soc-packets rect:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+@keyframes socWaveDance {
+    0% { transform: scaleY(0.6); filter: none; opacity: 0.7; }
+    100% { transform: scaleY(1.35); filter: drop-shadow(0 0 6px var(--primary)); opacity: 1; }
+}
+
+/* @keyframes socHubPulse {
+    0% { transform: scale(1); opacity: 0.8; filter: none; }
+    100% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 8px var(--primary))}
+} */
+
+/* @keyframes socPipGlow {
+    0% { transform: scale(0.9); opacity: 0.7; filter: none; }
+    100% { transform: scale(1.35); opacity: 1; filter: drop-shadow(0 0 8px var(--primary)); }
+} */
+
+/* @keyframes socPacketPulse {
+    0% { opacity: 0.5; filter: none; }
+    100% { opacity: 1; filter: drop-shadow(0 0 6px var(--primary)); }
+} */
+
+/* ==========================================================================
+    5. Brand Identity Hover Animations
+   ========================================================================== */
+
+.service-list-card-branding .brd-sigil-frame,
+.service-list-card-brand-identity .brd-sigil-frame,
+.service-list-card-branding .brd-guides,
+.service-list-card-brand-identity .brd-guides {
+    transition: transform 400ms cubic-bezier(.22, 1, .36, 1), opacity 350ms ease, filter 350ms ease;
+}
+
+.service-list-card-branding:hover .brd-guides,
+.service-list-card-brand-identity:hover .brd-guides {
+    opacity: 0.75;
+    stroke: #ffffff;
+    transform: scale(1.03);
+    transform-origin: 110px 100px;
+    filter: drop-shadow(0 0 8px var(--primary));
+}
+
+.service-list-card-branding:hover .brd-sigil-frame,
+.service-list-card-brand-identity:hover .brd-sigil-frame {
+    stroke: #ffffff;
+    stroke-width: 1.8;
+    filter: drop-shadow(0 0 12px var(--primary));
+}
+
+.service-list-card-branding:hover .brd-core-rhombus,
+.service-list-card-brand-identity:hover .brd-core-rhombus {
+    animation: brdCoreGlow 1.5s ease-in-out infinite alternate;
+    /* fill: #ffffff; */
+}
+
+@keyframes brdCoreGlow {
+    0% { transform: scale(0.96); transform-origin: 110px 100px; opacity: 0.8; }
+    100% { transform: scale(1.1); transform-origin: 110px 100px; opacity: 1; filter: drop-shadow(0 0 10px var(--primary)); }
+}
+
+/* ==========================================================================
+    6. AI Automation (Elevated) Hover Animations
+   ========================================================================== */
+
+.service-list-card-automation .ai-npu-carrier,
+.service-list-card-ai-automation .ai-npu-carrier,
+.service-list-card-automation .ai-trigger-node,
+.service-list-card-ai-automation .ai-trigger-node,
+.service-list-card-automation .ai-gate-diamond,
+.service-list-card-ai-automation .ai-gate-diamond,
+.service-list-card-automation .ai-agent-disp,
+.service-list-card-ai-automation .ai-agent-disp,
+.service-list-card-automation .ai-bus-inlet-line,
+.service-list-card-ai-automation .ai-bus-inlet-line,
+.service-list-card-automation .ai-route-alpha,
+.service-list-card-ai-automation .ai-route-alpha,
+.service-list-card-automation .ai-route-beta,
+.service-list-card-ai-automation .ai-route-beta {
+    transition: transform 400ms cubic-bezier(.22, 1, .36, 1), stroke 300ms ease, filter 300ms ease;
+}
+
+.service-list-card-automation:hover .ai-npu-carrier,
+.service-list-card-ai-automation:hover .ai-npu-carrier {
+    stroke: #ffffff;
+    stroke-width: 1.8;
+    filter: drop-shadow(0 0 10px color-mix(in oklab, var(--primary) 70%, transparent));
+}
+
+.service-list-card-automation:hover .ai-gate-diamond,
+.service-list-card-ai-automation:hover .ai-gate-diamond {
+    stroke: #ffffff;
+    fill: color-mix(in oklab, var(--primary) 28%, transparent);
+    filter: drop-shadow(0 0 8px var(--primary));
+}
+
+.service-list-card-automation:hover .ai-agent-disp,
+.service-list-card-ai-automation:hover .ai-agent-disp {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 8px var(--primary));
+}
+
+.service-list-card-automation:hover .ai-node-core,
+.service-list-card-ai-automation:hover .ai-node-core {
+    animation: aiCoreGlow 1.4s ease-in-out infinite alternate;
+}
+
+.service-list-card-automation .ai-node-p1,
+.service-list-card-ai-automation .ai-node-p1,
+.service-list-card-automation .ai-node-p2,
+.service-list-card-ai-automation .ai-node-p2,
+.service-list-card-automation .ai-node-p3,
+.service-list-card-ai-automation .ai-node-p3,
+.service-list-card-automation .ai-node-p4,
+.service-list-card-ai-automation .ai-node-p4,
+.service-list-card-automation .ai-node-p5,
+.service-list-card-ai-automation .ai-node-p5,
+.service-list-card-automation .ai-node-p6,
+.service-list-card-ai-automation .ai-node-p6,
+.service-list-card-automation .ai-node-p7,
+.service-list-card-ai-automation .ai-node-p7,
+.service-list-card-automation .ai-node-p8,
+.service-list-card-ai-automation .ai-node-p8 {
+    transition: fill 300ms ease, opacity 300ms ease, filter 300ms ease;
+}
+
+.service-list-card-automation:hover .ai-node-p1,
+.service-list-card-ai-automation:hover .ai-node-p1,
+.service-list-card-automation:hover .ai-node-p3,
+.service-list-card-ai-automation:hover .ai-node-p3 {
+    animation: aiSynapseWave 1.4s ease-in-out infinite alternate;
+}
+
+.service-list-card-automation:hover .ai-node-p2,
+.service-list-card-ai-automation:hover .ai-node-p2,
+.service-list-card-automation:hover .ai-node-p4,
+.service-list-card-ai-automation:hover .ai-node-p4,
+.service-list-card-automation:hover .ai-node-p5,
+.service-list-card-ai-automation:hover .ai-node-p5 {
+    animation: aiSynapseWave 1.4s ease-in-out 0.2s infinite alternate;
+}
+
+.service-list-card-automation:hover .ai-node-p6,
+.service-list-card-ai-automation:hover .ai-node-p6,
+.service-list-card-automation:hover .ai-node-p7,
+.service-list-card-ai-automation:hover .ai-node-p7,
+.service-list-card-automation:hover .ai-node-p8,
+.service-list-card-ai-automation:hover .ai-node-p8 {
+    animation: aiSynapseWave 1.4s ease-in-out 0.4s infinite alternate;
+}
+
+/* Fluid Inflow Bus Pulse */
+.service-list-card-automation:hover .ai-bus-inlet-line,
+.service-list-card-ai-automation:hover .ai-bus-inlet-line {
+    stroke: #ffffff;
+    stroke-dasharray: 3 4;
+    animation: aiBusPulse 1.4s linear infinite;
+    filter: drop-shadow(0 0 5px var(--primary));
+}
+
+/* Autonomous Branch Output Pulses */
+.service-list-card-automation:hover .ai-route-alpha,
+.service-list-card-ai-automation:hover .ai-route-alpha {
+    stroke: #ffffff;
+    stroke-dasharray: 3 4;
+    animation: aiRoutePulse 1.6s linear infinite;
+    filter: drop-shadow(0 0 5px var(--primary));
+}
+
+.service-list-card-automation:hover .ai-route-beta,
+.service-list-card-ai-automation:hover .ai-route-beta {
+    stroke: #ffffff;
+    stroke-dasharray: 3 4;
+    animation: aiRoutePulse 1.6s linear infinite 0.25s;
+    filter: drop-shadow(0 0 5px var(--primary));
+}
+
+/* Self-Healing Feedback Loop Trace Flow */
+.service-list-card-automation:hover .ai-feedback-loop,
+.service-list-card-ai-automation:hover .ai-feedback-loop {
+    stroke-opacity: 0.65;
+    animation: aiLoopMarch 1.8s linear infinite;
+}
+
+/* Binary Terminal Pips Data Stream */
+.service-list-card-automation:hover .ai-trigger-node rect,
+.service-list-card-ai-automation:hover .ai-trigger-node rect {
+    animation: aiBitStream 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes aiCoreGlow {
+    0% { opacity: 0.8; filter: drop-shadow(0 0 2px var(--primary)); }
+    100% { opacity: 1; fill: #ffffff; filter: drop-shadow(0 0 10px var(--primary)); }
+}
+
+@keyframes aiSynapseWave {
+    0% { opacity: 0.4; fill: var(--primary); }
+    100% { opacity: 1; fill: #ffffff; filter: drop-shadow(0 0 5px var(--primary)); }
+}
+
+@keyframes aiBusPulse {
+    from { stroke-dashoffset: 30; }
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes aiRoutePulse {
+    from { stroke-dashoffset: 38; }
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes aiLoopMarch {
+    from { stroke-dashoffset: 24; }
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes aiBitStream {
+    0% { opacity: 0.35; }
+    100% { opacity: 0.95; filter: drop-shadow(0 0 3px var(--primary)); }
+}
+
+/* ==========================================================================
+    7. Cyber Security Hover Animations
+   ========================================================================== */
+
+.service-list-card-security .sec-shield,
+.service-list-card-cyber-security .sec-shield,
+.service-list-card-security .sec-cipher,
+.service-list-card-cyber-security .sec-cipher {
+    transition: transform 400ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.service-list-card-security:hover .sec-shield-frame,
+.service-list-card-cyber-security:hover .sec-shield-frame {
+    stroke: #ffffff;
+    filter: drop-shadow(0 0 10px color-mix(in oklab, var(--primary) 60%, transparent));
+}
+
+.service-list-card-security:hover .sec-cipher-inner,
+.service-list-card-cyber-security:hover .sec-cipher-inner {
+    animation: secCipherPulse 1.6s ease-in-out infinite alternate;
+}
+
+.service-list-card-security:hover .sec-scanline,
+.service-list-card-cyber-security:hover .sec-scanline {
+    animation: secRadarSweep 2s cubic-bezier(.4, 0, .2, 1) infinite;
+}
+
+@keyframes secCipherPulse {
+    0% { transform: scale(0.95); transform-origin: 115px 104px; stroke: var(--primary); }
+    100% { transform: scale(1.1); transform-origin: 115px 104px; stroke: #ffffff; filter: drop-shadow(0 0 6px var(--primary)); }
+}
+
+@keyframes secRadarSweep {
+    0% { transform: translateY(0); opacity: 0; }
+    20% { opacity: 0.9; }
+    80% { opacity: 0.9; }
+    100% { transform: translateY(68px); opacity: 0; }
+}
+
+/* ==========================================================================
+    8. Website Maintenance (Elevated) Hover Animations
+   ========================================================================== */
+
+.service-list-card-management .mnt-gauge-outer,
+.service-list-card-website-maintenance .mnt-gauge-outer,
+.service-list-card-management .mnt-rack-chassis,
+.service-list-card-website-maintenance .mnt-rack-chassis {
+    transition: transform 500ms cubic-bezier(.22, 1, .36, 1), stroke 300ms ease, filter 300ms ease;
+}
+
+.service-list-card-management:hover .mnt-gauge-outer,
+.service-list-card-website-maintenance:hover .mnt-gauge-outer {
+    stroke: #ffffff;
+    stroke-opacity: 0.85;
+    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--primary) 70%, transparent));
+}
+
+.service-list-card-management:hover .mnt-rack-chassis,
+.service-list-card-website-maintenance:hover .mnt-rack-chassis {
+    stroke: #ffffff;
+    stroke-width: 1.8;
+    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--primary) 60%, transparent));
+}
+
+.service-list-card-management:hover .mnt-radar-sweep,
+.service-list-card-website-maintenance:hover .mnt-radar-sweep {
+    transform-origin: 105px 92px;
+    animation: mntRadarRotate 2.4s linear infinite;
+}
+
+.service-list-card-management:hover .mnt-led-1,
+.service-list-card-website-maintenance:hover .mnt-led-1 {
+    animation: mntLedPing 0.8s ease-in-out infinite alternate;
+}
+.service-list-card-management:hover .mnt-led-2,
+.service-list-card-website-maintenance:hover .mnt-led-2 {
+    animation: mntLedPing 0.8s ease-in-out 0.2s infinite alternate;
+}
+.service-list-card-management:hover .mnt-led-3,
+.service-list-card-website-maintenance:hover .mnt-led-3 {
+    animation: mntLedPing 0.8s ease-in-out 0.4s infinite alternate;
+}
+.service-list-card-management:hover .mnt-led-4,
+.service-list-card-website-maintenance:hover .mnt-led-4 {
+    animation: mntLedPing 0.8s ease-in-out 0.15s infinite alternate;
+}
+
+.service-list-card-management:hover .mnt-ecg-trace,
+.service-list-card-website-maintenance:hover .mnt-ecg-trace {
+    stroke-dasharray: 180;
+    animation: mntEcgDraw 1.8s linear infinite;
+    filter: drop-shadow(0 0 6px var(--primary));
+}
+
+.service-list-card-management:hover .mnt-status-beacon,
+.service-list-card-website-maintenance:hover .mnt-status-beacon {
+    animation: mntBeaconPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes mntRadarRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* @keyframes mntLedPing {
+    0% { opacity: 0.35; transform: scale(0.85); transform-origin: center; }
+    100% { opacity: 1; transform: scale(1.2); fill: #ffffff; filter: drop-shadow(0 0 4px var(--primary)); }
+} */
+
+@keyframes mntEcgDraw {
+    from { stroke-dashoffset: 180; }
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes mntBeaconPulse {
+    0%, 100% { opacity: 1; transform: scale(1); transform-origin: 172px 92px; filter: drop-shadow(0 0 5px var(--primary)); }
+    50% { opacity: 0.3; transform: scale(0.75); transform-origin: 172px 92px; filter: none; }
+}
+
+/* ==========================================================================
+    9. Managed Services Hover Animations
+   ========================================================================== */
+
+.service-list-card-managed .mng-blade,
+.service-list-card-managed-services .mng-blade {
+    transition: transform 400ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.service-list-card-managed:hover .mng-blade-1,
+.service-list-card-managed-services:hover .mng-blade-1 {
+    transform: translateY(-3px);
+}
+
+.service-list-card-managed:hover .mng-blade-3,
+.service-list-card-managed-services:hover .mng-blade-3 {
+    transform: translateY(3px);
+}
+
+.service-list-card-managed:hover .mng-led-1,
+.service-list-card-managed-services:hover .mng-led-1 {
+    animation: mngLedFlicker 0.6s steps(2, start) infinite;
+}
+
+.service-list-card-managed:hover .mng-led-2,
+.service-list-card-managed-services:hover .mng-led-2 {
+    animation: mngLedFlicker 0.85s steps(2, start) 0.15s infinite;
+}
+
+.service-list-card-managed:hover .mng-led-3,
+.service-list-card-managed-services:hover .mng-led-3 {
+    animation: mngLedFlicker 0.5s steps(2, start) 0.3s infinite;
+}
+
+.service-list-card-managed:hover .mng-led-4,
+.service-list-card-managed-services:hover .mng-led-4 {
+    animation: mngLedFlicker 0.7s steps(2, start) 0.2s infinite;
+}
+
+@keyframes mngLedFlicker {
+    0%, 100% { opacity: 1; fill: var(--primary); filter: drop-shadow(0 0 3px var(--primary)); }
+    50% { opacity: 0.2; fill: #ffffff; filter: none; }
+}
+
+/* ==========================================================================
+    Responsive Adjustments
+   ========================================================================== */
+
 @media (max-width: 1080px) {
     .service-list-cards {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -212,6 +933,14 @@
     .service-list-card-static > p {
         margin-top: .8rem;
         font-size: .72rem;
+        max-width: 25ch;
+    }
+    .service-card-artwork {
+        width: 11rem;
+        height: 11rem;
+        right: -1.75rem;
+        bottom: -2rem;
+        opacity: 0.55;
     }
 }
 
@@ -220,37 +949,39 @@
         grid-template-columns: 1fr;
     }
     .service-list-card-static {
-        min-height: 250px;
+        min-height: 230px;
+        padding: 1rem;
     }
     .service-list-card-static h3 {
         max-width: 11ch;
-        margin-top: 2.5rem;
-        font-size: clamp(1.8rem, 10vw, 2.5rem);
+        margin-top: 2rem;
+        font-size: clamp(1.7rem, 9vw, 2.2rem);
+    }
+    .service-card-artwork {
+        width: 12rem;
+        height: 12rem;
+        right: -1.5rem;
+        bottom: -1.8rem;
     }
 }
 
-@media (max-width: 380px) {
-    .service-list-cards {
-        gap: .5rem;
-    }
-    .service-list-card-static {
-        padding: .72rem;
-    }
-    .service-list-card-static h3 {
-        font-size: 1.1rem;
-    }
-}
+/* ==========================================================================
+    Reduced Motion (Accessibility)
+   ========================================================================== */
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
     .service-list-card-static,
     .service-list-card-icon,
-    .service-list-card-static .card-link svg {
+    .service-list-card-static .card-link svg,
+    .service-card-artwork,
+    .service-card-artwork * {
         transition: none !important;
+        animation: none !important;
     }
     .service-list-card-static:hover,
     .service-list-card-static:hover .service-list-card-icon,
-    .service-list-card-static:hover .card-link svg {
+    .service-list-card-static:hover .card-link svg,
+    .service-list-card-static:hover .service-card-artwork {
         transform: none !important;
     }
 }

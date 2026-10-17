@@ -265,6 +265,16 @@
 .faq-tabs-component .faq-tabs button > span {
     position: relative;
     z-index: 2;
+    color: var(--muted-foreground);
+    transition: color .35s ease;
+}
+
+.faq-tabs-component .faq-tabs button:hover > span {
+    color: var(--foreground);
+}
+
+.faq-tabs-component .faq-tabs button.is-active > span {
+    color: #000;
 }
 
 .faq-tabs-component .faq-tabs button b {
@@ -379,6 +389,23 @@
     }
     .faq-tabs button b {
         display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .faq-tabs button > span,
+    .faq-tabs-component .faq-tabs button > span {
+        color: var(--muted-foreground);
+    }
+
+    .faq-tabs button:hover > span,
+    .faq-tabs-component .faq-tabs button:hover > span {
+        color: var(--foreground);
+    }
+
+    .faq-tabs button.is-active > span,
+    .faq-tabs-component .faq-tabs button.is-active > span {
+        color: #000 !important;
     }
 }
 
