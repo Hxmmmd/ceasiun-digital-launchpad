@@ -97,10 +97,10 @@ export function FAQComponent() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.1 }}
                 >
-                    {questions.map((faq) => (
-                    <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
+                    {questions.map((faq, index) => (
+                    <FAQItem key={faq.question} question={faq.question} answer={faq.answer} index={index} />
                     ))}
                 </motion.div>
                 </AnimatePresence>
@@ -111,38 +111,44 @@ export function FAQComponent() {
     );
 }
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
+function FAQItem({ question, answer, index }: { question: string; answer: string; index: number }) {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <motion.div
-        className={`faq-item ${isOpen ? "is-open" : ""}`}
-        animate={isOpen ? "open" : "closed"}
-        >
-        <button
-            type="button"
-            aria-expanded={isOpen}
+            className={`faq-item ${isOpen ? "is-open" : ""}`}
+            animate={isOpen ? "open" : "closed"}
             onClick={() => setIsOpen((value) => !value)}
-        >
-            <span>{question}</span>
-            <motion.span
-            animate={{ rotate: isOpen ? 45 : 0 }}
-            transition={{ duration: 0.2 }}
-            >
-            <Plus aria-hidden="true" />
-            </motion.span>
-        </button>
-        <motion.div
-            initial={false}
-            animate={{
-            height: isOpen ? "auto" : 0,
-            opacity: isOpen ? 1 : 0,
-            marginBottom: isOpen ? 16 : 0,
+            role="button"
+            tabIndex={0}
+            aria-expanded={isOpen}
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setIsOpen((value) => !value);
+                }
             }}
-            transition={{ duration: 0.25 }}
-            className="faq-answer-wrap"
         >
-            <p>{answer}</p>
-        </motion.div>
+            <div className="faq-question-row">
+                <span>{(index + 1) + ". " + question}</span>
+                <motion.span
+                    className="faq-icon-wrap"
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.1 }}
+                >
+                    <Plus aria-hidden="true" />
+                </motion.span>
+            </div>
+            <motion.div
+                initial={false}
+                animate={{
+                    height: isOpen ? "auto" : 0,
+                    opacity: isOpen ? 1 : 0,
+                }}
+                transition={{ duration: 0.1 }}
+                className="faq-answer-wrap"
+            >
+                <p>{answer}</p>
+            </motion.div>
         </motion.div>
     );
 }

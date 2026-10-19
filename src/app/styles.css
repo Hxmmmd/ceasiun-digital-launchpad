@@ -489,7 +489,7 @@ html {
   .nav-actions > a {
   display: none;
   }
-  .nav-actions > .header-login { display: inline-flex; align-items: center; padding: 0.45rem 0.2rem; font-size: 0.86rem; white-space: nowrap; }
+  .nav-actions > .header-login { display: none; }
   .mobile-nav {
   flex: 1;
   display: flex;
@@ -520,6 +520,9 @@ html {
   margin-top: 1.5rem;
   padding-top: 1.25rem;
   border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 .mobile-nav a {
   display: flex;
@@ -2028,13 +2031,43 @@ blockquote em {
   color: var(--muted-foreground);
   font-size: 0.8rem;
 }
-.mobile-nav-footer button,
-.mobile-nav-footer a {
+.mobile-nav-footer .project-cta,
+.mobile-nav-footer .project-cta a,
+.mobile-nav-footer .project-cta svg {
   color: #000000 !important;
   font-weight: 700 !important;
 }
-.mobile-nav-footer svg {
-  color: #000000 !important;
+
+.mobile-nav-footer .mobile-login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  color: var(--foreground) !important;
+  font-weight: 700 !important;
+  background: color-mix(in oklab, var(--card) 75%, var(--primary) 22%) !important;
+  border: 1px solid color-mix(in oklab, var(--primary) 40%, var(--border)) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-nav-footer .mobile-login-btn svg {
+  color: var(--primary) !important;
+  transition: transform 220ms ease;
+}
+
+.mobile-nav-footer .mobile-login-btn:hover,
+.mobile-nav-footer .mobile-login-btn:focus-visible {
+  background: color-mix(in oklab, var(--primary) 28%, var(--card)) !important;
+  border-color: var(--primary) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--primary) 28%, transparent);
+}
+
+.mobile-nav-footer .mobile-login-btn:hover svg {
+  color: #ffffff !important;
+  transform: translate(2px, -2px);
 }
 .auth-page {
   min-height: 100vh;
@@ -2268,6 +2301,9 @@ blockquote em {
   }
   .nav-actions > a {
     display: inline-flex;
+  }
+  .nav-actions > .header-login {
+    display: inline-flex !important;
   }
   .menu-btn {
     display: none;
@@ -4154,11 +4190,11 @@ blockquote em {
 /* ---------- Header: premium primary CTA + integrated Login ---------- */
 .nav-actions > .header-login,
 .header-login {
-  display: inline-flex !important;
+  display: inline-flex;
   align-items: center;
-  padding: 0.5rem 0.95rem !important;
+  padding: 0.8rem 0.95rem;
   border: 1px solid var(--border);
-  border-radius: 0.5rem !important;
+  border-radius: 0.5rem;
   color: var(--muted-foreground);
   font-size: 0.86rem;
   font-weight: 600;
@@ -4178,6 +4214,12 @@ blockquote em {
   border-color: color-mix(in oklab, var(--primary) 55%, var(--border));
   background: color-mix(in oklab, var(--primary) 10%, transparent);
   transform: translateY(-1px);
+}
+
+@media (max-width: 699px) {
+  .nav-actions > .header-login {
+    display: none !important;
+  }
 }
 
 /* The Start Your Project CTA is the primary action of the whole site. */

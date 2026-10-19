@@ -10,6 +10,7 @@ import { useTestimonials } from "@/components/public-content";
 import { useCms } from "@/hooks/use-cms";
 import { ServiceList } from "@/components/page-components/ServiceList";
 import { FAQComponent } from "@/components/page-components/FAQComponent";
+// import {InteractiveHoverButton} from "@/components/External/ButtonComponent"
 
 const faqs = [
   ["What kind of businesses do you work with?", "Ceasiun supports traditional, growing and international businesses that need a dependable digital partner—from their first launch to ongoing technical operations."],
@@ -97,7 +98,7 @@ export default function HomePage() {
         <div className="shell new-hero-inner">
           <p className="eyebrow">Ceasiun - Digital Growth Partner</p>
           <h1 id="hero-title">Take your <br /> business online.<br /><em>Build it to grow.</em></h1>
-          <p className="hero-lede">Websites, software and automation that fit your business—chosen around what you actually need, not what a service menu says you should buy.</p>
+          <p className="hero-lede">Websites, software and automation that fit your business chosen around what you actually need, not what a service menu says you should buy.</p>
           <div className="hero-actions"><Link className="button button-primary" href="/start-project">Start a project <ArrowUpRight size={18} /></Link><a className="text-link" href="#approach">See how we work <ArrowUpRight size={17} /></a></div>
           <div className="hero-note"><span className="status-dot" /> Clear scope. Milestone delivery. Ongoing support when it helps.</div>
         </div>

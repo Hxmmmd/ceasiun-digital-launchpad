@@ -10,6 +10,7 @@ import {
   Home,
   Instagram,
   Linkedin,
+  LogIn,
   Gamepad2,
   Mail,
   Menu,
@@ -101,6 +102,9 @@ const mobileNavIcons = {
               {settings.headerCta} <ArrowUpRight />
             </Link>
           </Button>
+          <Link href="/auth" className="header-login" aria-label="Login">
+            <User className="w-5 h-5" />
+          </Link>
           <Button
             className="menu-btn"
             variant="ghost"
@@ -110,9 +114,6 @@ const mobileNavIcons = {
           >
             {open ? <X /> : <Menu />}
           </Button>
-          <Link href="/auth" className="header-login" aria-label="Login">
-            <User className="w-5 h-5" />
-          </Link>
         </div>
       </div>
 
@@ -146,9 +147,16 @@ const mobileNavIcons = {
           </div>
 
           <div className="mobile-nav-footer">
-<Button asChild size="lg" className="project-cta w-full text-black font-bold">
-          <Link href="/contact" onClick={closeMenu}>
+            <Button asChild size="lg" className="project-cta w-full text-black font-bold">
+              <Link href="/contact" onClick={closeMenu}>
                 {settings.headerCta} <ArrowUpRight className="text-black" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" className="mobile-login-btn w-full font-bold">
+              <Link href="/auth" onClick={closeMenu}>
+                <LogIn className="w-4 h-4" />
+                <span>Login</span>
+                <ArrowUpRight className="w-4 h-4" />
               </Link>
             </Button>
           </div>

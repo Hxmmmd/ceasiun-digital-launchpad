@@ -302,18 +302,35 @@
     border: 1px solid var(--border);
     border-radius: .7rem;
     background: color-mix(in oklab, var(--background) 92%, var(--card));
-    transition: background-color .25s ease, border-color .25s ease;
+    transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .2s ease;
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
 }
 
 .faq-tabs-component .faq-item + .faq-item {
     margin-top: .75rem;
 }
 
+.faq-tabs-component .faq-item:hover {
+    border-color: color-mix(in oklab, var(--primary) 35%, var(--border));
+    background: color-mix(in oklab, var(--background) 86%, var(--primary));
+    transform: translateY(-1px);
+}
+
 .faq-tabs-component .faq-item.is-open {
     border-color: color-mix(in oklab, var(--primary) 42%, var(--border));
     background: color-mix(in oklab, var(--background) 84%, var(--primary));
+    box-shadow: 0 4px 20px color-mix(in oklab, var(--primary) 10%, transparent);
 }
 
+.faq-tabs-component .faq-item.is-open:hover {
+    border-color: color-mix(in oklab, var(--primary) 55%, var(--border));
+    background: color-mix(in oklab, var(--background) 80%, var(--primary));
+    box-shadow: 0 6px 24px color-mix(in oklab, var(--primary) 15%, transparent);
+}
+
+.faq-tabs-component .faq-item .faq-question-row,
 .faq-tabs-component .faq-item button {
     display: flex;
     min-height: 0;
@@ -321,38 +338,55 @@
     justify-content: space-between;
     gap: 1rem;
     width: 100%;
-    padding: 1rem 1.1rem;
+    padding: 1.15rem 1.25rem 0.5rem;
     text-align: left;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none;
 }
 
+.faq-tabs-component .faq-item .faq-question-row > span:first-child,
 .faq-tabs-component .faq-item button > span:first-child {
     color: var(--foreground);
     font-size: 1rem;
     font-weight: 600;
 }
 
+.faq-tabs-component .faq-item .faq-icon-wrap,
 .faq-tabs-component .faq-item button > span:last-child {
     display: grid;
-    width: auto;
-    height: auto;
+    width: 1.85rem;
+    height: 1.85rem;
     place-items: center;
-    border: 0;
+    flex-shrink: 0;
+    border: 1px solid color-mix(in oklab, var(--primary) 35%, var(--border));
+    border-radius: 50%;
     color: var(--muted-foreground);
-    background: transparent;
+    background: color-mix(in oklab, var(--primary) 8%, transparent);
+    transition: color .2s ease, border-color .2s ease, background-color .2s ease;
 }
 
+.faq-tabs-component .faq-item:hover .faq-icon-wrap,
+.faq-tabs-component .faq-item.is-open .faq-icon-wrap,
 .faq-tabs-component .faq-item.is-open button > span:last-child {
     color: var(--primary);
+    border-color: var(--primary);
+    background: color-mix(in oklab, var(--primary) 20%, transparent);
 }
 
 .faq-tabs-component .faq-answer-wrap {
-    padding-inline: 1.1rem;
+    padding: 0 1.25rem 1.25rem;
+    background: transparent !important;
+    border: none !important;
 }
 
 .faq-tabs-component .faq-answer-wrap p {
-    padding: 0 0 1rem;
+    padding: 0;
+    margin: 0;
     color: var(--muted-foreground);
     line-height: 1.65;
+    font-size: .95rem;
 }
 
 /* Responsive styles */
@@ -422,6 +456,7 @@
     .faq-tabs-component .faq-list {
         margin-top: 2rem;
     }
+    .faq-tabs-component .faq-item .faq-question-row > span:first-child,
     .faq-tabs-component .faq-item button > span:first-child {
         font-size: .9rem;
     }
