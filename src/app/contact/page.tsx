@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, Check, CheckCircle2, Facebook, Gamepad2, Instagr
 import { Layout, PageIntro, SectionHead, meta } from "@/components/site";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useCms, useCmsServices } from "@/hooks/use-cms";
+import { faq, services, siteSettings, type Service } from "@/lib/site-data";
 
 function whatsappHref(value: string) {
   if (value.startsWith("http")) return value;
@@ -88,7 +88,7 @@ const subserviceGoals: Record<string, { question: string; goals: string[] }> = {
   "Technical Advisory & Architecture": { question: "What do you need help with in technical advisory and architecture?", goals: ["Plan a technical roadmap", "Review system architecture", "Make better technology decisions", "Prepare for scale", "Reduce technical risk", "Other"] },
 };
 
-function QuoteIntake({ services, initialService, onSubmit }: { services: ReturnType<typeof useCmsServices>; initialService: string; onSubmit: (data: QuoteData) => void }) {
+function QuoteIntake({ serviceList, initialService, onSubmit }: { serviceList: Service[]; initialService: string; onSubmit: (data: QuoteData) => void }) {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<QuoteData>({ services: initialService ? [initialService] : [], serviceSelections: initialService ? { [initialService]: { subservices: [], discovery: "", goals: {}, context: {}, scope: {} } } : {}, goals: [], situation: [], timeline: "", budget: "", projectType: "", platforms: [], notes: "", name: "", company: "", email: "", phone: "", contactMethod: "Email", files: [] });
   const [errors, setErrors] = useState<string[]>([]);
@@ -106,7 +106,7 @@ function QuoteIntake({ services, initialService, onSubmit }: { services: ReturnT
   return <div className="quote-intake">
     <div className="quote-progress" aria-label={`Project enquiry: ${steps[step] ?? "Review"}`}><div className="quote-progress-track"><span style={{ width: `${((step + 1) / steps.length) * 100}%` }} /></div><div className="quote-progress-steps"><span className="active"><b>{steps[step] ?? "Review"}</b><small>{step + 1} of {steps.length} questions</small></span></div></div>
     <div className="quote-step" key={step}>
-      {step === 0 && <><p className="eyebrow">01 / SERVICES</p><h2>What would you like Ceasiun to help you with?</h2><p className="quote-helper">Choose one or more capabilities. We&apos;ll shape the next questions around your selection.</p><div className="quote-options service-options">{services.map((item) => <button type="button" className={data.services.includes(item.title) ? "selected" : ""} onClick={() => { const nextServices = data.services.includes(item.title) ? data.services.filter((service) => service !== item.title) : [...data.services, item.title]; update({ services: nextServices, serviceSelections: { ...data.serviceSelections, ...(nextServices.includes(item.title) && !data.serviceSelections[item.title] ? { [item.title]: { subservices: [], discovery: "", goals: {}, context: {}, scope: {} } } : {}) } }); setErrors([]); }} key={item.slug}>{item.icon && <item.icon /> }<span><strong>{item.title}</strong><small>{item.short}</small></span>{data.services.includes(item.title) && <Check />}</button>)}</div></>}
+      {step === 0 && <><p className="eyebrow">01 / SERVICES</p><h2>What would you like Ceasiun to help you with?</h2><p className="quote-helper">Choose one or more capabilities. We&apos;ll shape the next questions around your selection.</p><div className="quote-options service-options">{serviceList.map((item) => <button type="button" className={data.services.includes(item.title) ? "selected" : ""} onClick={() => { const nextServices = data.services.includes(item.title) ? data.services.filter((service) => service !== item.title) : [...data.services, item.title]; update({ services: nextServices, serviceSelections: { ...data.serviceSelections, ...(nextServices.includes(item.title) && !data.serviceSelections[item.title] ? { [item.title]: { subservices: [], discovery: "", goals: {}, context: {}, scope: {} } } : {}) } }); setErrors([]); }} key={item.slug}>{item.icon && <item.icon /> }<span><strong>{item.title}</strong><small>{item.short}</small></span>{data.services.includes(item.title) && <Check />}</button>)}</div></>}
       {step === 1 && <><p className="eyebrow">02 / YOUR DIRECTION</p><h2>{data.services.length > 1 ? "Which services do you need help with?" : `Which part of ${formatServiceList(data.services)} do you need?`}</h2><p className="quote-helper">Choose the capabilities that best describe the project. If you&apos;re not sure, select that and we&apos;ll guide you.</p><div className="service-subservice-sections">{data.services.map((service) => { const serviceData = getServiceQuestions(service); const selection = data.serviceSelections[service] ?? { subservices: [], discovery: "", goals: {} }; if (!serviceData) return null; return <section className="service-subservice-section" key={service}><div className="service-subservice-heading"><span className="service-subservice-kicker">Selected service</span><h3>{service}</h3><p>{service === "Website Development" ? "Choose the type of website or web solution you need." : service === "Graphic Designing" ? "Choose the type of visual and design work you need." : service === "Social Media Management" ? "Choose the social media activities you want us to handle." : `Choose the capabilities you need from ${service}.`}</p></div><div className="quote-chip-grid">{serviceData.subservices.map((item) => <button type="button" className={selection.subservices.includes(item) ? "selected" : ""} onClick={() => toggleServiceSubservice(service, item)} key={item}>{item}{selection.subservices.includes(item) && <Check />}</button>)}</div>{selection.subservices.some((item) => item.includes("not sure")) && <Textarea value={selection.discovery} onChange={(event) => updateServiceSelections(service, { discovery: event.target.value })} rows={5} placeholder={`Tell us what you are trying to accomplish with ${service}...`} />}</section>; })}</div></>}
       {step === 2 && <><p className="eyebrow">03 / GOALS</p><h2>What should each selected service achieve?</h2><p className="quote-helper">Choose goals for the exact sub-services you selected.</p><div className="service-subservice-sections">{data.services.map((service) => { const serviceData = getServiceQuestions(service); return <section className="service-subservice-section" key={service}><div className="service-subservice-heading"><span className="service-subservice-kicker">{service}</span><h3>Goals for {service}</h3></div>{(data.serviceSelections[service]?.subservices ?? []).map((subservice) => { const goalData = subserviceGoals[subservice]; const goals = goalData?.goals ?? serviceData?.goals ?? questions.goals; const selectedGoals = data.serviceSelections[service]?.goals?.[subservice] ?? []; return <div className="service-goal-group" key={subservice}><h4>{subservice}</h4><p>{goalData?.question ?? `What are you looking to achieve with ${subservice}?`}</p><div className="quote-chip-grid">{goals.map((goal) => <button type="button" className={selectedGoals.includes(goal) ? "selected" : ""} onClick={() => toggleServiceGoal(service, subservice, goal)} key={goal}>{goal}{selectedGoals.includes(goal) && <Check />}</button>)}</div></div>; })}</section>; })}</div></>}
       {step === 3 && <><p className="eyebrow">04 / CONTEXT</p><h2>What context should we know for each selected area?</h2><p className="quote-helper">These options are tailored to the sub-services you selected.</p><div className="service-subservice-sections">{data.services.map((service) => <section className="service-subservice-section" key={service}><div className="service-subservice-heading"><span className="service-subservice-kicker">{service}</span><h3>What do you have today?</h3><p>Tell us about your current setup, systems, assets, or stage of readiness.</p></div>{(data.serviceSelections[service]?.subservices ?? []).map((subservice) => <div className="service-goal-group" key={subservice}><h4>{subservice}</h4><div className="quote-chip-grid">{(detailOptions[subservice]?.context ?? getServiceQuestions(service)?.context ?? questions.context).map((item) => <button type="button" className={(data.serviceSelections[service]?.context?.[subservice] ?? []).includes(item) ? "selected" : ""} onClick={() => toggleServiceDetail("context", service, subservice, item)} key={item}>{item}{(data.serviceSelections[service]?.context?.[subservice] ?? []).includes(item) && <Check />}</button>)}</div></div>)}</section>)}</div></>}
@@ -120,11 +120,21 @@ function QuoteIntake({ services, initialService, onSubmit }: { services: ReturnT
   </div>;
 }
 
+const contactContent = {
+  eyebrow: "Contact Us",
+  title: "Let's define the next move.",
+  copy: "Tell us where your business is now, what needs to change, and what a successful outcome looks like.",
+  successTitle: "Message received.",
+  successCopy: "Thank you for reaching out. The Ceasiun team will review your enquiry and respond shortly.",
+  asideEyebrow: "Direct Contact",
+  asideTitle: "Prefer a conversation?",
+  faqEyebrow: "Before We Begin",
+  faqTitle: "Common questions answered.",
+};
+
 export default function ContactPage() {
   const searchParams = useSearchParams();
   const search = { service: searchParams.get("service") ?? "" };
-  const cms = useCms();
-  const services = useCmsServices();
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -141,17 +151,17 @@ export default function ContactPage() {
 
   return (
     <Layout>
-      <PageIntro eyebrow={cms.contact.eyebrow} title={cms.contact.title} copy={cms.contact.copy} />
+      <PageIntro eyebrow={contactContent.eyebrow} title={contactContent.title} copy={contactContent.copy} />
 
       <section className="section shell contact-grid">
         {submitted ? (
           <div className="form-success">
             <CheckCircle2 />
-            <h2>{cms.contact.successTitle}</h2>
-            <p>{cms.contact.successCopy}</p>
+            <h2>{contactContent.successTitle}</h2>
+            <p>{contactContent.successCopy}</p>
           </div>
         ) : (
-          <QuoteIntake services={services} initialService={search.service} onSubmit={handleSubmit} />
+          <QuoteIntake serviceList={services} initialService={search.service} onSubmit={handleSubmit} />
         )}
 
         <aside className="contact-direct">
@@ -161,8 +171,8 @@ export default function ContactPage() {
             Skip the form and start a conversation directly with our team on WhatsApp.
           </p>
           <a
-          style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "8px"}}
-            href={whatsappHref(cms.settings.whatsapp)}
+            style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "8px"}}
+            href={whatsappHref(siteSettings.whatsapp)}
             target="_blank"
             rel="noreferrer"
             className="premium-whatsapp-cta"
@@ -173,8 +183,8 @@ export default function ContactPage() {
       </section>
 
       <section className="section shell faq">
-        <SectionHead eyebrow={cms.contact.faqEyebrow} title={cms.contact.faqTitle} />
-        {cms.faq.map(([question, answer]) => (
+        <SectionHead eyebrow={contactContent.faqEyebrow} title={contactContent.faqTitle} />
+        {faq.map(([question, answer]) => (
           <details key={question}>
             <summary>
               {question}

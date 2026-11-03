@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState, useRef, type CSSProperties } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import type { Testimonial } from "@/components/public-content";
+import type { Testimonial } from "@/lib/testimonials";
 
 const googleLogo = "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/google/default.svg";
 
@@ -18,12 +18,6 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
   useEffect(() => {
     setActive((current) => (visible.length ? current % visible.length : 0));
   }, [visible.length]);
-
-  // useEffect(() => {
-  //   if (visible.length < 2) return;
-  //   const timer = window.setInterval(() => setActive((current) => (current + 1) % visible.length), 6000);
-  //   return () => window.clearInterval(timer);
-  // }, [visible.length, active]);
 
   useEffect(() => {
     if (visible.length < 2) return;

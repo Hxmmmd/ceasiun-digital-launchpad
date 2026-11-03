@@ -74,7 +74,7 @@ export function ScrollReveal() {
       window.setTimeout(prepare, 400),
     ];
 
-    // Content loads from client-side CMS hooks, so watch briefly for late nodes.
+    // Watch briefly for late-rendered DOM nodes.
     const mo = new MutationObserver(() => prepare());
     mo.observe(document.body, { childList: true, subtree: true });
     const stop = window.setTimeout(() => mo.disconnect(), 3500);

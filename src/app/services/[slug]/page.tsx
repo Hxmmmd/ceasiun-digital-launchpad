@@ -7,9 +7,8 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Layout, CTA, meta } from "@/components/site";
-import { samples } from "@/lib/site-data";
+import { samples, services } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
-import { useCmsServices } from "@/hooks/use-cms";
 import ShapeGrid from "@/components/External/ShapeGrid";
 import LogoLoop from "@/components/External/LogoLoop"
 import { useParams } from "next/navigation";
@@ -208,7 +207,6 @@ const serviceLogosMap: Record<string, any[]> = {
 
 export default function RoutePage() {
   const { slug } = useParams<{ slug: string }>();
-  const services = useCmsServices();
   const service = services.find((item) => item.slug === slug);
 
   if (!service) {

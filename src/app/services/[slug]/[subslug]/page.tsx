@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, CheckCircle2, Layers, Sparkles } from "lucide-react";
 import { Layout, CTA, meta } from "@/components/site";
 import { Button } from "@/components/ui/button";
-import { useCmsServices } from "@/hooks/use-cms";
+import { services } from "@/lib/site-data";
 import { useParams } from "next/navigation";
 
 const slugify = (value: string) => value.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -20,7 +20,6 @@ const fallbackCopy = { intro: "A focused Ceasiun practice designed around your g
 
 export default function RoutePage() {
   const { slug, subslug } = useParams<{ slug: string; subslug: string }>();
-  const services = useCmsServices();
   const service = services.find((entry) => entry.slug === slug);
   const item = service?.items.find((entry) => slugify(entry) === subslug);
   if (!service || !item) return null;

@@ -9,9 +9,7 @@ export type Product = {
   isVisible: boolean;
 };
 
-export const PRODUCT_STORAGE_KEY = "ceasiun_products";
-
-export const defaultProducts: Product[] = [
+export const products: Product[] = [
   {
     id: "product-logistics-command",
     slug: "logistics-command",
@@ -44,12 +42,4 @@ export const defaultProducts: Product[] = [
   },
 ];
 
-export function readProducts(): Product[] {
-  if (typeof window === "undefined") return defaultProducts;
-  try {
-    const saved = window.localStorage.getItem(PRODUCT_STORAGE_KEY);
-    return saved ? JSON.parse(saved) : defaultProducts;
-  } catch {
-    return defaultProducts;
-  }
-}
+export const defaultProducts = products;

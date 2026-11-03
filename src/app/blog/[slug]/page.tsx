@@ -2,8 +2,8 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
-import { Layout} from "@/components/site";
-import { usePost } from "@/components/public-content";
+import { Layout } from "@/components/site";
+import { blogPosts } from "@/lib/blog-posts";
 import { useParams } from "next/navigation";
 
 const idFor = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -84,7 +84,7 @@ function RenderProseContent({ body }: { body: string }) {
 
 export default function RoutePage() {
   const { slug } = useParams<{ slug: string }>();
-  const post = usePost(slug);
+  const post = blogPosts.find((p) => p.slug === slug && p.status === "published");
   const [activeId, setActiveId] = useState("");
 
   useEffect(() => {
@@ -97,10 +97,6 @@ export default function RoutePage() {
     }
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
-
-  if (post === undefined) {
-    return <div className="loading">Loading article...</div>;
-  }
 
   if (!post) {
     return (

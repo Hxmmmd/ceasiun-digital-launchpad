@@ -27,8 +27,7 @@ import {
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
-import { useCms } from "@/hooks/use-cms";
-import { nav } from "@/lib/site-data";
+import { ctaContent, nav, siteSettings } from "@/lib/site-data";
 
 function whatsappHref(value: string) {
   if (value.startsWith("http")) return value;
@@ -54,7 +53,7 @@ const mobileNavIcons = {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
-  const { settings } = useCms();
+  const settings = siteSettings;
 
   useEffect(() => {
     if (open) {
@@ -167,7 +166,7 @@ const mobileNavIcons = {
 }
 
 export function Footer() {
-  const { settings } = useCms();
+  const settings = siteSettings;
 
   return (
     <footer className="footer">
@@ -271,7 +270,7 @@ export function SectionHead({ eyebrow, title, copy }: { eyebrow: string; title: 
 }
 
 export function CTA() {
-  const { cta } = useCms();
+  const cta = ctaContent;
 
   return (
     <section style={{margin: "30px 0px 0px 0px"}} className="cta-band">

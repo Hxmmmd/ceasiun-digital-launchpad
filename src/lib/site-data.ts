@@ -266,6 +266,8 @@ export const services = [
   },
 ];
 
+export type Service = (typeof services)[number];
+
 export const processSteps = [
   "Discussion",
   "Discovery",
@@ -331,3 +333,30 @@ export const samples = [
     image: "brand",
   },
 ];
+
+export const siteSettings = {
+  siteName: "Ceasiun",
+  tagline: "Your Digital Growth Partner",
+  phone: "0314 0262087",
+  whatsapp: "+923140262087",
+  email: "contact@ceasiun.com",
+  announcementBanner: "Launch Sprints Available for Q4 - Reserve Your Slot Now!",
+  bannerActive: true,
+  linkedin: "https://linkedin.com/in/ceasiun",
+  instagram: "https://instagram.com/ceasiun",
+  facebook: "https://facebook.com/ceasiun",
+  x: "https://x.com/ceasiun",
+  youtube: "https://youtube.com/@ceasiun",
+  tiktok: "https://tiktok.com/@ceasiun",
+  discord: "https://discord.com/invite/AkBQH7EQM4",
+  headerCta: "Start a project",
+  footerBlurb: "Ceasiun, your digital growth partner.",
+  footerTagline:
+    "Website Development - Digital Marketing - SMM - Design - Branding - AI & Automation - Cyber Security - Managed Operations",
+};
+
+export const ctaContent = {
+  eyebrow: "Your Next Move",
+  title: "Build what growth needs next.",
+  button: "Talk to Ceasiun",
+};

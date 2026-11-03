@@ -6,10 +6,10 @@ import { Layout, SectionHead } from "@/components/site";
 import { useEffect, useState } from "react";
 import type { ComponentType } from "react";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
-import { useTestimonials } from "@/components/public-content";
-import { useCms } from "@/hooks/use-cms";
+import { testimonials } from "@/lib/testimonials";
 import { ServiceList } from "@/components/page-components/ServiceList";
 import { FAQComponent } from "@/components/page-components/FAQComponent";
+import ImpactSection from "@/components/sections/OurImpact"
 // import {InteractiveHoverButton} from "@/components/External/ButtonComponent"
 
 const faqs = [
@@ -78,9 +78,6 @@ function Faq() {
 }
 
 export default function HomePage() {
-  const cms = useCms(); 
-  const testimonials = useTestimonials();
-
   return <Layout>
     <a className="skip-link" href="#main">Skip to content</a>
     <div id="top" className="new-home">
@@ -125,12 +122,14 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
+        <section>
+          <ImpactSection/>
+        </section>
         <section id="services" className="new-section services-section">
           <div className="shell">
             <div className="section-intro compact">
               <p className="eyebrow">Services</p>
-              <h2>One partner across the digital work.</h2>
+              <h2>One partner across <br /><em>all digital work.</em></h2>
               <p>Explore the areas we can bring together when requirements call for it.</p>
             </div>
             <ServiceList />
@@ -140,8 +139,9 @@ export default function HomePage() {
         <section id="approach" className="new-section approach-section">
           <div className="shell">
             <div className="section-intro">
-              <p className="eyebrow">A considered approach</p>
-              <h2>Only what your business actually needs.</h2>
+              <p className="eyebrow">Process</p>
+              {/* <p className="eyebrow">A considered approach</p> */}
+              <h2>A considered <br /><em>approach</em></h2>
               <p>We understand the business, the current situation and the final goal first. Then we recommend the right services and technology—without adding unnecessary pieces.</p>
             </div>
             <div className="approach-steps" aria-label="How a project moves from question to delivery">
@@ -173,7 +173,7 @@ export default function HomePage() {
           <div className="shell why-grid">
             <div>
               <p className="eyebrow">Why Ceasiun</p>
-              <h2>Technical depth, explained plainly.</h2>
+              <h2>Technical <em>depth,</em><br /> explained <br /><em>plainly.</em></h2>
             </div>
             <div className="why-list">
               <div>

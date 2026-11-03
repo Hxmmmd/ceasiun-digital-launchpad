@@ -1601,7 +1601,7 @@ blockquote em {
 @keyframes tech-orbit-float { 50% { translate: 0 -14px; rotate: 2deg; opacity: .52; } }
 @keyframes tech-pulse { 50% { scale: 1.8; opacity: .35; } }
 .new-hero h1, .new-cta h2 { max-width: 980px; margin: 1.5rem 0 2rem; font: 700 clamp(3.25rem, 6.5vw, 6rem)/.92 var(--font-display); letter-spacing: -.08em; }
-.new-hero h1 em, .new-cta h2 em { color: var(--primary); font-style: normal; }
+.new-hero h1 em, .new-cta h2 em, .new-section h2 em { color: var(--primary); font-style: normal; }
 .hero-lede { max-width: 600px; color: var(--muted-foreground); font-size: clamp(1.05rem, 1.7vw, 1.3rem); line-height: 1.65; }
 .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; margin-top: 2.5rem; }
 .button { display: inline-flex; align-items: center; gap: .6rem; padding: .95rem 1.2rem; text-decoration: none; }

@@ -2,14 +2,24 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
-import { usePublishedPosts } from "@/components/public-content";
 import { Layout, PageIntro, meta } from "@/components/site";
 import { Input } from "@/components/ui/input";
-import { useCms } from "@/hooks/use-cms";
+import { blogPosts } from "@/lib/blog-posts";
+
+const blogContent = {
+  eyebrow: "Insights & Articles",
+  title: "Useful thinking for digital operators.",
+  copy: "Practical perspectives across the disciplines that shape modern digital growth.",
+};
 
 export default function BlogListingPage() {
-  const { blog } = useCms();
-  const posts = usePublishedPosts();
+  const posts = useMemo(
+    () =>
+      blogPosts
+        .filter((post) => post.status === "published")
+        .sort((a, b) => new Date(b.published_at ?? 0).getTime() - new Date(a.published_at ?? 0).getTime()),
+    [],
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -28,68 +38,70 @@ export default function BlogListingPage() {
   return (
     <Layout>
       <PageIntro
-        eyebrow={blog.eyebrow}
-        title={blog.title}
-        copy={blog.copy}
+        eyebrow={blogContent.eyebrow}
+        title={blogContent.title}
+        copy={blogContent.copy}
       />
 
       <section className="section shell">
         <div>
-        {/* Search & Category Filter Tools */}
-        <div className="blog-tools">
-          <label>
-            <Search />
-            <Input
-              aria-label="Search articles"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search insights by topic or keyword..."
-            />
-          </label>
+          {/* Search & Category Filter Tools */}
+          <div className="blog-tools">
+            <label>
+              <Search />
+              <Input
+                aria-label="Search articles"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search insights by topic or keyword..."
+              />
+            </label>
 
-          {categories.length > 1 && (
-            <div className="filters">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  className={selectedCategory === category ? "selected" : ""}
-                  onClick={() => setSelectedCategory(category)}
-                  type="button"
+            {categories.length > 1 && (
+              <div className="filters">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    className={selectedCategory === category ? "selected" : ""}
+                    onClick={() => setSelectedCategory(category)}
+                    type="button"
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Post Grid or Empty State */}
+          {filteredPosts.length > 0 ? (
+            <div className="post-grid">
+              {filteredPosts.map((post) => (
+                <Link
+                  href={`/blog/${post.slug}`}
+                  key={post.id}
+                  className="post-card"
                 >
-                  {category}
-                </button>
+                  <span>{post.category}</span>
+                  <h2>{post.title}</h2>
+                  <p>{post.excerpt}</p>
+                  <small>
+                    By {post.author}
+                    {post.published_at && ` - ${new Date(post.published_at).toLocaleDateString()}`}
+                  </small>
+                </Link>
               ))}
             </div>
+          ) : (
+            <div className="empty-proof">
+              <h3>No published insights yet.</h3>
+              <p>The Ceasiun team is currently preparing initial articles and guides.</p>
+            </div>
           )}
-        </div>
-
-        {/* Post Grid or Empty State */}
-        {filteredPosts.length > 0 ? (
-          <div className="post-grid">
-            {filteredPosts.map((post) => (
-              <Link
-                 href={`/blog/${post.slug}`}
-                key={post.id}
-                className="post-card"
-              >
-                <span>{post.category}</span>
-                <h2>{post.title}</h2>
-                <p>{post.excerpt}</p>
-                <small>
-                  By {post.author}
-                  {post.published_at && ` - ${new Date(post.published_at).toLocaleDateString()}`}
-                </small>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="empty-proof">
-            <h3>No published insights yet.</h3>
-            <p>The Ceasiun team is currently preparing initial articles and guides.</p>
-          </div>
-        )}
         </div>
       </section>
     </Layout>
   );
 }
+
+export { meta };
