@@ -122,9 +122,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        <section>
-          <ImpactSection/>
-        </section>
+        <ImpactSection />
         <section id="services" className="new-section services-section">
           <div className="shell">
             <div className="section-intro compact">
