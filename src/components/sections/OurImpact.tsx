@@ -536,23 +536,22 @@ export default function ImpactSection() {
 
   return (
     <section
+      style={{marginBottom: "1rem"}} 
       id="impact"
       ref={sectionRef}
       className="impact-section"
       aria-labelledby="impact-section-title"
     >
-      <div className="shell">
+      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}} className="shell">
         {/* Section Header */}
-        <header className="impact-header section-intro">
+        <header style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginBottom: "2rem" }} className="impact-header section-intro">
           <p className="eyebrow">Measurable Outcomes</p>
-          <h2 id="impact-section-title">
+          <h2 style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }} id="impact-section-title">
             Digital Work. <br />
             <em>Real Business Impact.</em>
           </h2>
-          <p>
-            We help businesses grow their revenue, save valuable time, reduce
-            operational costs, and build reliable digital infrastructure through
-            technology-driven solutions.
+          <p style={{ textAlign: "center"}}>
+            We help businesses grow revenue, increase efficiency, and reduce costs with technology-driven solutions.
           </p>
         </header>
 
