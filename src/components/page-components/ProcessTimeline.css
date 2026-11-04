@@ -1,0 +1,654 @@
+/* ==========================================================================
+   Ceasiun Process Timeline Styles
+   Pixel-Perfect Responsive 6-Step Workflow Diagram
+   - Desktop: Single Row Horizontal (>= 1024px)
+   - Tablet: Continuous Serpentine Zigzag (641px - 1023px)
+   - Mobile: Vertical Timeline Stack (<= 640px)
+   ========================================================================== */
+
+.process-timeline-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  isolation: isolate;
+}
+
+/* ==========================================================================
+   Shared Node Styling (Compact Interactive Workflow Node)
+   ========================================================================== */
+
+.timeline-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 15px 0px;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  user-select: none;
+  width: 80%;
+  max-width: 140px;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.timeline-node:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 0.85rem;
+}
+
+/* Icon Shell */
+.timeline-icon-box {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 0.95rem;
+  background: linear-gradient(
+    145deg,
+    color-mix(in oklab, var(--card) 95%, var(--primary)),
+    var(--card)
+  );
+  border: 1px solid color-mix(in oklab, var(--border) 80%, var(--primary));
+  color: var(--primary);
+  box-shadow: 0 4px 14px color-mix(in oklab, black 45%, transparent);
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 240ms ease,
+    color 220ms ease;
+}
+
+/* Micro Stage Index Badge */
+.timeline-stage-badge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  height: 1.15rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--card) 92%, black);
+  border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border));
+  color: var(--primary);
+  font: 700 0.62rem / 1 var(--font-mono, monospace);
+  letter-spacing: 0.08em;
+  box-shadow: 0 2px 6px color-mix(in oklab, black 60%, transparent);
+}
+
+/* Node Title */
+.timeline-node-title {
+  margin-top: 0.65rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 1.1vw, 0.96rem);
+  font-weight: 600;
+  color: var(--foreground);
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+  transition: color 220ms ease;
+}
+
+/* Node Hint */
+.timeline-node-hint {
+  margin-top: 0.15rem;
+  font-size: 0.68rem;
+  color: var(--muted-foreground);
+  opacity: 0.7;
+  transition: opacity 200ms ease;
+}
+
+/* Hover & Active States */
+.timeline-node:hover .timeline-icon-box,
+.timeline-node.is-active .timeline-icon-box {
+  transform: translateY(-4px) scale(1.06);
+  /* border-color: var(--primary); */
+  background: color-mix(in oklab, var(--primary) 15%, var(--card));
+  color: #ffffff;
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--primary) 28%, transparent);
+}
+
+.timeline-node:hover .timeline-node-title,
+.timeline-node.is-active .timeline-node-title {
+  color: var(--primary);
+}
+
+.timeline-node:hover .timeline-node-hint,
+.timeline-node.is-active .timeline-node-hint {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Floating Popover (Edge-Aware, Zero Horizontal Overflow)
+   ========================================================================== */
+
+.timeline-popover {
+  position: absolute;
+  z-index: 60;
+  bottom: calc(100% + 14px);
+  width: min(280px, calc(100vw - 3rem));
+  padding: 1.15rem 1.25rem;
+  border-radius: 0.85rem;
+  background: linear-gradient(
+    145deg,
+    color-mix(in oklab, var(--card) 98%, var(--primary)),
+    color-mix(in oklab, var(--background) 95%, black)
+  );
+  border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border));
+  box-shadow: 0 16px 36px color-mix(in oklab, black 85%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--primary) 20%, transparent);
+  text-align: left;
+  pointer-events: auto;
+  animation: popoverFadeIn 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Center-aligned popover (default) */
+.timeline-popover.popover-align-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.timeline-popover.popover-align-center::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 7px;
+  border-style: solid;
+  border-color: color-mix(in oklab, var(--primary) 45%, var(--border)) transparent transparent transparent;
+}
+
+/* Left-aligned popover (for leftmost nodes to prevent left overflow) */
+.timeline-popover.popover-align-left {
+  left: 0;
+  transform: none;
+}
+.timeline-popover.popover-align-left::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 26px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: color-mix(in oklab, var(--primary) 45%, var(--border)) transparent transparent transparent;
+}
+
+/* Right-aligned popover (for rightmost nodes to prevent right overflow) */
+.timeline-popover.popover-align-right {
+  right: 0;
+  left: auto;
+  transform: none;
+}
+.timeline-popover.popover-align-right::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 26px;
+  left: auto;
+  border-width: 7px;
+  border-style: solid;
+  border-color: color-mix(in oklab, var(--primary) 45%, var(--border)) transparent transparent transparent;
+}
+
+.timeline-popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.45rem;
+}
+
+.timeline-popover-stage {
+  font: 700 0.65rem / 1 var(--font-mono, monospace);
+  color: var(--primary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.timeline-popover-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  padding: 0;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.timeline-popover-close:hover {
+  color: var(--foreground);
+  border-color: var(--primary);
+}
+
+.timeline-popover-title {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--foreground);
+  letter-spacing: -0.02em;
+}
+
+.timeline-popover-desc {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--muted-foreground);
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.timeline-popover.popover-align-center {
+  animation: popoverFadeInCenter 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes popoverFadeInCenter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* ==========================================================================
+   SVG Connector Animations (Laser Surge & Directional Pulses)
+   ========================================================================== */
+
+.timeline-connector-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Horizontal Moving Laser Surge (Left-to-Right →) */
+.timeline-laser-surge-h {
+  stroke-dasharray: 6 6;
+  stroke-dashoffset: 100;
+  animation: laserSurgeH 4.6s linear infinite;
+  filter: drop-shadow(0 0 4px var(--primary));
+}
+
+@keyframes laserSurgeH {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Reverse Horizontal Moving Laser Surge (Right-to-Left ←) */
+.timeline-laser-surge-h-rev {
+  stroke-dasharray: 6 6;
+  stroke-dashoffset: 0;
+  animation: laserSurgeHRev 4s linear infinite;
+  filter: drop-shadow(0 0 4px var(--primary));
+}
+
+@keyframes laserSurgeHRev {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Vertical Moving Laser Surge (Top-to-Bottom ↓) */
+.timeline-laser-surge-v {
+  stroke-dasharray: 6 6;
+  stroke-dashoffset: 70;
+  animation: laserSurgeV 4s linear infinite;
+  filter: drop-shadow(0 0 4px var(--primary));
+}
+
+@keyframes laserSurgeV {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ==========================================================================
+   1. Desktop Layout (Single Row Horizontal Timeline: >= 1024px)
+   Discussion -> Planning -> Execute -> Review -> Delivery -> Support
+   ========================================================================== */
+
+.timeline-desktop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  padding: 3.5rem 0.5rem 1rem;
+}
+
+.timeline-desktop-node-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 90px;
+}
+
+/* Desktop Horizontal Connector */
+.timeline-desktop-connector {
+  flex: 1 1 0%;
+  height: 52px;
+  min-width: 20px;
+  max-width: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.35rem;
+}
+
+.timeline-desktop-connector svg {
+  width: 100%;
+  height: 24px;
+}
+
+/* ==========================================================================
+   2. Tablet Layout (Zigzag Serpentine Timeline: 641px - 1023px)
+   Row 1: Discussion (01) -> Planning (02)
+   Curve: Planning (02) ↓ Execute (03) on right
+   Row 2: Review (04) <- Execute (03) (Right-to-Left)
+   Curve: Review (04) ↓ Delivery (05) on left
+   Row 3: Delivery (05) -> Support (06)
+   ========================================================================== */
+
+.timeline-tablet {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  max-width: 680px;
+  margin: 3rem auto 1.5rem;
+  padding: 0 1rem;
+}
+
+.timeline-tablet-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+.timeline-tablet-node-wrapper {
+  position: relative;
+  width: 90px;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.timeline-tablet-connector-h {
+  /* flex: 1 1 0%; */
+  height: 52px;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.timeline-tablet-connector-h svg {
+  width: 100%;
+  height: 24px;
+}
+
+/* Tablet Downward Connector Slots (Mathematically Centered Under Nodes) */
+.timeline-tablet-down-slot-right {
+  display: flex;
+  width: 200px;
+  height: 48px;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-tablet-down-slot-left {
+  display: flex;
+  width: 33%;
+  height: 48px;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-tablet-down-slot-right svg,
+.timeline-tablet-down-slot-left svg {
+  width: 24px;
+  height: 48px;
+}
+
+/* ==========================================================================
+   3. Mobile Layout (Vertical Timeline Stack: <= 640px)
+   Discussion ↓ Planning ↓ Execute ↓ Review ↓ Delivery ↓ Support
+   ========================================================================== */
+
+.timeline-mobile {
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 500px;
+  margin: 1.5rem auto 0;
+  padding: 0 0.25rem;
+}
+
+.timeline-mobile-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.timeline-mobile-node-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 0.95rem;
+  background: linear-gradient(
+    145deg,
+    color-mix(in oklab, var(--card) 95%, var(--primary)),
+    var(--card)
+  );
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 220ms ease, background-color 220ms ease, transform 220ms ease;
+}
+
+.timeline-mobile-node-btn:hover,
+.timeline-mobile-node-btn.is-active {
+  border-color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 10%, var(--card));
+  transform: translateY(-2px);
+}
+
+.timeline-mobile-icon-box {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 0.8rem;
+  background: color-mix(in oklab, var(--primary) 8%, var(--card));
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, var(--border));
+  color: var(--primary);
+}
+
+.timeline-mobile-title-wrap {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.timeline-mobile-down-slot-right {
+  display: flex;
+  width: 33%;
+  height: 48px;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-mobile-stage-label {
+  font: 700 0.65rem / 1 var(--font-mono, monospace);
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.timeline-mobile-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--foreground);
+  letter-spacing: -0.015em;
+}
+
+.timeline-mobile-chevron {
+  color: var(--muted-foreground);
+  transition: transform 240ms ease, color 200ms ease;
+  flex-shrink: 0;
+}
+
+.timeline-mobile-node-btn.is-active .timeline-mobile-chevron {
+  transform: rotate(180deg);
+  color: var(--primary);
+}
+
+/* Mobile Expanded Detail Box (Full Width, Perfectly Readable) */
+.timeline-mobile-detail-box {
+  margin-top: 0.65rem;
+  width: 100%;
+  padding: 0.95rem 1.15rem;
+  border-radius: 0.8rem;
+  background: color-mix(in oklab, var(--card) 90%, black);
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, var(--border));
+  animation: mobileDetailIn 200ms ease both;
+}
+
+.timeline-mobile-detail-box p {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+@keyframes mobileDetailIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Vertical Connector between rows (Dead-Center Under 44px Icon) */
+.timeline-mobile-connector {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding-left: 26px; /* 16px button padding + 22px icon radius - 12px SVG center = exactly 26px */
+  height: 34px;
+  overflow: visible;
+}
+
+.timeline-mobile-connector svg {
+  width: 24px;
+  height: 34px;
+}
+
+/* ==========================================================================
+   Breakpoints Display Toggles
+   ========================================================================== */
+
+@media (min-width: 1024px) {
+  .timeline-desktop {
+    display: flex;
+  }
+  .timeline-tablet {
+    display: none;
+  }
+  .timeline-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .timeline-desktop {
+    display: none;
+  }
+  .timeline-tablet {
+    display: flex;
+  }
+  .timeline-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .timeline-desktop {
+    display: none;
+  }
+  .timeline-tablet {
+    display: none;
+  }
+  .timeline-mobile {
+    display: flex;
+  }
+}
+
+/* ==========================================================================
+   Accessibility: Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-laser-surge-h-rev,
+  .timeline-laser-surge-v,
+  .timeline-popover,
+  .timeline-node,
+  .timeline-laser-surge-h {
+    stroke-dasharray: 2 2;
+  }
+  .timeline-icon-box {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,41 @@
+{processStages.map((stage, index) => {
+          const isLast = index === processStages.length - 1;
+          const isActive = activeStageId === stage.id;
+          const IconComponent = stage.icon;
+
+          return (
+            <div key={stage.id} className="timeline-mobile-item">
+              <button
+                type="button"
+                className={`timeline-mobile-node-btn ${isActive ? "is-active" : ""}`}
+                onClick={() => handleToggle(stage.id)}
+                aria-expanded={isActive}
+                aria-controls={`mobile-detail-${stage.id}`}
+              >
+                <div className="timeline-mobile-icon-box">
+                  <IconComponent size={20} strokeWidth={1.8} />
+                </div>
+                <div className="timeline-mobile-title-wrap">
+                  <span className="timeline-mobile-stage-label">
+                    STAGE {stage.stageNumber}
+                  </span>
+                  <span className="timeline-mobile-title">{stage.title}</span>
+                </div>
+                <ChevronDown size={18} className="timeline-mobile-chevron" />
+              </button>
+
+              {/* Mobile Expanded Detail Box (Full Width, Perfectly Legible) */}
+              {isActive && (
+                <div
+                  id={`mobile-detail-${stage.id}`}
+                  className="timeline-mobile-detail-box"
+                >
+                  <p>{stage.description}</p>
+                </div>
+              )}
+
+              {/* Vertical connector to next stage */}
+              {!isLast && <MobileVerticalConnector />}
+            </div>
+          );
+        })}

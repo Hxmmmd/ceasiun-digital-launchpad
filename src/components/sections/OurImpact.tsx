@@ -546,9 +546,8 @@ export default function ImpactSection() {
         {/* Section Header */}
         <header style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginBottom: "2rem" }} className="impact-header section-intro">
           <p className="eyebrow">Measurable Outcomes</p>
-          <h2 style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }} id="impact-section-title">
-            Digital Work. <br />
-            <em>Real Business Impact.</em>
+          <h2 id="impact-section-title">
+            Real Business <em> Impact.</em>
           </h2>
           <p style={{ textAlign: "center"}}>
             We help businesses grow revenue, increase efficiency, and reduce costs with technology-driven solutions.

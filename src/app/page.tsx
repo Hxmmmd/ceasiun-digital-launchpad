@@ -1,15 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Check, ChevronDown, Minus, Plus, Search, SlidersHorizontal, Rocket, ClipboardCheck, Truck, Headphones } from "lucide-react";
+import { ArrowUpRight, Check, ChevronDown, Minus, Plus } from "lucide-react";
 import { Layout, SectionHead } from "@/components/site";
 import { useEffect, useState } from "react";
-import type { ComponentType } from "react";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { testimonials } from "@/lib/testimonials";
 import { ServiceList } from "@/components/page-components/ServiceList";
 import { FAQComponent } from "@/components/page-components/FAQComponent";
 import ImpactSection from "@/components/sections/OurImpact"
+import ProcessTimeline from "@/components/page-components/ProcessTimeline";
 // import {InteractiveHoverButton} from "@/components/External/ButtonComponent"
 
 const faqs = [
@@ -18,13 +18,7 @@ const faqs = [
   ["How do projects begin?", "Every project starts with a conversation about the objective, current situation and desired outcome. From there, we define scope, milestones and a clear next step."],
   ["How are payments structured?", "Projects require a 30% advance followed by milestone-based payments. Local and international payment methods are available."],
 ];
-const processSteps = [
-  ["Discussion", "We understand your business, goals, current situation and expectations and the challenge you want to solve.", Search],
-  ["Planning", "We examine requirements, define priorities, scope, milestones and the right direction for the work.", SlidersHorizontal], 
-  ["Execute", "The agreed work is designed, developed, configured and progressed with clear momentum.", Rocket], 
-  ["Review", "We test the work against the requirements, gather your feedback and refine what matters.", ClipboardCheck], 
-  ["Delivery", "The finished work is finalized, handed you over and prepared for launch or everyday use etc.", Truck], 
-  ["Support", "Post-delivery guidance, fixes and ongoing technical support continue where they are useful.", Headphones]]
+
   
 const stats = [["200+", "Campaigns launched"], ["50+", "Happy clients"], ["5+", "Years experience"], ["4.9", "Client rating"]]
 
@@ -132,36 +126,18 @@ export default function HomePage() {
             </div>
             <ServiceList />
           </div>
+          
         </section>
         
         <section id="approach" className="new-section approach-section">
-          <div className="shell">
-            <div className="section-intro">
-              <p className="eyebrow">Process</p>
+          <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} className="shell">
+            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 0 }} className="section-intro">
+              <p style={{textAlign:'center'}} className="eyebrow">Process</p>
               {/* <p className="eyebrow">A considered approach</p> */}
-              <h2>A considered <br /><em>approach</em></h2>
-              <p>We understand the business, the current situation and the final goal first. Then we recommend the right services and technology—without adding unnecessary pieces.</p>
+              <h2 style={{textAlign:'center'}}>A considered <em>approach</em></h2>
+              <p style={{textAlign:'center'}}>We understand the business, the current situation and the final goal first. Then we recommend the right services and technology—without adding unnecessary pieces.</p>
             </div>
-            <div className="approach-steps" aria-label="How a project moves from question to delivery">
-              {processSteps.map((item, index) => { 
-                const [step, detail, Icon] = item as [string, string, ComponentType<{ size?: number; strokeWidth?: number }>]; 
-                const StepIcon = Icon;
-                return <article key={step} className="approach-step">
-                          <div className="approach-step-top">
-                            <span className="approach-index">
-                              stage:&nbsp;{String(index + 1).padStart(2, "0")} 
-                            </span>
-                          </div>
-                          <div className="approach-step-heading">
-                            <span className="approach-icon">
-                              <StepIcon size={18} strokeWidth={1.8} />
-                            </span>
-                            <h3>{step}</h3>
-                          </div>
-                          <p>{detail}</p>
-                        </article>;
-              })}
-            </div>
+            <ProcessTimeline />
           </div>
         </section>
 
