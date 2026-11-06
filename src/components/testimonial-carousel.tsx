@@ -82,7 +82,7 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
   const slides = Array.from({ length: visible.length + 2 }, (_, index) => visible[index % visible.length]);
 
   return (
-    <div className="reviews-panel" aria-roledescription="carousel" aria-label="Google client reviews">
+    <section className="reviews-panel" aria-roledescription="carousel" aria-label="Google client reviews">
       <div className="reviews-intro">
         <span className="eyebrow">Our clients&apos; testimonials</span>
         <h3>What our<br />clients say?</h3>
@@ -122,7 +122,7 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

@@ -4432,3 +4432,1842 @@ blockquote em {
   background-color: transparent;
   color: var(--primary);
 }
+
+
+/* ========================================================================= */
+/* PREMIUM AUTH & 2FA OTP STYLES */
+/* ========================================================================= */
+.premium-auth-page {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 3rem) 1rem;
+  background-color: #050709;
+  overflow-x: hidden;
+}
+
+.auth-bg-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 10%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 70%),
+    radial-gradient(circle at 10% 90%, color-mix(in oklab, var(--primary) 8%, transparent), transparent 45%),
+    radial-gradient(circle at 90% 80%, color-mix(in oklab, var(--primary) 8%, transparent), transparent 45%);
+}
+
+.auth-grid-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--primary) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--primary) 8%, transparent) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 40%, transparent 80%);
+}
+
+.auth-card-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 520px;
+  background: color-mix(in oklab, var(--card) 85%, #050709);
+  border: 1px solid color-mix(in oklab, var(--border) 70%, var(--primary) 30%);
+  border-radius: 20px;
+  padding: clamp(1.75rem, 5vw, 2.75rem);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--primary) 15%, transparent),
+    0 24px 64px -16px rgba(0, 0, 0, 0.8),
+    0 0 40px -10px color-mix(in oklab, var(--primary) 16%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.auth-card-laser {
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  filter: drop-shadow(0 0 8px var(--primary));
+  border-radius: 999px;
+}
+
+.auth-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  transition: color 150ms ease, transform 150ms ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.auth-back-link:hover {
+  color: var(--primary);
+  transform: translateX(-2px);
+}
+
+.auth-security-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.68rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--primary) 28%, transparent);
+  border-radius: 999px;
+}
+
+.auth-brand-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.auth-logo-squircle {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--card) 90%, black);
+  border: 1px solid color-mix(in oklab, var(--primary) 40%, transparent);
+  box-shadow: 0 0 20px -4px color-mix(in oklab, var(--primary) 30%, transparent);
+}
+
+.auth-brand-copy .auth-eyebrow {
+  font-size: 0.68rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+  margin-bottom: 0.15rem;
+}
+
+.auth-brand-copy h1 {
+  font-size: clamp(1.4rem, 4vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  line-height: 1.15;
+}
+
+.auth-subtitle {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+  margin-bottom: 1.5rem;
+}
+
+/* Presets Helper Card */
+.auth-presets-card {
+  margin-bottom: 1.5rem;
+  background: color-mix(in oklab, var(--card) 94%, black);
+  border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.presets-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 0.8rem;
+  transition: background-color 150ms ease;
+}
+
+.presets-toggle-btn:hover {
+  background: color-mix(in oklab, var(--primary) 8%, transparent);
+}
+
+.presets-toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.presets-toggle-left .sparkle-icon {
+  color: var(--primary);
+}
+
+.preset-chevron {
+  transition: transform 200ms ease;
+}
+
+.preset-chevron.is-open {
+  transform: rotate(180deg);
+}
+
+.presets-button-grid {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0.6rem 0.8rem 0.8rem;
+  border-top: 1px solid color-mix(in oklab, var(--border) 50%, transparent);
+}
+
+.preset-role-chip {
+  text-align: left;
+  background: color-mix(in oklab, var(--card) 70%, transparent);
+  border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.preset-role-chip:hover {
+  border-color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 10%, transparent);
+}
+
+.preset-role-chip.is-selected {
+  border-color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 16%, transparent);
+}
+
+.preset-chip-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.preset-role-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.preset-role-tag {
+  font-size: 0.65rem;
+  font-family: var(--font-mono, monospace);
+  padding: 0.15rem 0.4rem;
+  background: color-mix(in oklab, var(--primary) 20%, transparent);
+  color: var(--primary);
+  border-radius: 4px;
+}
+
+.preset-role-desc {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--muted-foreground);
+}
+
+/* Credentials Form */
+.auth-credentials-form {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.auth-input-group label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.45rem;
+  letter-spacing: 0.02em;
+}
+
+.input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-field-icon {
+  position: absolute;
+  left: 0.95rem;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+
+.auth-text-input {
+  width: 100%;
+  padding-left: 2.75rem !important;
+  padding-right: 2.75rem !important;
+  min-height: 48px;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.88rem;
+  transition: all 180ms ease;
+}
+
+.auth-text-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 25%, transparent);
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 150ms ease;
+}
+
+.password-toggle-btn:hover {
+  color: #ffffff;
+}
+
+.auth-submit-btn {
+  min-height: 48px;
+  background: var(--primary) !important;
+  color: #000000 !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: 0.92rem;
+  border-radius: 10px;
+  transition: all 180ms ease;
+  box-shadow: 0 8px 20px -4px color-mix(in oklab, var(--primary) 40%, transparent);
+}
+
+.auth-submit-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -4px color-mix(in oklab, var(--primary) 55%, transparent);
+}
+
+.auth-alert-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background: color-mix(in oklab, #ef4444 14%, var(--card));
+  border: 1px solid color-mix(in oklab, #ef4444 35%, transparent);
+  border-radius: 10px;
+  color: #fca5a5;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.auth-alert-message.otp-success-banner {
+  background: color-mix(in oklab, var(--primary) 16%, var(--card));
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.auth-security-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  color: var(--muted-foreground);
+  line-height: 1.4;
+}
+
+.auth-security-footer .lock-icon {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* ========================================================================= */
+/* OTP SPECIFIC STYLES */
+/* ========================================================================= */
+.otp-header-block {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.otp-shield-pulse {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.15rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--primary) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--primary) 40%, transparent);
+}
+
+.otp-shield-icon {
+  color: var(--primary);
+  z-index: 2;
+}
+
+.otp-pulse-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--primary);
+  opacity: 0.4;
+  animation: cs-otp-pulse 2.2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+@keyframes cs-otp-pulse {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 0; }
+  100% { transform: scale(0.95); opacity: 0; }
+}
+
+.otp-header-block h1 {
+  font-size: clamp(1.4rem, 4vw, 1.85rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.45rem;
+}
+
+.otp-description {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+
+.otp-masked-email {
+  color: #ffffff;
+  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+}
+
+.otp-target-role-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding: 0.45rem 0.85rem;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+  border-radius: 8px;
+}
+
+.otp-role-label {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.otp-role-pill {
+  font-size: 0.75rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 16%, transparent);
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+}
+
+/* Demo quick-code pill */
+.otp-demo-helper-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.95rem;
+  margin-bottom: 1.35rem;
+  background: color-mix(in oklab, var(--primary) 10%, var(--card));
+  border: 1px dashed color-mix(in oklab, var(--primary) 40%, transparent);
+  border-radius: 10px;
+}
+
+.otp-demo-info {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: #ffffff;
+}
+
+.otp-key-highlight {
+  font-family: var(--font-mono, monospace);
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  font-size: 0.92rem;
+}
+
+.otp-autofill-btn {
+  background: color-mix(in oklab, var(--primary) 22%, transparent);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.otp-autofill-btn:hover {
+  background: var(--primary);
+  color: #000000;
+}
+
+/* 6-Digit OTP Container */
+.otp-input-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.otp-digits-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(0.35rem, 2vw, 0.65rem);
+}
+
+.otp-digit-box {
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  min-height: 52px;
+  text-align: center;
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+  font-weight: 700;
+  color: #ffffff;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1.5px solid color-mix(in oklab, var(--border) 80%, transparent);
+  border-radius: 12px;
+  transition: all 180ms ease;
+  caret-color: var(--primary);
+}
+
+.otp-digit-box:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 30%, transparent), 0 0 16px -2px color-mix(in oklab, var(--primary) 40%, transparent);
+  background: color-mix(in oklab, var(--primary) 8%, var(--card));
+  transform: translateY(-2px);
+}
+
+.otp-digit-box.is-filled {
+  border-color: color-mix(in oklab, var(--primary) 65%, transparent);
+  background: color-mix(in oklab, var(--primary) 12%, var(--card));
+  color: var(--primary);
+}
+
+.otp-timer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.78rem;
+  color: var(--muted-foreground);
+  padding: 0 0.25rem;
+}
+
+.otp-timer-display {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.otp-resend-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  color: var(--muted-foreground);
+  font-size: 0.78rem;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transition: all 150ms ease;
+}
+
+.otp-resend-btn.is-active {
+  color: var(--primary);
+  cursor: pointer;
+  opacity: 1;
+}
+
+.otp-resend-btn.is-active:hover {
+  text-decoration: underline;
+}
+
+/* ========================================================================= */
+/* ROLE-BASED DASHBOARD WIDGETS & RBAC */
+/* ========================================================================= */
+.admin-role-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 14%, transparent);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.15rem;
+}
+
+.admin-user-identity-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  margin: 0.5rem 0 1.25rem;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.identity-avatar {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.identity-meta {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.identity-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.identity-email {
+  font-size: 0.72rem;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.nav-counter {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-family: var(--font-mono, monospace);
+  padding: 0.15rem 0.45rem;
+  background: color-mix(in oklab, var(--card) 90%, white);
+  border-radius: 999px;
+  color: var(--muted-foreground);
+}
+
+.nav-counter.alert {
+  background: color-mix(in oklab, #ef4444 25%, transparent);
+  color: #ef4444;
+}
+
+.admin-nav-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  color: var(--muted-foreground);
+  font-size: 0.84rem;
+  border-radius: 8px;
+  transition: all 150ms ease;
+  text-decoration: none;
+}
+
+.admin-nav-link-btn:hover {
+  background: color-mix(in oklab, var(--primary) 10%, transparent);
+  color: #ffffff;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.topbar-title-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar-breadcrumb {
+  font-size: 0.7rem;
+  font-family: var(--font-mono, monospace);
+  color: var(--primary);
+}
+
+.topbar-tab-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.role-simulator-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.65rem;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid color-mix(in oklab, var(--primary) 30%, transparent);
+  border-radius: 8px;
+}
+
+.role-select-label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.role-simulator-select {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.role-simulator-select option {
+  background: #0f141a;
+  color: #ffffff;
+}
+
+/* Role Distribution List */
+.role-distribution-list {
+  display: grid;
+  gap: 0.55rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.role-dist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  background: color-mix(in oklab, var(--card) 70%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.role-tag-badge {
+  font-size: 0.74rem;
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.role-tag-badge.super-admin {
+  background: color-mix(in oklab, #ef4444 20%, transparent);
+  color: #ef4444;
+}
+
+.role-tag-badge.content-editor {
+  background: color-mix(in oklab, #3b82f6 20%, transparent);
+  color: #60a5fa;
+}
+
+.role-tag-badge.seo-manager {
+  background: color-mix(in oklab, #10b981 20%, transparent);
+  color: #34d399;
+}
+
+.role-tag-badge.support {
+  background: color-mix(in oklab, #f59e0b 20%, transparent);
+  color: #fbbf24;
+}
+
+.role-tag-badge.client {
+  background: color-mix(in oklab, var(--primary) 20%, transparent);
+  color: var(--primary);
+}
+
+.role-count {
+  font-size: 0.78rem;
+  color: var(--muted-foreground);
+}
+
+/* Editorial Pipeline Kanban Board */
+.editorial-pipeline-section {
+  margin-top: 1.5rem;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.section-title-row h3 {
+  font-size: 1.15rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.btn-editor-action {
+  background: var(--primary) !important;
+  color: #000000 !important;
+  font-weight: 600;
+}
+
+.editorial-board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.editorial-card {
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.editorial-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--primary) 50%, var(--border));
+}
+
+.editorial-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.editorial-status-tag {
+  font-size: 0.65rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.editorial-status-tag.draft {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.editorial-status-tag.review {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+}
+
+.editorial-status-tag.live {
+  background: color-mix(in oklab, var(--primary) 20%, transparent);
+  color: var(--primary);
+}
+
+.editorial-date {
+  font-size: 0.72rem;
+  color: var(--muted-foreground);
+}
+
+.editorial-card h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.35;
+}
+
+.editorial-card p {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.editorial-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in oklab, var(--border) 50%, transparent);
+}
+
+.tag-pill {
+  font-size: 0.7rem;
+  color: var(--primary);
+}
+
+.author-pill {
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+}
+
+/* SEO Radar Table */
+.seo-table-card {
+  margin-top: 1.5rem;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.rank-badge {
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+}
+
+.rank-badge.rank-top {
+  background: color-mix(in oklab, var(--primary) 25%, transparent);
+  color: var(--primary);
+}
+
+.rank-badge.rank-mid {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+}
+
+.trend-up {
+  color: #34d399;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.trend-neutral {
+  color: var(--muted-foreground);
+  font-size: 0.76rem;
+}
+
+/* Support Canned Responses */
+.support-quick-responses-card {
+  margin-top: 1.5rem;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.canned-templates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.template-box {
+  background: color-mix(in oklab, var(--card) 70%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  transition: border-color 150ms ease;
+}
+
+.template-box:hover {
+  border-color: var(--primary);
+}
+
+.template-box strong {
+  display: block;
+  font-size: 0.88rem;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.template-box p {
+  font-size: 0.78rem;
+  color: var(--muted-foreground);
+  line-height: 1.45;
+  font-style: italic;
+}
+
+/* Client Portal Roadmap Stepper */
+.client-roadmap-card {
+  margin-top: 1.5rem;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.roadmap-stepper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  position: relative;
+}
+
+.milestone-step {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.milestone-step .step-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.milestone-step.completed .step-circle {
+  background: var(--primary);
+  color: #000000;
+}
+
+.milestone-step.active .step-circle {
+  background: color-mix(in oklab, var(--primary) 25%, transparent);
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  box-shadow: 0 0 12px color-mix(in oklab, var(--primary) 40%, transparent);
+}
+
+.milestone-step.pending .step-circle {
+  background: color-mix(in oklab, var(--card) 90%, black);
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+}
+
+.step-content h5 {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+}
+
+.step-content p {
+  font-size: 0.72rem;
+  color: var(--muted-foreground);
+  line-height: 1.35;
+}
+
+.client-request-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: #ffffff;
+}
+
+.client-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.84rem;
+  resize: vertical;
+}
+
+.client-textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.client-assets-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.client-assets-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  background: color-mix(in oklab, var(--card) 70%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.client-assets-list strong {
+  display: block;
+  font-size: 0.82rem;
+  color: #ffffff;
+}
+
+.client-assets-list span {
+  font-size: 0.72rem;
+  color: var(--muted-foreground);
+}
+
+.asset-status-pill {
+  font-size: 0.68rem;
+  font-family: var(--font-mono, monospace);
+  color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 15%, transparent);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.admin-role-select {
+  width: 100%;
+  min-height: 48px;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 0 0.75rem;
+  font-size: 0.85rem;
+}
+
+.admin-role-select option {
+  background: #0d1217;
+  color: #ffffff;
+}
+
+.header-subtitle {
+  font-size: 0.84rem;
+  color: var(--muted-foreground);
+  margin-top: 0.35rem;
+  max-width: 680px;
+}
+
+.kpi-trend {
+  font-size: 0.72rem;
+  font-family: var(--font-mono, monospace);
+  color: var(--muted-foreground);
+  margin-top: 0.25rem;
+}
+
+.kpi-trend.positive {
+  color: var(--primary);
+}
+
+.kpi-trend.alert {
+  color: #ef4444;
+}
+
+.admin-loading-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+  gap: 1rem;
+  text-align: center;
+  background: #050709;
+  color: var(--muted-foreground);
+}
+
+.admin-loading-spinner {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto;
+  border: 2px solid color-mix(in oklab, var(--primary) 20%, transparent);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: cs-spin 0.8s linear infinite;
+}
+
+@keyframes cs-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 640px) {
+  .otp-digits-container {
+    gap: 0.35rem;
+  }
+  .otp-digit-box {
+    min-height: 44px;
+    font-size: 1.15rem;
+  }
+  .topbar-actions {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+  .role-simulator-dropdown {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+
+/* ========================================================================= */
+/* PREMIUM RBAC USER & ROLE PROVISIONING UI */
+/* ========================================================================= */
+.rbac-view-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* KPI Bar */
+.rbac-kpi-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.85rem;
+}
+
+.rbac-kpi-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.15rem;
+  background: color-mix(in oklab, var(--card) 90%, black);
+  border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+  border-radius: 12px;
+  transition: border-color 150ms ease;
+}
+
+.rbac-kpi-item:hover {
+  border-color: color-mix(in oklab, var(--primary) 40%, var(--border));
+}
+
+.rbac-kpi-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--card) 75%, transparent);
+  border: 1px solid var(--border);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.rbac-kpi-item strong {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.15;
+}
+
+.rbac-kpi-item span {
+  font-size: 0.72rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono, monospace);
+}
+
+/* 2-Column Responsive Layout */
+.rbac-management-layout {
+  display: grid;
+  grid-template-columns: minmax(360px, 420px) 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .rbac-management-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Base Card Styling */
+.rbac-provision-card,
+.rbac-directory-card {
+  position: relative;
+  background: color-mix(in oklab, var(--card) 92%, #050709);
+  border: 1px solid color-mix(in oklab, var(--border) 70%, var(--primary) 25%);
+  border-radius: 18px;
+  padding: clamp(1.25rem, 2.5vw, 1.85rem);
+  box-shadow:
+    0 16px 40px -12px rgba(0, 0, 0, 0.7),
+    0 0 24px -8px color-mix(in oklab, var(--primary) 10%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.card-laser-top {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  filter: drop-shadow(0 0 6px var(--primary));
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+/* Card Headers */
+.rbac-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+}
+
+.rbac-squircle-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid color-mix(in oklab, var(--primary) 40%, transparent);
+  color: var(--primary);
+  box-shadow: 0 0 16px -4px color-mix(in oklab, var(--primary) 25%, transparent);
+  flex-shrink: 0;
+}
+
+.rbac-header-copy {
+  flex: 1;
+}
+
+.rbac-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.rbac-title-row h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.rbac-restricted-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.65rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 14%, transparent);
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, transparent);
+  border-radius: 999px;
+}
+
+.rbac-counter-pill {
+  font-size: 0.7rem;
+  font-family: var(--font-mono, monospace);
+  color: var(--muted-foreground);
+  background: color-mix(in oklab, var(--card) 90%, white);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.rbac-card-subtitle {
+  font-size: 0.78rem;
+  color: var(--muted-foreground);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Provision Form Styles */
+.rbac-form {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.rbac-input-group label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.45rem;
+}
+
+.rbac-field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.rbac-field-icon {
+  position: absolute;
+  left: 0.95rem;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+
+.rbac-styled-input {
+  width: 100%;
+  padding-left: 2.6rem !important;
+  min-height: 46px;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.86rem;
+  transition: all 180ms ease;
+}
+
+.rbac-styled-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 22%, transparent);
+  outline: none;
+}
+
+.rbac-pw-toggle {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 150ms ease;
+}
+
+.rbac-pw-toggle:hover {
+  color: #ffffff;
+}
+
+.rbac-select-wrapper {
+  position: relative;
+}
+
+.rbac-styled-select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 1rem;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 180ms ease;
+  outline: none;
+}
+
+.rbac-styled-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 22%, transparent);
+}
+
+.rbac-styled-select option {
+  background: #090e13;
+  color: #ffffff;
+  padding: 0.5rem;
+}
+
+/* Status Segmented Control */
+.rbac-status-segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  padding: 0.35rem;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.rbac-segment-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.rbac-segment-btn.is-active {
+  background: color-mix(in oklab, var(--card) 75%, transparent);
+  border-color: color-mix(in oklab, var(--border) 90%, transparent);
+  color: #ffffff;
+}
+
+.segment-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.segment-dot.green {
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.segment-dot.red {
+  background: #ef4444;
+}
+
+/* Submit Button */
+.rbac-submit-btn {
+  min-height: 48px;
+  background: var(--primary) !important;
+  color: #000000 !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  transition: all 180ms ease;
+  box-shadow: 0 8px 20px -4px color-mix(in oklab, var(--primary) 35%, transparent);
+}
+
+.rbac-submit-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -4px color-mix(in oklab, var(--primary) 50%, transparent);
+}
+
+/* Active Directory Header & Search */
+.rbac-directory-header {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.rbac-header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  flex: 1;
+  min-width: 240px;
+}
+
+.rbac-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 220px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.rbac-search-icon {
+  position: absolute;
+  left: 0.85rem;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+
+.rbac-search-input {
+  width: 100%;
+  padding-left: 2.35rem;
+  padding-right: 1.85rem;
+  min-height: 38px;
+  background: color-mix(in oklab, var(--card) 95%, black);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  transition: all 150ms ease;
+}
+
+.rbac-search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--primary) 20%, transparent);
+}
+
+.rbac-search-clear {
+  position: absolute;
+  right: 0.65rem;
+  background: none;
+  border: none;
+  color: var(--muted-foreground);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Table Container & Table */
+.rbac-table-container {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+}
+
+.rbac-users-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.rbac-users-table th {
+  background: color-mix(in oklab, var(--card) 96%, black);
+  padding: 0.85rem 1.15rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
+  border-bottom: 1px solid var(--border);
+}
+
+.rbac-users-table td {
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--border) 50%, transparent);
+  vertical-align: middle;
+}
+
+.rbac-user-row {
+  transition: background-color 150ms ease;
+}
+
+.rbac-user-row:hover {
+  background-color: color-mix(in oklab, var(--primary) 4%, transparent);
+}
+
+/* Personnel Meta Cell */
+.rbac-user-meta-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.rbac-user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #ffffff;
+  background: color-mix(in oklab, var(--card) 85%, black);
+  border: 1.5px solid var(--border);
+  flex-shrink: 0;
+}
+
+.rbac-user-avatar.role-super-admin {
+  border-color: #ef4444;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.rbac-user-avatar.role-content-editor {
+  border-color: #3b82f6;
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.rbac-user-avatar.role-seo-manager {
+  border-color: #10b981;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.rbac-user-avatar.role-support {
+  border-color: #f59e0b;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.12);
+}
+
+.rbac-user-avatar.role-client {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 15%, transparent);
+}
+
+.rbac-user-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.rbac-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.rbac-name-row strong {
+  font-size: 0.88rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.rbac-root-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.6rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.rbac-user-email {
+  font-size: 0.76rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono, monospace);
+}
+
+/* Role Pills */
+.rbac-role-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.rbac-role-pill.role-super-admin {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.rbac-role-pill.role-content-editor {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.rbac-role-pill.role-seo-manager {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.rbac-role-pill.role-support {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.rbac-role-pill.role-client {
+  background: color-mix(in oklab, var(--primary) 16%, transparent);
+  color: var(--primary);
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, transparent);
+}
+
+/* Status Tags */
+.rbac-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--card) 80%, black);
+}
+
+.rbac-status-tag.active {
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.rbac-status-tag.active .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.rbac-status-tag.disabled {
+  color: var(--muted-foreground);
+  border: 1px solid var(--border);
+}
+
+.rbac-status-tag.disabled .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted-foreground);
+}
+
+/* Actions Group */
+.rbac-actions-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+}
+
+.rbac-btn-toggle {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 150ms ease;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+}
+
+.rbac-btn-toggle:hover {
+  color: #ffffff;
+  border-color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 10%, transparent);
+}
+
+.rbac-btn-delete {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: none;
+  border: 1px solid transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.rbac-btn-delete:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #ef4444;
+}
+
+.rbac-empty-row {
+  text-align: center;
+  padding: 2.5rem 1rem !important;
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+}

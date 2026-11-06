@@ -7,12 +7,309 @@
     position: relative;
 }
 
-/* Service cards grid */
-.service-list-cards {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(.65rem, 1.4vw, 1rem);
+/* ==========================================================================
+    Horizontal Service Showcase Presentation
+   ========================================================================== */
+
+.services-showcase-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    width: 100%;
+}
+
+/* 1. Compact Service Index Rack */
+.services-index-rack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    align-items: center;
+    padding: 0.45rem;
+    background: color-mix(in oklab, var(--card) 40%, black);
+    border: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+    border-radius: 0.95rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.services-index-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.38rem 0.75rem;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--muted-foreground);
+    font-size: 0.76rem;
+    font-weight: 550;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.services-index-chip:hover {
+    color: var(--foreground);
+    background: color-mix(in oklab, var(--primary) 8%, transparent);
+    border-color: color-mix(in oklab, var(--primary) 30%, transparent);
+}
+
+.services-index-chip.is-active {
+    color: #ffffff;
+    background: color-mix(in oklab, var(--primary) 14%, var(--card));
+    border-color: color-mix(in oklab, var(--primary) 55%, var(--border));
+    box-shadow: 0 2px 10px color-mix(in oklab, var(--primary) 16%, transparent);
+}
+
+.services-index-chip .chip-number {
+    font: 700 0.68rem/1 var(--font-mono, monospace);
+    color: var(--primary);
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+}
+
+.services-index-chip.is-active .chip-number {
+    opacity: 1;
+}
+
+.services-index-chip .chip-title {
+    font-family: var(--font-display, inherit);
+    letter-spacing: -0.01em;
+}
+
+/* 2. Interactive Status & Controls Strip */
+.services-status-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.15rem 0.25rem 0;
+}
+
+.services-status-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
     min-width: 0;
+}
+
+.status-live-dot {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--primary);
+    box-shadow: 0 0 8px color-mix(in oklab, var(--primary) 80%, transparent);
+    animation: serviceLivePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes serviceLivePulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.85;
+    }
+    50% {
+        transform: scale(1.35);
+        opacity: 1;
+        box-shadow: 0 0 12px color-mix(in oklab, var(--primary) 95%, transparent);
+    }
+}
+
+.status-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--muted-foreground);
+    letter-spacing: 0.02em;
+    min-width: 0;
+}
+
+.status-number {
+    font-family: var(--font-mono, monospace);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.status-sep {
+    opacity: 0.45;
+    font-family: var(--font-mono, monospace);
+}
+
+.status-total {
+    font-family: var(--font-mono, monospace);
+    opacity: 0.75;
+}
+
+.status-dash {
+    opacity: 0.4;
+    margin: 0 0.15rem;
+}
+
+.status-title {
+    color: var(--foreground);
+    font-weight: 600;
+    font-family: var(--font-display, inherit);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.services-controls-cluster {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-shrink: 0;
+}
+
+.services-nav-buttons {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.services-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.65rem;
+    border: 1px solid var(--border);
+    background: color-mix(in oklab, var(--card) 85%, black);
+    color: var(--foreground);
+    cursor: pointer;
+    transition: transform 180ms ease, border-color 200ms ease, color 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.services-nav-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    border-color: var(--primary);
+    color: var(--primary);
+    background: color-mix(in oklab, var(--primary) 12%, var(--card));
+    box-shadow: 0 4px 14px color-mix(in oklab, var(--primary) 20%, transparent);
+}
+
+.services-nav-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.services-nav-btn:disabled {
+    opacity: 0.28;
+    cursor: not-allowed;
+}
+
+/* 3. Hairline Progress Bar */
+.services-progress-rail {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background: color-mix(in oklab, var(--border) 60%, transparent);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.services-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, color-mix(in oklab, var(--primary) 50%, transparent), var(--primary));
+    border-radius: 2px;
+    transition: width 340ms cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 0 8px color-mix(in oklab, var(--primary) 70%, transparent);
+}
+
+/* 4. Centered 3-Card Stage */
+.services-3card-stage {
+    position: relative;
+    max-width: 100%;
+    margin-inline: auto;
+    overflow: hidden;
+    /* Headroom for hover translateY(-6px) and bottom glow shadow */
+    padding-top: 14px;
+    padding-bottom: 30px;
+    margin-top: -10px;
+    margin-bottom: -18px;
+    touch-action: pan-y pinch-zoom;
+    user-select: none;
+    cursor: grab;
+    outline: none;
+}
+
+.services-3card-stage:active {
+    cursor: grabbing;
+}
+
+.services-3card-track {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+    width: max-content;
+    will-change: transform;
+}
+
+/* Slide styling */
+.services-3card-slide {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    transition: opacity 350ms ease, transform 350ms ease;
+    box-sizing: border-box;
+}
+
+/* Active Center Slide - Full Focus */
+.services-3card-slide.is-active-center {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Neighbor Left / Right Slides - Subtle Context, Clickable to Center */
+.services-3card-slide.is-neighbor-slide {
+    opacity: 0.62;
+    cursor: pointer;
+}
+
+.services-3card-slide.is-neighbor-slide:hover {
+    opacity: 0.88;
+}
+
+/* Far Slides - Hidden Outside 3-Card Window */
+.services-3card-slide.is-hidden-slide {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.services-3card-slide > .service-list-card-static {
+    width: 100%;
+    height: 100%;
+    min-height: 270px;
+    box-sizing: border-box;
+}
+
+/* 5. Mobile Footer Hint */
+.services-mobile-footer {
+    display: none;
+}
+
+.services-drag-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    color: var(--muted-foreground);
+    letter-spacing: 0.02em;
+}
+
+.drag-hint-pulse {
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--primary);
+    opacity: 0.7;
 }
 
 /* Service card container */
@@ -903,65 +1200,113 @@
     Responsive Adjustments
    ========================================================================== */
 
-@media (max-width: 1080px) {
-    .service-list-cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (max-width: 960px) {
+    .services-index-rack {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        padding: 0.45rem 0.75rem;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
+        mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+    }
+    .services-index-rack::-webkit-scrollbar {
+        display: none;
+    }
+    .services-index-chip {
+        scroll-snap-align: center;
+        flex-shrink: 0;
     }
 }
 
 @media (max-width: 760px) {
-    .service-list-cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: .7rem;
-    }
     .service-list-card-static {
-        min-height: 220px;
-        padding: .85rem;
-        border-radius: .85rem;
+        min-height: 240px;
+        padding: 1rem;
+        border-radius: 0.95rem;
     }
     .service-list-card-icon {
-        width: 2rem;
-        height: 2rem;
+        width: 2.15rem;
+        height: 2.15rem;
     }
     .service-list-card-number {
-        font-size: .76rem;
+        font-size: 0.72rem;
     }
     .service-list-card-static h3 {
-        margin-top: 1.7rem;
-        font-size: clamp(1.15rem, 5.3vw, 1.65rem);
+        margin-top: 1.5rem;
+        margin-bottom: 0.85rem;
+        font-size: clamp(1.2rem, 3.8vw, 1.55rem);
     }
     .service-list-card-static > p {
-        margin-top: .8rem;
-        font-size: .72rem;
-        max-width: 25ch;
+        margin-top: 0;
+        font-size: 0.76rem;
+        line-height: 1.45;
+        max-width: 28ch;
     }
     .service-card-artwork {
-        width: 11rem;
-        height: 11rem;
+        width: 11.5rem;
+        height: 11.5rem;
         right: -1.75rem;
         bottom: -2rem;
         opacity: 0.55;
     }
 }
 
+@media (max-width: 640px) {
+    .services-mobile-footer {
+        display: flex;
+        justify-content: center;
+        padding-top: 0.25rem;
+    }
+}
+
 @media (max-width: 540px) {
-    .service-list-cards {
-        grid-template-columns: 1fr;
+    .services-index-rack {
+        padding: 0.35rem 0.5rem;
+        border-radius: 0.75rem;
+    }
+    .services-index-chip {
+        padding: 0.32rem 0.6rem;
+        font-size: 0.72rem;
+    }
+    .services-index-chip .chip-number {
+        font-size: 0.64rem;
+    }
+    .services-status-strip {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+    .services-status-info {
+        min-width: 0;
+    }
+    .status-title {
+        max-width: 135px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .services-nav-btn {
+        width: 2.05rem;
+        height: 2.05rem;
     }
     .service-list-card-static {
-        min-height: 230px;
+        min-height: 235px;
         padding: 1rem;
     }
     .service-list-card-static h3 {
-        max-width: 11ch;
-        margin-top: 2rem;
-        font-size: clamp(1.7rem, 9vw, 2.2rem);
+        margin-top: 1.4rem;
+        margin-bottom: 0.75rem;
+        font-size: clamp(1.2rem, 5.2vw, 1.45rem);
     }
     .service-card-artwork {
-        width: 12rem;
-        height: 12rem;
+        width: 10.5rem;
+        height: 10.5rem;
         right: -1.5rem;
-        bottom: -1.8rem;
+        bottom: -1.75rem;
     }
 }
 

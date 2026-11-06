@@ -8,7 +8,8 @@ import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { testimonials } from "@/lib/testimonials";
 import { ServiceList } from "@/components/page-components/ServiceList";
 import { FAQComponent } from "@/components/page-components/FAQComponent";
-import ImpactSection from "@/components/sections/OurImpact"
+import ImpactSection from "@/components/sections/OurImpact";
+// import TheGap from "@/components/sections/TheGap";
 import ProcessTimeline from "@/components/page-components/ProcessTimeline";
 // import {InteractiveHoverButton} from "@/components/External/ButtonComponent"
 
@@ -90,7 +91,7 @@ export default function HomePage() {
           <p className="eyebrow">Ceasiun - Digital Growth Partner</p>
           <h1 id="hero-title">Take your <br /> business online.<br /><em>Build it to grow.</em></h1>
           <p className="hero-lede">Websites, software and automation that fit your business chosen around what you actually need, not what a service menu says you should buy.</p>
-          <div className="hero-actions"><Link className="button button-primary" href="/start-project">Start a project <ArrowUpRight size={18} /></Link><a className="text-link" href="#approach">See how we work <ArrowUpRight size={17} /></a></div>
+          <div className="hero-actions"><Link className="button button-primary" href="/start-project">Start a project <ArrowUpRight size={18} /></Link></div>
           <div className="hero-note"><span className="status-dot" /> Clear scope. Milestone delivery. Ongoing support when it helps.</div>
         </div>
         {/* <div className="hero-index" aria-hidden="true">01 <span /> 07</div> */}
@@ -107,7 +108,7 @@ export default function HomePage() {
           <div className="shell problem-grid">
             <div>
               <p className="eyebrow">The gap</p>
-              <h2>Digital should make business clearer, not more complicated.</h2>
+              <h2>Digital should make business <em>clearer</em>, not more <em>complicated.</em></h2>
             </div>
             <div className="problem-copy">
               <p>Many businesses have a website that does not bring in the right opportunities, tools that do not talk to each other, or a growing list of tasks no one has time to own.</p>
@@ -116,13 +117,14 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+        {/* <TheGap /> */}
         <ImpactSection />
         <section id="services" className="new-section services-section">
-          <div className="shell">
-            <div className="section-intro compact">
-              <p className="eyebrow">Services</p>
-              <h2>One partner across <br /><em>all digital work.</em></h2>
-              <p>Explore the areas we can bring together when requirements call for it.</p>
+          <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} className="shell">
+            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} className="section-intro compact">
+              <p style={{textAlign:'center'}} className="eyebrow">Services</p>
+              <h2 style={{textAlign: 'center'}}>One partner across <br /><em>all digital work.</em></h2>
+              <p style={{textAlign: 'center'}}>Explore the areas we can bring together when requirements call for it.</p>
             </div>
             <ServiceList />
           </div>
@@ -222,7 +224,7 @@ export default function HomePage() {
           </div>
         </section> */}
 
-        <section id="testimonials" className="section shell new-section testimonials-section">
+        {/* <section id="testimonials" className="section shell new-section testimonials-section"> */}
           {testimonials.length > 0 ? (
             <TestimonialCarousel testimonials={testimonials} />
           ) : (
@@ -231,7 +233,7 @@ export default function HomePage() {
               <p>We would rather show no claim than an unverified one.</p>
             </div>
           )}
-        </section>
+        {/* </section> */}
 
         <section>
           <FAQComponent />
