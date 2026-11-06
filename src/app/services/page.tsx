@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { CTA, Layout, PageIntro } from "@/components/site";
-import { samples } from "@/lib/site-data";
+import { samples } from "@/data/site-data";
 import { ServiceExplorer } from "@/components/page-components/ServiceExplorer";
 
 const servicesPageContent = {

@@ -5,7 +5,7 @@ import { ArrowUpRight, Check, ChevronDown, Minus, Plus } from "lucide-react";
 import { Layout, SectionHead } from "@/components/site";
 import { useEffect, useState } from "react";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
-import { testimonials } from "@/lib/testimonials";
+import { testimonials } from "@/data/testimonials";
 import { ServiceList } from "@/components/page-components/ServiceList";
 import { FAQComponent } from "@/components/page-components/FAQComponent";
 import ImpactSection from "@/components/sections/OurImpact";

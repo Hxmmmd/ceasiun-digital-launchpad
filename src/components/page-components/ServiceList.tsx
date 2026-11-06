@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { services } from "@/lib/site-data";
+import { services } from "@/data/site-data";
 import { ServiceArtwork } from "./ServiceArtwork";
 import "./ServiceList.css";
 

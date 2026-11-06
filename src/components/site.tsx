@@ -27,7 +27,7 @@ import {
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
-import { ctaContent, nav, siteSettings } from "@/lib/site-data";
+import { ctaContent, nav, siteSettings } from "@/data/site-data";
 
 function whatsappHref(value: string) {
   if (value.startsWith("http")) return value;

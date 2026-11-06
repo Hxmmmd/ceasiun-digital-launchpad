@@ -7,7 +7,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Layout, CTA, meta } from "@/components/site";
-import { samples, services } from "@/lib/site-data";
+import { samples, services } from "@/data/site-data";
 import { Button } from "@/components/ui/button";
 import ShapeGrid from "@/components/External/ShapeGrid";
 import LogoLoop from "@/components/External/LogoLoop"

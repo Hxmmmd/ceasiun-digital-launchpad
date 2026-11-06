@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { CTA, Layout, PageIntro } from "@/components/site";
 import { Button } from "@/components/ui/button";
-import { products } from "@/lib/products";
+import { products } from "@/data/products";
 
 const visibleProducts = products.filter((product) => product.isVisible);
 

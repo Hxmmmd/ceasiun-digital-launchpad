@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { CTA, Layout, meta } from "@/components/site";
-import { caseStudies } from "@/lib/case-studies";
+import { caseStudies } from "@/data/case-studies";
 import { useParams } from "next/navigation";
 
 export default function RoutePage() {

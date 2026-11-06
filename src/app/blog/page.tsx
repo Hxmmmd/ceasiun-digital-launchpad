@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { Layout, PageIntro, meta } from "@/components/site";
 import { Input } from "@/components/ui/input";
-import { blogPosts } from "@/lib/blog-posts";
+import { blogPosts } from "@/data/blog-posts";
 
 const blogContent = {
   eyebrow: "Insights & Articles",

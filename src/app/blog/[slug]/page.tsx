@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Layout } from "@/components/site";
-import { blogPosts } from "@/lib/blog-posts";
+import { blogPosts } from "@/data/blog-posts";
 import { useParams } from "next/navigation";
 
 const idFor = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-");

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, CheckCircle2, Layers, Sparkles } from "lucide-react";
 import { Layout, CTA, meta } from "@/components/site";
 import { Button } from "@/components/ui/button";
-import { services } from "@/lib/site-data";
+import { services } from "@/data/site-data";
 import { useParams } from "next/navigation";
 
 const slugify = (value: string) => value.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");

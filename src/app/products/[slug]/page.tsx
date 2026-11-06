@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { CTA, Layout, PageIntro } from "@/components/site";
 import { Button } from "@/components/ui/button";
-import { products } from "@/lib/products";
+import { products } from "@/data/products";
 import { useParams } from "next/navigation";
 
 export default function ProductDetailPage() {

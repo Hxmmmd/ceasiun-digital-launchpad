@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Check } from "lucide-react";
-import { services } from "@/lib/site-data";
+import { services } from "@/data/site-data";
 import "./ServiceExplorer.css";
 
 const serviceAreas = services.map((service) => ({

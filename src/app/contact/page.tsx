@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, Check, CheckCircle2, Facebook, Gamepad2, Instagr
 import { Layout, PageIntro, SectionHead, meta } from "@/components/site";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { faq, services, siteSettings, type Service } from "@/lib/site-data";
+import { faq, services, siteSettings, type Service } from "@/data/site-data";
 
 function whatsappHref(value: string) {
   if (value.startsWith("http")) return value;

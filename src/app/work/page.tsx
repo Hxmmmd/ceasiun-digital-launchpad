@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { CTA, Layout, PageIntro, meta } from "@/components/site";
-import { caseStudies } from "@/lib/case-studies";
+import { caseStudies } from "@/data/case-studies";
 import automation from "@/assets/work-automation.jpg";
 import brand from "@/assets/work-brand.jpg";
 import commerce from "@/assets/work-commerce.jpg";

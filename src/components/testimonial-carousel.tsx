@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState, useRef, type CSSProperties } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import type { Testimonial } from "@/lib/testimonials";
+import type { Testimonial } from "@/data/testimonials";
 
 const googleLogo = "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/google/default.svg";
 
