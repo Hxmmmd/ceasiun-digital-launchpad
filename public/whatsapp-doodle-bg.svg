@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" fill="none" stroke="rgba(255,255,255,0.065)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- WhatsApp speech bubble -->
+  <path d="M40 45h46a10 10 0 0 1 10 10v22a10 10 0 0 1-10 10H56l-18 14V55a10 10 0 0 1 10-10z"/>
+  <circle cx="62" cy="67" r="2.5" fill="rgba(255,255,255,0.06)"/>
+  <circle cx="74" cy="67" r="2.5" fill="rgba(255,255,255,0.06)"/>
+
+  <!-- heart -->
+  <path d="M165 48 C165 38, 150 32, 138 45 C126 32, 111 38, 111 48 C111 70, 138 85, 138 85 C138 85, 165 70, 165 48 Z"/>
+
+  <!-- coffee mug -->
+  <path d="M230 52h34v26a10 10 0 0 1-10 10h-14a10 10 0 0 1-10-10V52z"/>
+  <path d="M264 58h10a6 6 0 0 1 0 12h-10"/>
+
+  <!-- star -->
+  <polygon points="340,42 344,54 357,55 347,64 350,76 340,69 330,76 333,64 323,55 336,54"/>
+
+  <!-- headphones -->
+  <path d="M50 160a25 25 0 0 1 50 0v18a6 6 0 0 1-6 6h-5a6 6 0 0 1-6-6v-10a6 6 0 0 1 6-6h3v-2a18 18 0 0 0-36 0v2h3a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6h-5a6 6 0 0 1-6-6v-18z"/>
+
+  <!-- camera -->
+  <path d="M150 155h12l4-7h20l4 7h12a6 6 0 0 1 6 6v30a6 6 0 0 1-6 6h-52a6 6 0 0 1-6-6v-30a6 6 0 0 1 6-6z"/>
+  <circle cx="176" cy="174" r="10"/>
+
+  <!-- paper airplane -->
+  <path d="M285 145l65 32-65 32 16-32-16-32zm16 32h49"/>
+
+  <!-- music notes -->
+  <path d="M45 270v-28l30-7v28"/>
+  <circle cx="38" cy="274" r="7" fill="rgba(255,255,255,0.06)"/>
+  <circle cx="68" cy="267" r="7" fill="rgba(255,255,255,0.06)"/>
+
+  <!-- clock -->
+  <circle cx="155" cy="270" r="20"/>
+  <polyline points="155,258 155,270 165,275"/>
+
+  <!-- smiley face -->
+  <circle cx="260" cy="270" r="20"/>
+  <circle cx="252" cy="264" r="2.5" fill="rgba(255,255,255,0.06)"/>
+  <circle cx="268" cy="264" r="2.5" fill="rgba(255,255,255,0.06)"/>
+  <path d="M250 277a13 13 0 0 0 20 0"/>
+
+  <!-- speech bubble rounded -->
+  <path d="M345 255h30a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8h-18l-10 9v-9a8 8 0 0 1-2-6v-18a8 8 0 0 1 0-8z"/>
+
+  <!-- thumbs up -->
+  <path d="M75 350h18v20H75zm18 20h28a7 7 0 0 0 7-6l4-16a7 7 0 0 0-7-8h-14v-8a7 7 0 0 0-7-7l-11 12v27z"/>
+
+  <!-- planet with ring -->
+  <circle cx="210" cy="355" r="14"/>
+  <ellipse cx="210" cy="355" rx="26" ry="6" transform="rotate(-25 210 355)"/>
+
+  <!-- sparkles -->
+  <path d="M315 345v18M306 354h18M360 338v12M354 344h12"/>
+</svg>
+

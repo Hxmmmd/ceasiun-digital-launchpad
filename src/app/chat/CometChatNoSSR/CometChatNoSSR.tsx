@@ -16,7 +16,7 @@ export const COMETCHAT_CONSTANTS = {
 // Cached so init runs once, even though React Strict Mode runs effects twice in development.
 let initPromise: Promise<void> | undefined;
 
-function initCometChat(): Promise<void> {
+export function initCometChat(): Promise<void> {
   if (!initPromise) {
     const uiKitSettings = new UIKitSettingsBuilder()
       .setAppId(COMETCHAT_CONSTANTS.APP_ID)

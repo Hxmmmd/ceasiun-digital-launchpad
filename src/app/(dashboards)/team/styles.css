@@ -25,11 +25,11 @@
   --bjork-border-strong: #343434;
   --bjork-thumb: #626262;
   --bjork-track: #090909;
-  --bjork-accent: #ec5c13;
-  --bjork-accent-hover: #f07832;
-  --bjork-accent-soft: rgba(236, 92, 19, 0.12);
-  --bjork-accent-muted: rgba(236, 92, 19, 0.24);
-  --bjork-accent-foreground: #fff2ea;
+  --bjork-accent: #00e5bf;
+  --bjork-accent-hover: #26f2ce;
+  --bjork-accent-soft: rgba(0, 229, 191, 0.12);
+  --bjork-accent-muted: rgba(0, 229, 191, 0.25);
+  --bjork-accent-foreground: #041210;
   --bjork-shadow-surface: inset 0 7px 14px rgba(255, 255, 255, 0.03), inset 0 0.5px 0.5px rgba(255, 255, 255, 0.06), 0 14px 20px -6px rgba(0, 0, 0, 0.45);
   --bjork-shadow-soft: inset 0 1px 0 rgba(255, 255, 255, 0.045);
   --bjork-shadow-panel: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 18px 36px -28px rgba(0, 0, 0, 0.9);

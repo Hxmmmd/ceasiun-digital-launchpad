@@ -1,0 +1,243 @@
+/* Scoped CometChat styling - WhatsApp Dark Mode Theme for Ceasiun Team Dashboard */
+
+.team-chat-wrapper {
+  width: 100%;
+  height: calc(100vh - 80px);
+  min-height: 650px;
+  max-height: calc(100vh - 80px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid #222e35;
+  background-color: #0b141a;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
+/* Force chat container to fit available box, never full viewport */
+.team-chat-wrapper .App,
+.team-chat-wrapper .team-chat-app-container {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.team-chat-wrapper .cometchat,
+.team-chat-wrapper .cometchat-root {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  background-color: #0b141a !important;
+  color: #e9edef !important;
+  border-radius: 12px;
+  overflow: hidden !important;
+}
+
+/* Sidebar conversations list (WhatsApp dark: #111b21) */
+.team-chat-wrapper .conversations-wrapper,
+.team-chat-wrapper .selector-wrapper {
+  background-color: #111b21 !important;
+  border-right: 1px solid #222e35 !important;
+}
+
+/* CometChat Tabs at bottom of conversation list */
+.team-chat-wrapper .cometchat-tabs {
+  background-color: #111b21 !important;
+  border-top: 1px solid #222e35 !important;
+}
+
+.team-chat-wrapper .cometchat-tab-item--active svg {
+  color: #00a884 !important;
+}
+
+/* WhatsApp Default Chat Wallpaper & Message List */
+.team-chat-wrapper .messages-wrapper,
+.team-chat-wrapper .cometchat-messages-wrapper,
+.team-chat-wrapper .cometchat-message-list-wrapper {
+  background-color: #0b141a !important;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(11, 20, 26, 0.4) 0%, #0b141a 100%),
+    url('/whatsapp-doodle-bg.svg') !important;
+  background-repeat: repeat !important;
+  background-size: 380px 380px !important;
+  background-attachment: local !important;
+}
+
+/* Chat Header across CometChat (WhatsApp dark: #202c33) */
+.team-chat-wrapper .cometchat-message-header,
+.team-chat-wrapper .cometchat-header,
+.team-chat-wrapper .cometchat-header-wrapper {
+  background-color: #202c33 !important;
+  border-bottom: 1px solid #222e35 !important;
+  color: #e9edef !important;
+}
+
+.team-chat-wrapper .cometchat-message-header *,
+.team-chat-wrapper .cometchat-header * {
+  color: #e9edef !important;
+}
+
+/* WhatsApp Message Composer / Input container */
+.team-chat-wrapper .cometchat-message-composer {
+  background-color: #202c33 !important;
+  border-top: 1px solid #222e35 !important;
+  padding: 8px 12px !important;
+}
+
+.team-chat-wrapper .cometchat-message-composer__input-container {
+  background-color: #2a3942 !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  color: #d1d7db !important;
+}
+
+.team-chat-wrapper .cometchat-message-composer__input-container:focus-within {
+  border-color: #00a884 !important;
+  box-shadow: none !important;
+}
+
+.team-chat-wrapper .cometchat-message-composer input,
+.team-chat-wrapper .cometchat-message-composer textarea {
+  color: #d1d7db !important;
+}
+
+/* Active and Hover items in conversation list */
+.team-chat-wrapper .cometchat-conversation-list-item,
+.team-chat-wrapper .cometchat-user-list-item,
+.team-chat-wrapper .cometchat-group-list-item {
+  border-bottom: 1px solid #222e35 !important;
+  transition: background-color 150ms ease !important;
+}
+
+.team-chat-wrapper .cometchat-conversation-list-item:hover,
+.team-chat-wrapper .cometchat-user-list-item:hover,
+.team-chat-wrapper .cometchat-group-list-item:hover {
+  background-color: #202c33 !important;
+}
+
+.team-chat-wrapper .cometchat-conversation-list-item--active,
+.team-chat-wrapper .cometchat-user-list-item--active {
+  background-color: #2a3942 !important;
+}
+
+/* -------------------------------------------------------------
+ * WhatsApp Message Bubbles
+ * ----------------------------------------------------------- */
+
+/* Reset outer bubble wrappers */
+.team-chat-wrapper .cometchat-message-bubble,
+.team-chat-wrapper .cometchat-message-bubble-outgoing,
+.team-chat-wrapper .cometchat-message-bubble-incoming {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Updated WhatsApp Outgoing bubble styling */
+.team-chat-wrapper .cometchat-message-bubble-outgoing .cometchat-message-bubble__text-message,
+.team-chat-wrapper .cometchat-text-bubble--outgoing .cometchat-text-bubble__text {
+  background-color: #005c4b !important;
+  color: #e9edef !important;
+  border-radius: 8px 8px 2px 8px !important;
+  padding: 8px 12px !important;
+  box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.3) !important;
+}
+
+.team-chat-wrapper .cometchat-text-bubble--outgoing pre,
+.team-chat-wrapper .cometchat-text-bubble--outgoing code {
+  background-color: rgba(0,0,0,0.28) !important;
+  color: #6ee7b7 !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
+
+
+/* WhatsApp Incoming bubble (#202c33 dark slate) */
+.team-chat-wrapper .cometchat-message-bubble-incoming .cometchat-message-bubble__text-message,
+.team-chat-wrapper .cometchat-text-bubble--incoming .cometchat-text-bubble__text {
+  background-color: #202c33 !important;
+  color: #e9edef !important;
+  border-radius: 8px 8px 8px 2px !important;
+  padding: 8px 12px !important;
+  box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.3) !important;
+}
+
+.team-chat-wrapper .cometchat-text-bubble--incoming .cometchat-text-bubble__text,
+.team-chat-wrapper .cometchat-text-bubble--incoming * {
+  color: #e9edef !important;
+}
+
+.team-chat-wrapper .cometchat-text-bubble--incoming pre,
+.team-chat-wrapper .cometchat-text-bubble--incoming code {
+  background-color: rgba(0, 0, 0, 0.35) !important;
+  color: #93c5fd !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+}
+
+/* Timestamp in bubbles */
+.team-chat-wrapper [class*="timestamp"],
+.team-chat-wrapper .cometchat-message-timestamp {
+  color: #8696a0 !important;
+  font-size: 11px !important;
+}
+
+/* Read receipt ticks (WhatsApp cyan checkmarks #53bdeb) */
+.team-chat-wrapper [class*="receipt"] svg,
+.team-chat-wrapper [class*="receipt"] img {
+  filter: brightness(0) saturate(100%) invert(74%) sepia(35%) saturate(1200%) hue-rotate(160deg) !important;
+}
+
+/* WhatsApp Send button (#00a884 emerald green circular button) */
+.team-chat-wrapper .cometchat-message-composer__send-btn,
+.team-chat-wrapper .cometchat-button--primary,
+.team-chat-wrapper button[type="submit"] {
+  background-color: #00a884 !important;
+  color: #ffffff !important;
+  border-radius: 50% !important;
+}
+
+.team-chat-wrapper .cometchat-message-composer__send-btn:hover {
+  background-color: #02906f !important;
+}
+
+/* Search bar styling */
+.team-chat-wrapper .cometchat-search-bar {
+  background-color: #202c33 !important;
+  border: 1px solid #222e35 !important;
+  border-radius: 8px !important;
+  color: #e9edef !important;
+}
+
+.team-chat-wrapper .cometchat-search-bar input {
+  color: #e9edef !important;
+}
+
+/* Scrollbars inside chat */
+.team-chat-wrapper ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.team-chat-wrapper ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.team-chat-wrapper ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 3px;
+}
+
+.team-chat-wrapper ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}

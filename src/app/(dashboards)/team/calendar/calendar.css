@@ -1,0 +1,53 @@
+/* Team Calendar styling tailored for Team Dashboard dark theme */
+
+.team-calendar-wrapper {
+  --ck-color-black: #080808;
+  --ck-color-white: #ededed;
+  --ck-background: #111111;
+  --ck-foreground: #ededed;
+  --ck-muted: #161616;
+  --ck-muted-foreground: rgba(237, 237, 237, 0.6);
+  --ck-accent: #202020;
+  --ck-border: #232323;
+  --ck-primary: #ec5c13;
+  --ck-primary-foreground: #fff2ea;
+  --ck-ring: #ec5c13;
+  --ck-radius: 10px;
+  --ck-event: #ec5c13;
+  --ck-event-ink-light: #f07832;
+  --ck-event-ink-dark: #ec5c13;
+  color-scheme: dark;
+}
+
+.team-calendar-wrapper .ck-root {
+  background-color: var(--bjork-bg, #111111) !important;
+  color: var(--bjork-text, #ededed) !important;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Ensure toolbar blends with dashboard surface */
+.team-calendar-wrapper .ck-toolbar {
+  background-color: var(--bjork-surface, #121212) !important;
+  border-color: var(--bjork-border, #232323) !important;
+}
+
+/* Ensure sidebar blends with dashboard panel */
+.team-calendar-wrapper .ck-sidebar {
+  background-color: var(--bjork-panel, #0d0d0d) !important;
+  border-color: var(--bjork-border, #232323) !important;
+}
+
+/* Grid slots and day headers */
+.team-calendar-wrapper [data-ck-slot],
+.team-calendar-wrapper [data-ck-day] {
+  border-color: var(--bjork-border, #232323) !important;
+}
+
+/* Prevent unwanted horizontal overflow */
+.team-calendar-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+

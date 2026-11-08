@@ -63,8 +63,8 @@
         "sendPrivateMessageToGroupMembers": true
       },
       "inAppSounds": {
-        "incomingMessageSound": true,
-        "outgoingMessageSound": true
+        "incomingMessageSound": false,
+        "outgoingMessageSound": false
       }
     },
     "callFeatures": {
@@ -87,9 +87,9 @@
       "compactMessageComposer": false
     },
     "style": {
-      "theme": "system",
+      "theme": "dark",
       "color": {
-        "brandColor": "#6852D6",
+        "brandColor": "#00e5bf",
         "primaryTextLight": "#141414",
         "primaryTextDark": "#FFFFFF",
         "secondaryTextLight": "#727272",

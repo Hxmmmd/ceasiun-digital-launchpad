@@ -10,7 +10,15 @@ import { useSettings } from "@/CometChat/config/SettingsContext";
 import useSystemColorScheme from "@/builder/customHooks";
 import { useBuilderTheme } from "@/builder/useBuilderTheme";
 
-export default function CometChatAppShell() {
+export default function CometChatAppShell({
+  style: customStyle,
+  className = "App",
+  targetUser,
+}: {
+  style?: React.CSSProperties;
+  className?: string;
+  targetUser?: CometChat.User | null;
+} = {}) {
   // UI Kit init has already finished before this renders, so the session can be read up front.
   const [loggedInUser, setLoggedInUser] = useState<CometChat.User | null>(
     () => CometChatUIKit.getLoggedInUser() ?? null
@@ -43,11 +51,17 @@ export default function CometChatAppShell() {
 
   return (
     /* The chat UI fills its parent, so give it explicit dimensions. */
-    <div className="App" style={{ width: "100vw", height: "100dvh" }}>
+    <div className={className} style={customStyle || { width: "100vw", height: "100dvh" }}>
       <CometChatProvider theme={theme} locale="en-us">
         <AppContextProvider>
           {loggedInUser ? (
-            <CometChatHome loggedInUser={loggedInUser} onLogout={handleLogout} />
+            <CometChatHome
+              key={targetUser?.getUid() || "default-chat-home"}
+              loggedInUser={loggedInUser}
+              onLogout={handleLogout}
+              defaultUser={targetUser || undefined}
+              autoOpenFirstItem={Boolean(targetUser)}
+            />
           ) : (
             <CometChatLogin onLoginSuccess={setLoggedInUser} />
           )}
