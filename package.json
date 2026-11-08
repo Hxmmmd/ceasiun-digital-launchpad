@@ -14,6 +14,9 @@
     "rolldown": "1.2.1"
   },
   "dependencies": {
+    "@cometchat/calls-sdk-javascript": "^5.1.0",
+    "@cometchat/chat-sdk-javascript": "^4.3.0",
+    "@cometchat/chat-uikit-react": "^7.2.5",
     "@hookform/resolvers": "^5.2.2",
     "@prisma/adapter-pg": "^7.10.1",
     "@prisma/client": "^7.10.1",
@@ -45,6 +48,7 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/vite": "^4.2.1",
     "better-auth": "^1.7.18",
+    "calendarkit-pro": "^2.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",

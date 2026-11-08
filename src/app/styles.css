@@ -6271,3 +6271,58 @@ blockquote em {
   color: var(--muted-foreground);
   font-size: 0.85rem;
 }
+
+/* ----------------------------------------------------------------------------------------------------------
+ * Bjork Dashboard Theme Variables (Team Analytics) - Aligned with Ceasiun Cyber/Cyan Palette
+ * -------------------------------------------------------------------------------------------------------- */
+:root, .dark {
+  --bjork-bg: #07090e;
+  --bjork-surface: #0a0d14;
+  --bjork-surface-muted: rgba(14, 18, 27, 0.95);
+  --bjork-surface-hover: #121723;
+  --bjork-surface-active: #182030;
+  --bjork-panel: #05070a;
+  --bjork-menu: rgba(10, 13, 20, 0.98);
+  --bjork-field: rgba(10, 13, 20, 0.95);
+  --bjork-field-muted: rgba(14, 18, 27, 0.65);
+  --bjork-field-inset: rgba(5, 7, 10, 0.85);
+  --bjork-error-bg: #1a0b0e;
+  --bjork-text: #f0f6fc;
+  --bjork-text-strong: #ffffff;
+  --bjork-text-medium: #cbd5e1;
+  --bjork-text-muted: #8b9bb4;
+  --bjork-text-soft: #62728d;
+  --bjork-text-faint: #3e4a5e;
+  --bjork-inverted-text: #05070a;
+  --bjork-border: #151d2a;
+  --bjork-border-muted: #101622;
+  --bjork-border-strong: #1e293b;
+  --bjork-thumb: #334155;
+  --bjork-track: #07090e;
+  
+  /* Ceasiun Signature Cyan / Teal Brand Accents */
+  --bjork-accent: #00e5bf;
+  --bjork-accent-hover: #26f2ce;
+  --bjork-accent-soft: rgba(0, 229, 191, 0.12);
+  --bjork-accent-muted: rgba(0, 229, 191, 0.25);
+  --bjork-accent-foreground: #041210;
+  
+  --bjork-shadow-surface: inset 0 7px 14px rgba(0, 229, 191, 0.02), inset 0 0.5px 0.5px rgba(255, 255, 255, 0.05), 0 14px 24px -8px rgba(0, 0, 0, 0.7);
+  --bjork-shadow-soft: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --bjork-shadow-panel: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 18px 36px -28px rgba(0, 0, 0, 0.9);
+  --bjork-shadow-menu: inset 0 1px 0 rgba(0, 229, 191, 0.05), inset 0 12px 24px rgba(0, 0, 0, 0.4), 0 22px 42px -22px rgba(0, 0, 0, 0.95);
+  --bjork-shadow-inset: inset 0 1px 10px rgba(0, 0, 0, 0.6);
+  --bjork-ring-offset: #07090e;
+  /* Block chart & feedback tokens */
+  --blk-chart-ghost: rgba(148, 163, 184, 0.45);
+  --blk-accent-ink: #00e5bf;
+  --blk-accent-fill: #00e5bf;
+  --blk-accent-fill-ink: #041210;
+  --blk-success: #10b981;
+  --blk-success-soft: rgba(16, 185, 129, 0.15);
+  --blk-error: #f43f5e;
+  --blk-error-soft: rgba(244, 63, 94, 0.15);
+  --blk-warning: #f59e0b;
+  --blk-warning-soft: rgba(245, 158, 11, 0.15);
+
+}
